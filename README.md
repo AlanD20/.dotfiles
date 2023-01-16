@@ -63,6 +63,10 @@ systemctl list-unit-files --type=service
 
 ## Resources
 
+- (Find more about WSL configs](https://learn.microsoft.com/en-us/windows/wsl/wsl-config)
+
+- **Notice**: Global configuration options with `.wslconfig` is only available for distributions running as WSL 2.
+
 - [Download LSP](https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers)
 
 - Using neovim? Here is a [kickstart](https://github.com/nvim-lua/kickstart.nvim) if you want to extend, or [Another great starter config by nexxeln](https://github.com/nexxeln/nvim)
