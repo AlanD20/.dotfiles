@@ -4,6 +4,8 @@
 ###
 node_version="16.19.0"
 
+# bundle zsh plugins
+antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
 
 source ~/.zshrc
 
@@ -13,9 +15,6 @@ command -v zsh | sudo tee -a /etc/shells
 # Use zsh as default shell
 sudo chsh -s $(which zsh) $USER
 # usermod --shell /bin/zsh $USER
-
-# bundle zsh plugins
-antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
 
 # echo "Installing neovim plugins"
 # nvim --headless +PlugInstall +qall

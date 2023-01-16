@@ -34,22 +34,21 @@ nix_pkgs=(
   antibody
   meslo-lgs-nf
   redis
-  php82Packages.composer
   sqlite
 
   # Language Servers
-  gopls
-  sqls
-  marksman
-  nodePackages_latest.intelephense
-  python-language-server
-  nodePackages_latest.yaml-language-server
-  nodePackages_latest.vscode-json-languageserver
-  nodePackages_latest.vscode-langservers-extracted
-  nodePackages_latest.typescript-language-server
-  nodePackages_latest.svelte-language-server
-  nodePackages_latest.dockerfile-language-server-nodejs
-  nodePackages_latest.bash-language-server
+  # gopls
+  # sqls
+  # marksman
+  # nodePackages_latest.intelephense
+  # python-language-server
+  # nodePackages_latest.yaml-language-server
+  # nodePackages_latest.vscode-json-languageserver
+  # nodePackages_latest.vscode-langservers-extracted
+  # nodePackages_latest.typescript-language-server
+  # nodePackages_latest.svelte-language-server
+  # nodePackages_latest.dockerfile-language-server-nodejs
+  # nodePackages_latest.bash-language-server
 )
 
 stow_dirs=(
@@ -121,7 +120,17 @@ do
 done
 
 
-echo "Installing nix"
+echo "=========================================="
+echo "Installing Composer"
+echo "=========================================="
+
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+
+
+echo "=========================================="
+echo "Installing NIX"
+echo "=========================================="
 sh <(curl -k -L https://nixos.org/nix/install) $nix_flag
 
 echo "Source nix"
