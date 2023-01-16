@@ -1,0 +1,14 @@
+[user]
+	email = aland20@pm.me
+	name = AlanD20
+	signingkey = 70912BD60D19DD10
+[init]
+	defaultBranch = main
+[core]
+	editor = code --wait
+
+[gpg]
+	program = "C:/Program Files (x86)/gnupg/bin/gpg"
+[commit]
+	gpsign = true
+	gpgsign = true
