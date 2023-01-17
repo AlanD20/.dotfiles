@@ -1,0 +1,232 @@
+{
+  "window.title": "${rootPath}${separator}${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName}",
+  "editor.linkedEditing": true,
+  "editor.wordWrap": "on",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.codeActionsOnSave": {
+    //This option will remove unused imports
+    //Not recommended for JavaScript Frameworks.
+    "source.organizeImports": false
+  },
+  "editor.fontFamily": "Dank Mono",
+  // "editor.fontFamily": "Hack",
+  // "editor.fontFamily": "Fira Code",
+  // "editor.fontFamily": "JetBrains Mono",
+  // "editor.fontFamily": "Cascadia Code PL",
+  // "editor.fontFamily": "Operator Mono",
+  // "editor.fontFamily": "DejaVu Sans Mono",
+  // "editor.fontFamily": "Droid Sans Mono",
+  "editor.fontWeight": "300",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.fontSize": 15,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorWidth": 2,
+  "editor.suggestSelection": "first",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.bracketPairsHorizontal": true,
+  "editor.unicodeHighlight.includeComments": true,
+  "editor.unicodeHighlight.nonBasicASCII": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.scrollToSwitchTabs": true,
+  "workbench.editor.untitled.labelFormat": "name",
+  "workbench.editor.wrapTabs": true,
+  "workbench.editor.decorations.badges": true,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "workbench.colorTheme": "Panda Syntax",
+  "workbench.productIconTheme": "fluent-icons",
+  "workbench.iconTheme": "material-icon-theme",
+  "files.autoSave": "onWindowChange",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.fileNesting.enabled": true,
+  "indentRainbow.errorColor": "rgba(128,32,32,0.4)",
+  "indentRainbow.tabmixColor": "rgba(128,32,96,0.4)",
+  "color-highlight.markerType": "foreground",
+  "html.autoClosingTags": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[http]": {
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    }
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false
+  },
+  "python.defaultInterpreterPath": "C:\\laragon\\bin\\python\\python-3.10\\python.exe",
+  "python.formatting.autopep8Args": ["--indent-size=2", "--ignore=E121"],
+  "terminal.integrated.enableBell": true,
+  // "terminal.integrated.fontFamily": "Cascadia Code PL",
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.automationProfile.linux": {
+    "path": "/bin/zsh",
+    "icon": "symbol-null"
+  },
+  "javascript.autoClosingTags": true,
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.autoClosingTags": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "javascriptreact": "html",
+    "typescriptreact": "html",
+    "html": "HTML",
+    "blade": "HTML",
+    "plaintext": "javascript"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "rest-client.fontSize": 14,
+  "python.languageServer": "Jedi",
+  "git.enableSmartCommit": true,
+  "placeholderImages.quoteStyle": "double",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
+  "intelephense.environment.shortOpenTag": true,
+  "blade.format.enable": true,
+  "better-comments.highlightPlainText": true,
+  "path-intellisense.showHiddenFiles": true,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "dart.previewFlutterUiGuides": true,
+  "dart.previewFlutterUiGuidesCustomTracking": true,
+  "redhat.telemetry.enabled": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/*.meta": true,
+    "**/*.*.meta": true,
+    "**/*.unity": true,
+    "**/*.unityproj": true,
+    "**/*.mat": true,
+    "**/*.fbx": true,
+    "**/*.FBX": true,
+    "**/*.tga": true,
+    "**/*.cubemap": true,
+    "**/*.prefab": true,
+    "**/Library": true,
+    "**/ProjectSettings": true,
+    "**/Temp": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "intelephense.files.exclude": [
+    "**/.git/**",
+    "**/.svn/**",
+    "**/.hg/**",
+    "**/CVS/**",
+    "**/.DS_Store/**",
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/.history/**"
+  ],
+  "vscode-pets.theme": "forest",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "plaintext": "html",
+    "vue-html": "html"
+  },
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true,
+  "prettier.bracketSameLine": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true,
+  "editor.inlineSuggest.enabled": true,
+  "java.import.gradle.java.home": "C:\\Program Files\\Java\\jre1.8.0_301",
+  "editor.cursorStyle": "block",
+  "editorconfig.generateAuto": false,
+  "editorconfig.template": "C:\\Users\\WWW\\.editorconfig",
+  // "editorconfig.template": "/home/www/.editorconfig",
+  "git.autofetch": true,
+  "reactSnippets.settings.typescriptPropsStatePrefix": "interface",
+  "git.confirmSync": false,
+  "deno.path": "D:\\scoop\\shims\\deno",
+  "reactSnippets.settings.importReactOnTop": false,
+  "[dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.stickyScroll.enabled": true,
+  "C_Cpp.default.cppStandard": "c++11",
+  "C_Cpp.default.cStandard": "c11",
+  "[c]": {
+    "editor.wordBasedSuggestions": false,
+    "editor.suggest.insertMode": "replace",
+    "editor.semanticHighlighting.enabled": true
+  },
+  "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+  "C_Cpp.default.compilerPath": "C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin\\gcc.exe",
+  "editor.accessibilitySupport": "off",
+  "window.titleBarStyle": "custom",
+  "go.toolsManagement.autoUpdate": true,
+  "gopls": {
+    "ui.semanticTokens": true
+  },
+
+  "laravel-pint.enable": true,
+  "alpine-intellisense.settings.languageScopes": "php",
+  "bladeFormatter.format.sortHtmlAttributes": "code-guide",
+  "bladeFormatter.format.wrapAttributes": "force-expand-multiline",
+  "nginx-conf-hint.format.align": true,
+  "html.format.wrapAttributes": "force-expand-multiline",
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", ":class"]
+}

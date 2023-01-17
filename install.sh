@@ -6,6 +6,7 @@
 php_version="8.2"
 
 packages=(
+  dkms
   apt-transport-https
   ca-certificates
   curl
@@ -15,6 +16,10 @@ packages=(
   unattended-upgrades
   php$php_version
   php$php_version-{common,cgi,fpm,mbstring,curl,gd,imagick,intl,memcached,snmp,xml,zip,opcache,pgsql,mysql,psr,redis}
+  python3-pip
+  redis-server
+  # Download nginx from ppa:ondrej/nginx repo
+  nginx
 )
 
 nix_pkgs=(
@@ -27,44 +32,31 @@ nix_pkgs=(
   ripgrep
   bat
   direnv
+  neovim
   helix
-  nginx
   dos2unix
   unzip
-  antibody
   meslo-lgs-nf
   redis
   sqlite
-
-  # Language Servers
-  # gopls
-  # sqls
-  # marksman
-  # nodePackages_latest.intelephense
-  # python-language-server
-  # nodePackages_latest.yaml-language-server
-  # nodePackages_latest.vscode-json-languageserver
-  # nodePackages_latest.vscode-langservers-extracted
-  # nodePackages_latest.typescript-language-server
-  # nodePackages_latest.svelte-language-server
-  # nodePackages_latest.dockerfile-language-server-nodejs
-  # nodePackages_latest.bash-language-server
+  go
+  docker
 )
 
 stow_dirs=(
   common
   git
   helix
+  p10k
   tmux
   zsh
-  p10k
 )
 
 echo "========================================================"
 echo "  💻  System Wide Installation"
 echo "========================================================"
 
-read -p "Type of System? (WSL | *Linux): " sys;
+read -p "Installation for: (wsl | *linux): " sys;
 
 # Linux flag
 nix_flag="--daemon"
@@ -87,7 +79,7 @@ function update_upgrade () {
 echo "🌎 Generate locale language"
 sudo locale-gen
 
-echo "Update System"
+echo "💻 Update System"
 update_upgrade
 
 ###
@@ -104,15 +96,15 @@ update_upgrade
 
 
 echo "=========================================="
-echo "Updating kernals..."
+echo "🧩 Updating kernals..."
 echo "=========================================="
-sudo apt -y install linux-headers-$(uname -r) build-essential dkms
+sudo apt -y install linux-headers-$(uname -r)
 echo "=========================================="
-echo "Kernal updated successfully!"
+echo "✅ Kernal updated successfully!"
 echo "=========================================="
 
 
-echo "Initial system update"
+echo "💽 Initial system update"
 
 for package in ${packages[@]}
 do
@@ -124,16 +116,22 @@ echo "=========================================="
 echo "Installing Composer"
 echo "=========================================="
 
+# Using NIX will source NIX's php version
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 
+echo "=========================================="
+echo "Installing antidote"
+echo "=========================================="
+
+git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
 
 echo "=========================================="
-echo "Installing NIX"
+echo "📦 Installing NIX"
 echo "=========================================="
-sh <(curl -k -L https://nixos.org/nix/install) $nix_flag
+sh <(curl -L https://nixos.org/nix/install) $nix_flag
 
-echo "Source nix"
+echo "🔃 Source nix"
 . ~/.nix-profile/etc/profile.d/nix.sh
 
 
@@ -149,20 +147,20 @@ done
 
 
 echo "=========================================="
-echo "Enabling auto updates"
+echo "⌛ Enabling auto updates"
 echo "=========================================="
 sudo dpkg-reconfigure -f noninteractive --priority=low unattended-upgrades
 
 
 echo "=========================================="
-echo "Uninstalling Apache2..."
+echo "❌ Uninstalling Apache2..."
 echo "=========================================="
 sudo systemctl stop apache2 -f
 sudo apt remove -y apache2 --purge
 
 
 echo "=========================================="
-echo 'Fixing php.ini File...'
+echo '✏️ Fixing php.ini File...'
 echo "=========================================="
 sudo sed -i 's/;cgi.fix_pathinfo=0/cgi.fix_pathinfo=1/gI' /etc/php/$php_version/fpm/php.ini
 sudo sed -i 's/;extension=fileinfo/extension=fileinfo/gI' /etc/php/$php_version/fpm/php.ini
@@ -177,7 +175,7 @@ sudo sed -i 's/;extension=sockets/extension=sockets/gI' /etc/php/$php_version/fp
 
 
 echo "=========================================="
-echo "Stowing dot files"
+echo "🔗 Stowing dot files"
 echo "=========================================="
 
 for dir in ${stow_dirs[@]}
@@ -188,17 +186,17 @@ done
 
 
 echo "=========================================="
-echo "Configuring zsh"
+echo "🖼️ Configuring zsh"
 echo "=========================================="
 
 # source .proflie for nix-env that installed zsh
 source ~/.profile
 
+# Load the profile script with zsh
 $(which zsh) ./install-profile.zsh
 
-
 echo "=========================================="
-echo "Finishing installation script..."
+echo "🔃 Finishing installation script..."
 echo "=========================================="
 sudo systemctl restart php$php_version-fpm
 sudo systemctl restart nginx

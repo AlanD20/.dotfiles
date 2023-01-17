@@ -16,12 +16,12 @@
 
 alias rr="source ~/.zshrc; pwd";
 
-# Bundle zsh plugins via antibody
-alias update-antibody='antibody bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plugins.sh';
+# Bundle zsh plugins via antidote
+alias update-ad='antidote bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plugins.zsh';
 
 # Editor
-alias vim='hx';
 alias ef='hx `fzf`';
+alias vf='lvim `fzf`';
 
 # Apt
 alias apti="sudo apt-get -y install";
@@ -32,6 +32,7 @@ alias aptug="sudo apt-get -y upgrade";
 # Nix
 alias ni='nix-env -iA'
 alias nr='nix-env --uninstall'
+alias nix-clean='sudo nix-collect-garbage -d'
 
 # GPG
 alias rgpg="gpg-connect-agent RELOADAGENT /bye"; # Reload gpg
@@ -41,8 +42,8 @@ alias tgpg="echo test | gpg --clearsign"; # Test gpg
 alias cat='bat';
 alias cls="clear";
 alias mkp="mkdir -pv";
-alias ss="sudo systemctl start";
-alias sr="sudo systemctl restart";
+alias ss="sudo systemctl";
+alias sr="ss restart";
 
 # Exa
 # More flags at https://github.com/ogham/exa#command-line-options
@@ -52,7 +53,14 @@ alias la="lls --git-ignore";
 alias lta="lls --tree --git-ignore";
 
 # Custom Service Control
-alias ss-redis="ss redis-server";
+alias ss-redis="ss start redis-server";
 
 # PHP
 alias pa="php artisan";
+
+# Custom git
+function clone_single_branch () {
+  git clone --single-branch --branch $@
+}
+
+alias gcls="clone_single_branch"

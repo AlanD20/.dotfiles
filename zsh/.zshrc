@@ -81,14 +81,14 @@ SAVEHIST=1000
 # autoload -Uz compinit && compinit
 setopt autocd beep extendedglob nomatch notify
 
+# Export lvim path
+export PATH="$HOME/.local/bin:$PATH"
+
 # Export nvm completion settings for lukechilds/zsh-nvm plugin
 # Note: This must be exported before the plugin is bundled
 export NVM_DIR=${HOME}/.nvm
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
-
-# Source get AntiBody
-source ~/.zsh_plugins.sh
 
 ZSH_WEB_SEARCH_ENGINES=(yt "https://www.youtube.com/results?search_query=")
 
@@ -160,4 +160,12 @@ if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# source antidote
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+
+# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+antidote load
+
+source ~/.zsh_plugins.zsh
 

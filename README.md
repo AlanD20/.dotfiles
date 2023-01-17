@@ -18,26 +18,6 @@ useradd -s /bin/bash -m -g users -G sudo,www-data myuser
 
 ---
 
-### Enable systemd in WSL
-
-```bash
-# Make sure WSL: Version 0.67.6 and above
-wsl --version
-wsl --update
-
-# Open /etc/wsl.conf and add the following code
-[boot]
-systemd=true
-
-# Shutdown the WSL instance.
-wsl --shutdown
-
-# Now run WSL, and check systemd
-systemctl list-unit-files --type=service
-```
-
----
-
 ### Run Script
 
 1. Change `install.sh` file to executable
@@ -63,31 +43,31 @@ systemctl list-unit-files --type=service
 
 ## Resources
 
-- (Find more about WSL configs](https://learn.microsoft.com/en-us/windows/wsl/wsl-config)
+- [Download LSP For Helix](https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers)
 
-- **Notice**: Global configuration options with `.wslconfig` is only available for distributions running as WSL 2.
+- Using **neovim**? Here are a few starter configs:
+  - [LunarVim](https://www.lunarvim.org/)
+  - [kickstart](https://github.com/nvim-lua/kickstart.nvim) supports extendibility
+  - [Neovim config by nexxeln](https://github.com/nexxeln/nvim)
+  - [A bunch of plugins for neovim](https://github.com/rockerBOO/awesome-neovim)
+  - [Cosmic Nvim](https://github.com/CosmicNvim/CosmicNvim/)
+  - [Install LSP for neovim](https://github.com/williamboman/mason.nvim)
 
-- [Download LSP](https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers)
+      ```bash
+      :MasonInstall cssls
+      ```
 
-- Using neovim? Here is a [kickstart](https://github.com/nvim-lua/kickstart.nvim) if you want to extend, or [Another great starter config by nexxeln](https://github.com/nexxeln/nvim)
+- Adding custom LSP to Helix Editor. Here is an example
 
-- [Install LSP for neovim](https://github.com/williamboman/mason.nvim)
+  ```toml
+  # npm install blade-formatter --location=global 
 
-```bash
-:MasonInstall cssls
-```
+  [[language]]
+  name = "blade-formatter"
+  scope = "source.blade-formatter"
+  roots = []
+  file-types = ["blade.php"]
+  language-server = { command = "blade-formatter", args = ["--write"] }
+  formatter = { command = "blade-formatter", args = ["--write"] }
 
-- Adding custom language to Helix Editor
-
-```toml
-# npm install blade-formatter --location=global 
-
-[[language]]
-name = "blade-formatter"
-scope = "source.blade-formatter" 
-roots = []
-file-types = ["blade.php"]
-language-server = { command = "blade-formatter" , args = ["--write"] }
-formatter = { command = "blade-formatter" , args = ["--write"] }
-
-```
+  ```

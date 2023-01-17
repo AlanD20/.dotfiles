@@ -1,22 +1,36 @@
+
+# Install nvm
 lukechilds/zsh-nvm
 
-robbyrussell/oh-my-zsh path:plugins/fzf
-robbyrussell/oh-my-zsh path:plugins/colored-man-pages
-robbyrussell/oh-my-zsh path:plugins/command-not-found
-robbyrussell/oh-my-zsh path:plugins/git
-robbyrussell/oh-my-zsh path:plugins/git-extras
-robbyrussell/oh-my-zsh path:plugins/node
-robbyrussell/oh-my-zsh path:plugins/npm
-robbyrussell/oh-my-zsh path:plugins/yarn
-robbyrussell/oh-my-zsh path:plugins/web-search
-robbyrussell/oh-my-zsh path:plugins/docker
-robbyrussell/oh-my-zsh path:plugins/fancy-ctrl-z
-robbyrussell/oh-my-zsh path:plugins/history
+# Add support for keyboard shortcut
+ohmyzsh/ohmyzsh path:plugins/fzf
 
+# Enable gpg-agent if not working
+ohmyzsh/ohmyzsh path:plugins/gpg-agent
+
+ohmyzsh/ohmyzsh path:plugins/tmux
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+ohmyzsh/ohmyzsh path:plugins/command-not-found
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/git-extras
+ohmyzsh/ohmyzsh path:plugins/node
+ohmyzsh/ohmyzsh path:plugins/npm
+ohmyzsh/ohmyzsh path:plugins/yarn
+ohmyzsh/ohmyzsh path:plugins/web-search
+ohmyzsh/ohmyzsh path:plugins/docker
+ohmyzsh/ohmyzsh path:plugins/fancy-ctrl-z
+ohmyzsh/ohmyzsh path:plugins/history
+
+# install p10k theme
 romkatv/powerlevel10k
+
 rupa/z
 
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
 
+
+belak/zsh-utils path:editor
+belak/zsh-utils path:utility
+belak/zsh-utils path:completion

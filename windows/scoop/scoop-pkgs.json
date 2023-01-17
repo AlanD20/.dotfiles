@@ -1,0 +1,115 @@
+{
+  "buckets": [
+    {
+      "Name": "extras",
+      "Source": "https://github.com/ScoopInstaller/Extras",
+      "Updated": "2023-01-14T17:27:45+01:00",
+      "Manifests": 1756
+    },
+    {
+      "Name": "github-gh",
+      "Source": "https://github.com/cli/scoop-gh.git",
+      "Updated": "2023-01-03T23:54:24+01:00",
+      "Manifests": 0
+    },
+    {
+      "Name": "main",
+      "Source": "https://github.com/ScoopInstaller/Main",
+      "Updated": "2023-01-14T17:28:12+01:00",
+      "Manifests": 1142
+    }
+  ],
+  "apps": [
+    {
+      "Updated": "2022-11-20T18:12:32.3864966+01:00",
+      "Info": "",
+      "Source": "main",
+      "Version": "22.01",
+      "Name": "7zip"
+    },
+    {
+      "Updated": "2023-01-13T00:45:45.6643508+01:00",
+      "Info": "",
+      "Source": "main",
+      "Version": "1.29.2",
+      "Name": "deno"
+    },
+    {
+      "Updated": "2023-01-13T00:46:00.9321173+01:00",
+      "Info": "",
+      "Source": "github-gh",
+      "Version": "2.21.2",
+      "Name": "gh"
+    },
+    {
+      "Updated": "2023-01-14T20:45:28.6698052+01:00",
+      "Info": "",
+      "Source": "extras",
+      "Version": "0.3.5",
+      "Name": "git-aliases"
+    },
+    {
+      "Updated": "2023-01-09T23:27:47.1477402+01:00",
+      "Info": "",
+      "Source": "main",
+      "Version": "22.12",
+      "Name": "helix"
+    },
+    {
+      "Updated": "2022-12-01T13:31:01.3100441+01:00",
+      "Info": "",
+      "Source": "main",
+      "Version": "0.50",
+      "Name": "innounp"
+    },
+    {
+      "Updated": "2022-12-18T00:27:05.3433081+01:00",
+      "Info": "",
+      "Source": "main",
+      "Version": "12.2.0-rt_v10-rev1",
+      "Name": "mingw"
+    },
+    {
+      "Updated": "2022-12-25T19:39:23.9441072+01:00",
+      "Info": "",
+      "Source": "main",
+      "Version": "1.28.0",
+      "Name": "minikube"
+    },
+    {
+      "Updated": "2022-12-01T13:35:34.5192852+01:00",
+      "Info": "",
+      "Source": "main",
+      "Version": "3.0.7",
+      "Name": "openssl"
+    },
+    {
+      "Updated": "2022-11-20T18:07:18.5107419+01:00",
+      "Info": "",
+      "Source": "main",
+      "Version": "1.25.1",
+      "Name": "rustup"
+    },
+    {
+      "Updated": "2023-01-14T20:45:46.2965535+01:00",
+      "Info": "",
+      "Source": "main",
+      "Version": "2.3.4",
+      "Name": "vagrant"
+    },
+    {
+      "Updated": "2022-12-18T00:27:31.7766348+01:00",
+      "Info": "",
+      "Source": "extras",
+      "Version": "4.0.2",
+      "Name": "wireshark"
+    },
+    {
+      "Updated": "2023-01-13T00:46:25.6435105+01:00",
+      "Info": "",
+      "Source": "extras",
+      "Version": "5.13.4.11835",
+      "Name": "zoom"
+    }
+  ]
+}
