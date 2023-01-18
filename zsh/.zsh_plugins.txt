@@ -1,13 +1,7 @@
+lukechilds/zsh-nvm                     # Install nvm
 
-# Install nvm
-lukechilds/zsh-nvm
-
-# Add support for keyboard shortcut
-ohmyzsh/ohmyzsh path:plugins/fzf
-
-# Enable gpg-agent if not working
-ohmyzsh/ohmyzsh path:plugins/gpg-agent
-
+ohmyzsh/ohmyzsh path:plugins/fzf       # Add support for keyboard shortcut
+ohmyzsh/ohmyzsh path:plugins/gpg-agent # Enable gpg-agent if not working
 ohmyzsh/ohmyzsh path:plugins/tmux
 ohmyzsh/ohmyzsh path:plugins/colored-man-pages
 ohmyzsh/ohmyzsh path:plugins/command-not-found
@@ -21,15 +15,12 @@ ohmyzsh/ohmyzsh path:plugins/docker
 ohmyzsh/ohmyzsh path:plugins/fancy-ctrl-z
 ohmyzsh/ohmyzsh path:plugins/history
 
-# install p10k theme
-romkatv/powerlevel10k
-
+romkatv/powerlevel10k                  # install p10k theme
 rupa/z
 
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
-
 
 belak/zsh-utils path:editor
 belak/zsh-utils path:utility

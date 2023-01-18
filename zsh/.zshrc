@@ -17,7 +17,7 @@
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -71,18 +71,19 @@
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-# plugins=(git web-search docker command-not-found fancy-ctrl-z history npm yarn)
-
 # Default zsh configs
-HISTFILE=~/.histfile
+HISTFILE=$HOME/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
 # autoload -Uz compinit && compinit
 setopt autocd beep extendedglob nomatch notify
 
-# Export lvim path
-export PATH="$HOME/.local/bin:$PATH"
+# Export vscode bin path
+export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"
+
+# Export bin dir
+export PATH="$PATH:$HOME/.local/bin"
 
 # Export nvm completion settings for lukechilds/zsh-nvm plugin
 # Note: This must be exported before the plugin is bundled
@@ -152,20 +153,20 @@ export FZF_CTRL_R_OPTS="
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 
 # Source aliases
-if [ -e ~/.aliases.sh ]; then . ~/.aliases.sh; fi
+if [ -e $HOME/.aliases.sh ]; then . $HOME/.aliases.sh; fi
 
 # added by Nix installer
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
 
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
+[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
 # source antidote
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
 
-# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+# initialize plugins statically with ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 antidote load
 
-source ~/.zsh_plugins.zsh
+source $HOME/.zsh_plugins.zsh
 

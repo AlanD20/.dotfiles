@@ -39,7 +39,6 @@ alias rgpg="gpg-connect-agent RELOADAGENT /bye"; # Reload gpg
 alias tgpg="echo test | gpg --clearsign"; # Test gpg
 
 # System
-alias cat='bat';
 alias cls="clear";
 alias mkp="mkdir -pv";
 alias ss="sudo systemctl";

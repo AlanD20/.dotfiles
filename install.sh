@@ -58,14 +58,11 @@ echo "========================================================"
 
 read -p "Installation for: (wsl | *linux): " sys;
 
-# Linux flag
+# Multi-user installation for Linux
 nix_flag="--daemon"
 
-if [ "$sys" == "wsl" ]
-then
-    # WSL flag
-    nix_flag="--no-daemon"
-fi
+# Change to Single-user installation for WSL
+[ "$sys" == "wsl" ] && nix_flag="--no-daemon"
 
 function update_upgrade () {
   sudo apt -y update && sudo apt -y upgrade
@@ -117,8 +114,7 @@ echo "Installing Composer"
 echo "=========================================="
 
 # Using NIX will source NIX's php version
-curl -sS https://getcomposer.org/installer | php
-sudo mv composer.phar /usr/local/bin/composer
+curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer
 
 echo "=========================================="
 echo "Installing antidote"
@@ -129,10 +125,7 @@ git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antid
 echo "=========================================="
 echo "📦 Installing NIX"
 echo "=========================================="
-sh <(curl -L https://nixos.org/nix/install) $nix_flag
-
-echo "🔃 Source nix"
-. ~/.nix-profile/etc/profile.d/nix.sh
+sh <(curl -L https://nixos.org/nix/install) $nix_flag && . ~/.nix-profile/etc/profile.d/nix.sh
 
 
 echo "=========================================="

@@ -1,19 +1,24 @@
 theme = "kanagawa"
 
 [editor]
+auto-save = true
 line-number = "relative"
 bufferline = "multiple"
 true-color = true
 color-modes = true
+shell = ['zsh', '-c']
 
 [editor.statusline]
-left = ["mode", "spinner", "diagnostics"]
-center = ["file-name"]
-right = ["selections", "position", "file-encoding", "file-type"]
+left = ["mode", "spinner"]
+center = ["file-name", "file-type", "total-line-numbers"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending"]
+separator = "│"
+mode = { normal = "NORMAL", insert = "INSERT", select = "SELECT" }
 
 [editor.cursor-shape]
+insert = "block"
 normal = "block"
-select = "underline"
+select = "bar"
 
 [editor.file-picker]
 hidden = false
@@ -24,9 +29,17 @@ A-j = "move_line_down"
 A-k = "move_line_up"
 A-l = "move_char_right"
 esc = ["collapse_selection", "keep_primary_selection"]
+C-s = ":w" # Maps the Ctrl-s to the typable command :w which is an alias for :write (save file)
+g = { a = "code_action" } # Maps `ga` to show possible code actions
+"ret" = ["open_below", "normal_mode"] # Maps the enter key to open_below then re-enter normal mode
+C-a = "select_all"
+C-d = "copy_selection_on_next_line"
+backspace = ["insert_mode", "delete_char_backward"]
+# "C-S-esc" = "extend_line" # Maps Ctrl-Shift-Escape to extend_line
 
 [keys.insert]
-j = { k = "normal_mode" } # Maps `jk` to exit insert mode
+j = { k = "normal_mode" }
+"A-x" = "normal_mode" # Maps Alt-X to enter normal mode
 # Move cursor in insert mode
 A-h = "move_char_left"
 A-j = "move_line_down"
