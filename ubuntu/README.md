@@ -1,8 +1,8 @@
-## Ubuntu Customization
+# Ubuntu Customization
 
 ---
 
-### GNOME Extensions
+## GNOME Extensions
 
 - Install the following packages:
 
@@ -15,17 +15,17 @@ sudo apt-get install chrome-gnome-shell # Only Chromium Browsers
 
 [GNOME Extensions](https://extensions.gnome.org/):
 
-- **[Dim On Battery Power](https://extensions.gnome.org/extension/947/dim-on-battery-power/)** Lower brightness when low in battery.
-- **[OpenWeather](https://extensions.gnome.org/extension/750/openweather/)** To show current weather.
-- **[Sound Input & Output Device Chooser](https://extensions.gnome.org/extension/906/sound-output-device-chooser/)** Allows to choose inputs & outputs in status bar.
-- **[Vitals](https://extensions.gnome.org/extension/1460/vitals/)** System Monitoring
-- **[ArcMenu](https://extensions.gnome.org/extension/3628/arcmenu/)** Accessible start menu.
-- **[Blur my Shell](https://extensions.gnome.org/extension/3193/blur-my-shell/)**
-- **[Dash to Panel by charlesg99](https://extensions.gnome.org/extension/1160/dash-to-panel/)**
+- [**Dim On Battery Power**](https://extensions.gnome.org/extension/947/dim-on-battery-power/) Lower brightness when low in battery.
+- [**OpenWeather**](https://extensions.gnome.org/extension/750/openweather/) To show current weather.
+- [**Sound Input & Output Device Chooser**](https://extensions.gnome.org/extension/906/sound-output-device-chooser/) Allows to choose inputs & outputs in status bar.
+- [**Vitals**](https://extensions.gnome.org/extension/1460/vitals/) System Monitoring
+- [**ArcMenu**](https://extensions.gnome.org/extension/3628/arcmenu/) Accessible start menu.
+- [**Blur my Shell**](https://extensions.gnome.org/extension/3193/blur-my-shell/)
+- [**Dash to Panel by charlesg99**](https://extensions.gnome.org/extension/1160/dash-to-panel/)
 - [**Try Icons: Reloaded**](https://extensions.gnome.org/extension/2890/tray-icons-reloaded/) - Works with Dash to Panel. Shows system icon trays.
 - [**Nothing To Say**](https://extensions.gnome.org/extension/1113/nothing-to-say/) - Easily system-wide mute/unmute with keyboard shortcut.
-- **[Impatience](https://extensions.gnome.org/extension/277/impatience/)** - Change default speed animations.
-- **[User Themes](https://extensions.gnome.org/extension/19/user-themes/)** - Change system theme.
+- [**Impatience**](https://extensions.gnome.org/extension/277/impatience/) - Change default speed animations.
+- [**User Themes**](https://extensions.gnome.org/extension/19/user-themes/) - Change system theme.
 
 ---
 

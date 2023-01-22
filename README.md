@@ -20,13 +20,15 @@ useradd -s /bin/bash -m -g users -G sudo,www-data myuser
 
 ### Run Script
 
-1. Change `install.sh` and `install-profile.zsh` files to executable
+1. Add/Edit/Delete anything that is not needed for the setup, in the `install.sh` and `install-profile.zsh` files. Including packages.
+
+2. Change `install.sh` and `install-profile.zsh` files to executable
 
     ```bash
     chmod +x ./install*
     ```
 
-2. Run the script without `sudo`.
+3. Run the script without `sudo`.
 
     ```bash
     ./install.sh

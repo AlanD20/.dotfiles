@@ -18,7 +18,7 @@ mode = { normal = "NORMAL", insert = "INSERT", select = "SELECT" }
 [editor.cursor-shape]
 insert = "block"
 normal = "block"
-select = "bar"
+select = "underline"
 
 [editor.file-picker]
 hidden = false

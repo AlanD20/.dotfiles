@@ -37,10 +37,13 @@ nix_pkgs=(
   dos2unix
   unzip
   meslo-lgs-nf
-  redis
   sqlite
   go
+  gopls
   docker
+  lf    # File manager
+  lazygit
+  # lldb   # Debugger
 )
 
 stow_dirs=(
@@ -193,6 +196,10 @@ echo "🔃 Finishing installation script..."
 echo "=========================================="
 sudo systemctl restart php$php_version-fpm
 sudo systemctl restart nginx
+
+# Clean unnecessary files by nix
+nix-collect-garbage -d
+
 yes | sudo apt autoremove
 update_upgrade
 

@@ -1,8 +1,11 @@
+# remove duplicat entries from $PATH
+typeset -U PATH path
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-# export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -89,13 +92,13 @@ export PATH="$PATH:$HOME/.local/bin"
 # Note: This must be exported before the plugin is bundled
 export NVM_DIR=${HOME}/.nvm
 export NVM_COMPLETION=true
-export NVM_LAZY_LOAD=true
+# export NVM_LAZY_LOAD=true # If enabled, the npm bin path will not be added
 
 ZSH_WEB_SEARCH_ENGINES=(yt "https://www.youtube.com/results?search_query=")
 
 ZSH_WEB_SEARCH_ENGINES=(yth "https://www.youtube.com/")
 
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export MANPATH="/usr/local/man:$MANPATH"
@@ -113,8 +116,8 @@ export LANG=en_US.UTF-8
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Emacs keybinding
-bindkey -e
+# Vi keybinding
+bindkey -v
 
 # Fix Shift + arrows to move
 bindkey "^[[1;2C" forward-word

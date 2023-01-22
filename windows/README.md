@@ -1,10 +1,11 @@
-## Windows Customization
+# Windows Customization
 
-#### Notice
+## Notice
 
 - Do not forget to change the computer username in the config files.
+- [Here is a link to view all the windows commands inclduing documentations.](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands)
 
-## Installation
+## Utility Apps/Installation
 
 - [**Chocolatey**](https://chocolatey.org/install#individual)
 - [**Scoop.sh**](https://scoop.sh/) and here is [**Scoop Documentation**](https://scoop-docs.vercel.app/docs/).
@@ -16,10 +17,15 @@
     scoop bucket add versions
     ```
 
-- [**WinDbg**](https://apps.microsoft.com/store/detail/windbg-preview/9PGJGD53TN86)
-- [**More SysInternal Utilities**](https://learn.microsoft.com/en-us/sysinternals/downloads/)
+- [**WizTree**](https://diskanalyzer.com/)
+- [**TCPView**](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview)
+- [**Process Explorer**](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer)
+- [**autoruns**](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)
+- [**Revo Uninstaller**](https://www.revouninstaller.com/)
 - [**CPU-z**](https://www.cpuid.com/softwares/cpu-z.html)
 - [**ThrottleStop**](https://www.techpowerup.com/download/techpowerup-throttlestop/)
+- [**WinDbg**](https://apps.microsoft.com/store/detail/windbg-preview/9PGJGD53TN86)
+- [**Many More SysInternal Utilities**](https://learn.microsoft.com/en-us/sysinternals/downloads/)
 
 ---
 
@@ -44,7 +50,7 @@ scoop install 7zip deno gh mingw openssl rustup wireshark zoom
 - Don't forget to change the GUID to your GUID Appliations.
 - You can generate GUID by creating a new profile, then use it to your customization.
 
-#### Enable systemd in WSL
+### Enable systemd in WSL
 
 ```bash
 # Make sure WSL: Version 0.67.6 and above

@@ -1,8 +1,10 @@
-## VS Code Configuration
+# VS Code Configuration
 
 The settings must be placed at `~/.config/Code/User`
 
-### Export VSCode Extensions
+- Run `wsl-ext.sh` if you have installed the extensions on windows and you want to only install those extensions that need to be installed separately on WSL.
+
+## Export VSCode Extensions
 
 ```bash
 code --list-extensions | xargs -L 1 echo code --install-extension # Unix
@@ -10,14 +12,14 @@ code --list-extensions | xargs -L 1 echo code --install-extension # Unix
 code --list-extensions | % { "code --install-extension $_" } # Windows PowerShell
 ```
 
-#### Shortcuts
+### Shortcuts
 
-- `ctrl+n` Advanced New File
-- `ctrl+q` Saves All Files
-- `ctrl+k` Clears Command Line
-- `ctrl+shift+q` Closes Current Workspace/Folder
+- `Ctrl + n` Advanced New File
+- `Ctrl + q` Saves All Files
+- `Ctrl + k` Clears Command Line
+- `Ctrl + Shift + q` Closes Current Workspace/Folder
 
-#### Fonts
+### Fonts
 
 - Dank Mono **(Font Family Primary)**
 - JetBrains Mono
@@ -27,7 +29,7 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - Droid Sans Mono
 - Hack (No Glyph)
 
-#### Themes
+### Themes
 
 - Panda Theme **(Theme Primary)**
 - Monokai Pro
@@ -37,17 +39,17 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - Atom One Dark Theme
 - Sublime material Theme
 
-#### Icons
+### Icons
 
 - Fluent Icons **(Product Icon Primary)**
 - Material Icon Theme **(File Icon Primary)**
 - Material Theme Icons
 
-#### Suggested Extensions
+### Suggested Extensions
 
 - Tabnine AI Autocomplete (Alternative to GitHub Copilot)
 
-#### Extensions
+### Extensions
 
 - Advanced-new-file
 - AREPL for python
