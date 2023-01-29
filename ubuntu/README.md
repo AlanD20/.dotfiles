@@ -26,6 +26,7 @@ sudo apt-get install chrome-gnome-shell # Only Chromium Browsers
 - [**Nothing To Say**](https://extensions.gnome.org/extension/1113/nothing-to-say/) - Easily system-wide mute/unmute with keyboard shortcut.
 - [**Impatience**](https://extensions.gnome.org/extension/277/impatience/) - Change default speed animations.
 - [**User Themes**](https://extensions.gnome.org/extension/19/user-themes/) - Change system theme.
+- [**Switcher**](https://extensions.gnome.org/extension/973/switcher/)- Change system theme.
 
 ---
 

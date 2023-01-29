@@ -49,6 +49,7 @@ useradd -s /bin/bash -m -g users -G sudo,www-data myuser
 
 - Using **neovim**? Here are a few starter configs:
   - [LunarVim](https://www.lunarvim.org/)
+  - [SpiceVim](https://spacevim.org/)
   - [kickstart](https://github.com/nvim-lua/kickstart.nvim) supports extendibility
   - [Neovim config by nexxeln](https://github.com/nexxeln/nvim)
   - [A bunch of plugins for neovim](https://github.com/rockerBOO/awesome-neovim)

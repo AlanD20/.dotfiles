@@ -53,6 +53,7 @@ code --install-extension firefox-devtools.vscode-firefox-debug
 code --install-extension formulahendry.auto-rename-tag
 code --install-extension formulahendry.code-runner
 code --install-extension Fudge.auto-using
+code --install-extension garlandcrow.vscode-helix
 code --install-extension GitHub.copilot
 code --install-extension GitHub.github-vscode-theme
 code --install-extension GitHub.vscode-pull-request-github
@@ -60,6 +61,7 @@ code --install-extension golang.go
 code --install-extension GrapeCity.gc-excelviewer
 code --install-extension GraphQL.vscode-graphql
 code --install-extension GraphQL.vscode-graphql-syntax
+code --install-extension Gruntfuggly.todo-tree
 code --install-extension hajdaini.select-until-pattern
 code --install-extension hiukky.flate
 code --install-extension honnamkuan.golang-snippets

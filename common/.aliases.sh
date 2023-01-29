@@ -56,13 +56,22 @@ alias ss-redis="ss start redis-server";
 
 # PHP
 alias pa="php artisan";
-alias pa-clear="php artisan clear && php artisan clear-compiled && php artisan config:clear && php artisan cache:clear && php artisan view:clear && php artisan route:clear && php
- artisan optimize && composer dump-autoload -o"
+alias pa-clear="php artisan clear && \
+                php artisan clear-compiled && \
+                php artisan config:clear && \
+                php artisan cache:clear && \
+                php artisan view:clear && \
+                php artisan route:clear && \
+                php artisan optimize && \
+                composer dump-autoload -o";
+alias cr="composer run";
+alias cio="composer install -o";
+alias cdo="composer dump-autoload -o";
 
 # Custom git
 function clone_single_branch () {
   git clone --single-branch --branch $@
 }
 
-alias gcls="clone_single_branch"
-alias lz="lazygit"
+alias gcls="clone_single_branch";
+alias lz="lazygit";

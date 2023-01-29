@@ -7,21 +7,21 @@
 
 **Default Shortcuts:**
 
-- `Ctrl + b`: Enable tmux prefix mode.
-- `prefix + c`: Create a new window.
-- `prefix + w`: Tmus session manager.
-- `prefix + d`: Detach from current session.
-- `prefix + x`: Kill current tmux pane.
-- `prefix + Shift + "`: Create a new horizontal pane.
-- `prefix + Shift + %`: Create a new vertical pane.
-- `prefix + h/j/k/l`: Move focus to another pane.
-- `prefix + Shift + h/j/k/l`: Resize current pane.
-- `prefix + ,`: Rename current pane.
-- `prefix + .`: Move current pane to another session.
+- <kbd>Ctrl</kbd> + <kbd>b</kbd>: Enable tmux prefix mode.
+- `prefix` + <kbd>c</kbd>: Create a new window.
+- `prefix` + <kbd>w</kbd>: Tmus session manager.
+- `prefix` + <kbd>d</kbd>: Detach from current session.
+- `prefix` + <kbd>x</kbd>: Kill current tmux pane.
+- `prefix` + <kbd>Shift</kbd> + <kbd>"</kbd>: Create a new horizontal pane.
+- `prefix` + <kbd>Shift</kbd> + <kbd>%</kbd>: Create a new vertical pane.
+- `prefix` + <kbd>h/j/k/l</kbd>: Move focus to another pane.
+- `prefix` + <kbd>Shift</kbd> + <kbd>h/j/k/l</kbd>: Resize current pane.
+- `prefix` + <kbd>,</kbd>: Rename current pane.
+- `prefix` + <kbd>.</kbd>: Move current pane to another session.
 
-- `prefix + Shift + I`: Install plugins.
-- `prefix + Shift + U`: Update plugins.
-- `prefix + r`: Reload tmux.
+- `prefix` + <kbd>Shift</kbd> + <kbd>I</kbd>: Install plugins.
+- `prefix` + <kbd>Shift</kbd> + <kbd>U</kbd>: Update plugins.
+- `prefix` + <kbd>r</kbd>: Reload tmux.
 
 ## Oh-my-zsh tmux plugin
 
@@ -46,7 +46,7 @@
 
 **Alias:**
 
-- `prefix + Ctrl + f`: To open session switcher with fzf.
+- `prefix` + <kbd>Ctrl</kbd> + <kbd>f</kbd>: To open session switcher with fzf.
 
 ## Tmux Sessionist
 
@@ -54,18 +54,18 @@
 
 **Aliases:**
 
-- `prefix + g` - prompts for session name and switches to it. Performs 'kind-of'
+- `prefix` + <kbd>g</kbd> - prompts for session name and switches to it. Performs 'kind-of'
   name completion.
-  Faster than the built-in `prefix + s` prompt for long session lists.
-- `prefix + C` (shift + c) - prompt for creating a new session by name.
-- `prefix + X` (shift + x) - kill current session without detaching tmux.
-- `prefix + S` (shift + s) - switches to the last session.
-  The same as built-in `prefix + L` that everyone seems to override with
+  Faster than the built-in `prefix` + <kbd>s</kbd> prompt for long session lists.
+- `prefix` + <kbd>C</kbd>` (shift + c) - prompt for creating a new session by name.
+- `prefix` + <kbd>X</kbd>` (shift + x) - kill current session without detaching tmux.
+- `prefix` + <kbd>S</kbd>` (shift + s) - switches to the last session.
+  The same as built-in `prefix` + <kbd>L</kbd> that everyone seems to override with
   some other binding.
-- `prefix + @` - promote current pane into a new session.
-  Analogous to how `prefix + !` breaks current pane to a new window.
-- `prefix + t<secondary-key>` - join currently marked pane (`prefix + m`) to current session/window, and switch to it
+- `prefix` + <kbd>@</kbd> - promote current pane into a new session.
+  Analogous to how `prefix` + <kbd>!</kbd> breaks current pane to a new window.
+- `prefix` + <kbd>t</kbd><secondary-key> - join currently marked pane (`prefix` + <kbd>m</kbd>) to current session/window, and switch to it
   - secondary-keys
-    - `h`, `-`, `"`: join horizontally
-    - `v`, `|`, `%`: join vertically
-    - `f`, `@`: join full screen
+    - <kbd>h</kbd>, <kbd>-</kbd>, <kbd>"</kbd>: join horizontally
+    - <kbd>v</kbd>, <kbd>|</kbd>, <kbd>%</kbd>: join vertically
+    - <kbd>f</kbd>, <kbd>@</kbd>: join full screen

@@ -1,5 +1,3 @@
-#!/bin/sh
-
 code --install-extension adpyke.codesnap
 code --install-extension adrianwilczynski.alpine-js-intellisense
 code --install-extension adrolli.tallui-laravel-livewire-tailwind
@@ -43,7 +41,6 @@ code --install-extension GrapeCity.gc-excelviewer
 code --install-extension hajdaini.select-until-pattern
 code --install-extension ikappas.composer
 code --install-extension JakeWilson.vscode-placeholder-images
-code --install-extension kamikillerto.vscode-colorize
 code --install-extension kokororin.vscode-phpfmt
 code --install-extension leizongmin.node-module-intellisense
 code --install-extension lennardv.livewire-goto-updated
@@ -90,6 +87,8 @@ code --install-extension sevavietl.php-files
 code --install-extension shd101wyy.markdown-preview-enhanced
 code --install-extension shufo.vscode-blade-formatter
 code --install-extension sleistner.vscode-fileutils
+code --install-extension swordev.phpstan
+code --install-extension vintharas.learn-vim
 code --install-extension VisualStudioExptTeam.intellicode-api-usage-examples
 code --install-extension VisualStudioExptTeam.vscodeintellicode
 code --install-extension WallabyJs.quokka-vscode

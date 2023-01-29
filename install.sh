@@ -41,7 +41,7 @@ nix_pkgs=(
   go
   gopls
   docker
-  lf    # File manager
+  lf # File manager
   lazygit
   # lldb   # Debugger
 )
@@ -50,6 +50,8 @@ stow_dirs=(
   common
   git
   helix
+  lazygit
+  lvim
   p10k
   tmux
   zsh
@@ -59,7 +61,7 @@ echo "========================================================"
 echo "  💻  System Wide Installation"
 echo "========================================================"
 
-read -p "Installation for: (wsl | *linux): " sys;
+read -p "Installation for: (wsl | *linux): " sys
 
 # Multi-user installation for Linux
 nix_flag="--daemon"
@@ -67,10 +69,9 @@ nix_flag="--daemon"
 # Change to Single-user installation for WSL
 [ "$sys" == "wsl" ] && nix_flag="--no-daemon"
 
-function update_upgrade () {
+function update_upgrade() {
   sudo apt -y update && sudo apt -y upgrade
 }
-
 
 ###
 # Start installation
@@ -90,10 +91,8 @@ sudo add-apt-repository -y universe
 sudo add-apt-repository -y ppa:ondrej/php
 sudo add-apt-repository -y ppa:ondrej/nginx
 
-
 echo "Source new repositores"
 update_upgrade
-
 
 echo "=========================================="
 echo "🧩 Updating kernals..."
@@ -103,14 +102,11 @@ echo "=========================================="
 echo "✅ Kernal updated successfully!"
 echo "=========================================="
 
-
 echo "💽 Initial system update"
 
-for package in ${packages[@]}
-do
+for package in ${packages[@]}; do
   sudo apt -y install $package
 done
-
 
 echo "=========================================="
 echo "Installing Composer"
@@ -130,30 +126,25 @@ echo "📦 Installing NIX"
 echo "=========================================="
 sh <(curl -L https://nixos.org/nix/install) $nix_flag && . ~/.nix-profile/etc/profile.d/nix.sh
 
-
 echo "=========================================="
 echo "Installing packages using NIX"
 echo "=========================================="
 
-for package in ${nix_pkgs[@]}
-do
-	echo "📦 Installing $package"
-	NIXPKGS_ALLOW_UNFREE=1 nix-env -iA nixpkgs.$package
+for package in ${nix_pkgs[@]}; do
+  echo "📦 Installing $package"
+  NIXPKGS_ALLOW_UNFREE=1 nix-env -iA nixpkgs.$package
 done
-
 
 echo "=========================================="
 echo "⌛ Enabling auto updates"
 echo "=========================================="
 sudo dpkg-reconfigure -f noninteractive --priority=low unattended-upgrades
 
-
 echo "=========================================="
 echo "❌ Uninstalling Apache2..."
 echo "=========================================="
 sudo systemctl stop apache2 -f
 sudo apt remove -y apache2 --purge
-
 
 echo "=========================================="
 echo '✏️ Fixing php.ini File...'
@@ -169,17 +160,14 @@ sudo sed -i 's/;extension=openssl/extension=openssl/gI' /etc/php/$php_version/fp
 sudo sed -i 's/;extension=pdo_mysql/extension=pdo_mysql/gI' /etc/php/$php_version/fpm/php.ini
 sudo sed -i 's/;extension=sockets/extension=sockets/gI' /etc/php/$php_version/fpm/php.ini
 
-
 echo "=========================================="
 echo "🔗 Stowing dot files"
 echo "=========================================="
 
-for dir in ${stow_dirs[@]}
-do
+for dir in ${stow_dirs[@]}; do
   echo "Stowing $dir"
   stow $dir
 done
-
 
 echo "=========================================="
 echo "🖼️ Configuring zsh"
@@ -203,8 +191,7 @@ nix-collect-garbage -d
 yes | sudo apt autoremove
 update_upgrade
 
-
-bat<< MANUAL_TASKS
+bat <<MANUAL_TASKS
 ==============================================
             Remaining Manual Tasks....
 ==============================================

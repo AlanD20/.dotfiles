@@ -93,7 +93,9 @@
   "[dart]": {
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
-    "editor.rulers": [80],
+    "editor.rulers": [
+      80
+    ],
     "editor.selectionHighlight": false,
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
@@ -101,7 +103,10 @@
     "editor.wordBasedSuggestions": false
   },
   "python.defaultInterpreterPath": "C:\\laragon\\bin\\python\\python-3.10\\python.exe",
-  "python.formatting.autopep8Args": ["--indent-size=2", "--ignore=E121"],
+  "python.formatting.autopep8Args": [
+    "--indent-size=2",
+    "--ignore=E121"
+  ],
   "terminal.integrated.enableBell": true,
   // "terminal.integrated.fontFamily": "Cascadia Code PL",
   "terminal.integrated.fontFamily": "MesloLGS NF",
@@ -221,12 +226,23 @@
   "gopls": {
     "ui.semanticTokens": true
   },
-
   "laravel-pint.enable": true,
   "alpine-intellisense.settings.languageScopes": "php",
   "bladeFormatter.format.sortHtmlAttributes": "code-guide",
   "bladeFormatter.format.wrapAttributes": "force-expand-multiline",
   "nginx-conf-hint.format.align": true,
   "html.format.wrapAttributes": "force-expand-multiline",
-  "tailwindCSS.classAttributes": ["class", "className", "ngClass", ":class"]
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    ":class"
+  ],
+  "laravel-pint.preset": "laravel",
+  "remote.WSL2.connectionMethod": "localhost",
+  "remote.WSL2.server.connectThroughLocalhost": true,
+  "markdownlint.config": {
+    "MD033": false,
+    "MD041": false
+  }
 }

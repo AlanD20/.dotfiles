@@ -4,6 +4,9 @@ The settings must be placed at `~/.config/Code/User`
 
 - Run `wsl-ext.sh` if you have installed the extensions on windows and you want to only install those extensions that need to be installed separately on WSL.
 
+- [Shortcut Cheatsheet (Windows)](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
+- [Another repo to find out more tips about VS Code](https://github.com/cavo789/vscode_tips)
+
 ## Export VSCode Extensions
 
 ```bash
@@ -14,10 +17,10 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 
 ### Shortcuts
 
-- `Ctrl + n` Advanced New File
-- `Ctrl + q` Saves All Files
-- `Ctrl + k` Clears Command Line
-- `Ctrl + Shift + q` Closes Current Workspace/Folder
+- <kbd>Ctrl</kbd> + <kbd>n</kbd> Advanced New File
+- <kbd>Ctrl</kbd> + <kbd>q</kbd> Saves All Files
+- <kbd>Ctrl</kbd> + <kbd>k</kbd> Clears Command Line
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>q</kbd> Closes Current Workspace/Folder
 
 ### Fonts
 
@@ -56,8 +59,8 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - Auto Rename Tags
 - Better comment
 - Better TOML
-- CodeLLDB
 - Code Runner
+- CodeLLDB
 - CodeSnap
 - Color highlight
 - Composer
@@ -75,9 +78,9 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - File Utils
 - Git Extension Pack
 - Git Graph
-- Gi Graph
-- Github Pull Requests and issues
+- Git Graph
 - git history
+- Github Pull Requests and issues
 - Go
 - Golang by aldijav
 - Golang snippets
@@ -122,6 +125,7 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - Prisma
 - Pylance
 - Quokka.js
+- Remote Development
 - Rest client (Test back-end API)
 - Rust syntax
 - Rust-analyzer
@@ -129,11 +133,14 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - Save and Run
 - SCSS intellisense
 - Select until pattern
+- shell-format
+- shellman
 - Simple React Snippets
 - SQLite Viewer
 - Tailwind CSS IntelliSense
 - TallUI Laravel, PHP and TALL-Stack VScode Extensions
 - Thunder Client
+- Todo Tree
 - Vetur
 - Vscode-pets
 - Vuter
@@ -157,9 +164,9 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - CMake Tools
 - CodeLLDB
 - Dart
+- Debugger for Unity
 - Deno
 - Deno Standard Library Snippets
-- Debugger for Unity
 - Extension pack for java
 - Flutter
 - flutter color
