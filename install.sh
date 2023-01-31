@@ -20,6 +20,7 @@ packages=(
   redis-server
   # Download nginx from ppa:ondrej/nginx repo
   nginx
+  openssh-server
 )
 
 nix_pkgs=(
@@ -180,10 +181,18 @@ source ~/.profile
 $(which zsh) ./install-profile.zsh
 
 echo "=========================================="
+echo "Configure SSH"
+echo "=========================================="
+
+sudo sed -i 's/#Port 22/Port 22/I' /etc/ssh/sshd_config
+sudo sed -i 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/I' /etc/ssh/sshd_config
+
+echo "=========================================="
 echo "🔃 Finishing installation script..."
 echo "=========================================="
 sudo systemctl restart php$php_version-fpm
 sudo systemctl restart nginx
+sudo systemctl start ssh
 
 # Clean unnecessary files by nix
 nix-collect-garbage -d

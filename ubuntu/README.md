@@ -26,7 +26,7 @@ sudo apt-get install chrome-gnome-shell # Only Chromium Browsers
 - [**Nothing To Say**](https://extensions.gnome.org/extension/1113/nothing-to-say/) - Easily system-wide mute/unmute with keyboard shortcut.
 - [**Impatience**](https://extensions.gnome.org/extension/277/impatience/) - Change default speed animations.
 - [**User Themes**](https://extensions.gnome.org/extension/19/user-themes/) - Change system theme.
-- [**Switcher**](https://extensions.gnome.org/extension/973/switcher/)- Change system theme.
+- [**Switcher**](https://extensions.gnome.org/extension/973/switcher/)- Switch windows quickly with a simple search.
 
 ---
 
@@ -56,16 +56,3 @@ pip3 install fuzzywuzzy faker requests pint simpleeval parsedatetime
 - To set shortcut, set it in the application settings, then go to settings > keyboard > view and customize shortcut > at the bottom select custom shortcut > Add new shortcut and fill the name, set the command to `ulauncher-toggle`
 
 ---
-
-## Install zsh & Oh-my-zsh & powerlevel10k
-
-```bash
-# 1. Install zsh
-sudo apt install zsh
-
-# 2. Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# 3. Install powerlevel10k for oh-my-zsh
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-```

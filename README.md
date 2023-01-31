@@ -43,6 +43,14 @@ useradd -s /bin/bash -m -g users -G sudo,www-data myuser
 
 ---
 
+## Find WSL IP For SSH
+
+```bash
+ip addr | grep eth0
+```
+
+---
+
 ## Resources
 
 - [Download LSP For Helix](https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers)
