@@ -62,7 +62,10 @@ echo "========================================================"
 echo "  💻  System Wide Installation"
 echo "========================================================"
 
-read -p "Installation for: (wsl | *linux): " sys
+# read -p "Installation for: (wsl | *linux): " sys
+sys="linux"
+
+[[ $(uname -r) == *"microsoft"* ]] && sys="wsl"
 
 # Multi-user installation for Linux
 nix_flag="--daemon"
@@ -125,7 +128,14 @@ git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antid
 echo "=========================================="
 echo "📦 Installing NIX"
 echo "=========================================="
-sh <(curl -L https://nixos.org/nix/install) $nix_flag && . ~/.nix-profile/etc/profile.d/nix.sh
+sh <(curl -L https://nixos.org/nix/install) $nix_flag
+
+[ "$sys" == "wsl" ] && . ~/.nix-profile/etc/profile.d/nix.sh
+[ "$sys" == "linux" ] && . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+
+# Enable System support nix shell loader in .zshrc file
+[ "$sys" == "wsl" ] && sed -i "/# WSL Nix/{n;s/# //I}" ./zsh/.zshrc
+[ "$sys" == "linux" ] && sed -i "/# Linux Nix/{n;s/# //I}" ./zsh/.zshrc
 
 echo "=========================================="
 echo "Installing packages using NIX"

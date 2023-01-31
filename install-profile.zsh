@@ -1,4 +1,3 @@
-
 ###
 # Configs
 ###
@@ -8,7 +7,7 @@ node_version="16.19.0"
 source "$HOME/.zshrc"
 
 # bundle zsh plugins
-antidote bundle < "$HOME/.zsh_plugins.txt" > "$HOME/.zsh_plugins.zsh"
+antidote bundle <"$HOME/.zsh_plugins.txt" >"$HOME/.zsh_plugins.zsh"
 
 # Install ohmyzsh
 yes no | sh -c "$HOME/.cache/antidote/*ohmyzsh/tools/install.sh"
@@ -17,7 +16,7 @@ yes no | sh -c "$HOME/.cache/antidote/*ohmyzsh/tools/install.sh"
 command -v zsh | sudo tee -a /etc/shells
 
 # Use zsh as default shell
-sudo chsh -s $(which zsh) $USER
+sudo usermod --shell $(which zsh) $USER
 
 # Remove auto-generated .zshrc by ohmyzsh
 rm "$HOME/.zshrc"
@@ -41,7 +40,7 @@ nvm install $node_version
 nvm alias default $node_version
 nvm use default
 npm install npm@latest --location=global
-npm install yarn --location=global
+npm install yarn pnpm --location=global
 
 echo "=========================================="
 echo "Installing LSP Through npm for Helix"
@@ -57,4 +56,4 @@ echo "=========================================="
 LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/fc6873809934917b470bff1b072171879899a36b/utils/installer/install.sh)
 
 # Make GNUPG to cache the entered passphrase for 8 hours
-mkdir -p $HOME/.gnupg && echo "default-cache-ttl 28800" >> ~/.gnupg/gpg-agent.conf
+mkdir -p $HOME/.gnupg && echo "default-cache-ttl 28800" >>~/.gnupg/gpg-agent.conf
