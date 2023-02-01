@@ -9,11 +9,18 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
+quote = single
 
-# quote = single
+# 4 space indentation
+[*.py]
+indent_style = space
+indent_size = 4
+
 
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{yml,yaml}]
+# Matches the exact files either package.json or .travis.yml
+[{package.json,*.{yml,yaml}}]
+indent_style = space
 indent_size = 2

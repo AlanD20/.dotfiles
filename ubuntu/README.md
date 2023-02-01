@@ -1,5 +1,16 @@
 # Ubuntu Customization
 
+## Programs
+
+Install snapd packages by editing `ubuntu/packages.sh` file.
+
+Manual DEB installaton:
+
+- Chrome
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Flameshot Screen Capture](https://flameshot.org/)
+- [Ulauncher](https://ulauncher.io/)
+
 ---
 
 ## GNOME Extensions
@@ -26,20 +37,18 @@ sudo apt-get install chrome-gnome-shell # Only Chromium Browsers
 - [**Nothing To Say**](https://extensions.gnome.org/extension/1113/nothing-to-say/) - Easily system-wide mute/unmute with keyboard shortcut.
 - [**Impatience**](https://extensions.gnome.org/extension/277/impatience/) - Change default speed animations.
 - [**User Themes**](https://extensions.gnome.org/extension/19/user-themes/) - Change system theme.
-- [**Switcher**](https://extensions.gnome.org/extension/973/switcher/)- Switch windows quickly with a simple search.
+- [**UTCClock**](https://extensions.gnome.org/extension/1183/utcclock/) - Add UTC Timer.
+- [**AATWS - Advanced Alt-Tab Window Switcher**](https://extensions.gnome.org/extension/4412/advanced-alttab-window-switcher/)- Highly customizable replacement for the Alt/Super+Tab window/app switchers that offers 'type to search' mode, various filtering and sorting options.
 
 ---
 
 ## Flameshot Screen Capture
 
-- [Download Flameshot Screen Capture](https://flameshot.org/)
 - To set shortcut, go to settings > keyboard > view and customize shortcut > at the bottom select custom shortcut > Add new shortcut and fill the name, set the command to `flameshot gui`
 
 ---
 
 ## Ulauncher
-
-- [Download Ulauncher](https://ulauncher.io/)
 
 - [[Theme] Gruvbox for Ulauncher](https://github.com/SylEleuth/ulauncher-gruvbox)
 
@@ -51,8 +60,15 @@ sudo apt-get install chrome-gnome-shell # Only Chromium Browsers
 pip3 install fuzzywuzzy faker requests pint simpleeval parsedatetime
 ```
 
-- Put The Configuration Files at ~/.config/ulauncher/
-- Remove the `ulauncher_` prefix from the files.
+- Put The Configuration Files at `~/.config/ulauncher/`
 - To set shortcut, set it in the application settings, then go to settings > keyboard > view and customize shortcut > at the bottom select custom shortcut > Add new shortcut and fill the name, set the command to `ulauncher-toggle`
 
 ---
+
+## Add Startup Programs
+
+Open Tweaks applicaiton, then go to `Startup Applications`. After that, add both flameshot and Ulauncher applications to the startup alogn with any other applications you would like to run when the computer is powered on.
+
+## Troubleshooting
+
+- Do you see a black screen when sharing your screen? Make sure to turn off wayland at `/etc/gdm3/custom.conf` by changing `#WaylandEnable=false` to `WaylandEnable=false`.
