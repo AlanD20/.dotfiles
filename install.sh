@@ -41,7 +41,6 @@ nix_pkgs=(
   sqlite
   go
   gopls
-  docker
   lf # File manager
   lazygit
   # lldb   # Debugger
@@ -49,6 +48,7 @@ nix_pkgs=(
 
 stow_dirs=(
   common
+  fonts
   git
   helix
   lazygit
@@ -82,7 +82,7 @@ function update_upgrade() {
 ###
 
 echo "🌎 Generate locale language"
-sudo locale-gen
+sudo locale-gen en_US-UTF-8
 
 echo "💻 Update System"
 update_upgrade
@@ -175,10 +175,25 @@ echo "=========================================="
 echo "🔗 Stowing dot files"
 echo "=========================================="
 
+# Export C locale if env is linux
+[ "$sys" == "linux" ] && export LC_ALL=C
+
+# Remove exisitng config
+rm $HOME/.config/lvim/config.lua
+
+# To fix perl locale warning
+export LC_ALL=C
+
 for dir in ${stow_dirs[@]}; do
   echo "Stowing $dir"
   stow $dir
 done
+
+echo "=========================================="
+echo "Caching fonts"
+echo "=========================================="
+
+fc-cache -rv
 
 echo "=========================================="
 echo "🖼️ Configuring zsh"
@@ -204,11 +219,52 @@ sudo systemctl restart php$php_version-fpm
 sudo systemctl restart nginx
 sudo systemctl start ssh
 
+yes | sudo apt autoremove
+update_upgrade
+
 # Clean unnecessary files by nix
 nix-collect-garbage -d
 
-yes | sudo apt autoremove
-update_upgrade
+echo "=========================================="
+echo "Installing Docker"
+echo "=========================================="
+
+function docker_install() {
+
+  if [ "$sys" == "wsl" ]; then
+    nix-env -iA nixpkgs.docker
+    return 0
+  fi
+
+  sudo mkdir -p /etc/apt/keyrings
+
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+  echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+
+  update_upgrade
+
+  sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+}
+
+docker_install
+
+function ubuntu_setup() {
+
+  if [ "$sys" == "wsl" ]; then
+    return 0
+  fi
+
+  stow --dir=./ubuntu/ulauncher --target=$HOME .
+
+  chmod +x ./ubuntu/setup.sh && ./ubuntu/setup.sh
+
+}
+
+ubuntu_setup
 
 bat <<MANUAL_TASKS
 ==============================================
