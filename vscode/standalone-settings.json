@@ -244,5 +244,11 @@
   "markdownlint.config": {
     "MD033": false,
     "MD041": false
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[blade]": {
+    "editor.defaultFormatter": "shufo.vscode-blade-formatter"
   }
 }

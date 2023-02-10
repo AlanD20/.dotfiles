@@ -8,9 +8,7 @@ This repository is a starter setup for new linux environment.
 
 Here are a few configuration to do before running the script.
 
----
-
-### Add user
+- Add user
 
 ```bash
 useradd -s /bin/bash -m -g users -G sudo,www-data myuser
@@ -40,6 +38,14 @@ useradd -s /bin/bash -m -g users -G sudo,www-data myuser
 
 - `zsh-nvm` plugin installs `nvm`.
 - `fzf` plugin is required to enable shortcuts if we install `fzf` through `nix`.
+
+---
+
+## Desktop Environment Setup
+
+- **Following scripts must be run after `install.sh` script**
+- Running `apt` on Ubuntu gnome? run `apt.sh` script then after that, you may run `setup.sh` script in `ubuntu` direcotry..
+- Running `pacman` On Manjaro KDE Plasma? run `pacman.sh` script then after that, you may run `setup.sh` script in `manjaro` directory.
 
 ---
 

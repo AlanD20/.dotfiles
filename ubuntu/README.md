@@ -1,4 +1,4 @@
-# Ubuntu Customization
+# Ubuntu Gnome Customization
 
 ## Programs
 

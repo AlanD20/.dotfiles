@@ -53,7 +53,6 @@ code --install-extension firefox-devtools.vscode-firefox-debug
 code --install-extension formulahendry.auto-rename-tag
 code --install-extension formulahendry.code-runner
 code --install-extension Fudge.auto-using
-code --install-extension garlandcrow.vscode-helix
 code --install-extension GitHub.copilot
 code --install-extension GitHub.github-vscode-theme
 code --install-extension GitHub.vscode-pull-request-github
@@ -157,6 +156,7 @@ code --install-extension vscjava.vscode-java-pack
 code --install-extension vscjava.vscode-java-test
 code --install-extension vscjava.vscode-maven
 code --install-extension vuhrmeister.vscode-meteor
+code --install-extension waderyan.gitblame
 code --install-extension WallabyJs.quokka-vscode
 code --install-extension WillettsTech.willetts-tech
 code --install-extension wk-j.save-and-run

@@ -26,13 +26,27 @@ alias ef='hx `fzf`'
 # Apt
 alias apti="sudo apt-get -y install"
 alias aptr="sudo apt-get -y remove"
+alias aptrp="sudo apt-get -y --purge remove"
 alias aptud="sudo apt-get -y update"
 alias aptug="sudo apt-get -y upgrade"
 
 # Nix
-alias ni='nix-env -iA'
-alias nr='nix-env --uninstall'
-alias nix-clean='nix-collect-garbage -d'
+alias ni="nix-env -iA"
+alias nr="nix-env --uninstall"
+alias nix-clean="nix-collect-garbage -d"
+
+# Pacman
+alias paci="sudo pacman -S --noconfirm"
+alias pacr="sudo pacman -R --noconfirm"
+alias pacrp="sudo pacman -Rs --noconfirm"
+alias pacud="sudo pacman -Sy --noconfirm"
+alias pacug="sudo pacman -Su --noconfirm"
+
+# Pamac
+alias pai="pamac install --no-confirm"
+alias par="pamac remove --no-confirm"
+alias paud="pamac update"
+alias paug="pamac upgrade --no-confirm"
 
 # GPG
 alias rgpg="gpg-connect-agent RELOADAGENT /bye" # Reload gpg
