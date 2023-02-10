@@ -1,0 +1,16 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "AlanD20",
+    "email": "aland20@pm.me",
+    "url": "https://github.com/aland20"
+  },
+  "scripts": {
+    "start": "docker-compose -f server.yml start",
+    "stop": "docker-compose -f server.yml stop",
+    "up": "docker-compose -f server.yml up -d",
+    "down": "docker-compose -f server.yml down"
+  }
+}

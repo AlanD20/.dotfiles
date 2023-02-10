@@ -176,3 +176,6 @@ source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
 antidote load
 
 source $HOME/.zsh_plugins.zsh
+
+# go executable path 
+# export GOROOT="/nix/store/c55qzy9gbm86hh4fxm0mjn76rbzgif6i-go-1.20/share/go"

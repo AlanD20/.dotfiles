@@ -10,7 +10,7 @@ source "$HOME/.zshrc"
 antidote bundle <"$HOME/.zsh_plugins.txt" >"$HOME/.zsh_plugins.zsh"
 
 # Install ohmyzsh
-yes no | sh -c "$HOME/.cache/antidote/*ohmyzsh/tools/install.sh"
+yes no | sh -c "$HOME/.cache/antidote/*ohmyzsh*/tools/install.sh"
 
 # add zsh to valid login shell
 command -v zsh | sudo tee -a /etc/shells
