@@ -17,10 +17,20 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 
 ### Shortcuts
 
-- <kbd>Ctrl</kbd> + <kbd>n</kbd> Advanced New File
-- <kbd>Ctrl</kbd> + <kbd>q</kbd> Saves All Files
-- <kbd>Ctrl</kbd> + <kbd>k</kbd> Clears Command Line
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>q</kbd> Closes Current Workspace/Folder
+- <kbd>Ctrl</kbd> + <kbd>n</kbd> Advanced New File.
+- <kbd>Ctrl</kbd> + <kbd>q</kbd> Save All Opened Tabs.
+- <kbd>Ctrl</kbd> + <kbd>k</kbd> Clear Command Line.
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>q</kbd> Closes Current Workspace/Folder.
+- <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>l</kbd> Move cursor to end of the current line.
+- <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>h</kbd> Move cursor to start of the current line.
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>H</kbd> Select characters from current to start of the current line.
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>L</kbd> Select characters from current to end of the current line.
+- <kbd>Alt</kbd> + <kbd>l</kbd> Move cursor to right.
+- <kbd>Alt</kbd> + <kbd>h</kbd> Move cursor to left.
+- <kbd>Alt</kbd> + <kbd>k</kbd> Move cursor to up.
+- <kbd>Alt</kbd> + <kbd>j</kbd> Move cursor to down.
+- <kbd>Ctrl</kbd> + <kbd>UpArrow</kbd> Next Suggestion selector to up.
+- <kbd>Ctrl</kbd> + <kbd>DownArrow</kbd> Next Suggestion selector to down.
 
 ### Fonts
 

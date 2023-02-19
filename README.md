@@ -64,6 +64,7 @@ ip addr | grep eth0
 - Using **neovim**? Here are a few starter configs:
   - [LunarVim](https://www.lunarvim.org/)
   - [SpiceVim](https://spacevim.org/)
+  - [NvChad](https://nvchad.com/)
   - [kickstart](https://github.com/nvim-lua/kickstart.nvim) supports extendibility
   - [Neovim config by nexxeln](https://github.com/nexxeln/nvim)
   - [A bunch of plugins for neovim](https://github.com/rockerBOO/awesome-neovim)

@@ -168,7 +168,8 @@
     "**/.classpath": true,
     "**/.project": true,
     "**/.settings": true,
-    "**/.factorypath": true
+    "**/.factorypath": true,
+    "**/.git/objects/**": true
   },
   "intelephense.files.exclude": [
     "**/.git/**",

@@ -10,6 +10,16 @@ Manual installaton:
 
 ---
 
+## EasyEffects
+
+- Install the following packages using `pamac`.
+
+```bash
+pamac install manjaro-pipewire plasma-pa lsp-plugins calf
+```
+
+---
+
 ## Flameshot Screen Capture
 
 - To set shortcut, search for shortcut and add `flameshot` application, then set shortcut for `Take Screenshot`.

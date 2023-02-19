@@ -33,6 +33,8 @@ alias aptug="sudo apt-get -y upgrade"
 # Nix
 alias ni="nix-env -iA"
 alias nr="nix-env --uninstall"
+alias nud="nix-channel --update"
+alias nug="nix-env -u '*'"
 alias nix-clean="nix-collect-garbage -d"
 
 # Pacman
