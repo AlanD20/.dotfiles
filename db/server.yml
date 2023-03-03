@@ -1,0 +1,65 @@
+# Enable network for Windows
+# Linux does't need separate network
+# ==========================
+version: "3.8"
+# networks:
+#   webnet:
+#     driver: bridge
+name: dev
+services:
+  # Database service
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    # networks:
+    #   - webnet
+    command: "--authentication_policy=mysql_native_password"
+    environment:
+      MYSQL_DATABASE: mydb
+      # MYSQL_ROOT_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    healthcheck:
+      retries: 10
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+    volumes:
+      - ./db-data:/var/lib/mysql
+  # ======================
+  # Email Testing Server
+  mailpit:
+    image: axllent/mailpit
+    # networks:
+    #   - webnet
+    ports:
+      - "1025:1025"
+      - "8225:8025"
+    environment:
+      MP_DATA_FILE: /home
+    volumes:
+      - ./mailpit:/home
+    restart: unless-stopped
+  # ======================
+  # Email Testing Server
+  # mailhog:
+  #   image: mailhog/mailhog:latest
+  #   networks:
+  #     - webnet
+  #   ports:
+  #     - "1025:1025"
+  #     - "8225:8025"
+  #   restart: on-failure
+  # ======================
+  # PhpMyAdmin to manage database with UI
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin
+    # networks:
+    #   - webnet
+    ports:
+      - "8080:80"
+    restart: on-failure
+    environment:
+      - PMA_HOST=db

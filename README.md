@@ -57,6 +57,14 @@ ip addr | grep eth0
 
 ---
 
+## Database & Email With Dcoker
+
+Checkout [db](db) directory to quickly setup database and a testing email service with a single command.
+
+You can configure the docker-compose file to your needs.
+
+---
+
 ## Resources
 
 - [Download LSP For Helix](https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers)
