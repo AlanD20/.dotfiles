@@ -47,8 +47,8 @@ alias pacug="sudo pacman -Su --noconfirm"
 # Pamac
 alias pai="pamac install --no-confirm"
 alias par="pamac remove --no-confirm"
-alias paud="pamac update"
-alias paug="pamac upgrade --no-confirm"
+alias paud="pamac update -a"
+alias paug="pamac upgrade -a --no-confirm"
 
 # GPG
 alias rgpg="gpg-connect-agent RELOADAGENT /bye" # Reload gpg

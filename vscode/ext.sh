@@ -62,6 +62,7 @@ code --install-extension GraphQL.vscode-graphql
 code --install-extension GraphQL.vscode-graphql-syntax
 code --install-extension Gruntfuggly.todo-tree
 code --install-extension hajdaini.select-until-pattern
+code --install-extension hakcorp.php-awesome-snippets
 code --install-extension hiukky.flate
 code --install-extension honnamkuan.golang-snippets
 code --install-extension humao.rest-client

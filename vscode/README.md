@@ -23,8 +23,6 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>q</kbd> Closes Current Workspace/Folder.
 - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>l</kbd> Move cursor to end of the current line.
 - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>h</kbd> Move cursor to start of the current line.
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>H</kbd> Select characters from current to start of the current line.
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>L</kbd> Select characters from current to end of the current line.
 - <kbd>Alt</kbd> + <kbd>l</kbd> Move cursor to right.
 - <kbd>Alt</kbd> + <kbd>h</kbd> Move cursor to left.
 - <kbd>Alt</kbd> + <kbd>k</kbd> Move cursor to up.
@@ -45,6 +43,7 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 ### Themes
 
 - Panda Theme **(Theme Primary)**
+- halcyon **(Background For Custom Theme)**
 - Monokai Pro
 - Material Candy
 - Guthub theme
@@ -125,6 +124,7 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - Paste JSON as Code
 - Path Intellisense
 - PDF Viewer
+- PHP awesome snippets
 - php debug by xdebug
 - php intelephense
 - php intellisense

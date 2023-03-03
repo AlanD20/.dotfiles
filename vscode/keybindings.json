@@ -22,14 +22,6 @@
     "command": "cursorLineEnd"
   },
   {
-    "key": "ctrl+shift+h",
-    "command": "cursorLineStartSelect"
-  },
-  {
-    "key": "ctrl+shift+l",
-    "command": "cursorLineEndSelect"
-  },
-  {
     "key": "alt+j",
     "command": "cursorDown",
     "when": "textInputFocus"
@@ -92,11 +84,6 @@
   {
     "key": "ctrl+shift+k",
     "command": "editor.action.selectHighlights",
-    "when": "editorFocus"
-  },
-  {
-    "key": "ctrl+shift+l",
-    "command": "-editor.action.selectHighlights",
     "when": "editorFocus"
   },
   {
