@@ -2,6 +2,8 @@
 
 The settings must be placed at `~/.config/Code/User`
 
+**Notice:** Do not forget to change the binary paths in the config.
+
 - Run `wsl-ext.sh` if you have installed the extensions on windows and you want to only install those extensions that need to be installed separately on WSL.
 
 - [Shortcut Cheatsheet (Windows)](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)

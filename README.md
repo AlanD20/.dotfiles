@@ -1,29 +1,30 @@
 # Dot Files
 
-This repository is a starter setup for new linux environment.
+My personal dotfiles (configuration files) for new sysmten environment.
 
----
+It works for:
 
-## Configs
+- Windows: Suggestions, config files
+- WSL: Full setup
+- Ubuntu Gnome: Full setup
+- Manjaro KDE Plasma: Full setup
 
-Here are a few configuration to do before running the script.
+**Notice:** Do not forget to change my personal name to whatever you like in the config files by searching and replacing `<name>` to your name.
 
-- Add user
+Run the script as a normal user with sudo permission. Here is how you may add a new user in Linux:
 
 ```bash
 useradd -s /bin/bash -m -g users -G sudo,www-data myuser
 ```
 
----
-
-### Run Script
+## Running Installation Scripts
 
 1. Add/Edit/Delete anything that is not needed for the setup, in the `install.sh` and `install-profile.zsh` files. Including packages.
 
-2. Change `install.sh` and `install-profile.zsh` files to executable
+2. Change script files to executable
 
     ```bash
-    chmod +x ./install*
+    chmod +x ./*.sh 
     ```
 
 3. Run the script without `sudo`.
@@ -32,30 +33,11 @@ useradd -s /bin/bash -m -g users -G sudo,www-data myuser
     ./install.sh
     ```
 
----
-
-## ZSH Plugins
-
-- `zsh-nvm` plugin installs `nvm`.
-- `fzf` plugin is required to enable shortcuts if we install `fzf` through `nix`.
-
----
-
 ## Desktop Environment Setup
 
-- **Following scripts must be run after `install.sh` script**
-- Running `apt` on Ubuntu gnome? run `apt.sh` script then after that, you may run `setup.sh` script in `ubuntu` direcotry..
-- Running `pacman` On Manjaro KDE Plasma? run `pacman.sh` script then after that, you may run `setup.sh` script in `manjaro` directory.
-
----
-
-## Find WSL IP For SSH
-
-```bash
-ip addr | grep eth0
-```
-
----
+- **After you have ran the `install.sh` and `install-profile.sh` at the root project, run the following scripts to setup Linux environment.**
+- Using `apt` on Ubuntu gnome? Use `apt.sh` script, after that, you may run `setup.sh` script inside `ubuntu` direcotry.
+- Using `pacman` On Manjaro KDE Plasma? Use `pacman.sh` script, after that, you may run `setup.sh` script inside `manjaro` directory.
 
 ## Database & Email With Dcoker
 
@@ -66,6 +48,16 @@ You can configure the docker-compose file to your needs.
 ---
 
 ## Resources
+
+- ZSH Plugin Descriptions
+  - `zsh-nvm` plugin installs `nvm`.
+  - `fzf` plugin is required to enable shortcuts if we install `fzf` through `nix`.
+
+- Find WSL IP address for SSH access:
+
+    ```bash
+    ip addr | grep eth0
+    ```
 
 - [Download LSP For Helix](https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers)
 

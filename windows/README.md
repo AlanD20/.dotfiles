@@ -2,7 +2,7 @@
 
 ## Notice
 
-- Do not forget to change the computer username in the config files.
+- Do not forget to change the computer name and my personal name to whatever you like in the config files by searching and replacing `<name>` to your name and `<pc-name>` to your user's pc name.
 - [Here is a link to view all the windows commands inclduing documentations.](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands)
 
 ## Utility Apps/Installation
@@ -95,4 +95,4 @@ systemctl list-unit-files --type=service
 
 ### Powershell Profile
 
-- Put the config file to `User/Documnet/PowerShell`
+- Put the config file to `C:\Users\%USERPROFILE%\Documents\PowerShell`

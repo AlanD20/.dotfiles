@@ -1,3 +1,4 @@
 keybinding:
   universal:
-      appendNewline: '<tab>'
+    # Use tab to create a multi-line commit message
+    appendNewline: "<tab>"

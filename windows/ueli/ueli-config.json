@@ -33,8 +33,7 @@
       ],
       "applicationFolders": [
         "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs",
-        "C:\\Users\\AlanD20\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu",
-        "C:\\Users\\AlanD20\\Desktop\\WWW"
+        "C:\\Users\\<pc-name>\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu"
       ],
       "enabled": true,
       "showFullFilePath": true,
@@ -155,7 +154,7 @@
           "description": "Open Localhost",
           "executionArgument": "C:\\xampp\\htdocs",
           "icon": {
-            "parameter": "C:\\Users\\AlanD20\\Documents\\ico\\folder.png",
+            "parameter": "C:\\Users\\<pc-name>\\Documents\\ico\\folder.png",
             "type": "URL"
           },
           "name": "local",
@@ -167,7 +166,7 @@
           "description": "Open localhost With Port 80",
           "executionArgument": "http://127.0.0.1",
           "icon": {
-            "parameter": "C:\\Users\\AlanD20\\Documents\\ico\\url.png",
+            "parameter": "C:\\Users\\<pc-name>\\Documents\\ico\\url.png",
             "type": "URL"
           },
           "name": "local:80",
@@ -176,82 +175,22 @@
           "type": "URL"
         },
         {
-          "description": "Opens GitHub Profile",
-          "executionArgument": "https://github.com/AlanD20",
-          "icon": {
-            "parameter": "C:\\Users\\AlanD20\\Documents\\ico\\url.png",
-            "type": "URL"
-          },
-          "name": "gh Profile",
-          "needsUserConfirmationBeforeExecution": false,
-          "tags": [],
-          "type": "URL"
-        },
-        {
-          "description": "Opens GitHub Repositories",
-          "executionArgument": "https://github.com/AlanD20?tab=repositories",
-          "icon": {
-            "parameter": "C:\\Users\\AlanD20\\Documents\\ico\\url.png",
-            "type": "URL"
-          },
-          "name": "gh Repository",
-          "needsUserConfirmationBeforeExecution": false,
-          "tags": [],
-          "type": "URL"
-        },
-        {
-          "description": "Opens Personal Website",
-          "executionArgument": "https://aland20.tech",
-          "icon": {
-            "parameter": "C:\\Users\\AlanD20\\Documents\\ico\\url.png",
-            "type": "URL"
-          },
-          "name": "aland20",
-          "needsUserConfirmationBeforeExecution": false,
-          "tags": [],
-          "type": "URL"
-        },
-        {
           "description": "Opens User Folder",
-          "executionArgument": "C:\\Users\\AlanD20",
+          "executionArgument": "C:\\Users\\<pc-name>",
           "icon": {
-            "parameter": "C:\\Users\\AlanD20\\Documents\\ico\\folder.png",
+            "parameter": "C:\\Users\\<pc-name>\\Documents\\ico\\folder.png",
             "type": "URL"
           },
-          "name": "AlanD20",
+          "name": "<pc-name>",
           "needsUserConfirmationBeforeExecution": false,
           "tags": [],
           "type": "File path"
-        },
-        {
-          "description": "",
-          "executionArgument": "C:\\Users\\AlanD20\\Desktop\\ku-ticks",
-          "icon": {
-            "parameter": "C:\\Users\\AlanD20\\Documents\\ico\\folder.png",
-            "type": "URL"
-          },
-          "name": "kuticks",
-          "needsUserConfirmationBeforeExecution": false,
-          "tags": [],
-          "type": "File path"
-        },
-        {
-          "description": "Opens Ku-Ticks Project in VS Code",
-          "executionArgument": "code C:\\Users\\AlanD20\\Desktop\\ku-ticks",
-          "icon": {
-            "parameter": "",
-            "type": "URL"
-          },
-          "name": "code kuticks",
-          "needsUserConfirmationBeforeExecution": false,
-          "tags": [],
-          "type": "Commandline tool"
         },
         {
           "description": "Open Localhost With Port 3000",
           "executionArgument": "http://127.0.0.1:3000",
           "icon": {
-            "parameter": "C:\\Users\\AlanD20\\Documents\\ico\\url.png",
+            "parameter": "C:\\Users\\<pc-name>\\Documents\\ico\\url.png",
             "type": "URL"
           },
           "name": "local:3000",
@@ -263,7 +202,7 @@
           "description": "Open Localhost With Port 8000",
           "executionArgument": "http://127.0.0.1:8000",
           "icon": {
-            "parameter": "C:\\Users\\AlanD20\\Documents\\ico\\url.png",
+            "parameter": "C:\\Users\\<pc-name>\\Documents\\ico\\url.png",
             "type": "URL"
           },
           "name": "local:8000",
@@ -277,7 +216,7 @@
       "folders": [
         {
           "excludeHiddenFiles": true,
-          "folderPath": "C:\\Users\\AlanD20\\Documents",
+          "folderPath": "C:\\Users\\<pc-name>\\Documents",
           "recursive": false
         }
       ],

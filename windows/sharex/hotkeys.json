@@ -252,7 +252,7 @@
           },
           "FFmpegOptions": {
             "OverrideCLIPath": false,
-            "CLIPath": "C:\\Users\\AlanD20\\Documents\\ShareX\\Tools\\ffmpeg.exe",
+            "CLIPath": "C:\\Users\\<pc-name>\\Documents\\ShareX\\Tools\\ffmpeg.exe",
             "VideoSource": "GDI grab",
             "AudioSource": "None",
             "VideoCodec": "libx264",

@@ -1,14 +1,18 @@
 [user]
-	email = aland20@pm.me
-	name = AlanD20
-	signingkey = 70912BD60D19DD10
+  email = aland20@pm.me
+  name = AlanD20
+  signingkey = 70912BD60D19DD10
+
 [init]
-	defaultBranch = main
+  defaultBranch = main
+
 [core]
-	editor = code --wait
+  editor = code --wait
 
 [gpg]
-	program = "C:/Program Files (x86)/gnupg/bin/gpg"
+  # program = "C:/Program Files (x86)/gnupg/bin/gpg"
+  program = "/usr/bin/gpg"
+  
 [commit]
-	gpsign = true
-	gpgsign = true
+  gpsign = true
+  gpgsign = true

@@ -249,7 +249,6 @@
       "colorScheme": "Monokai Remastered",
       "cursorColor": "#E800B6",
       "cursorShape": "filledBox",
-      "experimental.useAtlasEngine": true,
       "font": {
         "face": "MesloLGS NF",
         "size": 12,
@@ -263,7 +262,7 @@
     },
     "list": [
       {
-        "backgroundImage": "C:/Users/WWW/Pictures/BG/DSC_3003col-730.jpg",
+        "backgroundImage": "C:/Users/<pc-name>/Pictures/BG/DSC_3003col-730.jpg",
         "backgroundImageOpacity": 0.25,
         "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
         "hidden": false,
@@ -271,10 +270,10 @@
         "opacity": 75,
         "source": "Windows.Terminal.PowershellCore",
         "startingDirectory": "%USERPROFILE%/Desktop",
-        "tabTitle": "PS 7.x => @AlanD20"
+        "tabTitle": "PS 7.x => @<name>"
       },
       {
-        "backgroundImage": "C:/Users/WWW/Pictures/BG/Epic Mountain.jpg",
+        "backgroundImage": "C:/Users/<pc-name>/Pictures/BG/Epic Mountain.jpg",
         "backgroundImageOpacity": 0.25,
         "commandline": "C:\\Windows\\system32\\wsl.exe -d Ubuntu-22.04",
         "cursorShape": "filledBox",
@@ -287,19 +286,19 @@
         "name": "Ubuntu-22.04 LTS",
         "source": "Windows.Terminal.Wsl",
         "startingDirectory": "~",
-        "tabTitle": "WSL/Ubuntu => @AlanD20"
+        "tabTitle": "WSL/Ubuntu => @<name>"
       },
       {
-        "backgroundImage": "C:/Users/WWW/Pictures/BG/AS6_1770-101.jpeg",
+        "backgroundImage": "C:/Users/<pc-name>/Pictures/BG/AS6_1770-101.jpeg",
         "backgroundImageOpacity": 0.25,
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "hidden": false,
         "name": "Command Prompt",
-        "startingDirectory": "C:/Users/WWW/Desktop",
-        "tabTitle": "CMD => @AlanD20"
+        "startingDirectory": "C:/Users/<pc-name>/Desktop",
+        "tabTitle": "CMD => @<name>"
       },
       {
-        "backgroundImage": "C:/Users/WWW/Pictures/BG/Epic Mountain.jpg",
+        "backgroundImage": "C:/Users/<pc-name>/Pictures/BG/Epic Mountain.jpg",
         "backgroundImageOpacity": 0.25,
         "commandline": "ubuntu2004.exe",
         "cursorShape": "filledBox",
@@ -311,7 +310,7 @@
         "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
         "name": "Ubuntu-20.04 LTS",
         "startingDirectory": "~",
-        "tabTitle": "WSL/Ubuntu 20 => @AlanD20"
+        "tabTitle": "WSL/Ubuntu 20 => @<name>"
       }
     ]
   },
