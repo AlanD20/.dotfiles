@@ -102,6 +102,15 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
   },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[blade]": {
+    "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
   // "python.defaultInterpreterPath": "C:\\laragon\\bin\\python\\python-3.10\\python.exe",
   "python.defaultInterpreterPath": "/usr/bin/python",
   "python.formatting.autopep8Args": [
@@ -222,7 +231,8 @@
     "editor.semanticHighlighting.enabled": true
   },
   "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
-  "C_Cpp.default.compilerPath": "C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin\\gcc.exe",
+  // "C_Cpp.default.compilerPath": "C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin\\gcc.exe",
+  "C_Cpp.default.compilerPath": "/usr/bin/gcc",
   "editor.accessibilitySupport": "off",
   "go.toolsManagement.autoUpdate": true,
   "gopls": {
@@ -246,17 +256,6 @@
     "MD033": false,
     "MD041": false
   },
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-  "vs-kubernetes": {
-    "vscode-kubernetes.minikube-path.linux": "/home/www/.local/state/vs-kubernetes/tools/minikube/linux-amd64/minikube",
-    "vscode-kubernetes.kubectl-path.linux": "/home/www/.local/state/vs-kubernetes/tools/kubectl/kubectl",
-    "vscode-kubernetes.helm-path.linux": "/home/www/.local/state/vs-kubernetes/tools/helm/linux-amd64/helm"
-  },
-  "[blade]": {
-    "editor.defaultFormatter": "shufo.vscode-blade-formatter"
-  },
   "window.titleBarStyle": "custom",
   "workbench.colorTheme": "Panda Syntax",
   "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
@@ -264,5 +263,11 @@
   "editor.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
   "git.mergeEditor": true,
-  "markdown.validate.enabled": true
+  "markdown.validate.enabled": true,
+  "zig.zls.path": "<ZLS_PATH>",
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.runInTerminal": true,
+  "code-runner.saveAllFilesBeforeRun": true,
+  "code-runner.saveFileBeforeRun": true,
+  "telemetry.telemetryLevel": "off"
 }

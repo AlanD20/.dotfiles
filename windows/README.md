@@ -17,40 +17,43 @@
     scoop bucket add versions
     ```
 
-- [**WizTree**](https://diskanalyzer.com/)
-- [**TCPView**](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview)
-- [**Process Explorer**](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer)
-- [**autoruns**](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)
-- [**Revo Uninstaller**](https://www.revouninstaller.com/)
-- [**CPU-z**](https://www.cpuid.com/softwares/cpu-z.html)
-- [**ThrottleStop**](https://www.techpowerup.com/download/techpowerup-throttlestop/)
-- [**WinDbg**](https://apps.microsoft.com/store/detail/windbg-preview/9PGJGD53TN86)
+- [**WizTree**](https://diskanalyzer.com/): Visualizing disk to clear up spaces.
+- [**TCPView**](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview): Display running services with ports
+- [**Process Explorer**](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer): Bettter version of task manager
+- [**autoruns**](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns): Easily trace down running applications and auto startup apps.
+- [**Revo Uninstaller**](https://www.revouninstaller.com/): Uninstall an application including its registery values and user prefs.
+- [**ThrottleStop**](https://www.techpowerup.com/download/techpowerup-throttlestop/): Forcefully run CPU at the highest rate in Laptops or throttled CPUs.
+- [**WinDbg**](https://apps.microsoft.com/store/detail/windbg-preview/9PGJGD53TN86): Analyze dumped errors or logs.
 - [**Many More SysInternal Utilities**](https://learn.microsoft.com/en-us/sysinternals/downloads/)
+- [**Bloatbox**](https://github.com/builtbybel/bloatbox): Remove bloated native applications.
+- [**Windows Optimizer**](https://github.com/hellzerg/optimizer)
 
 ---
 
-## Choco
+## Applications w/ Scoop
+
+- CLI Apps
 
 ```bash
-choco install -y git notepadplusplus sharex ueli oh-my-posh laragon.install 7zip winrar avidemux hxd javaruntime gnupg tor-browser coretemp curl neovim discord powertoys winaero-tweaker sqlite
+scoop install git gnupg sqlite curl neovim oh-my-posh nvm deno gh mingw openssl rustup zig-dev vagrant ripgrep git-aliases
+```
+
+- GUI Apps
+
+```bash
+scoop install notepadplusplus spotify discord powertoys winaero-tweaker tor-browser coretemp sharex ueli avidemux hxd 7zip winrar laragon wireshark zoom firefox vscode cpu-z postman rainmeter chatterino virtualbox-np
 ```
 
 ---
 
-## Scoop
+## App Configurations
 
-```bash
-scoop install 7zip deno gh mingw openssl rustup wireshark zoom
-```
-
----
-
-## Windows Terminal
+##### Windows Terminal
 
 - Don't forget to change the GUID to your GUID Appliations.
 - You can generate GUID by creating a new profile, then use it to your customization.
 
-### Enable systemd in WSL
+##### Enable systemd in WSL
 
 ```bash
 # Make sure WSL: Version 0.67.6 and above
@@ -68,9 +71,7 @@ wsl --shutdown
 systemctl list-unit-files --type=service
 ```
 
----
-
-### [Ueli App](https://ueli.app/)
+##### [Ueli App](https://ueli.app/)
 
 - Put the **ueli_config.json** contents to `C:\Users\%USERPROFILE%\AppData\Roaming\ueli\config.json`
 - [Dracula Theme Pink Version](https://github.com/dracula/ueli)
@@ -79,20 +80,69 @@ systemctl list-unit-files --type=service
   <img src="https://user-images.githubusercontent.com/30084112/174482271-c8de6e19-74bb-40ab-b85d-70d8a17fc29d.png" width="50" height="50" />
   <img src="https://user-images.githubusercontent.com/30084112/174482278-ff08492d-c6ff-408a-ad06-1b7280591567.png" width="50" height="50" />
 
----
-
-### [ShareX](https://getsharex.com/downloads/)
+##### [ShareX](https://getsharex.com/downloads/)
 
 - Put the **sharex_*.json** contents to `C:\Users\%USERPROFILE%\Documents\ShareX`
 
----
-
-### [Winaero Tweaker](https://winaero.com/winaero-tweaker/)
+##### [Winaero Tweaker](https://winaero.com/winaero-tweaker/)
 
 - Import the file in the application.
 
----
-
-### Powershell Profile
+##### Powershell Profile
 
 - Put the config file to `C:\Users\%USERPROFILE%\Documents\PowerShell`
+
+---
+
+### Scoop Commands
+
+- [Check out more commands](https://github.com/ScoopInstaller/Scoop/wiki/Commands)
+
+```bash
+# Check current bucket (source) lists
+scoop bucket list
+
+# Add a new bucket to the list
+scoop bucket add extras
+scoop bucket add versions
+
+# List of installed apps
+scoop list
+
+# Install an app
+scoop install my-app app2
+
+# Uninstall an app
+scoop uninstall my-app
+scoop uninstall -p my-app # Clean user prefs
+
+# Update all apps
+scoop update *
+
+# Export installed apps
+scoop export > "C:/scoop-apps.json"
+
+# Remove old versions
+scoop cleanup *
+```
+
+### Chocolatey Commands
+
+```bash
+# List installed apps
+choco list --local
+
+# Install an app
+choco install my-app app2
+choco install -y my-app3   # Skip confirmation
+
+# Uninstall an app
+choco uninstall my-app
+choco uninstall my-app3 --purge # Clean user prefs
+
+# Update all apps
+choco update all -y
+
+# Export installed apps
+choco export "C:/choco-apps.xml" --include-version-numbers
+```
