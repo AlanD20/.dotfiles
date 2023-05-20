@@ -1,3 +1,6 @@
+require("aland20.go")
+require("aland20.php")
+require("aland20.python")
 
 -- vim options
 vim.opt.guifont = 'MesloLGS:h16'
@@ -93,8 +96,6 @@ lvim.builtin.treesitter.ensure_installed = {
   "git_rebase",
   "gitattributes",
   "gitignore",
-  "go",
-  "gomod",
   -- "graphql",
   "help",
   "html",
@@ -104,10 +105,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "json",
   "lua",
   "markdown",
-  "php",
-  "phpdoc",
   "prisma",
-  "python",
   "rust",
   "scss",
   "sql",
@@ -116,6 +114,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "tsx",
   "typescript",
   "yaml",
+  "zls",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -200,11 +199,9 @@ lvim.builtin.treesitter.indent.enable = true
 
 -- Additional Plugins
 lvim.plugins = {
-  {
-    -- "folke/trouble.nvim",
-    -- cmd = "TroubleToggle",
-    "jwalton512/vim-blade",
-  },
+  -- "folke/trouble.nvim",
+  -- cmd = "TroubleToggle",
+  -- "jwalton512/vim-blade",
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
@@ -220,3 +217,4 @@ lvim.plugins = {
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+
