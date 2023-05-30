@@ -55,6 +55,41 @@ Don't forget to add `flatpak` and `AUR third-party` repositories
 - When you install PHP on arch-distributed system, it installs the latest version of PHP, don't put the verison when installing PHP from pacman.
 - Because of the previous reason, the PHP paths doesn't contain the version such as `/etc/php/php.ini` or the `php-fpm.sock` is at `/var/run/php-fpm/php-fpm.sock` that has `http` group.
 
+### xdebug Setup
+
+- Follow the official documentation if necessary, [here](https://xdebug.org/docs/install).
+
+**Make sure you haven't missed any of the following steps:**
+
+- Install `php debug` extension by `xdebug` on vscode.
+- Install xdebug, using pacman:
+
+    ```bash
+    pacman -S xdebug
+    ```
+
+- Create `xdebug.ini` file at `/etc/php/conf.d` or modify the existing one, and make sure it has the following content.
+
+    ```ini
+    zend_extension=xdebug.so
+    xdebug.mode=debug
+    xdebug.remote_enable=on
+    xdebug.remote_host=127.0.0.1
+    xdebug.remote_port=9003
+    xdebug.remote_handler=dbgp
+    xdebug.start_with_request=yes
+    ```
+
+- Restart your fpm or webserver or any other service that usese PHP under the hood.
+
+- Run the following function to check if it works:
+
+    ```bash
+    php -r "xdebug_info();"
+    ```
+
+- If it says `xdebug.so` not found, make sure to provide the full path, on Linux, it's usually at `/usr/lib/php/modules/xdebug.so`
+
 ## Troubleshooting
 
 - You may have to install the fonts as personal user so that it could be used in the konsole profile.
