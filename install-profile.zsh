@@ -1,7 +1,7 @@
 ###
 # Configs
 ###
-node_version="16.19.0"
+node_version="lts/hydrogen"
 
 # Load profile for antidote
 source "$HOME/.zshrc"
@@ -39,8 +39,7 @@ echo "=========================================="
 nvm install $node_version
 nvm alias default $node_version
 nvm use default
-npm install npm@latest --location=global
-npm install yarn pnpm --location=global
+npm install npm@latest yarn@latest pnpm@latest --location=global
 
 echo "=========================================="
 echo "Installing LSP Through npm for Helix"

@@ -86,6 +86,7 @@ code --install-extension leizongmin.node-module-intellisense
 code --install-extension lennardv.livewire-goto-updated
 code --install-extension linyang95.php-symbols
 code --install-extension lorenzopirro.zig-snippets
+code --install-extension m1guelpf.better-pest
 code --install-extension mathematic.vscode-pdf
 code --install-extension MehediDracula.php-constructor
 code --install-extension MehediDracula.php-namespace-resolver
@@ -131,7 +132,6 @@ code --install-extension PascalReitermann93.vscode-yaml-sort
 code --install-extension patbenatar.advanced-new-file
 code --install-extension phproberto.vscode-php-getters-setters
 code --install-extension PKief.material-icon-theme
-code --install-extension pranaygp.vscode-css-peek
 code --install-extension premparihar.gotestexplorer
 code --install-extension Prisma.prisma
 code --install-extension quicktype.quicktype
@@ -160,6 +160,7 @@ code --install-extension slevesque.shader
 code --install-extension smcpeak.default-keys-windows
 code --install-extension sperovita.alpinejs-syntax-highlight
 code --install-extension stpn.vscode-graphql
+code --install-extension sumneko.lua
 code --install-extension syler.sass-indented
 code --install-extension tinkertrain.theme-panda
 code --install-extension tonybaloney.vscode-pets
@@ -182,6 +183,7 @@ code --install-extension wmaurer.change-case
 code --install-extension xabikos.JavaScriptSnippets
 code --install-extension xdebug.php-debug
 code --install-extension YclepticStudios.unity-snippets
+code --install-extension yoavbls.pretty-ts-errors
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension ziglang.vscode-zig
 code --install-extension ziyasal.vscode-open-in-github

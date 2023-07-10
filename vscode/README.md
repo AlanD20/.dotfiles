@@ -115,6 +115,7 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - Livewire goto
 - Livewire Language SUpport
 - Livewire Switcher
+- Lua
 - Markdown All in One By Yu Zhang
 - Markdown Preview Enhanced
 - Markdownlint

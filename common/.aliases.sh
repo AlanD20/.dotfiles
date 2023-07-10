@@ -33,7 +33,7 @@ alias aptug="sudo apt-get -y upgrade"
 # Nix
 alias ni="nix-env -iA"
 alias nr="nix-env --uninstall"
-alias nud="nix-channel --update"
+alias nud="nix-channel --update unstable"
 alias nug="nix-env -u '*'"
 alias nix-clean="nix-collect-garbage -d"
 
@@ -43,6 +43,13 @@ alias pacr="sudo pacman -R --noconfirm"
 alias pacrp="sudo pacman -Rs --noconfirm"
 alias pacud="sudo pacman -Sy --noconfirm"
 alias pacug="sudo pacman -Su --noconfirm"
+
+# Pacman
+alias yayi="yay -S --noconfirm"
+alias yayr="yay -R --noconfirm"
+alias yayrp="yay -Rs --noconfirm"
+alias yayud="yay -Sy --noconfirm"
+alias yayug="yay -Su --noconfirm"
 
 # Pamac
 alias pai="pamac install --no-confirm"

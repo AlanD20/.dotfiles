@@ -22,6 +22,8 @@ pacman_pkgs=(
   zip
   unzip
   python-setuptools
+  net-tools
+  perl-image-exiftool
 )
 
 sudo pacman-mirrors --fasttrack && sudo pacman -Syu
@@ -47,8 +49,10 @@ sudo sed -i 's/;extension=imap/extension=imap/I' /etc/php/php.ini
 sudo sed -i 's/;extension=mbstring/extension=mbstring/I' /etc/php/php.ini
 sudo sed -i 's/;extension=exif/extension=exif/I' /etc/php/php.ini
 sudo sed -i 's/;extension=mysqli/extension=mysqli/I' /etc/php/php.ini
+sudo sed -i 's/;extension=sqlite3/extension=sqlite3/I' /etc/php/php.ini
 sudo sed -i 's/;extension=openssl/extension=openssl/I' /etc/php/php.ini
 sudo sed -i 's/;extension=pdo_mysql/extension=pdo_mysql/I' /etc/php/php.ini
+sudo sed -i 's/;extension=pdo_sqlite/extension=pdo_sqlite/I' /etc/php/php.ini
 sudo sed -i 's/;extension=sockets/extension=sockets/I' /etc/php/php.ini
 sudo sed -i 's/;extension=intl/extension=intl/I' /etc/php/php.ini
 sudo sed -i 's/;extension=sodium/extension=sodium/I' /etc/php/php.ini

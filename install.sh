@@ -14,7 +14,6 @@ nix_pkgs=(
   ripgrep
   bat
   direnv
-  neovim
   helix
   dos2unix
   unzip
@@ -25,6 +24,7 @@ nix_pkgs=(
   lf # File manager
   lazygit
   # lldb   # Debugger
+  delta # git pager
 )
 
 stow_dirs=(
@@ -90,6 +90,9 @@ sh <(curl -L https://nixos.org/nix/install) $nix_flag
 echo "=========================================="
 echo "Installing packages using NIX"
 echo "=========================================="
+
+# Add unstable channel
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable && nix-channel --update unstable
 
 for package in ${nix_pkgs[@]}; do
   echo "📦 Installing $package"
