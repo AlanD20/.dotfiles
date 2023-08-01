@@ -55,6 +55,7 @@ pacman_pkgs=(
   gnome-keyring # Keychain to store secrets and passwords
   libsecret     # Dependency for gnome-keyring
   seahorse      # Frontend gnome-keyring contorl
+  keepassxc     # Frontend for keepass, a password manager, you could use this instead of gnome-keyring
 
   #
   # CLI Utils
@@ -80,6 +81,7 @@ pacman_pkgs=(
   slurp               # get x, y screen. used with grim
   swappy              # Editing tool for screenshot
   mpv                 # Video&Audio Player
+  mupdf               # View pdf and other files
 
   #
   # languages

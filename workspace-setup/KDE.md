@@ -1,4 +1,26 @@
-# KDE Customization
+# KDE
+
+## KDE Installation
+
+1. We need to install the following packages.
+
+   ```bash
+   sudo pacman -S plasma plasma-desktop plasma-wayland-session kde-applications kdeplasma-addons sddm
+   ```
+
+2. Auto start KDE by executing `startkde` at `~/.initrc`.
+
+   ```bash
+   exec startkde
+   ```
+
+3. Enable `sddm` service. Then reboot. After that, KDE plasma should load.
+
+   ```bash
+   sudo systemctl enable sddm
+
+   reboot
+   ```
 
 ## Programs
 
