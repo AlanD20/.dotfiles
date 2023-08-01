@@ -5,22 +5,24 @@ suggestions.
 
 - Windows: Suggestions, config files
 - Arch
+- Ubuntu
 
 ## Desktop Environment Setup
 
-- **After you have ran the `install.sh` and `install-profile.sh` at the root
-  project, run the following scripts to setup Linux environment.**
-- Using `apt` on Ubuntu gnome? Use `apt.sh` script, after that, you may run
-  `setup.sh` script inside `ubuntu` direcotry.
-- Using `pacman` On Manjaro KDE Plasma? Use `pacman.sh` script, after that, you
-  may run `setup.sh` script inside `manjaro` directory.
+- Scripts start with `setup-*` are suppose to install essential apps, and
+  `*-install-profile` are intended to be installed with user privileges.
 
 ## Database & Email With Docker
 
-Checkout [db](db) directory to quickly setup database and a testing email
-service with a single command.
+Checkout [docker/db](docker/db) directory to quickly setup database and a
+testing email service with a single command.
 
 You can configure the docker-compose file to your needs.
+
+## Screen sharing on Wayland
+
+To share your screen on Wayland, install `obs-studio` then use `pipewire` window
+capture to share your screen.
 
 ---
 
