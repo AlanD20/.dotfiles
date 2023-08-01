@@ -18,17 +18,17 @@ echo "=========================================="
 echo "Installing packages using Apt"
 echo "=========================================="
 
-for package in ${packages[@]}; do
-  sudo apt -y install $package
+for package in "${apt_pkgs[@]}"; do
+  sudo apt -y install "$package"
 done
 
 echo "=========================================="
 echo "Installing packages using Snapd"
 echo "=========================================="
 
-for package in ${snap_pkgs[@]}; do
+for package in "${snap_pkgs[@]}"; do
   echo "📦 Installing $package"
-  sudo snap install $package --classic
+  sudo snap install "$package" --classic
 done
 
 echo "=========================================="
