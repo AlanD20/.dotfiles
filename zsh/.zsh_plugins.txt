@@ -3,7 +3,7 @@ lukechilds/zsh-nvm                     # Install nvm
 ohmyzsh/ohmyzsh path:plugins/fzf       # Add support for keyboard shortcut
 ohmyzsh/ohmyzsh path:plugins/gpg-agent # Enable gpg-agent if not working
 ohmyzsh/ohmyzsh path:plugins/tmux
-ohmyzsh/ohmyzsh path:plugins/vi-mode
+# ohmyzsh/ohmyzsh path:plugins/vi-mode
 ohmyzsh/ohmyzsh path:plugins/colored-man-pages
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:plugins/git

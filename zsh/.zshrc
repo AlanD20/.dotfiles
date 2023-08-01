@@ -1,23 +1,10 @@
 # remove duplicat entries from $PATH
 typeset -U PATH path
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -28,7 +15,7 @@ CASE_SENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode auto # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -82,8 +69,8 @@ SAVEHIST=1000
 # autoload -Uz compinit && compinit
 setopt autocd beep extendedglob nomatch notify
 
-# Export vscode bin path
-export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"
+# Export vscode bin path for WSL
+# export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"
 
 # Export bin dir
 export PATH="$PATH:$HOME/.local/bin"
@@ -116,10 +103,10 @@ export LC_ALL="en_US.UTF-8"
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
 # Vi keybinding
-bindkey -v
+# bindkey -v
 
 # Fix Shift + arrows to move
 bindkey "^[[1;2C" forward-word
@@ -160,22 +147,27 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 # Source aliases
 if [ -e $HOME/.aliases.sh ]; then . $HOME/.aliases.sh; fi
 
-# WSL Nix
-# if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
-
-# Linux Nix
-# if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'; fi
-
 # To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
 [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
 # source antidote
-source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
+# source ${ZDOTDIR:-}/.antidote/antidote.zsh
+source '/usr/share/zsh-antidote/antidote.zsh'
 
 # initialize plugins statically with ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 antidote load
 
 source $HOME/.zsh_plugins.zsh
 
-# go executable path 
-# export GOROOT="/nix/store/c55qzy9gbm86hh4fxm0mjn76rbzgif6i-go-1.20/share/go"
+
+export GPG_TTY=$(tty)
+gpgconf --launch gpg-agent
+
+neofetch
+
+# bun completions
+[ -s "/home/www/.bun/_bun" ] && source "/home/www/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

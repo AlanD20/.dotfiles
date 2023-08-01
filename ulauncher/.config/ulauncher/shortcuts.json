@@ -1,132 +1,132 @@
 {
-  "641e5e70-7d27-4c6a-80ca-82998abe0bcb": {
-    "id": "641e5e70-7d27-4c6a-80ca-82998abe0bcb",
-    "name": "Google Search",
-    "keyword": "g?",
-    "cmd": "https://google.com/search?q=%s",
-    "icon": "/usr/share/ulauncher/media/google-search-icon.png",
-    "is_default_search": true,
-    "run_without_argument": false,
-    "added": 1655590501.8905509
-  },
-  "0253aeb4-3507-44ef-9f3e-2af625e18138": {
-    "id": "0253aeb4-3507-44ef-9f3e-2af625e18138",
-    "name": "Stack Overflow",
-    "keyword": "so?",
-    "cmd": "https://stackoverflow.com/search?q=%s",
-    "icon": "/usr/share/ulauncher/media/stackoverflow-icon.svg",
-    "is_default_search": false,
-    "run_without_argument": false,
-    "added": 1655590501.8906376
-  },
-  "493d8af0-56aa-438f-aab8-6f53ded065e9": {
-    "id": "493d8af0-56aa-438f-aab8-6f53ded065e9",
-    "name": "Wikipedia",
-    "keyword": "wiki?",
-    "cmd": "https://en.wikipedia.org/wiki/%s",
-    "icon": "/usr/share/ulauncher/media/wikipedia-icon.png",
-    "is_default_search": false,
-    "run_without_argument": false,
-    "added": 1655590501.8907032
-  },
-  "e0ca9aa3-25fd-4e65-921d-e9c02f719881": {
-    "id": "e0ca9aa3-25fd-4e65-921d-e9c02f719881",
-    "name": "Youtube",
-    "keyword": "yt?",
-    "cmd": "https://www.youtube.com/results?search_query=%s",
-    "icon": null,
-    "is_default_search": false,
-    "run_without_argument": false,
-    "added": 1655590560.2430966
-  },
-  "dc2ae3a2-8956-42f6-8d1d-f3b10d597ae9": {
-    "id": "dc2ae3a2-8956-42f6-8d1d-f3b10d597ae9",
-    "name": "GitHub Profile",
-    "keyword": "?ghp",
-    "cmd": "https://github.com/AlanD20",
-    "icon": null,
-    "is_default_search": false,
-    "run_without_argument": true,
-    "added": 1655593552.5778213
-  },
-  "5b9b716b-83ea-436f-be6b-caaf1169c188": {
-    "id": "5b9b716b-83ea-436f-be6b-caaf1169c188",
-    "name": "GitHub Repository",
-    "keyword": "?ghr",
-    "cmd": "https://github.com/AlanD20?tab=repositories",
-    "icon": null,
-    "is_default_search": false,
-    "run_without_argument": true,
-    "added": 1655593586.032102
-  },
-  "d09b70de-5090-4d92-b581-6ee148ce11b1": {
-    "id": "d09b70de-5090-4d92-b581-6ee148ce11b1",
-    "name": "Youtube Home",
-    "keyword": "?yth",
-    "cmd": "https://youtube.com",
-    "icon": null,
-    "is_default_search": true,
-    "run_without_argument": true,
-    "added": 1655598008.727205
-  },
-  "987803d4-aae9-435e-895f-5f2feff73996": {
-    "id": "987803d4-aae9-435e-895f-5f2feff73996",
-    "name": "Twitch",
-    "keyword": "?twitch",
-    "cmd": "https://twitch.tv",
-    "icon": null,
-    "is_default_search": true,
-    "run_without_argument": true,
-    "added": 1655598033.4921598
-  },
-  "19f63b92-4845-4aa0-85fe-0eba80adf870": {
-    "id": "19f63b92-4845-4aa0-85fe-0eba80adf870",
-    "name": "Twitter",
-    "keyword": "?twitter",
-    "cmd": "https://twitter.com",
-    "icon": null,
-    "is_default_search": true,
-    "run_without_argument": true,
-    "added": 1655598070.8705053
-  },
-  "39acc169-6923-4474-b8d4-5cecc23f0216": {
-    "id": "39acc169-6923-4474-b8d4-5cecc23f0216",
-    "name": "Localhost:3000",
-    "keyword": "local:3000",
-    "cmd": "http://127.0.0.1:3000",
-    "icon": null,
-    "is_default_search": false,
-    "run_without_argument": true,
-    "added": 1655664003.40669
-  },
-  "50666e49-ee82-4074-aaf6-2afd6d472848": {
-    "id": "50666e49-ee82-4074-aaf6-2afd6d472848",
-    "name": "Localhost 8000",
-    "keyword": "local:8000",
-    "cmd": "http://127.0.0.1:3000",
-    "icon": null,
-    "is_default_search": false,
-    "run_without_argument": true,
-    "added": 1655664024.0585217
-  },
-  "daaf0d33-914b-419b-a7d0-c4165b137082": {
-    "id": "daaf0d33-914b-419b-a7d0-c4165b137082",
-    "name": "Localhost 80",
-    "keyword": "localhost",
-    "cmd": "http://127.0.0.1",
-    "icon": null,
-    "is_default_search": false,
-    "run_without_argument": true,
-    "added": 1655664042.2192328
-  },
-  "e5304332-524b-4fb1-9a3e-ad77215136bc": {
-    "id": "e5304332-524b-4fb1-9a3e-ad77215136bc",
-    "name": "Localhost pgadmin4",
-    "keyword": "local:pgadmin4",
-    "cmd": "http://127.0.0.1/pgadmin4/browser",
-    "icon": null,
-    "is_default_search": false,
-    "run_without_argument": true,
-    "added": 1655664071.3647587
-  }
+    "641e5e70-7d27-4c6a-80ca-82998abe0bcb": {
+        "id": "641e5e70-7d27-4c6a-80ca-82998abe0bcb",
+        "name": "Google Search",
+        "keyword": "g?",
+        "cmd": "https://google.com/search?q=%s",
+        "icon": "/usr/share/ulauncher/media/google-search-icon.png",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1655590501.8905509
+    },
+    "0253aeb4-3507-44ef-9f3e-2af625e18138": {
+        "id": "0253aeb4-3507-44ef-9f3e-2af625e18138",
+        "name": "Stack Overflow",
+        "keyword": "so?",
+        "cmd": "https://stackoverflow.com/search?q=%s",
+        "icon": "/usr/share/ulauncher/media/stackoverflow-icon.svg",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1655590501.8906376
+    },
+    "493d8af0-56aa-438f-aab8-6f53ded065e9": {
+        "id": "493d8af0-56aa-438f-aab8-6f53ded065e9",
+        "name": "Wikipedia",
+        "keyword": "wiki?",
+        "cmd": "https://en.wikipedia.org/wiki/%s",
+        "icon": "/usr/share/ulauncher/media/wikipedia-icon.png",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1655590501.8907032
+    },
+    "e0ca9aa3-25fd-4e65-921d-e9c02f719881": {
+        "id": "e0ca9aa3-25fd-4e65-921d-e9c02f719881",
+        "name": "Youtube",
+        "keyword": "yt?",
+        "cmd": "https://www.youtube.com/results?search_query=%s",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1655590560.2430966
+    },
+    "dc2ae3a2-8956-42f6-8d1d-f3b10d597ae9": {
+        "id": "dc2ae3a2-8956-42f6-8d1d-f3b10d597ae9",
+        "name": "GitHub Profile",
+        "keyword": "?ghp",
+        "cmd": "https://github.com/AlanD20",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1655593552.5778213
+    },
+    "5b9b716b-83ea-436f-be6b-caaf1169c188": {
+        "id": "5b9b716b-83ea-436f-be6b-caaf1169c188",
+        "name": "GitHub Repository",
+        "keyword": "?ghr",
+        "cmd": "https://github.com/AlanD20?tab=repositories",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1655593586.032102
+    },
+    "d09b70de-5090-4d92-b581-6ee148ce11b1": {
+        "id": "d09b70de-5090-4d92-b581-6ee148ce11b1",
+        "name": "Youtube Home",
+        "keyword": "?yth",
+        "cmd": "https://youtube.com",
+        "icon": null,
+        "is_default_search": true,
+        "run_without_argument": true,
+        "added": 1655598008.727205
+    },
+    "987803d4-aae9-435e-895f-5f2feff73996": {
+        "id": "987803d4-aae9-435e-895f-5f2feff73996",
+        "name": "Twitch",
+        "keyword": "?twitch",
+        "cmd": "https://twitch.tv",
+        "icon": null,
+        "is_default_search": true,
+        "run_without_argument": true,
+        "added": 1655598033.4921598
+    },
+    "19f63b92-4845-4aa0-85fe-0eba80adf870": {
+        "id": "19f63b92-4845-4aa0-85fe-0eba80adf870",
+        "name": "Twitter",
+        "keyword": "?twitter",
+        "cmd": "https://twitter.com",
+        "icon": null,
+        "is_default_search": true,
+        "run_without_argument": true,
+        "added": 1655598070.8705053
+    },
+    "39acc169-6923-4474-b8d4-5cecc23f0216": {
+        "id": "39acc169-6923-4474-b8d4-5cecc23f0216",
+        "name": "Localhost:3000",
+        "keyword": "local:3000",
+        "cmd": "http://127.0.0.1:3000",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1655664003.40669
+    },
+    "50666e49-ee82-4074-aaf6-2afd6d472848": {
+        "id": "50666e49-ee82-4074-aaf6-2afd6d472848",
+        "name": "Localhost 8000",
+        "keyword": "local:8000",
+        "cmd": "http://127.0.0.1:3000",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1655664024.0585217
+    },
+    "daaf0d33-914b-419b-a7d0-c4165b137082": {
+        "id": "daaf0d33-914b-419b-a7d0-c4165b137082",
+        "name": "Localhost 80",
+        "keyword": "localhost",
+        "cmd": "http://127.0.0.1",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1655664042.2192328
+    },
+    "e5304332-524b-4fb1-9a3e-ad77215136bc": {
+        "id": "e5304332-524b-4fb1-9a3e-ad77215136bc",
+        "name": "Localhost pgadmin4",
+        "keyword": "local:pgadmin4",
+        "cmd": "http://127.0.0.1/pgadmin4/browser",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1655664071.3647587
+    }
 }

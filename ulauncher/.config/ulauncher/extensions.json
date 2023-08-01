@@ -1,135 +1,135 @@
 {
-  "com.github.lighttigerxiv.ulauncher-terminal-runner-extension": {
-    "id": "com.github.lighttigerxiv.ulauncher-terminal-runner-extension",
-    "url": "https://github.com/lighttigerXIV/ulauncher-terminal-runner-extension/",
-    "updated_at": "2022-06-19T00:32:32.297513",
-    "last_commit": "8cbcf85e8b3a48a45d2d181488af6e5d89bff1b0",
-    "last_commit_time": "2022-05-22T12:33:25"
-  },
-  "com.github.eckhoff42.ulauncher-kill-process-on-click": {
-    "id": "com.github.eckhoff42.ulauncher-kill-process-on-click",
-    "url": "https://github.com/Eckhoff42/Ulauncher-Kill-process-on-click",
-    "updated_at": "2022-06-19T00:41:18.171184",
-    "last_commit": "1cc49319d1a8811a2db63b6111effbb5ba087494",
-    "last_commit_time": "2022-05-05T09:03:54"
-  },
-  "com.github.melianmiko.ulauncher-nmcli": {
-    "id": "com.github.melianmiko.ulauncher-nmcli",
-    "url": "https://github.com/melianmiko/ulauncher-nmcli",
-    "updated_at": "2022-06-19T00:45:53.923837",
-    "last_commit": "fe967c947748616df602c9d022fec6d68a6b2cf2",
-    "last_commit_time": "2022-05-01T12:20:38"
-  },
-  "com.github.plibither8.ulauncher-vscode-recent": {
-    "id": "com.github.plibither8.ulauncher-vscode-recent",
-    "url": "https://github.com/plibither8/ulauncher-vscode-recent",
-    "updated_at": "2022-06-19T00:50:49.837826",
-    "last_commit": "610dc19a6bab76fd9438e1059aba849201a4a4aa",
-    "last_commit_time": "2022-05-19T11:37:12"
-  },
-  "com.github.tchar.ulauncher-albert-calculate-anything": {
-    "id": "com.github.tchar.ulauncher-albert-calculate-anything",
-    "url": "https://github.com/tchar/ulauncher-albert-calculate-anything",
-    "updated_at": "2022-06-19T00:58:34.979087",
-    "last_commit": "ee0903174c8b87cd1f7c3b6c1acef10702547507",
-    "last_commit_time": "2021-08-12T06:39:56"
-  },
-  "com.github.devkleber.ulauncher-open-link": {
-    "id": "com.github.devkleber.ulauncher-open-link",
-    "url": "https://github.com/DevKleber/ulauncher-open-link",
-    "updated_at": "2022-06-19T01:08:19.594802",
-    "last_commit": "5cb0d302500a38582e305ade7904420b830e9e60",
-    "last_commit_time": "2022-05-07T22:35:10"
-  },
-  "com.github.brpaz.ulauncher-faker": {
-    "id": "com.github.brpaz.ulauncher-faker",
-    "url": "https://github.com/brpaz/ulauncher-faker",
-    "updated_at": "2022-06-19T01:18:36.002064",
-    "last_commit": "58832c94acc671a9f603ea7fbf5d4405110bb902",
-    "last_commit_time": "2021-12-12T15:46:10"
-  },
-  "com.github.fsevenm.ulauncher-uuid": {
-    "id": "com.github.fsevenm.ulauncher-uuid",
-    "url": "https://github.com/fsevenm/ulauncher-uuid",
-    "updated_at": "2022-06-19T01:26:47.669722",
-    "last_commit": "2fbb70fd2af246277b2baff03465bc8bd971c85f",
-    "last_commit_time": "2021-01-14T04:26:08"
-  },
-  "com.github.kleber-swf.ulauncher-turn-off-screen": {
-    "id": "com.github.kleber-swf.ulauncher-turn-off-screen",
-    "url": "https://github.com/kleber-swf/ulauncher-turn-off-screen",
-    "updated_at": "2022-06-19T01:33:47.241714",
-    "last_commit": "a461b89706008fcb5605b6e800fec29308b70a04",
-    "last_commit_time": "2020-11-18T20:05:35"
-  },
-  "com.github.sergius02.ulauncher-colorconverter": {
-    "id": "com.github.sergius02.ulauncher-colorconverter",
-    "url": "https://github.com/sergius02/ulauncher-colorconverter",
-    "updated_at": "2022-06-19T01:35:58.463427",
-    "last_commit": "2d5e2bc17e89f1f1dc561f73e68ea574e0be844a",
-    "last_commit_time": "2020-12-06T20:59:43"
-  },
-  "com.github.pwnyprod.ulauncher-ipcopy": {
-    "id": "com.github.pwnyprod.ulauncher-ipcopy",
-    "url": "https://github.com/pwnyprod/ulauncher-ipcopy",
-    "updated_at": "2022-06-19T01:45:35.643218",
-    "last_commit": "7d5b328cad58dfda8ea613803f66bffa3c62b57f",
-    "last_commit_time": "2021-12-07T08:51:15"
-  },
-  "com.github.glovecc.ulauncher-github-search": {
-    "id": "com.github.glovecc.ulauncher-github-search",
-    "url": "https://github.com/Glovecc/ulauncher-github-search",
-    "updated_at": "2022-06-19T01:45:54.778138",
-    "last_commit": "ee3ea43e905cf184449c328f0dadaa4395f3ec0c",
-    "last_commit_time": "2022-01-14T13:46:35"
-  },
-  "com.github.ckrybus.ulauncher-journal": {
-    "id": "com.github.ckrybus.ulauncher-journal",
-    "url": "https://github.com/ckrybus/ulauncher-journal",
-    "updated_at": "2022-06-19T01:51:45.279238",
-    "last_commit": "c3fc03c6568bbba30ebef47a6f8d7321c3c9cdbb",
-    "last_commit_time": "2020-05-17T18:23:23"
-  },
-  "com.github.iboyperson.ulauncher-system": {
-    "id": "com.github.iboyperson.ulauncher-system",
-    "url": "https://github.com/iboyperson/ulauncher-system",
-    "updated_at": "2022-06-19T01:57:33.306113",
-    "last_commit": "667613bf7bb6b4affa4f2121b58589477cd89829",
-    "last_commit_time": "2021-11-08T18:16:55"
-  },
-  "com.github.fisadev.ulauncher-better-file-browser": {
-    "id": "com.github.fisadev.ulauncher-better-file-browser",
-    "url": "https://github.com/fisadev/ulauncher-better-file-browser",
-    "updated_at": "2022-06-19T01:58:14.477019",
-    "last_commit": "8ec8a0dda09e172de62051cd1f251816ce4af368",
-    "last_commit_time": "2019-09-06T19:20:09"
-  },
-  "com.github.brpaz.ulauncher-docker": {
-    "id": "com.github.brpaz.ulauncher-docker",
-    "url": "https://github.com/brpaz/ulauncher-docker",
-    "updated_at": "2022-06-19T02:02:12.635815",
-    "last_commit": "fdd7f05aa259d9bbe7bab218e9c66068edd1c46e",
-    "last_commit_time": "2022-06-14T10:49:26"
-  },
-  "com.github.brpaz.ulauncher-repl": {
-    "id": "com.github.brpaz.ulauncher-repl",
-    "url": "https://github.com/brpaz/ulauncher-repl",
-    "updated_at": "2022-06-19T02:11:49.213476",
-    "last_commit": "c21ea58032b9299a15fa06115e4c3555f220c78c",
-    "last_commit_time": "2021-12-12T15:48:16"
-  },
-  "com.github.brpaz.ulauncher-timestamp": {
-    "id": "com.github.brpaz.ulauncher-timestamp",
-    "url": "https://github.com/brpaz/ulauncher-timestamp",
-    "updated_at": "2022-06-19T02:13:36.546325",
-    "last_commit": "e366a81f92b8130dddc0b1bddecad253124c49b9",
-    "last_commit_time": "2021-12-12T15:49:08"
-  },
-  "com.github.isacikgoz.ukill": {
-    "id": "com.github.isacikgoz.ukill",
-    "url": "https://github.com/isacikgoz/ukill",
-    "updated_at": "2022-06-19T02:14:20.720809",
-    "last_commit": "bc50d9f41d46b6813a5aeebddd15734dcdb9d8db",
-    "last_commit_time": "2019-05-28T18:30:00"
-  }
+    "com.github.lighttigerxiv.ulauncher-terminal-runner-extension": {
+        "id": "com.github.lighttigerxiv.ulauncher-terminal-runner-extension",
+        "url": "https://github.com/lighttigerXIV/ulauncher-terminal-runner-extension/",
+        "updated_at": "2023-07-11T20:44:30.360401",
+        "last_commit": "d6bc2157e5c0ef2f812e3051ddde334c7b485c2e",
+        "last_commit_time": "2023-05-02T22:50:12"
+    },
+    "com.github.eckhoff42.ulauncher-kill-process-on-click": {
+        "id": "com.github.eckhoff42.ulauncher-kill-process-on-click",
+        "url": "https://github.com/Eckhoff42/Ulauncher-Kill-process-on-click",
+        "updated_at": "2023-07-11T20:44:32.479784",
+        "last_commit": "1cc49319d1a8811a2db63b6111effbb5ba087494",
+        "last_commit_time": "2022-05-05T09:03:54"
+    },
+    "com.github.melianmiko.ulauncher-nmcli": {
+        "id": "com.github.melianmiko.ulauncher-nmcli",
+        "url": "https://github.com/melianmiko/ulauncher-nmcli",
+        "updated_at": "2023-07-11T20:44:34.979876",
+        "last_commit": "fe967c947748616df602c9d022fec6d68a6b2cf2",
+        "last_commit_time": "2022-05-01T12:20:38"
+    },
+    "com.github.plibither8.ulauncher-vscode-recent": {
+        "id": "com.github.plibither8.ulauncher-vscode-recent",
+        "url": "https://github.com/plibither8/ulauncher-vscode-recent",
+        "updated_at": "2023-07-11T20:44:37.099565",
+        "last_commit": "610dc19a6bab76fd9438e1059aba849201a4a4aa",
+        "last_commit_time": "2022-05-19T11:37:12"
+    },
+    "com.github.tchar.ulauncher-albert-calculate-anything": {
+        "id": "com.github.tchar.ulauncher-albert-calculate-anything",
+        "url": "https://github.com/tchar/ulauncher-albert-calculate-anything",
+        "updated_at": "2023-07-11T20:44:42.443289",
+        "last_commit": "ee0903174c8b87cd1f7c3b6c1acef10702547507",
+        "last_commit_time": "2021-08-12T06:39:56"
+    },
+    "com.github.devkleber.ulauncher-open-link": {
+        "id": "com.github.devkleber.ulauncher-open-link",
+        "url": "https://github.com/DevKleber/ulauncher-open-link",
+        "updated_at": "2023-07-11T20:44:45.505742",
+        "last_commit": "5cb0d302500a38582e305ade7904420b830e9e60",
+        "last_commit_time": "2022-05-07T22:35:10"
+    },
+    "com.github.brpaz.ulauncher-faker": {
+        "id": "com.github.brpaz.ulauncher-faker",
+        "url": "https://github.com/brpaz/ulauncher-faker",
+        "updated_at": "2023-07-11T20:44:48.316043",
+        "last_commit": "58832c94acc671a9f603ea7fbf5d4405110bb902",
+        "last_commit_time": "2021-12-12T15:46:10"
+    },
+    "com.github.fsevenm.ulauncher-uuid": {
+        "id": "com.github.fsevenm.ulauncher-uuid",
+        "url": "https://github.com/fsevenm/ulauncher-uuid",
+        "updated_at": "2023-07-11T20:44:50.780197",
+        "last_commit": "2fbb70fd2af246277b2baff03465bc8bd971c85f",
+        "last_commit_time": "2021-01-14T04:26:08"
+    },
+    "com.github.kleber-swf.ulauncher-turn-off-screen": {
+        "id": "com.github.kleber-swf.ulauncher-turn-off-screen",
+        "url": "https://github.com/kleber-swf/ulauncher-turn-off-screen",
+        "updated_at": "2023-07-11T20:44:53.353509",
+        "last_commit": "a461b89706008fcb5605b6e800fec29308b70a04",
+        "last_commit_time": "2020-11-18T20:05:35"
+    },
+    "com.github.sergius02.ulauncher-colorconverter": {
+        "id": "com.github.sergius02.ulauncher-colorconverter",
+        "url": "https://github.com/sergius02/ulauncher-colorconverter",
+        "updated_at": "2023-07-11T20:44:55.585500",
+        "last_commit": "2d5e2bc17e89f1f1dc561f73e68ea574e0be844a",
+        "last_commit_time": "2020-12-06T20:59:43"
+    },
+    "com.github.pwnyprod.ulauncher-ipcopy": {
+        "id": "com.github.pwnyprod.ulauncher-ipcopy",
+        "url": "https://github.com/pwnyprod/ulauncher-ipcopy",
+        "updated_at": "2023-07-11T20:44:57.575214",
+        "last_commit": "7d5b328cad58dfda8ea613803f66bffa3c62b57f",
+        "last_commit_time": "2021-12-07T08:51:15"
+    },
+    "com.github.glovecc.ulauncher-github-search": {
+        "id": "com.github.glovecc.ulauncher-github-search",
+        "url": "https://github.com/Glovecc/ulauncher-github-search",
+        "updated_at": "2023-07-11T20:45:01.061182",
+        "last_commit": "ee3ea43e905cf184449c328f0dadaa4395f3ec0c",
+        "last_commit_time": "2022-01-14T13:46:35"
+    },
+    "com.github.ckrybus.ulauncher-journal": {
+        "id": "com.github.ckrybus.ulauncher-journal",
+        "url": "https://github.com/ckrybus/ulauncher-journal",
+        "updated_at": "2023-07-11T20:45:03.537840",
+        "last_commit": "c3fc03c6568bbba30ebef47a6f8d7321c3c9cdbb",
+        "last_commit_time": "2020-05-17T18:23:23"
+    },
+    "com.github.iboyperson.ulauncher-system": {
+        "id": "com.github.iboyperson.ulauncher-system",
+        "url": "https://github.com/iboyperson/ulauncher-system",
+        "updated_at": "2023-07-11T20:45:06.900421",
+        "last_commit": "a035679b0cba53e4f79be5d915cadeedbdc642da",
+        "last_commit_time": "2023-06-22T00:38:19"
+    },
+    "com.github.fisadev.ulauncher-better-file-browser": {
+        "id": "com.github.fisadev.ulauncher-better-file-browser",
+        "url": "https://github.com/fisadev/ulauncher-better-file-browser",
+        "updated_at": "2023-07-11T20:45:09.375233",
+        "last_commit": "8ec8a0dda09e172de62051cd1f251816ce4af368",
+        "last_commit_time": "2019-09-06T19:20:09"
+    },
+    "com.github.brpaz.ulauncher-docker": {
+        "id": "com.github.brpaz.ulauncher-docker",
+        "url": "https://github.com/brpaz/ulauncher-docker",
+        "updated_at": "2023-07-11T20:45:12.242092",
+        "last_commit": "fdd7f05aa259d9bbe7bab218e9c66068edd1c46e",
+        "last_commit_time": "2022-06-14T10:49:26"
+    },
+    "com.github.brpaz.ulauncher-repl": {
+        "id": "com.github.brpaz.ulauncher-repl",
+        "url": "https://github.com/brpaz/ulauncher-repl",
+        "updated_at": "2023-07-11T20:45:19.868881",
+        "last_commit": "c21ea58032b9299a15fa06115e4c3555f220c78c",
+        "last_commit_time": "2021-12-12T15:48:16"
+    },
+    "com.github.brpaz.ulauncher-timestamp": {
+        "id": "com.github.brpaz.ulauncher-timestamp",
+        "url": "https://github.com/brpaz/ulauncher-timestamp",
+        "updated_at": "2023-07-11T20:45:22.661362",
+        "last_commit": "e366a81f92b8130dddc0b1bddecad253124c49b9",
+        "last_commit_time": "2021-12-12T15:49:08"
+    },
+    "com.github.isacikgoz.ukill": {
+        "id": "com.github.isacikgoz.ukill",
+        "url": "https://github.com/isacikgoz/ukill",
+        "updated_at": "2023-07-11T20:45:25.730422",
+        "last_commit": "bc50d9f41d46b6813a5aeebddd15734dcdb9d8db",
+        "last_commit_time": "2019-05-28T18:30:00"
+    }
 }
