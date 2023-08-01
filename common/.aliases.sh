@@ -1,5 +1,8 @@
 #!/bin/sh
 
+source $HOME/.helpers.sh
+
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -14,62 +17,36 @@
 # WSL Aliases
 # alias desktop="${WINHOME}/Desktop";
 
-alias rr="source ~/.zshrc; pwd"
+alias rr="source $HOME/.zshrc; pwd"
 
 # Bundle zsh plugins via antidote
-alias update-ad='antidote bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plugins.zsh'
+alias update-ad="antidote bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plugins.zsh"
 
-# Editor
-alias ef='hx `fzf`'
-# alias vf='lvim `fzf`';
-
-# Apt
-alias apti="sudo apt-get -y install"
-alias aptr="sudo apt-get -y remove"
-alias aptrp="sudo apt-get -y --purge remove"
-alias aptud="sudo apt-get -y update"
-alias aptug="sudo apt-get -y upgrade"
-
-# Nix
-alias ni="nix-env -iA"
-alias nr="nix-env --uninstall"
-alias nud="nix-channel --update unstable"
-alias nug="nix-env -u '*'"
-alias nix-clean="nix-collect-garbage -d"
-
-# Pacman
-alias paci="sudo pacman -S --noconfirm"
-alias pacr="sudo pacman -R --noconfirm"
-alias pacrp="sudo pacman -Rs --noconfirm"
-alias pacud="sudo pacman -Sy --noconfirm"
-alias pacug="sudo pacman -Su --noconfirm"
-
-# Pacman
-alias yayi="yay -S --noconfirm"
-alias yayr="yay -R --noconfirm"
-alias yayrp="yay -Rs --noconfirm"
-alias yayud="yay -Sy --noconfirm"
-alias yayug="yay -Su --noconfirm"
-
-# Pamac
-alias pai="pamac install --no-confirm"
-alias par="pamac remove --no-confirm"
-alias paud="pamac update -a"
-alias paug="pamac upgrade -a --no-confirm"
+# Open
+alias f="fzf --preview=\"bat --color=always --style=plain {}\" --preview-window=\"border:rounded\" --border=rounded --prompt=\"$ \" --pointer=\"->\""
+alias vim="nvim"
+alias nvim="nvim"
+alias vf='nvim `f`'
+alias lz="lazygit"
 
 # GPG
 alias rgpg="gpg-connect-agent RELOADAGENT /bye" # Reload gpg
 alias tgpg="echo test | gpg --clearsign"        # Test gpg
+alias ncrgpg="gpg --encrypt --armor -r"
+alias dcrgpg="gpg --decrypt"
 
 # System
 alias cls="clear"
 alias mkp="mkdir -pv"
 alias ss="sudo systemctl"
+alias ssu="systemctl --user"
 alias sr="ss restart"
+alias sj="sudo journalctl"
+alias sju="journalctl --user"
 
 # Exa
 # More flags at https://github.com/ogham/exa#command-line-options
-alias ls='exa -a --icons --git --group-directories-first'
+alias ls="exa -a --icons --git --group-directories-first"
 alias lls="ls -l"
 alias la="lls --git-ignore"
 alias lta="lls --tree --git-ignore"
@@ -89,12 +66,8 @@ alias pa-clear="php artisan clear && \
                 composer dump-autoload -o"
 alias cr="composer run"
 alias cio="composer install -o"
+alias cio="composer update -o"
 alias cdo="composer dump-autoload -o"
 
-# Custom git
-function clone_single_branch() {
-  git clone --single-branch --branch $@
-}
-
 alias gcls="clone_single_branch"
-alias lz="lazygit"
+
