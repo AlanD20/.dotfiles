@@ -64,6 +64,7 @@ M.mason = {
     "css-lsp",
     "html-lsp",
     "typescript-language-server",
+    "tailwindcss-language-server",
     "deno",
     "prettier",
 
@@ -126,6 +127,12 @@ M.nvimtree = {
         git = true,
       },
     },
+  },
+
+  update_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
   },
 }
 

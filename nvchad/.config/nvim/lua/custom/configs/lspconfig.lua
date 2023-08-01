@@ -2,8 +2,8 @@ local on_init = require("plugins.configs.lspconfig").on_init
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
-local lspconfig = require "lspconfig"
-local util = require "lspconfig/util"
+local lspconfig = require("lspconfig")
+local util = require("lspconfig/util")
 
 -- if you just want default config for the servers then put them in a table
 local servers = {
@@ -21,10 +21,10 @@ local servers = {
 }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  lspconfig[lsp].setup({
     on_attach = on_attach,
     capabilities = capabilities,
-  }
+  })
 end
 
 --
@@ -34,7 +34,7 @@ end
 -- Python LSP
 ------------------------
 
-lspconfig.pylsp.setup {
+lspconfig.pylsp.setup({
   settings = {
     pylsp = {
       plugins = {
@@ -49,18 +49,18 @@ lspconfig.pylsp.setup {
       },
     },
   },
-}
+})
 
 ------------------------
 -- Go LSP
 ------------------------
 
-lspconfig.golangci_lint_ls.setup {
+lspconfig.golangci_lint_ls.setup({
   on_init = on_init,
   capabilities = capabilities,
-}
+})
 
-lspconfig.gopls.setup {
+lspconfig.gopls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = { "gopls" },
@@ -82,14 +82,14 @@ lspconfig.gopls.setup {
       },
     },
   },
-}
+})
 
 local status_ok, gopher = pcall(require, "gopher")
 if not status_ok then
   return
 end
 
-gopher.setup {
+gopher.setup({
   commands = {
     go = "go",
     gomodifytags = "gomodifytags",
@@ -97,4 +97,24 @@ gopher.setup {
     impl = "impl",
     iferr = "iferr",
   },
-}
+})
+
+-- Tailwind css
+lspconfig.tailwindcss.setup({
+
+  settings = {
+    tailwindCSS = {
+      classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+      lint = {
+        cssConflict = "warning",
+        invalidApply = "error",
+        invalidConfigPath = "error",
+        invalidScreen = "error",
+        invalidTailwindDirective = "error",
+        invalidVariant = "error",
+        recommendedVariantOrder = "warning",
+      },
+      validate = true,
+    },
+  },
+})

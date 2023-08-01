@@ -1,4 +1,4 @@
-local overrides = require "custom.configs.overrides"
+local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -12,13 +12,13 @@ local plugins = {
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
-          require "custom.configs.null-ls"
+          require("custom.configs.null-ls")
         end,
       },
     },
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
+      require("plugins.configs.lspconfig")
+      require("custom.configs.lspconfig")
     end, -- Override to setup mason-lspconfig
   },
 
@@ -56,10 +56,10 @@ local plugins = {
   -- All NvChad plugins are lazy-loaded by default
   -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
   -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
-  -- {
-  --   "mg979/vim-visual-multi",
-  --   lazy = false,
-  -- }
+  {
+    "mg979/vim-visual-multi",
+    lazy = false,
+  },
 
   -- Python plugins
   {
@@ -78,10 +78,10 @@ local plugins = {
     ft = "go",
     config = function(_, opts)
       require("gopher").setup(opts)
-      require("core.utils").load_mappings "gopher"
+      require("core.utils").load_mappings("gopher")
     end,
     build = function()
-      vim.cmd [[silent! GoInstallDeps]]
+      vim.cmd([[silent! GoInstallDeps]])
     end,
   },
   {
@@ -102,7 +102,30 @@ local plugins = {
     lazy = true,
     event = { "FileReadPre", "BufReadPre", "User FileOpened" },
   },
-
+  {
+    -- Makes find & replace easier by preserving original case sensitivity
+    -- This works for selection unlike text-case where it globally replaces words
+    -- use S instead of s.
+    "tpope/vim-abolish",
+    lazy = false,
+    enabled = true,
+  },
+  {
+    "johmsalas/text-case.nvim",
+    config = function()
+      require("textcase").setup({})
+    end,
+    lazy = false,
+    enabled = true,
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    lazy = false,
+  },
 }
 
 return plugins

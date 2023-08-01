@@ -6,7 +6,8 @@
 --   command = "tabdo wincmd =",
 -- })
 
-vim.opt.guifont = "MesloLGS:h16"
+-- Only accepts terminal font!
+-- vim.opt.guifont = { "MesloLGM Nerd Font", ":h16" }
 vim.opt.relativenumber = true
 vim.opt.wrap = true
 vim.opt.spell = true
