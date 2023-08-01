@@ -7,6 +7,10 @@ suggestions.
 - Arch
 - Ubuntu
 
+- You may find all the application descriptions in setup-\* scripts.
+
+![desktop-screenshot](pics/desktop-screenshot.png)
+
 ## Desktop Environment Setup
 
 - Scripts start with `setup-*` are suppose to install essential apps, and

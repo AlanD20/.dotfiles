@@ -31,7 +31,7 @@ pacman_pkgs=(
   openssh
   zip
   unzip
-  jq
+  jq # CLI json processor
 
   #
   # Base
@@ -45,39 +45,41 @@ pacman_pkgs=(
   brightnessctl # Brightness control
   playerctl     # Audio control
   acpi          # Power control
+
   qtkeychain-qt5
   openssl-1.1
-  ydotool      # similar to xdotool for wayland
+  ydotool      # similar to xdotool for wayland, programmatically send events and inputs
   mako         # Wayland notification
   lxappearance # Modify GTK+ appearance
-  gnome-keyring
-  libsecret
-  seahorse # Frontend gnome-keyring contorl
+
+  gnome-keyring # Keychain to store secrets and passwords
+  libsecret     # Dependency for gnome-keyring
+  seahorse      # Frontend gnome-keyring contorl
 
   #
   # CLI Utils
   #
-  tmux
-  zsh
-  stow
-  fzf
-  exa
-  ripgrep
-  bat
-  direnv
-  lf # CLI File manager
-  lazygit
-  fd
-  git-delta # git pager
-  perl-image-exiftool
-  feh         # Image viewer
-  thunar      # File Explorer
-  wf-recorder # Screen recorder
-  ffmpeg
-  grim   # Screenshot tool
-  slurp  # get x, y screen. used with grim
-  swappy # Editing tool for screenshot
-  mpv    # Video&Audio Player
+  tmux                # Terminal multiplexer
+  zsh                 # Main shell instead of bash
+  stow                # easily manage .dot files
+  fzf                 # fuzzy finder for files and directories
+  exa                 # better ls command
+  ripgrep             # Better grep
+  bat                 # Better cat command
+  direnv              # Loading env variables for current working directory
+  lf                  # CLI File manager
+  lazygit             # Manage git
+  fd                  # Quick file finder
+  git-delta           # git pager
+  perl-image-exiftool # Show image and file metadata
+  feh                 # Image viewer
+  thunar              # File Explorer
+  wf-recorder         # Screen recorder
+  ffmpeg              # Video & Audio converter
+  grim                # Screenshot tool
+  slurp               # get x, y screen. used with grim
+  swappy              # Editing tool for screenshot
+  mpv                 # Video&Audio Player
 
   #
   # languages
@@ -98,13 +100,13 @@ pacman_pkgs=(
   php-snmp
   php-sqlite
   php-sodium
-  xdebug
-  python-pip
+  xdebug     # PHP Debugger
+  python-pip # Python package manager
   python-setuptools
   python-requests
 
   #
-  # Albert
+  # Albert Plugins
   #
   libqalculate
   imagemagick
@@ -114,16 +116,16 @@ pacman_pkgs=(
   #
   # App Services
   #
-  pipewire
-  pipewire-alsa
-  pipewire-pulse
-  wireplumber
-  sqlite
-  nginx
-  docker
+  pipewire       # Audio manager
+  pipewire-alsa  # Support for alsa
+  pipewire-pulse # Support for pulse
+  wireplumber    # Pipewire session/policy manager
+  sqlite         # Lightweight file database
+  nginx          # Web server
+  docker         # Manage Containers
   containerd
-  docker-compose
-  redis
+  docker-compose # manage multiple containers within a single file
+  redis          # Caching database
 
   #
   # Fonts
@@ -144,14 +146,15 @@ pacman_pkgs=(
   #
   # Apps
   #
-  flatpak
+  flatpak # package manager
   discord
   # flameshot
   firefox
   obs-studio
+  gimp # Image editing
 
   #
-  # Easy Effects
+  # Easy Effects - Audio controller
   #
   easyeffects
   calf
@@ -173,9 +176,9 @@ aur_pkgs=(
   google-chrome
   spotify
   postman-agent
-  anydesk-bin # Remote desktop
-  zsh-antidote
-  xdman8 # Download Manager
+  anydesk-bin  # Remote desktop
+  zsh-antidote # Manag zsh plugins
+  xdman8       # Download Manager
 )
 
 echo "=========================================="
