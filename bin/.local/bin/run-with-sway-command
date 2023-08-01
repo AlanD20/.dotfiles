@@ -1,0 +1,24 @@
+#!/bin/sh
+
+
+# Credit: https://www.reddit.com/r/swaywm/comments/k0p5xw/comment/gdkdanc/?utm_source=share&utm_medium=web2x&context=3
+
+sway_command=$1
+shift
+
+"$@" &
+prog_pid=$!
+
+swaymsg -t subscribe '["window"]' |
+    jq --unbuffered --argjson pid "$prog_pid" '.container | select(.pid == $pid).id' | {
+    read -r id
+    swaymsg "[con_id=$id] $sway_command"
+} &
+sub_pid=$!
+
+wait $prog_pid
+ret=$?
+
+kill $sub_pid
+
+exit $ret

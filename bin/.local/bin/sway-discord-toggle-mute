@@ -1,0 +1,23 @@
+#!/bin/sh
+
+
+isOpen=$(swaymsg -t get_tree | grep -i '"class": "discord"')
+
+
+if [ -z $isOpen ]; then
+  exit 1;
+fi
+
+
+# Hold ( Alt + , ) then release both keys.
+# This bindings is set within discord to toggle mute, using ydotool to send these key inputs in order to mute it automatically.
+swaymsg '[class="discord"] focus; exec ydotool key 100:1 51:1 100:0 51:0'
+
+# Give some delay so that, it works as intended!
+sleep 0.05s
+
+# System mute as well.
+pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Since we focused on discord, we go back to previous workspace
+swaymsg 'workspace back_and_forth'

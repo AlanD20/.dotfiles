@@ -1,0 +1,38 @@
+#!/bin/sh
+
+app=$1
+
+if [ -z $app ] || [ -z $2 ]; then
+  printf "app name and identifier are required!\n
+  Supported applications will be spawned with given identifier.\n
+  - Sway commands are optional 
+  Examples:\n
+  \t $(basename $0) app_name '<class|app_id>,<identifier>' 'Sway commands'\n\n
+  \t $(basename $0) spotify 'class,Spotify' 'resize set 1280 920'\n
+  \t $(basename $0) alacritty 'app_id,alacritty' 'resize set 1080 768'\n
+  "
+  exit 1
+fi
+
+appType=$(echo $2 | cut -d ',' -f 1)
+appId=$(echo $2 | cut -d ',' -f 2)
+
+appGrabber=
+
+swayCommands=${3:-''}
+
+isOpen=$(swaymsg -t get_tree | grep -i "\"$appType\": \"$appId\"")
+
+function toggle_scratch() {
+
+  swaymsg "[$appType=\"$appId\"] scratchpad show"
+}
+
+
+if [ -z $isOpen ]; then
+  exec $HOME/.local/bin/run-with-sway-command "move to scratchpad, $swayCommands" $app --class $appId
+fi
+
+sleep 0.1
+
+toggle_scratch

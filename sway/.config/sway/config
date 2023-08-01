@@ -1,0 +1,82 @@
+font pango:"FiraCode Nerd Font" 16px
+
+### Variables
+#
+
+# Logo key M4. Use Mod1 for Alt.
+set $mod Mod1
+set $mod2 Mod4
+
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+
+# Your preferred terminal emulator
+set $term alacritty
+
+
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu albert | xargs swaymsg --
+# Second launcher to run background processes
+set $menu2 wofi --show drun -I
+
+
+# Your preferred lock command
+set $lock swaylock -f
+
+# Screenshot path
+set $screenshotDir "~/Downloads"
+
+#
+# Workspaces
+#
+set $ws_web 1:Web 
+set $ws_editor 2:Editor 
+set $ws_bg 3:Background 
+set $ws_term 4:Term 
+
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg $HOME/wallpapers/chilling.png fill
+
+
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    # separator_symbol ""
+    position top
+    swaybar_command waybar
+    workspace_buttons yes
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    # status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+
+
+include /etc/sway/config.d/*
+include $HOME/.config/sway/*.conf
