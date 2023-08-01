@@ -55,3 +55,4 @@ name = "python"
 roots = ["pyproject.toml"]
 language-server = { command = "pyright-langserver", args = ["--stdio"] }
 config = {} # <- this is the important line
+

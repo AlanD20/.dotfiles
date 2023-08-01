@@ -1,3 +1,6 @@
+os:
+  edit: "nvim {{filename}}"
+  editInTerminal: true
 keybinding:
   universal:
     # Use tab to create a multi-line commit message
