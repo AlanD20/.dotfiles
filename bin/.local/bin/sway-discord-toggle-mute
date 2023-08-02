@@ -1,16 +1,23 @@
 #!/bin/sh
 
+#
+# Usage:
+#
+# This will switch to discord window and toggles the microphone within the app
+# then switches back to previous workspace.
+#
+# You have to set a keybind to toggle mute in discord so that, it can be triggerd
+#
 
 isOpen=$(swaymsg -t get_tree | grep -i '"class": "discord"')
 
-
-if [ -z $isOpen ]; then
-  exit 1;
+if [ -z "$isOpen" ]; then
+  exit 1
 fi
 
-
 # Hold ( Alt + , ) then release both keys.
-# This bindings is set within discord to toggle mute, using ydotool to send these key inputs in order to mute it automatically.
+# This bindings is set within discord to toggle mute (right alt + , )
+# using ydotool to send these key inputs in order to mute it automatically.
 swaymsg '[class="discord"] focus; exec ydotool key 100:1 51:1 100:0 51:0'
 
 # Give some delay so that, it works as intended!

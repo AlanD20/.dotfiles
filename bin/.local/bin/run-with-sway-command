@@ -1,7 +1,17 @@
 #!/bin/sh
 
-
 # Credit: https://www.reddit.com/r/swaywm/comments/k0p5xw/comment/gdkdanc/?utm_source=share&utm_medium=web2x&context=3
+#
+# Usage:
+# This is similar to how you run exec inside sway config, which this allows you to
+# use any sway commands before running your executable.
+#
+# Example:
+#
+# run-with-sway-command <sway-commands...> <app> <extra-flags>
+#
+# run-with-sway-command "move to scratchpad" alacritty --class free-term
+#
 
 sway_command=$1
 shift
@@ -10,9 +20,9 @@ shift
 prog_pid=$!
 
 swaymsg -t subscribe '["window"]' |
-    jq --unbuffered --argjson pid "$prog_pid" '.container | select(.pid == $pid).id' | {
-    read -r id
-    swaymsg "[con_id=$id] $sway_command"
+  jq --unbuffered --argjson pid "$prog_pid" '.container | select(.pid == $pid).id' | {
+  read -r id
+  swaymsg "[con_id=$id] $sway_command"
 } &
 sub_pid=$!
 
