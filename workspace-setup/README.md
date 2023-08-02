@@ -5,6 +5,7 @@ as well as OS installations.
 
 Available guides:
 
+- [Arch Installation](ARCH-INSTALLATION.md)
 - [Applications](APPLICATIONS.md)
 - [Swaywm](SWAYWM.md)
 - [KDE](KDE.md)

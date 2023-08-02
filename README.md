@@ -7,7 +7,7 @@ suggestions.
 - Arch
 - Ubuntu
 
-- You may find all the application descriptions in `setup-\*` scripts.
+- You may find all the application descriptions in `setup-*` scripts.
 - Head over to [workspace-setup](workspace-setup/) for installation guides
   including archlinux installation with and without dual booting.
 
