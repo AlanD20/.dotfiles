@@ -16,8 +16,6 @@ source "$HOME/.helpers.sh"
 # WSL Aliases
 # alias desktop="${WINHOME}/Desktop";
 
-alias rr="source $HOME/.zshrc; pwd"
-
 # Bundle zsh plugins via antidote
 alias update-ad="antidote bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plugins.zsh"
 
@@ -69,3 +67,7 @@ alias cio="composer update -o"
 alias cdo="composer dump-autoload -o"
 
 alias gcls="clone_single_branch"
+
+# Personal
+alias confopen="nvim $HOME/.dotfiles"
+alias rr="source $HOME/.zshrc; pwd"

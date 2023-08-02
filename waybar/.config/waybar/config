@@ -247,7 +247,8 @@
     "format-source": " {volume}%",
     "format-source-muted": " ",
     "format-icons": {
-      "headphone": "   ",
+      "speaker": " 󰓃 ",
+      "headphone": "  ",
       "hands-free": "  ",
       "headset": " 🎧 ",
       "phone": "  ",
@@ -259,7 +260,13 @@
         "  "
       ]
     },
-    "on-click": "pavucontrol"
+    "max-volumne": "300",
+    "on-click": "pavucontrol",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%",
+    "ignored-sinks": [
+      "Easy Effects Sink"
+    ]
   },
   "mpd": {
     "format": "{stateIcon} {artist} - {title}",
