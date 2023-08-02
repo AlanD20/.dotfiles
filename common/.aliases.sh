@@ -1,7 +1,6 @@
 #!/bin/sh
 
-source $HOME/.helpers.sh
-
+source "$HOME/.helpers.sh"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -32,8 +31,8 @@ alias lz="lazygit"
 # GPG
 alias rgpg="gpg-connect-agent RELOADAGENT /bye" # Reload gpg
 alias tgpg="echo test | gpg --clearsign"        # Test gpg
-alias ncrgpg="gpg --encrypt --armor -r"
-alias dcrgpg="gpg --decrypt"
+alias ncrgpg="gpg --encrypt --armor -r"         # Encrypt file using gpg
+alias dcrgpg="gpg --decrypt"                    # Decrypt file using gpg
 
 # System
 alias cls="clear"
@@ -70,4 +69,3 @@ alias cio="composer update -o"
 alias cdo="composer dump-autoload -o"
 
 alias gcls="clone_single_branch"
-
