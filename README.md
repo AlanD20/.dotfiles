@@ -7,32 +7,45 @@ suggestions.
 - Arch
 - Ubuntu
 
-- You may find all the application descriptions in "setup-\*" scripts.
+- You may find all the application descriptions in `setup-\*` scripts.
 - Head over to [workspace-setup](workspace-setup/) for installation guides
   including archlinux installation with and without dual booting.
 
+<details>
+<summary>
+
+#### Arch with Sway Screenshot
+
+</summary>
+
 ![desktop-screenshot](pics/desktop-screenshot.png)
+
+</details>
 
 ## Desktop Environment Setup
 
-- Scripts start with `setup-*` are suppose to install essential apps, and
-  `*-install-profile` are intended to be installed with user privileges.
+- You may modify scripts to your needs:
+  - Scripts include names such as `setup-*.sh` are suppose to install essential
+    apps and configure the system workspace.
+  - Scripts include names such as `*-install-profile.zsh` are intended to be
+    installed with user privileges. They will configure the user workspace and
+    it copies user configurations.
 
 ## Database & Email With Docker
 
 Checkout [docker/db](docker/db) directory to quickly setup database and a
 testing email service with a single command.
 
-You can configure the docker-compose file to your needs.
+You may configure the docker-compose file to your needs.
 
-## Screen sharing on Wayland
+## Screen Sharing on Wayland
 
 To share your screen on Wayland, install `obs-studio` then use `pipewire` window
 capture to share your screen.
 
 ---
 
-## Resources
+## Resources & Troubleshooting
 
 - Licensed fonts such as `Dank Mono`.
 - ZSH Plugin Descriptions
