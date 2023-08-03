@@ -6,6 +6,9 @@ export ZSH="$HOME/.oh-my-zsh"
 export EDITOR="nvim"
 export VISUAL="nvim"
 
+# Export term colors
+export TERM="xterm-256color"
+
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
 
@@ -149,7 +152,10 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 if [ -e $HOME/.aliases.sh ]; then . $HOME/.aliases.sh; fi
 
 # To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
-[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
+# [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
+
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/custom-theme.omp.json)"
+
 
 # source antidote
 # source ${ZDOTDIR:-}/.antidote/antidote.zsh

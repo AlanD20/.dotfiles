@@ -174,6 +174,7 @@ pacman_pkgs=(
 )
 
 aur_pkgs=(
+  oh-my-posh-bin
   visual-studio-code-bin
   google-chrome
   spotify

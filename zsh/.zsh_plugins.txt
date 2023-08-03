@@ -16,7 +16,7 @@ ohmyzsh/ohmyzsh path:plugins/docker
 ohmyzsh/ohmyzsh path:plugins/fancy-ctrl-z
 ohmyzsh/ohmyzsh path:plugins/history
 
-romkatv/powerlevel10k                  # install p10k theme
+# romkatv/powerlevel10k                  # install p10k theme
 rupa/z
 
 zsh-users/zsh-autosuggestions
