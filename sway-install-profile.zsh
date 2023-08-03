@@ -28,10 +28,9 @@ stow_dirs=(
 )
 
 echo "=========================================="
-echo "Installing nvchad"
+echo "Installing antidote"
 echo "=========================================="
 # git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
-git clone https://github.com/NvChad/NvChad $HOME/.config/nvim --depth 1
 
 echo "=========================================="
 echo "🔗 Stowing dot files"

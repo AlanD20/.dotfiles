@@ -99,7 +99,7 @@ export LC_ALL="en_US.UTF-8"
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
@@ -127,7 +127,8 @@ export BAT_THEME="ansi"
 # FZF
 # Use @@ as the trigger sequence instead of the default **
 export FZF_COMPLETION_TRIGGER='@@'
-export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!{.git,.cache}'"
+# export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!{.git,.cache}'"
+export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type l $FD_OPTIONS"
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --margin=1 --padding=1"
 
 # Preview file content using bat (https://github.com/sharkdp/fd)
@@ -166,7 +167,7 @@ gpgconf --launch gpg-agent
 neofetch
 
 # bun completions
-[ -s "/home/www/.bun/_bun" ] && source "/home/www/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

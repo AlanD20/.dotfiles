@@ -8,6 +8,7 @@ vim.keymap.set("n", "n", "nzzzv", { silent = true, desc = "when searching, keep 
 vim.keymap.set("n", "N", "Nzzzv", { silent = true, desc = "when searching, keep cursor in middle" })
 vim.keymap.set("n", "<C-w>b", ":bufdo bd<CR>", { silent = true, desc = "Close all open buffers" })
 vim.keymap.set("n", "<C-S-A>", ":wa<CR>", { silent = true, desc = "Save all open buffers" })
+vim.keymap.set("n", "<leader>fx", ":!chmod +x %<CR>", { silent = true, desc = "Make current file executable" })
 
 vim.keymap.set(
   "n",

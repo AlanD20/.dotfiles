@@ -69,5 +69,5 @@ alias cdo="composer dump-autoload -o"
 alias gcls="clone_single_branch"
 
 # Personal
-alias confopen="nvim $HOME/.dotfiles"
+alias econf="cd $HOME/.dotfiles && nvim $HOME/.dotfiles"
 alias rr="source $HOME/.zshrc; pwd"
