@@ -154,7 +154,7 @@ if [ -e $HOME/.aliases.sh ]; then . $HOME/.aliases.sh; fi
 # To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
 # [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/custom-theme.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/aland20-custom-theme.omp.json)"
 
 
 # source antidote

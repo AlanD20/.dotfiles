@@ -22,6 +22,17 @@ suggestions.
 
 </details>
 
+<details>
+<summary>
+
+#### Oh My Posh Theme
+
+</summary>
+
+![oh-my-posh-aland20-custom-theme](pics/oh-my-posh-aland20-custom-theme.png)
+
+</details>
+
 ## Desktop Environment Setup
 
 - You may modify scripts to your needs:
