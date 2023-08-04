@@ -38,9 +38,17 @@ return {
     "tpope/vim-abolish",
   },
   {
+    -- Toggle text case
     "johmsalas/text-case.nvim",
     config = function()
       require("textcase").setup({})
+    end,
+  },
+  {
+    -- Auto closing/renaming HTML tags
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
     end,
   },
 }

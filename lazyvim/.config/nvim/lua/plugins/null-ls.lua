@@ -1,5 +1,4 @@
 local nls = require("null-ls")
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 return {
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -21,7 +20,7 @@ return {
 
         -- php
         nls.builtins.formatting.pint.with({
-          command = "vendor/bin/pint",
+          command = "./vendor/bin/pint",
           condition = function(utils)
             return utils.root_has_file({ "pint.json" })
           end,
@@ -49,6 +48,7 @@ return {
         nls.builtins.diagnostics.yamllint,
       },
       on_attach = function(client, bufnr)
+        local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_clear_autocmds({
             group = augroup,

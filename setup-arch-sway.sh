@@ -175,6 +175,7 @@ pacman_pkgs=(
 
 aur_pkgs=(
   oh-my-posh-bin
+  code-minimap # Required for minimap-vim
   visual-studio-code-bin
   google-chrome
   spotify
