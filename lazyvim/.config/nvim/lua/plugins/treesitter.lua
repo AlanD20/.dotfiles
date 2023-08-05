@@ -10,6 +10,7 @@ return {
         "graphql",
         "java",
         "bash",
+        "blade",
         "comment",
         "css",
         "dockerfile",

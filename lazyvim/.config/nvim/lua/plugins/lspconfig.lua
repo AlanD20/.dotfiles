@@ -22,6 +22,9 @@ return {
         -- clang = {},
         denols = {},
         emmet_ls = {
+          filetypes = {
+            "blade",
+          },
           includeLanguages = {
             javascript = "javascriptreact",
             plaintext = "javascript",

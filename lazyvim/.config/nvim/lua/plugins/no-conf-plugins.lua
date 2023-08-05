@@ -22,9 +22,9 @@ return {
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
     end,
   },
-  -- {
-  --   "jwalton512/vim-blade",
-  -- },
+  {
+    "jwalton512/vim-blade",
+  },
   {
     "rcarriga/nvim-notify",
     opts = {

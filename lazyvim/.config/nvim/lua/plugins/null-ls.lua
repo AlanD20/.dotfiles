@@ -31,7 +31,16 @@ return {
         -- nls.builtins.diagnostics.phpstan.with({
         --   temp_dir = "/tmp",
         -- }),
-        nls.builtins.formatting.blade_formatter,
+        nls.builtins.formatting.blade_formatter.with({
+          command = "blade-formatter",
+          args = {
+            "$FILENAME",
+            "--write",
+            "--wrap-attributes",
+            "force-expand-multiline",
+            -- "--sort-tailwindcss-classes",
+          },
+        }),
 
         -- go, two of following disabled as it's included with lazyvim go plugin
         -- nls.builtins.formatting.gofumpt,
