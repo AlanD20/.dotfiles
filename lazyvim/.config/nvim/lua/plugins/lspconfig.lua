@@ -5,15 +5,17 @@ return {
       servers = {
         -- installed servers
         html = {
-          autoClosingTags = true,
-          format = {
-            wrapAttributes = "force-expand-multiline",
-            templating = true,
-            wrapLineLength = 120,
-          },
-          hover = {
-            documentation = true,
-            references = true,
+          init_options = {
+            autoClosingTags = true,
+            format = {
+              wrapAttributes = "force-expand-multiline",
+              templating = true,
+              wrapLineLength = 120,
+            },
+            hover = {
+              documentation = true,
+              references = true,
+            },
           },
         },
         cssls = {},

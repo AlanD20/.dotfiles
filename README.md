@@ -54,6 +54,14 @@ You may configure the docker-compose file to your needs.
 To share your screen on Wayland, install `obs-studio` then use `pipewire` window
 capture to share your screen.
 
+## Chrome Flags
+
+Make sure to enable the following flags for Chromium
+
+- WebRTC PipeWire support: Enabled
+- Preferred Ozone platform: Wayland or Xorg
+- Parallel Downloading: Enabled
+
 ---
 
 ## Resources & Troubleshooting
