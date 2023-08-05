@@ -10,7 +10,7 @@ return {
 
         -- webdev stuff
         nls.builtins.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
-        nls.builtins.formatting.prettier, -- so prettier works only on these filetypes
+        nls.builtins.formatting.prettierd,
 
         -- Lua
         nls.builtins.formatting.stylua,
@@ -20,7 +20,6 @@ return {
 
         -- php
         nls.builtins.formatting.pint.with({
-          command = "./vendor/bin/pint",
           condition = function(utils)
             return utils.root_has_file({ "pint.json" })
           end,
@@ -54,13 +53,13 @@ return {
             group = augroup,
             buffer = bufnr,
           })
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.format({ bufnr = bufnr })
-            end,
-          })
+          -- vim.api.nvim_create_autocmd("BufWritePre", {
+          --   group = augroup,
+          --   buffer = bufnr,
+          --   callback = function()
+          --     vim.lsp.buf.format({ bufnr = bufnr })
+          --   end,
+          -- })
         end
       end,
     },

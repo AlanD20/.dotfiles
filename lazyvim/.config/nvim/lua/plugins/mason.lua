@@ -21,7 +21,7 @@ return {
         "typescript-language-server",
         "tailwindcss-language-server",
         "deno",
-        "prettier",
+        "prettierd",
 
         -- c/cpp
         "clangd",
