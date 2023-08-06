@@ -7,9 +7,9 @@ suggestions.
 - Arch
 - Ubuntu
 
-- You may find all the application descriptions in `setup-*` scripts.
-- Head over to [workspace-setup](workspace-setup/) for installation guides
-  including archlinux installation with and without dual booting.
+You may find all the application descriptions in `setup-*` scripts. Also, Head
+over to [workspace-setup](workspace-setup/) for installation guides including
+archlinux installation with and without dual booting.
 
 <details>
 <summary>
@@ -66,6 +66,9 @@ Make sure to enable the following flags for Chromium
 
 ## Resources & Troubleshooting
 
+- Want to install another desktop/window environment? Take a look at
+  [archinstall profiles](https://github.com/archlinux/archinstall/tree/master/archinstall/default_profiles).
+  It's a good start to install necessary packages for each environment.
 - Licensed fonts such as `Dank Mono`.
 - ZSH Plugin Descriptions
   - `zsh-nvm` plugin installs `nvm`.

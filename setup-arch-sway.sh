@@ -121,6 +121,8 @@ pacman_pkgs=(
   pipewire       # Audio manager
   pipewire-alsa  # Support for alsa
   pipewire-pulse # Support for pulse
+  pipewire-jack  # Support for jack
+  libpulse       # Sound server
   wireplumber    # Pipewire session/policy manager
   sqlite         # Lightweight file database
   nginx          # Web server

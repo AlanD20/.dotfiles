@@ -4,11 +4,6 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = true,
-    -- opts = function(_, opts)
-    --   opts.flavour = "maccho"
-    --   opts.transparent_background = true
-    --   opts.term_colors = true
-    -- end,
     opts = {
       transparent_background = true,
       term_colors = true,

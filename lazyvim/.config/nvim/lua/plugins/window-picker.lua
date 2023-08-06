@@ -4,9 +4,10 @@ return {
     version = "1.*",
     config = function()
       require("window-picker").setup({
-        autoselect_one = true,
-        include_current = false,
+        use_winbar = "smart",
         filter_rules = {
+          autoselect_one = true,
+          include_current_win = false,
           -- filter using buffer options
           bo = {
             -- if the file type is one of following, the window will be ignored

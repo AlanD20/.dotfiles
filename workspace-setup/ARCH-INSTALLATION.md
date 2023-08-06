@@ -197,13 +197,18 @@ as needed.
 
 7. Update pacman to top 10 fastest servers. Here are two ways to achieve this.
 
-   1. First, you have to backup `/etc/pacman.d/mirrorlist` then use that, to
-      pick top 10. To rank top 10, we need to install `pacman-contrib` package.
+   - First, you have to backup `/etc/pacman.d/mirrorlist` then use the following
+     methods:
+
+     ```bash
+     # Backupi existing mirror list
+     cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+     ```
+
+   1. `rankmirrors`: pick top 10. To rank top 10, we need to install
+      `pacman-contrib` package.
 
       ```bash
-      # Backupi existing mirror list
-      cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-
       # Install pacman-contrib to rank servers
       pacman -Sy pacman-contrib
 
@@ -211,14 +216,14 @@ as needed.
       rankmirrors -n 10 /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
       ```
 
-   - Second way is, install `reflector` and sort by the fastest one.
+   2 `Reflector`: install `reflector` and sort by the fastest one.
 
-     ```bash
-     sudo pacman -Sy reflector
+   ```bash
+   sudo pacman -Sy reflector
 
-     # Sort top 10 servers for someone who lives in Poland
-     reflector -c Poland --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
-     ```
+   # Sort top 10 servers for someone who lives in Poland
+   reflector -c Poland --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+   ```
 
 8. Enable parallel downloading for pacman. Add or uncomment the following line
    at `/etc/pacman.conf`.

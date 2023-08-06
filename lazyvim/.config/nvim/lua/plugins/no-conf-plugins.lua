@@ -1,19 +1,5 @@
 return {
   {
-    "echasnovski/mini.surround",
-    opts = {
-      mappings = {
-        add = "gsa",
-        delete = "gsd",
-        find = "gsf",
-        find_left = "gsF",
-        highlight = "gsh",
-        replace = "gsr",
-        update_n_lines = "gsn",
-      },
-    },
-  },
-  {
     "hrsh7th/nvim-cmp",
     dependencies = { "hrsh7th/cmp-emoji" },
     ---@param opts cmp.ConfigSchema
@@ -23,6 +9,7 @@ return {
     end,
   },
   {
+    -- Add blade indentations
     "jwalton512/vim-blade",
   },
   {
