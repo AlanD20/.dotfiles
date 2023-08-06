@@ -120,19 +120,22 @@
       "type": "prompt",
       "alignment": "right",
       "segments": [
-        {
-          "type": "upgrade",
-          "style": "plain",
-          "foreground": "p:bg-dark",
-          "background": "p:warning"
-        },
+        // {
+        //   "type": "upgrade",
+        //   "template": "   {{ .Version }}",
+        //   "foreground": "p:bg-dark",
+        //   "background": "p:warning",
+        //   "style": "powerline",
+        //   "powerline_symbol": "",
+        //   "invert_powerline": true
+        // },
         {
           "type": "executiontime",
           "template": "  {{ .FormattedMs }}\u2800",
           "background": "p:bg-light",
           "foreground": "p:text-light",
-          "style": "diamond",
-          "leading_diamond": "",
+          "style": "powerline",
+          "powerline_symbol": "",
           "invert_powerline": true,
           "properties": {
             "always_enabled": true,
@@ -174,11 +177,11 @@
       "segments": [
         {
           "type": "cmake",
-          "style": "powerline",
-          "powerline_symbol": "",
+          "template": "   cmake {{ .Full }} ",
           "foreground": "#E8EAEE",
           "background": "#1E9748",
-          "template": "   cmake {{ .Full }} "
+          "style": "powerline",
+          "powerline_symbol": ""
         },
         {
           "type": "node",
@@ -306,9 +309,7 @@
           "type": "status",
           "template": " ",
           "foreground": "#e0f8ff",
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}#ef5350{{ end }}"
-          ],
+          "foreground_templates": ["{{ if gt .Code 0 }}#ef5350{{ end }}"],
           "style": "plain",
           "properties": {
             "always_enabled": true

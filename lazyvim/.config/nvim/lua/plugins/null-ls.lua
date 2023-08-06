@@ -34,8 +34,8 @@ return {
         nls.builtins.formatting.blade_formatter.with({
           command = "blade-formatter",
           args = {
-            "$FILENAME",
             "--write",
+            "$FILENAME",
             "--wrap-attributes",
             "force-expand-multiline",
             -- "--sort-tailwindcss-classes",
