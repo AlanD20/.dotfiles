@@ -6,8 +6,8 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "moving down, ke
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, desc = "moving up, keep cursor in middle" })
 vim.keymap.set("n", "n", "nzzzv", { silent = true, desc = "when searching, keep cursor in middle" })
 vim.keymap.set("n", "N", "Nzzzv", { silent = true, desc = "when searching, keep cursor in middle" })
-vim.keymap.set("n", "<C-w>bc", "<cmd>bufdo bd<CR>", { silent = true, desc = "Close all open buffers" })
-vim.keymap.set("n", "<C-w>bs", "<cmd>wa<CR>", { silent = true, desc = "Save all open buffers" })
+vim.keymap.set("n", "<leader>bda", "<cmd>bufdo bd<CR>", { silent = true, desc = "Close all open buffers" })
+vim.keymap.set("n", "<leader>bsa", "<cmd>wa<CR>", { silent = true, desc = "Save all open buffers" })
 vim.keymap.set("n", "<leader>fx", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make current file executable" })
 vim.keymap.set(
   "n",

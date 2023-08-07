@@ -1,6 +1,15 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    keys = {
+      {
+        "<leader>slr",
+        function()
+          vim.lsp.buf.rename()
+        end,
+        desc = "Rename all refs under cursor in opened buffers",
+      },
+    },
     opts = {
       servers = {
         -- installed servers
