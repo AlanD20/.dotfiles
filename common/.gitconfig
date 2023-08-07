@@ -21,3 +21,19 @@ gpgsign = true
 [rebase]
 autoStash = true
 gpgsign = true
+
+[delta]
+  line-numbers = true
+  syntax-theme = Dracula
+  side-by-side = true
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+
+[interactive]
+    diffFilter = delta --color-only
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default

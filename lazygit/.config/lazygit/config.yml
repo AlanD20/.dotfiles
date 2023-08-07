@@ -1,3 +1,8 @@
+git:
+  paging:
+    colorArg: always
+    # GitHub issues 907: https://github.com/jesseduffield/lazygit/issues/907
+    pager: delta --paging=never --24-bit-color=never
 os:
   edit: "nvim {{filename}}"
   editInTerminal: true
