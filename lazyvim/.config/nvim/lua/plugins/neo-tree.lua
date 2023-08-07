@@ -26,7 +26,9 @@ return {
             local node = state.tree:get_node()
             local path = node:get_id()
             path = vim.fn.shellescape(path)
-            vim.api.nvim_command(":lua require('oil').open_float(" .. path .. ")")
+            if node.type == "directory" then
+              vim.api.nvim_command(":lua require('oil').open_float(" .. path .. ")")
+            end
           end,
         },
       },

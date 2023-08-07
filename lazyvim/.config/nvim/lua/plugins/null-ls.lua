@@ -21,12 +21,24 @@ return {
         -- php
         nls.builtins.formatting.pint.with({
           condition = function(utils)
-            return utils.has_file({ vim.fn.expand("~/pint.json") }) or utils.root_has_file({ "pint.json" })
+            return utils.has_file({ vim.fn.expand("~/.pint.json") }) or utils.root_has_file({ "pint.json" })
           end,
-          extra_args = {
-            "--config",
-            vim.fn.expand("~/.pint.json"),
-          },
+          extra_args = function(params)
+            local conf = ""
+            local files = vim.fs.find("pint.json", { path = params.root, type = "file" })
+
+            -- First Use pint.json in project dir, otherwise, use global pint.json
+            if files[1] ~= nil then
+              conf = params.root .. "/pint.json"
+            else
+              conf = vim.fn.expand("~/.pint.json")
+            end
+
+            return params.options and {
+              "--config",
+              conf,
+            }
+          end,
         }),
         nls.builtins.formatting.phpcsfixer.with({
           timeout = 10000,

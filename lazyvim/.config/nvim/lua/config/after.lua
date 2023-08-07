@@ -1,5 +1,5 @@
--- Other options
---
+-- After lazyvim loads
+
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 parser_config.blade = {
