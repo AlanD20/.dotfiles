@@ -9,6 +9,10 @@ export VISUAL="nvim"
 # Export term colors
 export TERM="xterm-256color"
 
+export ZSH_ENV_HOME="$HOME"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
 
