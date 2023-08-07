@@ -1,3 +1,5 @@
+;; extends
+
 ; AlpineJS attributes
 (attribute
   (attribute_name) @_attr
