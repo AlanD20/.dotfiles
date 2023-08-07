@@ -21,8 +21,12 @@ return {
         -- php
         nls.builtins.formatting.pint.with({
           condition = function(utils)
-            return utils.root_has_file({ "pint.json" })
+            return utils.has_file({ vim.fn.expand("~/pint.json") }) or utils.root_has_file({ "pint.json" })
           end,
+          extra_args = {
+            "--config",
+            vim.fn.expand("~/.pint.json"),
+          },
         }),
         nls.builtins.formatting.phpcsfixer.with({
           timeout = 10000,
