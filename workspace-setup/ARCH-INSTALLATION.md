@@ -423,6 +423,7 @@ as needed.
    systemctl --user enable gnmoe-keyring-daemon    # You may need to start the daemon: gnmoe-keyring-daemon --start -d
    systemctl --user enable ydotool
    systemctl --user enable pipewire
+   systemctl --user enable pipewire-pulse
    systemctl --user enable wireplumber
    systemctl --user enable redshift
 
