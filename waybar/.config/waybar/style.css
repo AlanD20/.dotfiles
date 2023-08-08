@@ -37,25 +37,24 @@
 }
 
 window#waybar {
-  background-color: rgba(34, 36, 54, 0.6);
+  background-color: rgba(34, 36, 54, 0.9);
   /* border-bottom: 0px solid rgba(100, 114, 125, 0.5); */
   color: #ffffff;
   transition-property: background-color;
   transition-duration: 0.5s;
-  border-radius: 12px;
+  /* border-radius: 12px; */
 }
 
 window#waybar.hidden {
   opacity: 0.2;
 }
 tooltip {
-  background: rgba(34, 36, 54, 0.6);
+  background: rgba(34, 36, 54, 0.8);
   border: 1px solid #ffffff;
 }
 tooltip label {
   color: #ffffff;
 }
-
 #workspaces button {
   padding: 0 12px 0 8px;
   margin: 4px 0 6px 0;
@@ -65,7 +64,7 @@ tooltip label {
 }
 
 #workspaces button.active {
-  padding: 0 0 0 0;
+  padding: 0;
   margin: 4px 0 6px 0;
   background-color: #ddddff;
   color: #303030;
@@ -116,6 +115,7 @@ tooltip label {
 
 #window,
 #workspaces {
+  padding: 2px 0 1px 0;
   margin: 0 2px;
 }
 

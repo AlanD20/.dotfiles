@@ -3,7 +3,7 @@
   "position": "top",
   "height": 33,
   // "width": 1350,
-  "margin": "4, 0, 4, 0",
+  "margin": "0, 0, 4, 0",
   // Choose the order of the modules
   "modules-left": [
     "custom/wmname",
