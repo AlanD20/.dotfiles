@@ -38,4 +38,24 @@ return {
       require("nvim-ts-autotag").setup()
     end,
   },
+  -- Better quickfix
+  {
+    "kevinhwang91/nvim-bqf",
+  },
+  {
+    -- Git blame
+    "f-person/git-blame.nvim",
+    keys = {
+      {
+        "<leader>gbt",
+        "<cmd>GitBlameToggle<CR>",
+        desc = "GitBlame: Toggle Virtual Text",
+      },
+      { "<leader>gbof", "<cmd>GitBlameOpenFileURL<CR>", desc = "GitBlame: Open file URL" },
+      { "<leader>gboc", "<cmd>GitBlameOpenCommitURL<CR>", desc = "GitBlame: Open commit URL" },
+      { "<leader>gbcf", "<cmd>GitBlameCopyFileURL<CR>", desc = "GitBlame: Copy file URL" },
+      { "<leader>gbcc", "<cmd>GitBlameCopyCommitURL<CR>", desc = "GitBlame: Copy commit URL" },
+      { "<leader>gbcs", "<cmd>GitBlameCopySHA<CR>", desc = "GitBlame: Copy SHA" },
+    },
+  },
 }
