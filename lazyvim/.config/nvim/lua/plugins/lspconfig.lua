@@ -43,6 +43,9 @@ return {
           },
         },
         intelephense = {
+          telemetry = {
+            enabled = false,
+          },
           completion = {
             fullyQualifyGlobalConstantsAndFunctions = true,
           },

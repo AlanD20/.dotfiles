@@ -58,4 +58,8 @@ return {
       { "<leader>gbcs", "<cmd>GitBlameCopySHA<CR>", desc = "GitBlame: Copy SHA" },
     },
   },
+  {
+    -- Better JSON for vim
+    "elzr/vim-json",
+  },
 }

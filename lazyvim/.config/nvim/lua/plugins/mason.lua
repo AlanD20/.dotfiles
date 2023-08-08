@@ -7,9 +7,10 @@ return {
         "shellcheck",
         "shfmt",
         "nginx-language-server",
-        "bash-language-server",
         "emmet-language-server",
         "emmet-ls",
+        "bash-language-server",
+        "ruff-lsp",
 
         -- lua
         "lua-language-server",
@@ -18,9 +19,12 @@ return {
         -- web dev
         "css-lsp",
         "html-lsp",
+        "js-debug-adapter",
         "typescript-language-server",
         "tailwindcss-language-server",
+        "eslint-lsp",
         "deno",
+        "prettier",
         "prettierd",
 
         -- c/cpp
@@ -49,17 +53,26 @@ return {
         "php-debug-adapter",
 
         -- python
+        "pyright",
         "python-lsp-server",
         "flake8",
         "black",
+        "debugpy",
 
         -- sql
         "sqlls",
+
+        -- JSON
+        "json-lsp",
 
         -- yaml
         "yaml-language-server",
         "yamllint",
         "yamlfmt",
+
+        -- Docker
+        "dockerfile-language-server",
+        "docker-compose-language-service",
 
         -- zig
         "zls",
