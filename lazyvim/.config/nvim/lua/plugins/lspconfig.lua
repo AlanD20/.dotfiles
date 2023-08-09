@@ -58,6 +58,7 @@ return {
             },
           },
         },
+        phpactor = {},
         tailwindcss = {
           settings = {
             tailwindCSS = {

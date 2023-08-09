@@ -16,6 +16,20 @@ return {
         auto_open = true,
       },
       filesystem = {
+        filtered_items = {
+          visible = true,
+          -- You could comment out the following lines to show hidden files by default.
+          show_hidden_count = true,
+          hide_dotfiles = false, --  don't hide dot files!!
+          hide_gitignored = true, --  we don't need this
+          hide_by_name = {
+            ".git",
+            ".vscode",
+            "vendor",
+            "node_modules",
+          },
+          never_show = {},
+        },
         window = {
           mappings = {
             ["e"] = "edit_with_oil",
