@@ -13,3 +13,10 @@ Available guides:
 Want to install another desktop/window environment? Take a look at
 [archinstall profiles](https://github.com/archlinux/archinstall/tree/master/archinstall/default_profiles).
 It's a good start to install necessary packages for each environment.
+
+## Resources
+
+- **[Official KDE Wiki](https://wiki.archlinux.org/title/KDE)**
+- **[Are We Wayland Yet?](https://arewewaylandyet.com/)**
+- [**Awesome Wayland**](https://github.com/natpen/awesome-wayland)
+- **[Awesome Wayland v2](https://github.com/anufrievroman/awesome-wayland)**

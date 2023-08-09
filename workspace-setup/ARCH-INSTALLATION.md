@@ -3,6 +3,14 @@
 This guide assumes you have booted to arch linux and you are ready to install
 archlinux.
 
+## Resources
+
+- **[Official Archlinux Installation Guide](https://wiki.archlinux.org/title/installation_guide)**
+- **[Official Archlinux General Recommendation Wiki](https://wiki.archlinux.org/title/General_recommendations)**
+- [**Configure Bluetooth Wiki**](https://wiki.archlinux.org/title/Bluetooth)
+
+---
+
 <details>
 <summary>
 

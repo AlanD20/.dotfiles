@@ -46,7 +46,7 @@ alias sju="journalctl --user"
 alias ls="exa -a --icons --git --group-directories-first"
 alias lls="ls -l"
 alias la="lls --git-ignore"
-alias lta="lls --tree --git-ignore"
+alias tree="lls --tree --git-ignore"
 
 # Custom Service Control
 alias ss-redis="ss start redis-server"
