@@ -153,8 +153,6 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 # "$@"
 # # /!\ do not remove the previous line
 
-new-session -n $HOST
-
 # Fix helix color highliting
 set-option -a terminal-overrides ",*256col*:RGB"
 
@@ -173,3 +171,6 @@ set -g @dracula-show-left-icon session
 
 # Use fzf to switch/create sessions
 set -g @plugin 'thuanOwa/tmux-fzf-session-switch'
+
+# vim tmux navigator using Ctrl+<jkhl>
+set -g @plugin 'christoomey/vim-tmux-navigator'

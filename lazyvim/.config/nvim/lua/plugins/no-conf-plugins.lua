@@ -62,4 +62,8 @@ return {
     -- Better JSON for vim
     "elzr/vim-json",
   },
+  {
+    -- Move between tmux panes and vim windows with Ctrl-<jkhl>
+    "christoomey/vim-tmux-navigator",
+  },
 }
