@@ -45,15 +45,15 @@
   ```bash
   export XDG_CURRENT_DESKTOP="sway"
   export XDG_SESSION_DESKTOP="sway"
-  export XCURSOR_THEME="Adwaita"
+  export XCURSOR_THEME="Sweet-cursors"
   export XCURSOR_SIZE=28
   export GTK_USE_PORTAL=0
-  export GTK_THEME="Adwaita:dark"
-  export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
+  export GTK_THEME="Nordic:dark"
+  export GTK2_RC_FILES=/usr/share/themes/Nordic/gtk-2.0/gtkrc
   export QT_QPA_PLATFORM="xcb"
   export QT_QPA_PLATFORMTHEME="qt5ct"
   export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-  export QT_STYLE_OVERRIDE=adwaita-dark
+  export QT_STYLE_OVERRIDE=Nordic
   export MOZ_ENABLE_WAYLAND=1
   ```
 

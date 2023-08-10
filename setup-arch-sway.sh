@@ -170,9 +170,11 @@ pacman_pkgs=(
   zam-plugins
 
   #
-  # Qt Dark Mode
+  # Qt & GTK Dark Mode
   #
   gnome-themes-extra
+  gtk-engines
+  gtk-engine-murrine
   papirus-icon-theme # Icons
   adwaita-qt6        # Theme for qt6
 
@@ -189,6 +191,7 @@ aur_pkgs=(
   zsh-antidote # Manag zsh plugins
   xdman8       # Download Manager
   lightly-qt   # Modern style for qt applications
+  nordic-theme # GTK3 theme
 )
 
 echo "=========================================="
