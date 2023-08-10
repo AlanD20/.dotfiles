@@ -24,7 +24,6 @@ return {
         "tailwindcss-language-server",
         "eslint-lsp",
         "deno",
-        "prettier",
         "prettierd",
 
         -- c/cpp

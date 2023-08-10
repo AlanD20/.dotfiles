@@ -43,7 +43,7 @@ live_config_reload: true
 shell:
   program: /usr/bin/zsh
 key_bindings:
-  - {key: "LShift", mods: "Super", mode: AppCursor, action: ToggleViMode}
+  - {key: "LShift", mods: "Super", action: ToggleViMode}
   - {key: "Return", mods: "Shift", mode: AppCursor, action: SpawnNewInstance}
 schemes:
   # Tokyo Night theme, based on both:
