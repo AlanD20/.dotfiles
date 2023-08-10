@@ -74,14 +74,17 @@ pacman_pkgs=(
   git-delta           # git pager
   perl-image-exiftool # Show image and file metadata
   feh                 # Image viewer
-  thunar              # File Explorer
-  wf-recorder         # Screen recorder
-  ffmpeg              # Video & Audio converter
-  grim                # Screenshot tool
-  slurp               # get x, y screen. used with grim
-  swappy              # Editing tool for screenshot
-  mpv                 # Video&Audio Player
-  mupdf               # View pdf and other files
+  # thunar              # File Explorer
+  dolphin       # File Explorer
+  kdf           # Show disk space
+  kde-cli-tools # Better tooling for dolphin
+  wf-recorder   # Screen recorder
+  ffmpeg        # Video & Audio converter
+  grim          # Screenshot tool
+  slurp         # get x, y screen. used with grim
+  swappy        # Editing tool for screenshot
+  mpv           # Video&Audio Player
+  mupdf         # View pdf and other files
 
   #
   # languages
@@ -158,8 +161,8 @@ pacman_pkgs=(
   gimp # Image editing
 
   #
-  # Easy Effects - Audio controller
   #
+  # Easy Effects - Audio controller
   easyeffects
   calf
   lsp-plugins
@@ -170,8 +173,8 @@ pacman_pkgs=(
   # Qt Dark Mode
   #
   gnome-themes-extra
-  adwaita-qt5
-  adwaita-qt6
+  papirus-icon-theme # Icons
+  adwaita-qt6        # Theme for qt6
 
 )
 
@@ -185,6 +188,7 @@ aur_pkgs=(
   anydesk-bin  # Remote desktop
   zsh-antidote # Manag zsh plugins
   xdman8       # Download Manager
+  lightly-qt   # Modern style for qt applications
 )
 
 echo "=========================================="

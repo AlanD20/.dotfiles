@@ -84,4 +84,27 @@
 - If it says `xdebug.so` not found, make sure to provide the full path, on
   Linux, it's usually at `/usr/lib/php/modules/xdebug.so`
 
+## A2DP Bluetooth Connection
+
+Here is how you may pair and connect your device using `bluetoothctl`
+
+```bash
+bluetoothctl
+
+# Turn on scanning to get your device mac address
+[host] scan on
+
+# After getting the mac address, you may pair it
+[host] pair <mac-address>
+
+# Show paired devices with its ma address
+[host] devices
+
+# After pairing successfully, you may connect to it.
+[host] connect <mac-address>
+
+# You may set the device trusted
+[host] trust <mac-address>
+```
+
 ## Troubleshooting

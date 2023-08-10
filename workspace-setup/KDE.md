@@ -41,7 +41,7 @@
 
 - **Global Theme**: Aritim-dark (primary), Otto, Breeze Dark
 - **Cursor**: [Sweet Cursors](https://store.kde.org/p/1393084),
-  [Sanity-curosrs](https://store.kde.org/p/1703043)
+  [Sanity-cursors](https://store.kde.org/p/1703043)
 - **Plasma Style**: Aritim-dark, Pax-Plasma
 - **Task Switcher**: [Medium Rounded By adhe](https://store.kde.org/p/1327319)
 - **Icons**: [Papirus](https://store.kde.org/p/1166289),
