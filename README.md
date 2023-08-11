@@ -33,9 +33,6 @@ archlinux installation with and without dual booting.
 
 </details>
 
-<details>
-<summary>
-
 ## Desktop Environment Setup
 
 - You may modify scripts to your needs:

@@ -4,7 +4,7 @@
 user=$1
 temp="/home/$user/temp"
 
-if [ -z "$user" ]; then
+if [ "$user" = "" ]; then
   echo "User is required!"
   exit 0
 fi
@@ -193,6 +193,7 @@ aur_pkgs=(
   xdman8       # Download Manager
   lightly-qt   # Modern style for qt applications
   nordic-theme # GTK3 theme
+  zig-bin
 )
 
 echo "=========================================="
