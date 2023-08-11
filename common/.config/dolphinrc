@@ -1,0 +1,33 @@
+MenuBar=Disabled
+
+[$Version]
+update_info=dolphin_detailsmodesettings.upd:rename-leading-padding
+
+[ContextMenu]
+ShowAddToPlaces=false
+ShowCopyMoveMenu=true
+
+[General]
+BrowseThroughArchives=true
+LockPanels=false
+OpenExternallyCalledFolderInNewTab=true
+OpenNewTabAfterLastTab=true
+RememberOpenedTabs=false
+UseTabForSwitchingSplitView=true
+Version=202
+ViewPropsTimestamp=2023,8,10,11,42,11.012
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[KPropertiesDialog]
+1920x1080 screen: Height=741
+1920x1080 screen: Width=846
+
+[MainWindow]
+MenuBar=Disabled
+ToolBarsMovable=Disabled
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,svgthumbnail
