@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# Usage:
+# sway-audio-recorder starts audio recording using ffmpeg. if there is an instance, it ends audio recording.
+#
+# Config:
+#       - Use the following command to get your input source for audio
+#         $ pactl list source | grep Name
+#
+# Args:
+#       --terminate      Terminate existing ffmpeg instnace.
+
+end_recording() {
+  pkill --signal SIGINT ffmpeg && notify-send -t 1500 -u Normal "Audio Recording Saved"
+  exit 0
+}
+
+usage() {
+  echo "Usage: $(basename "$0") [--terminate]"
+  exit 1
+}
+
+options=$(getopt -o '' --long terminate -- "$@")
+
+if [ "$?" -ne 0 ]; then
+  usage
+fi
+
+eval set -- "$options"
+
+# terminate already running instance with exit code success (0)
+if pgrep ffmpeg; then
+  end_recording
+fi
+
+case "$1" in
+--terminate)
+  end_recording
+  ;;
+--)
+  ffmpeg -f pulse -i alsa_input.pci-0000_00_1f.3.analog-stereo "$HOME/Downloads/aud-$(date +'%Y%m%d_%H%M%S').mp3"
+  ;;
+esac

@@ -300,7 +300,8 @@
     "return-type": "json",
     "interval": 1,
     "exec": "echo '{\"class\": \"recording\"}'",
-    "exec-if": "pgrep wf-recorder"
+    "exec-if": "pgrep wf-recorder",
+    "on-click": "$HOME/.local/bin/sway-wf-recorder --terminate"
   },
   "custom/audiorec": {
     "format": "♬ Rec",
@@ -308,7 +309,8 @@
     "return-type": "json",
     "interval": 1,
     "exec": "echo '{\"class\": \"audio recording\"}'",
-    "exec-if": "pgrep ffmpeg"
+    "exec-if": "pgrep ffmpeg",
+    "on-click": "$HOME/.local/bin/sway-audio-recorder --terminate"
   },
   "custom/media": {
     "format": "{icon} {}",

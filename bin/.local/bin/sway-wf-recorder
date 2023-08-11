@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# Usage:
+# sway-wf-recorder starts screen recording using wf-recorder. if there is an instance, it ends screen recording.
+#
+# Config:
+#       - Use the following command to get your output source for audio
+#         $ pactl list source | grep Name
+#
+# Args:
+#       --fullscreen    Record entire screen.
+#       --snapshot      Record specified geometry using slurp.
+#       --window        Record specified window using swaymsg.
+#       --terminate     Terminate existing wf-recorder instnace.
+
+end_recording() {
+  pkill --signal SIGINT wf-recorder && notify-send -t 1500 -u Normal "Screen Recording Saved"
+  exit 0
+}
+
+usage() {
+  echo "Usage: $(basename "$0") [--fullscreen] [--snapshot] [--window] [--terminate]"
+  exit 1
+}
+
+options=$(getopt -o '' --long fullscreen,snapshot,window,terminate -- "$@")
+
+if [ "$?" -ne 0 ]; then
+  usage
+fi
+
+eval set -- "$options"
+
+# terminate already running instance with exit code success (0)
+if pgrep wf-recorder; then
+  end_recording
+fi
+
+case "$1" in
+--fullscreen)
+  wf-recorder -a alsa_output.pci-0000_00_1f.3.analog-stereo.monitor -f "$HOME/Downloads/mov-$(date +'%Y-%m-%d--%H-%M-%S.mp4')"
+  ;;
+--snapshot)
+  geo=$(slurp) || exit 1
+  wf-recorder -g "$geo" -a alsa_output.pci-0000_00_1f.3.analog-stereo.monitor -f "$HOME/Downloads/mov-$(date +'%Y-%m-%d--%H-%M-%S.mp4')"
+  ;;
+--window)
+  geo=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp) || exit 1
+  wf-recorder -g "$geo" -a alsa_output.pci-0000_00_1f.3.analog-stereo.monitor -f "$HOME/Downloads/mov-$(date +'%Y-%m-%d--%H-%M-%S.mp4')"
+  ;;
+--terminate)
+  end_recording
+  ;;
+--)
+  usage
+  ;;
+esac
