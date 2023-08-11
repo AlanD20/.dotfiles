@@ -18,7 +18,7 @@ archlinux installation with and without dual booting.
 
 </summary>
 
-![desktop-screenshot](pics/desktop-screenshot.png)
+![desktop-screenshot](pics/sway-screenshot.png)
 
 </details>
 
@@ -32,6 +32,9 @@ archlinux installation with and without dual booting.
 ![oh-my-posh-aland20-custom-theme](pics/oh-my-posh-aland20-custom-theme.png)
 
 </details>
+
+<details>
+<summary>
 
 ## Desktop Environment Setup
 

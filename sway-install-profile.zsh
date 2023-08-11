@@ -19,7 +19,7 @@ stow_dirs=(
   redshift
   sway
   swaylock
-  thunar
+  # thunar
   tmux
   wallpapers
   waybar

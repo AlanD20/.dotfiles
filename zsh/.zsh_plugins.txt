@@ -17,7 +17,7 @@ ohmyzsh/ohmyzsh path:plugins/fancy-ctrl-z
 ohmyzsh/ohmyzsh path:plugins/history
 
 # romkatv/powerlevel10k                  # install p10k theme
-rupa/z
+rupa/z     # Zoxide, cd to any directory by using a unique part of your directory name
 
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
