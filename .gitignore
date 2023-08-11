@@ -1,3 +1,4 @@
 .vscode
 common/.config/gtk-3.0/bookmarks
 thunar/.config/Thunar/*.scm
+tmux/.config/tmux/plugins/*

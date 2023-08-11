@@ -182,7 +182,8 @@ pacman_pkgs=(
 
 aur_pkgs=(
   oh-my-posh-bin
-  code-minimap # Required for minimap-vim
+  tmux-plugin-manager # tpm for tmux
+  code-minimap        # Required for minimap-vim
   visual-studio-code-bin
   google-chrome
   spotify
