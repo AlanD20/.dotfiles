@@ -3,6 +3,8 @@
 # Usage:
 # sway-audio-recorder starts audio recording using ffmpeg. if there is an instance, it ends audio recording.
 #
+# Dependencies: ffmpeg, slurp, date
+#
 # Config:
 #       - Use the following command to get your input source for audio
 #         $ pactl list source | grep Name
@@ -34,10 +36,10 @@ if pgrep ffmpeg; then
 fi
 
 case "$1" in
---terminate)
-  end_recording
-  ;;
---)
-  ffmpeg -f pulse -i alsa_input.pci-0000_00_1f.3.analog-stereo "$HOME/Downloads/aud-$(date +'%Y%m%d_%H%M%S').mp3"
-  ;;
+  --terminate)
+    end_recording
+    ;;
+  --)
+    ffmpeg -f pulse -i alsa_input.pci-0000_00_1f.3.analog-stereo "$HOME/Downloads/aud-$(date +'%Y%m%d_%H%M%S').mp3"
+    ;;
 esac

@@ -3,6 +3,8 @@
 # Usage:
 # sway-grim-screenshot takes Screenshot using grim and swappy
 #
+# Dependencies: grim, slurp, swappy, date
+#
 # Args:
 #       --fullscreen    Screenshot entire desktop.
 #       --snapshot      Screenshot specified geometry using slurp.
@@ -32,18 +34,18 @@ if pgrep wf-recorder; then
 fi
 
 case "$1" in
---fullscreen)
-  grim "$HOME/Downloads/$(date +'%Y%m%d-%H%M%S').png" && screenshot_successful
-  ;;
---snapshot)
-  geo=$(slurp) || exit 1
-  (grim -g "$geo" - | swappy -f -) && screenshot_successful
-  ;;
---window)
-  geo=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp) || exit 1
-  (grim -g "$geo" - | swappy -f -) && screenshot_successful
-  ;;
---)
-  usage
-  ;;
+  --fullscreen)
+    grim "$HOME/Downloads/$(date +'%Y%m%d-%H%M%S').png" && screenshot_successful
+    ;;
+  --snapshot)
+    geo=$(slurp) || exit 1
+    (grim -g "$geo" - | swappy -f -) && screenshot_successful
+    ;;
+  --window)
+    geo=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp) || exit 1
+    (grim -g "$geo" - | swappy -f -) && screenshot_successful
+    ;;
+  --)
+    usage
+    ;;
 esac
