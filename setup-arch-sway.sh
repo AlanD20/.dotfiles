@@ -85,6 +85,7 @@ pacman_pkgs=(
   swappy        # Editing tool for screenshot
   mpv           # Video&Audio Player
   mupdf         # View pdf and other files
+  # pandoc-cli    # Convert files from one markup format into another
 
   #
   # languages

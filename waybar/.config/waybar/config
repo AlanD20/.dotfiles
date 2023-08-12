@@ -317,9 +317,9 @@
     "return-type": "json",
     "max-length": 30,
     "format-icons": {
-      "spotify": " ",
+      "spotify": "",
       "chromium": " ",
-      "default": "󱑽"
+      "default": "󱑽 "
     },
     "escape": true,
     "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources folder
