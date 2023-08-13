@@ -26,7 +26,7 @@ app=$1
 
 script=$(basename "$0")
 
-if [ -z "$app" ] || [ -z "$appType" ] || [ -z "$appId" ]; then
+if [ "$app" = "" ] || [ "$appType" = "" ] || [ "$appId" = "" ]; then
   printf "app name and identifier are required!\n
   Supported applications will be spawned with given identifier.\n
   - Sway commands are optional
@@ -40,15 +40,14 @@ fi
 
 isAppOpen=$(
   swaymsg -t get_tree | grep -i "\"$appType\": \"$appId\""
-  echo $?
 )
 
 # Check if grep's exit code is 0, then it found a match,
 # any code except 0 exit codes, that means the app isn't open
-if [ "$isAppOpen" -ne 0 ]; then
+if [ "$isAppOpen" = "" ]; then
 
   ("$HOME/.local/bin/run-with-sway-command" "scratchpad show" "$app" --class "$appId" ||
-    "$HOME/.local/bin/run-with-sway-command" "scratchpad show" "$app") &
+  "$HOME/.local/bin/run-with-sway-command" "scratchpad show" "$app") &
   sleep 1 && {
     swaymsg "[$appType=\"$appId\"] floating enable"
     swaymsg "[$appType=\"$appId\"] $swayCommands"
