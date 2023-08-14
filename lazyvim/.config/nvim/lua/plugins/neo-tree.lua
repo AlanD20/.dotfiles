@@ -32,7 +32,7 @@ return {
         },
         window = {
           mappings = {
-            ["e"] = "edit_with_oil",
+            ["E"] = "edit_with_oil",
           },
         },
         commands = {

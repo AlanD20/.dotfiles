@@ -57,6 +57,7 @@ return {
         --   temp_dir = "/tmp",
         -- }),
         nls.builtins.formatting.blade_formatter.with({
+          timeout = 100000,
           command = "blade-formatter",
           args = {
             "--write",

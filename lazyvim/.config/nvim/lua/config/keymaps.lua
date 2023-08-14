@@ -4,8 +4,8 @@
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "moving down, keep cursor in middle" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, desc = "moving up, keep cursor in middle" })
-vim.keymap.set("n", "E", "$", { silent = true, desc = "Move to beginning of the line" })
-vim.keymap.set("n", "B", "^", { silent = true, desc = "Move to end of the line" })
+vim.keymap.set({ "n", "v" }, "E", "$", { silent = true, desc = "Move to beginning of the line" })
+vim.keymap.set({ "n", "v" }, "B", "^", { silent = true, desc = "Move to end of the line" })
 vim.keymap.set("n", "n", "nzzzv", { silent = true, desc = "when searching, keep cursor in middle" })
 vim.keymap.set("n", "N", "Nzzzv", { silent = true, desc = "when searching, keep cursor in middle" })
 vim.keymap.set("n", "<leader>bda", "<cmd>%bd!<CR>", { silent = true, desc = "Close all open buffers" })

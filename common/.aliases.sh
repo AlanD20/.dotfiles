@@ -21,6 +21,7 @@ alias update-ad="antidote bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plugins.z
 
 # Open
 alias f="fzf --preview=\"bat --color=always --style=plain {}\" --preview-window=\"border:rounded\" --border=rounded --prompt=\"$ \" --pointer=\"->\""
+alias v="nvim"
 alias vim="nvim"
 alias nvim="nvim"
 alias vf='nvim `f`'
@@ -63,7 +64,7 @@ alias pa-clear="php artisan clear && \
                 composer dump-autoload -o"
 alias cr="composer run"
 alias cio="composer install -o"
-alias cio="composer update -o"
+alias cuo="composer update -o"
 alias cdo="composer dump-autoload -o"
 
 alias gcls="clone_single_branch"
