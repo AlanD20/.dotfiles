@@ -12,6 +12,7 @@ stow_dirs=(
   docker
   easyeffects
   # flameshot
+  gnupg
   lazygit
   mako
   nvim
@@ -35,12 +36,11 @@ echo "=========================================="
 echo "=========================================="
 echo "🔗 Stowing dot files"
 echo "=========================================="
-# To fix perl locale warning
-export LC_ALL=C
 
 for dir in ${stow_dirs[@]}; do
   echo "Stowing $dir"
-  stow $dir
+  # LC_ALL=C fixes perl locale warning
+  LC_ALL=C stow $dir
 done
 
 echo "=========================================="
@@ -50,13 +50,13 @@ echo "=========================================="
 fc-cache -rv
 
 # Load profile for antidote
-source "$HOME/.zshrc"
+source "$ZDOTDIR/.zshrc"
 
 # bundle zsh plugins
-antidote bundle <"$HOME/.zsh_plugins.txt" >"$HOME/.zsh_plugins.zsh"
+antidote bundle <"$ZDOTDIR/.zsh_plugins.txt" >"$ZDOTDIR/.zsh_plugins.zsh"
 
-# Install ohmyzsh
-yes no | sh -c "$HOME/.cache/antidote/*ohmyzsh*/tools/install.sh"
+# Install ohmyzsh - installed from AUR
+# yes no | sh -c "$XDG_CACHE_HOME/antidote/*ohmyzsh*/tools/install.sh"
 
 # add zsh to valid login shell
 command -v zsh | sudo tee -a /etc/shells
@@ -65,13 +65,16 @@ command -v zsh | sudo tee -a /etc/shells
 sudo usermod --shell $(which zsh) $USER
 
 # Remove auto-generated .zshrc by ohmyzsh
-rm "$HOME/.zshrc"
+rm "$ZDOTDIR/.zshrc"
 
 # create a new symlink
 stow zsh
 
 # Loads plugins and nvm
-source "$HOME/.zshrc"
+source "$ZDOTDIR/.zshrc"
+
+# Change go mod path
+go env -w GOMODCACHE="$XDG_CACHE_HOME/go/pkg/mod"
 
 # Update nvm to latest
 nvm upgrade
@@ -84,9 +87,6 @@ nvm alias default $node_version
 nvm use default
 npm install npm@latest yarn@latest pnpm@latest --location=global
 
-# Make GNUPG to cache the entered passphrase for 8 hours
-mkdir -p $HOME/.gnupg && echo "default-cache-ttl 28800" >>$HOME/.gnupg/gpg-agent.conf
-
 echo "=========================================="
 echo "🔃 System Service"
 echo "=========================================="
@@ -95,5 +95,3 @@ systemctl --user enable ydotool
 systemctl --user enable pipewire
 systemctl --user enable wireplumber
 systemctl --user enable redshift
-
-

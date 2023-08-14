@@ -182,6 +182,7 @@ pacman_pkgs=(
 )
 
 aur_pkgs=(
+  oh-my-zsh-git
   oh-my-posh-bin
   tmux-plugin-manager # tpm for tmux
   code-minimap        # Required for minimap-vim

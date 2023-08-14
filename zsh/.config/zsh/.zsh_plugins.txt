@@ -21,7 +21,8 @@ rupa/z     # Zoxide, cd to any directory by using a unique part of your director
 
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
-zsh-users/zsh-syntax-highlighting
+# zsh-users/zsh-syntax-highlighting
+zdharma-continuum/fast-syntax-highlighting
 
 belak/zsh-utils path:utility
 belak/zsh-utils path:completion

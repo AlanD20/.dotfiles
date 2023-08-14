@@ -2,3 +2,10 @@
 common/.config/gtk-3.0/bookmarks
 thunar/.config/Thunar/*.scm
 tmux/.config/tmux/plugins/*
+
+gnupg/.gnupg/*
+!gnupg/.gnupg/gpg-agent-conf
+
+zsh/**/.zcompdump*
+zsh/**/.zhistory
+zsh/**/.zsh_plugins.zsh
