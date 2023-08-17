@@ -149,8 +149,9 @@
   },
   "cpu": {
     "format": " &#8239; {usage}%",
+    "interval": 5,
     "tooltip": false,
-    "on-click": "kitty -e 'htop'"
+    "on-click": "alacritty -e 'htop'"
   },
   "memory": {
     "interval": 5,
@@ -161,10 +162,11 @@
     "critical": 90
   },
   "temperature": {
-    // "thermal-zone": 2,
+    "interval": 1,
+    "thermal-zone": 6,
     // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-    "critical-threshold": 80,
-    // "format-critical": "{temperatureC}°C {icon}",
+    "critical-threshold": 95,
+    "format-critical": "{temperatureC}°C {icon}",
     "format": "{icon} &#8239;{temperatureC}°C",
     "format-icons": [
       "",
