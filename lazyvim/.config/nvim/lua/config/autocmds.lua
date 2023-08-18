@@ -12,3 +12,9 @@ vim.api.nvim_create_autocmd({ "FileType", "BufRead", "BufNewFile" }, {
   pattern = { ".*%.blade%.php" },
   command = " setlocal ts=2 sts=2 sw=2 filetype=blade syntax=blade expandtab",
 })
+
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--   group = augroup("auto-formatter"),
+--   pattern = { "*" },
+--   command = "FormatLock",
+-- })
