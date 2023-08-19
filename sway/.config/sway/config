@@ -30,22 +30,10 @@ set $menu2 wofi --show drun -I
 # Your preferred lock command
 set $lock swaylock -f
 
-# Screenshot path
-set $screenshotDir "~/Downloads"
-
-#
-# Workspaces
-#
-set $ws_web 1:Web 
-set $ws_editor 2:Editor 
-set $ws_bg 3:Background 
-set $ws_term 4:Term 
-
-
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $HOME/wallpapers/chilling.png fill
+output * bg $HOME/wallpapers/glowing-forest.jpg fill
 
 
 #
@@ -79,4 +67,4 @@ bar {
 
 
 include /etc/sway/config.d/*
-include $HOME/.config/sway/*.conf
+include $XDG_CONFIG_HOME/sway/*.conf

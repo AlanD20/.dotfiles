@@ -18,7 +18,7 @@ archlinux installation with and without dual booting.
 
 </summary>
 
-![desktop-screenshot](pics/sway-screenshot.png)
+![desktop-screenshot](pics/current-sway-screenshot.png)
 
 </details>
 
@@ -98,4 +98,5 @@ Make sure to enable the following flags for Chromium
 - After rebooting, unable to connect to internet? Sometimes, both `dhcpcd` and
   `NetworkManager` conflict with each other, as a result, it fails to connect to
   internet. There are several ways to go about it: (1) Restarting your computer
-  (2) Stopping `dhcpcd` service then starting it again should solve the problem.
+  (2) Stopping `dhcpcd` service then restart `NetworkManager` service, after
+  that, start `dhcpcd` service again. This should solve the problem.

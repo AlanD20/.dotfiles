@@ -1,31 +1,35 @@
-@define-color critical #ff0000; /* critical color */
-@define-color warning #f3f809; /* warning color */
-@define-color fgcolor #ffffff; /* foreground color */
-@define-color bgcolor #303030; /* background color */
-@define-color bgcolor #222436; /* background color */
-@define-color alert   #df3320;
+/* Catppuccin Mocha */
+/* https://github.com/catppuccin/waybar/ */
+@define-color base   #1e1e2e;
+@define-color mantle #181825;
+@define-color crust  #11111b;
 
-@define-color accent1 #ff7a93;
-@define-color accent2 #b9f27c;
-@define-color accent3 #ff9e64;
-@define-color accent4 #bb9af7;
-@define-color accent5 #7da6ff;
-@define-color accent6 #0db9d7;
+@define-color text     #cdd6f4;
+@define-color subtext0 #a6adc8;
+@define-color subtext1 #bac2de;
 
-@define-color blue      #1e66f5;
-@define-color lavender  #7287fd;
-@define-color sapphire  #209fb5;
-@define-color sky       #04a5e5;
-@define-color teal      #179299;
-@define-color green     #40a02b;
-@define-color yellow    #df8e1d;
-@define-color peach     #fe640b;
-@define-color maroon    #e64553;
-@define-color red       #d20f39;
-@define-color mauve     #8839ef;
-@define-color pink      #ea76cb;
-@define-color flamingo  #dd7878;
-@define-color rosewater #dc8a78;
+@define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color surface2 #585b70;
+
+@define-color overlay0 #6c7086;
+@define-color overlay1 #7f849c;
+@define-color overlay2 #9399b2;
+
+@define-color blue      #89b4fa;
+@define-color lavender  #b4befe;
+@define-color sapphire  #74c7ec;
+@define-color sky       #89dceb;
+@define-color teal      #94e2d5;
+@define-color green     #a6e3a1;
+@define-color yellow    #f9e2af;
+@define-color peach     #fab387;
+@define-color maroon    #eba0ac;
+@define-color red       #f38ba8;
+@define-color mauve     #cba6f7;
+@define-color pink      #f5c2e7;
+@define-color flamingo  #f2cdcd;
+@define-color rosewater #f5e0dc;
 
 * {
   /* `otf-font-awesome` is required to be installed for icons */
@@ -37,59 +41,55 @@
 }
 
 window#waybar {
-  background-color: rgba(34, 36, 54, 0.9);
-  /* border-bottom: 0px solid rgba(100, 114, 125, 0.5); */
-  color: #ffffff;
+  background-color: shade(@base, 0.8);
+  color: @text;
   transition-property: background-color;
   transition-duration: 0.5s;
-  /* border-radius: 12px; */
 }
 
 window#waybar.hidden {
   opacity: 0.2;
 }
 tooltip {
-  background: rgba(34, 36, 54, 0.8);
-  border: 1px solid #ffffff;
+  background: @base;
+  border: 2px solid alpha(@crust, 0.3);
 }
 tooltip label {
-  color: #ffffff;
+  color: @text;
 }
 #workspaces button {
-  padding: 0 12px 0 8px;
-  margin: 4px 0 6px 0;
+  padding: 0 4px 0 4px;
   background-color: transparent;
-  color: #ffffff;
-  min-width: 36px;
+  color: @text;
+  min-width: 30px;
 }
 
 #workspaces button.active {
-  padding: 0;
-  margin: 4px 0 6px 0;
-  background-color: #ddddff;
-  color: #303030;
-  min-width: 36px;
+  padding: 0 4px 0 4px;
+  background-color: @surface0;
+  color: shade(@lavender, 0.8);
 }
 
 #workspaces button:hover {
-  background: rgba(0, 0, 0, 0.5);
-  color: @pink;
+  background-color: shade(@crust, 0.9);
+  color: shade(@yellow, 0.8);
 }
 
 #workspaces button.focused {
-  background-color: #bbccdd;
-  color: #323232;
+  background-color: @surface0;
+  color: shade(@mauve, 0.8);
 }
 
 #workspaces button.urgent {
-  color: red;
+  color: @red;
 }
 
 #mode {
+  padding: 0px 5px;
   font-weight: bold;
-  font-style: italic;
-  background-color: #64727d;
-  border-bottom: 1px solid #ffffff;
+  /* font-style: italic; */
+  background-color: shade(@surface0, 0.8);
+  color: shade(@red, 0.8);
 }
 
 #clock,
@@ -102,21 +102,19 @@ tooltip label {
 #pulseaudio,
 #custom-media,
 #tray,
-#mode,
 #idle_inhibitor,
 #custom-power,
 #custom-pacman,
 #language {
   padding: 0px 3px;
   margin: 4px 3px 5px 3px;
-  color: @fgcolor;
+  color: @text;
   background-color: transparent;
 }
 
 #window,
 #workspaces {
   padding: 2px 0 1px 0;
-  margin: 0 2px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -130,21 +128,21 @@ tooltip label {
 }
 
 #clock {
-  color: #90ee90;
+  color: @subtext1;
 }
 
 #battery {
-  color: @accent5;
+  color: shade(@blue, 0.8);
 }
 
 @keyframes battery-blink {
   from {
     background-color: transparent;
-    color: @accent5;
+    color: shade(@blue, 0.8);
   }
   to {
-    background-color: @critical;
-    color: @fgcolor;
+    background-color: shade(@red, 0.7);
+    color: @text;
   }
 }
 
@@ -160,81 +158,93 @@ tooltip label {
   padding: 0 8px;
   border-radius: 4px;
   font-weight: bold;
-  color: @warning;
+  color: shade(@yellow, 0.8);
 }
 
 label:focus {
-  background-color: #000000;
+  background-color: @crust;
 }
 
 #cpu {
-  color: @accent1;
+  color: shade(@maroon, 0.8);
 }
 
 #memory {
-  color: #86e2d5;
+  color: shade(@sky, 0.8);
 }
 
 #backlight {
-  color: @accent2;
+  color: shade(@yellow, 0.7);
+}
+
+#backlight.normal {
+  color: shade(@yellow, 0.7);
+}
+#backlight.full {
+  color: shade(@text, 0.7);
 }
 
 #network {
-  color: @accent3;
+  color: shade(@peach, 0.8);
 }
 
 #network.disconnected {
-  color: @alert;
+  color: shade(@red, 0.8);
 }
 
 #pulseaudio {
-  color: @accent4;
+  color: shade(@maroon, 0.8);
 }
 
 #pulseaudio.muted {
-  color: #a0a0a0;
+  color: shade(@yellow, 0.8);
 }
 
 #custom-power {
-  color: @accent6;
+  color: shade(@teal, 0.8);
 }
 
 #custom-waylandvsxorg {
-  color: @accent5;
+  color: shade(@sky, 0.8);
 }
 
 #custom-pacman {
-  color: @accent2;
+  color: shade(@green, 0.8);
 }
 
 #custom-media {
-  background-color: #66cc99;
-  color: #2a5c45;
+  background-color: shade(@mantle, 0.8);
+  color: @subtext1;
   padding: 4px 8px;
-  min-width: 100px;
-  border-radius: 25px;
+  min-width: 150px;
+  border-radius: 7px;
+  border: 2px solid alpha(@mauve, 0.8);
 }
 
 #custom-media.custom-spotify {
-  background-color: #66cc99;
+  border: 2px solid alpha(@green, 0.8);
 }
 
 #custom-media.custom-vlc {
-  background-color: #ffa000;
+  border: 2px solid alpha(@peach, 0.8);
+}
+
+#custom-media.custom-chromium {
+  border: 2px solid alpha(@maroon, 0.8);
 }
 
 #temperature {
-  color: @accent6;
+  color: shade(@blue, 0.8);
 }
 
 @keyframes temperature-blink {
   from {
     background-color: transparent;
-    color: @accent6;
+    color: shade(@blue, 0.8);
   }
   to {
-    background-color: @critical;
-    color: @fgcolor;
+    background-color: shade(@red, 0.8);
+    color: @text;
   }
 }
 
@@ -246,35 +256,37 @@ label:focus {
 }
 
 #tray {
-  color: rgba(34, 36, 54, 0.6);
+  /* border: 1px solid alpha(@mantle, 0.7); */
 }
 
 #idle_inhibitor {
-  background-color: #343434;
+  background-color: @surface0;
   border-radius: 4px;
 }
 
 #mpd {
-  color: #d1e231;
+  color: shade(@yellow, 0.8);
 }
 
 #custom-language {
-  color: @accent5;
+  color: @text;
   min-width: 16px;
 }
 
 #custom-separator {
-  color: #606060;
+  color: @mantle;
   margin: 0 1px;
   padding-bottom: 5px;
 }
 
 #custom-wmname {
+  background-color: shade(@mantle, 0.6);
   font-size: 15px;
   padding: 0 2px;
+  border-right: 3px solid shade(@flamingo, 0.8);
 }
 
 #custom-recorder,
 #custom-audiorec {
-  color: #c71585;
+  color: shade(@red, 0.8);
 }

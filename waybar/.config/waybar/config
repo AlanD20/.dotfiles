@@ -6,11 +6,11 @@
   "margin": "0, 0, 4, 0",
   // Choose the order of the modules
   "modules-left": [
+    "sway/mode",
     "custom/wmname",
     "custom/separator",
     "sway/workspaces",
     "custom/separator",
-    "sway/mode",
     "sway/scratchpad",
     "custom/separator",
     "cpu",
@@ -28,43 +28,43 @@
   ],
   "modules-right": [
     "tray",
+    "custom/separator",
     "keyboard-state",
-    "idle_inhibitor",
+    // "idle_inhibitor",
     "custom/separator",
     "custom/keyboard-layout",
     "custom/separator",
-    // "backlight",
-    "backlight#icon",
-    "backlight#value",
-    "custom/separator",
-    "battery",
+    "pulseaudio",
     "custom/separator",
     "temperature",
     "custom/separator",
-    "pulseaudio",
+    // "backlight",
+    "backlight#icon",
+    // "backlight#value",
     "custom/separator",
-    "clock",
-    "custom/powermenu"
+    "battery",
+    "custom/separator",
+    "clock"
   ],
   // Modules configuration
   "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
-    "format": "{icon}"
-    // "format-icons": {
-    //"1": "",
-    //"2": "",
-    //"3": "",
-    //"4": "",
-    //"5": "",
-    //"6": "",
-    //"7": "",
-    //"8": "",
-    //"9": ""
-    // "urgent": "",
-    // "focused": ""
-    // "default": ""
-    // }
+    "format": "{icon}",
+    "format-icons": {
+      "1": "󰖟",
+      "2": "󱥇",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "7": "",
+      "8": "",
+      "9": "",
+      "urgent": "",
+      "focused": ""
+      // "default": ""
+    }
   },
   "custom/wmname": {
     "format": "    {} ",
@@ -72,9 +72,9 @@
     "exec": "cat /etc/hostname"
   },
   "keyboard-state": {
-    "numlock": true,
+    // "numlock": true,
     "capslock": true,
-    "format": "{name} {icon}",
+    "format": " {name} {icon}",
     "format-icons": {
       "locked": "   ",
       "unlocked": "   "
@@ -95,7 +95,7 @@
     "exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
     // Interval set only as a fallback, as the value is updated by signal
     "interval": 1,
-    "format": "   {} ", // Icon: keyboard
+    "format": "    {} ", // Icon: keyboard
     // Signal sent by Sway key binding (~/.config/sway/key-bindings)
     "signal": 1, // SIGHUP
     "tooltip": false,
@@ -110,7 +110,7 @@
     "tooltip": false
   },
   "sway/mode": {
-    "format": "<span color=\"#e64553\">{}</span>"
+    "format": "{}"
   },
   "idle_inhibitor": {
     "format": " {icon}  ",
@@ -176,6 +176,10 @@
   },
   "backlight#icon": {
     "format": "{icon}",
+    "states": {
+      "full": 100,
+      "normal": 99
+    },
     "format-icons": [
       "󱩎",
       "󱩏",
@@ -185,16 +189,17 @@
       "󱩓",
       "󱩔",
       "󱩕",
-      "󱩖"
+      "󱩖",
+      "󰛨"
     ],
     "on-scroll-down": "brightnessctl -c backlight set 1%-",
     "on-scroll-up": "brightnessctl -c backlight set +1%"
   },
-  "backlight#value": {
-    "format": "{percent}%",
-    "on-scroll-down": "brightnessctl -c backlight set 1%-",
-    "on-scroll-up": "brightnessctl -c backlight set +1%"
-  },
+  // "backlight#value": {
+  //   "format": "{percent}%",
+  //   "on-scroll-down": "brightnessctl -c backlight set 1%-",
+  //   "on-scroll-up": "brightnessctl -c backlight set +1%"
+  // },
   // "backlight": {
   //   // "device": "acpi_video1",
   //   "format": "{icon}&#8239;{percent}%",
@@ -212,7 +217,7 @@
     "format": "{icon}  &#8239; {capacity}%",
     "format-charging": "  &#8239;{capacity}%",
     "format-plugged": "  &#8239;{capacity}%",
-    "format-alt": "{icon} {time}",
+    "format-alt": "{icon}    {time}",
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
     "format-icons": [
@@ -232,7 +237,7 @@
     "format-linked": "&#8239;{ifname} (No IP)",
     "format-disconnected": "✈  &#8239;Disconnected ⚠",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "tooltip-format": "{ifname} via {gwaddr}  - {essid}: {ipaddr}"
+    "tooltip-format": "\t{ifname} via {gwaddr}\n\n \t{essid}: {ipaddr}"
   },
   "network#vpn": {
     "interface": "tun0",
@@ -315,16 +320,17 @@
     "on-click": "$HOME/.local/bin/sway-audio-recorder --terminate"
   },
   "custom/media": {
-    "format": "{icon} {}",
+    "format": "{icon}  {}",
     "return-type": "json",
     "max-length": 30,
     "format-icons": {
       "spotify": "",
       "chromium": " ",
+      "vlc": "󰕼 ",
       "default": "󱑽 "
     },
     "escape": true,
-    "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources folder
+    "exec": "$XDG_CONFIG_HOME/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources folder
     "on-click": "exec playerctl play-pause"
   }
 }
