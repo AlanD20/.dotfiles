@@ -74,7 +74,7 @@ pacman_pkgs=(
   git-delta           # git pager
   perl-image-exiftool # Show image and file metadata
   feh                 # Image viewer
-  # thunar              # File Explorer
+  # thunar            # File Explorer
   dolphin       # File Explorer
   kdf           # Show disk space
   kde-cli-tools # Better tooling for dolphin
@@ -85,7 +85,8 @@ pacman_pkgs=(
   swappy        # Editing tool for screenshot
   mpv           # Video&Audio Player
   mupdf         # View pdf and other files
-  # pandoc-cli    # Convert files from one markup format into another
+  # pandoc-cli  # Convert files from one markup format into another
+  entr # Rerun scripts or commands after file changes
 
   #
   # languages
