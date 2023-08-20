@@ -320,14 +320,14 @@
     "on-click": "$HOME/.local/bin/sway-audio-recorder --terminate"
   },
   "custom/media": {
-    "format": "{icon}  {}",
+    "format": "{icon}{}",
     "return-type": "json",
     "max-length": 30,
     "format-icons": {
       "spotify": "",
-      "chromium": " ",
-      "vlc": "󰕼 ",
-      "default": "󱑽 "
+      "chromium": "",
+      "vlc": "󰕼",
+      "default": "󱑽"
     },
     "escape": true,
     "exec": "$XDG_CONFIG_HOME/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources folder

@@ -84,6 +84,7 @@ pacman_pkgs=(
   slurp         # get x, y screen. used with grim
   swappy        # Editing tool for screenshot
   mpv           # Video&Audio Player
+  mpv-mpris     # MPV plugin to control player through MPRIS D-bus interface
   mupdf         # View pdf and other files
   # pandoc-cli  # Convert files from one markup format into another
   entr # Rerun scripts or commands after file changes
