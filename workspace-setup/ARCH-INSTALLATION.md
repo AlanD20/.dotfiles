@@ -9,6 +9,10 @@ archlinux.
 - **[Official Archlinux General Recommendation Wiki](https://wiki.archlinux.org/title/General_recommendations)**
 - [**Configure Bluetooth Wiki**](https://wiki.archlinux.org/title/Bluetooth)
 
+- You made a mistake during installation? Forgot to install a package such as
+  network? Go back to your arch installt and mount your arch root drive, then
+  use `pacstrap` to install any additional packages you would like.
+
 ---
 
 <details>
@@ -205,8 +209,8 @@ as needed.
 
 7. Update pacman to top 10 fastest servers. Here are two ways to achieve this.
 
-   - First, you have to backup `/etc/pacman.d/mirrorlist` then use the following
-     methods:
+   - First, you have to backup `/etc/pacman.d/mirrorlist` then use one of the
+     following methods:
 
      ```bash
      # Backupi existing mirror list
@@ -224,14 +228,14 @@ as needed.
       rankmirrors -n 10 /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
       ```
 
-   2 `Reflector`: install `reflector` and sort by the fastest one.
+   2. `Reflector`: install `reflector` and sort by the fastest one.
 
-   ```bash
-   sudo pacman -Sy reflector
+      ```bash
+      sudo pacman -Sy reflector
 
-   # Sort top 10 servers for someone who lives in Poland
-   reflector -c Poland --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
-   ```
+      # Sort top 10 servers for someone who lives in Poland
+      reflector -c Poland --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+      ```
 
 8. Enable parallel downloading for pacman. Add or uncomment the following line
    at `/etc/pacman.conf`.
@@ -302,7 +306,7 @@ as needed.
 </summary>
 
 - Fun Note: you have several ttys, you can switch between them using
-  `Alt + arrows` or `Alt + <F1, F2, etc…>`
+  `Alt + arrows` or `Ctrl + Alt + <F1, F2, etc…>`
 - Make sure to follow the steps and do necessary research if you don't
   understand a step.
 

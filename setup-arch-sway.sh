@@ -162,6 +162,7 @@ pacman_pkgs=(
   firefox
   obs-studio
   gimp # Image editing
+  libreoffice-fresh
 
   #
   #
@@ -254,6 +255,7 @@ echo "=========================================="
 echo "Setup PHP"
 echo "=========================================="
 sed -i 's/;cgi.fix_pathinfo=0/cgi.fix_pathinfo=1/I' /etc/php/php.ini
+sed -i 's/;extension=bcmath/extension=bcmath/I' /etc/php/php.ini
 sed -i 's/;extension=fileinfo/extension=fileinfo/I' /etc/php/php.ini
 sed -i 's/;extension=gd/extension=gd/I' /etc/php/php.ini
 sed -i 's/;extension=imap/extension=imap/I' /etc/php/php.ini
