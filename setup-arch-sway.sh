@@ -64,7 +64,7 @@ pacman_pkgs=(
   zsh                 # Main shell instead of bash
   stow                # easily manage .dot files
   fzf                 # fuzzy finder for files and directories
-  exa                 # better ls command
+  eza                 # better ls command (exa is unmainted)
   ripgrep             # Better grep
   bat                 # Better cat command
   direnv              # Loading env variables for current working directory
@@ -189,6 +189,7 @@ aur_pkgs=(
   oh-my-posh-bin
   tmux-plugin-manager # tpm for tmux
   code-minimap        # Required for minimap-vim
+  lazydocker
   visual-studio-code-bin
   google-chrome
   spotify
@@ -199,6 +200,7 @@ aur_pkgs=(
   lightly-qt   # Modern style for qt applications
   nordic-theme # GTK3 theme
   zig-bin
+  metadata-cleaner
 )
 
 echo "=========================================="

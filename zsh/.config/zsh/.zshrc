@@ -111,3 +111,6 @@ source "$ZDOTDIR/.zsh_plugins.zsh"
 
 gpgconf --launch gpg-agent
 neofetch
+
+# bun completions
+[ -s "/home/www/.local/share/bun/_bun" ] && source "/home/www/.local/share/bun/_bun"

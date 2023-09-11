@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 # WSL
 # alias desktop="${WINHOME}/Desktop";
 # WINHOME=$(wslpath "$(wslvar USERPROFILE)")
@@ -60,5 +59,5 @@ alias cdo="composer dump-autoload -o"
 alias gcls="clone_single_branch"
 
 # Personal
-alias econf="\cd $DOTFILES && $EDITOR ."
+alias econf="\cd $DOTFILES && $EDITOR"
 alias rr="source $ZDOTDIR/.zshrc"

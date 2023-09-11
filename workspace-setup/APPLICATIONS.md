@@ -108,3 +108,14 @@ bluetoothctl
 ```
 
 ## Troubleshooting
+
+- There is no bluetooth controller to select? Try to unload and load bluetooth
+  modules. [Credit](https://unix.stackexchange.com/a/707841)
+
+  ```bash
+  rmmod btusb
+  rmmod btintel
+
+  modprobe btintel
+  modprobe btusb
+  ```
