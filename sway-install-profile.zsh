@@ -15,7 +15,7 @@ stow_dirs=(
   gnupg
   lazygit
   mako
-  nvim
+  nvim # Make sure to change nvchad or lazyvim to nvim
   p10k
   redshift
   sway

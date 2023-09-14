@@ -22,7 +22,7 @@ pacman_pkgs=(
   dos2unix
   net-tools
   curl
-  nvim
+  neovim
   vim
   nano
   wget
