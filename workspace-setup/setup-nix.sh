@@ -33,7 +33,7 @@ stow_dirs=(
   p10k
   tmux
   zsh
-  db
+  docker
 )
 
 echo "========================================================"
@@ -72,7 +72,7 @@ git clone --depth=1 https://github.com/mattmc3/antidote.git "${ZDOTDIR:-~}/.anti
 echo "=========================================="
 echo "📦 Installing NIX"
 echo "=========================================="
-sh <(curl -L https://nixos.org/nix/install) $nix_flag
+sh <(curl -L https://nixos.org/nix/install) "$nix_flag"
 
 [ "$sys" == "wsl" ] && . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 [ "$sys" == "linux" ] && . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
@@ -122,7 +122,7 @@ echo "=========================================="
 source "$HOME/.profile"
 
 # Load the profile script with zsh
-$(which zsh) ./install-profile.zsh
+"$(which zsh)" ./install-profile.zsh
 
 echo "=========================================="
 echo "Configure SSH"
