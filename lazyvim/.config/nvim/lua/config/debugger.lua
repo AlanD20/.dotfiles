@@ -15,4 +15,8 @@ table.insert(dap.configurations.php, {
   type = "php",
   request = "launch",
   port = 9003,
+  -- Mapping paths for remote debugging
+  -- pathMappings = {
+  --   ["/var/www/webapp"] = "${workspaceFolder}",
+  -- },
 })

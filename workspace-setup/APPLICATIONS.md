@@ -60,17 +60,44 @@
   pacman -S xdebug
   ```
 
-- Create `xdebug.ini` file at `/etc/php/conf.d` or modify the existing one, and
+- Create `xdebug.ini` file at `/etc/php/conf.d` or modify the existing one. If
+  you are using `docker-php-ext-enable` command to enable extensions, it creates
+  its own `ini` file that starts with `docker-php-ext-<ext_name>`. After that,
   make sure it has the following content.
 
   ```ini
+  [xdebug]
   zend_extension=xdebug.so
-  xdebug.mode=debug
+  xdebug.mode="debug,develop,trace"
   xdebug.remote_enable=on
   xdebug.remote_host=127.0.0.1
   xdebug.remote_port=9003
   xdebug.remote_handler=dbgp
   xdebug.start_with_request=yes
+
+
+  # v3+
+  [xdebug]
+  zend_extension=xdebug.so
+  xdebug.mode="debug,develop,trace"
+  xdebug.remote_enable=on
+  # The server IP that hosts xdebug server
+  xdebug.remote_host="host.docker.internal"
+  xdebug.remote_port=9003
+  xdebug.remote_handler=dbgp
+  xdebug.start_with_request=yes
+  ```
+
+- If you are using docker, don't forget to allow communication between
+  container/host.
+
+  ```bash
+  # Docker flag
+  --add-host=host.docker.internal:host-gateway
+
+  # Docker compose
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
   ```
 
 - Restart all the services that is using native PHP server, i.e, fpm, web server
@@ -82,7 +109,29 @@
   ```
 
 - If it says `xdebug.so` not found, make sure to provide the full path, on
-  Linux, it's usually at `/usr/lib/php/modules/xdebug.so`
+  Linux, it's usually at `/usr/lib/php/modules/xdebug.so` or use a simple find
+  pattern
+  ```bash
+  find / -iname xdebug
+  ```
+- Here is a simple Dockerfile to run php-fpm-alpine and setup xdebug
+
+  ```Dockerfile
+  ARG PHP_VERSION=8.2
+  FROM php:$PHP_VERSION-fpm-alpine RUN apk update && apk upgrade --no-cache
+
+  # Xdebug tools
+  # Tools to compile xdebug
+  RUN apk add autoconf g++ make --no-cache\
+      && apk add --update linux-headers --no-cache \
+      # Install via pecl
+      pecl install -f xdebug \
+      # Enable extension, config at $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini
+      && docker-php-ext-enable xdebug \
+      # Cleanup
+      && rm -rf /tmp/pear\
+      && apk del --purge autoconf g++ make
+  ```
 
 ## A2DP Bluetooth Connection
 

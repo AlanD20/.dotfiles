@@ -6,3 +6,5 @@ debug
 foo.*
 *.log
 data
+lua/config/debuggers/*
+!lua/config/debuggers/.gitkeep
