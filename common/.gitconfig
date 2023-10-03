@@ -37,3 +37,7 @@ gpgsign = true
 
 [diff]
     colorMoved = default
+
+# Always use ssh instead of https
+[url "git@github.com:"]
+        insteadOf = https://github.com/

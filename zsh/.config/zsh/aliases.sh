@@ -57,6 +57,7 @@ alias cuo="composer update -o"
 alias cdo="composer dump-autoload -o"
 
 alias gcls="clone_single_branch"
+alias dc="docker-compose"
 
 # Personal
 alias econf="\cd $DOTFILES && $EDITOR"
