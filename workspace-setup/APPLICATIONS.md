@@ -70,20 +70,10 @@
   zend_extension=xdebug.so
   xdebug.mode="debug,develop,trace"
   xdebug.remote_enable=on
-  xdebug.remote_host=127.0.0.1
-  xdebug.remote_port=9003
-  xdebug.remote_handler=dbgp
-  xdebug.start_with_request=yes
-
-
-  # v3+
-  [xdebug]
-  zend_extension=xdebug.so
-  xdebug.mode="debug,develop,trace"
-  xdebug.remote_enable=on
+  xdebug.log=/tmp/xdebug.log
   # The server IP that hosts xdebug server
-  xdebug.remote_host="host.docker.internal"
-  xdebug.remote_port=9003
+  xdebug.client_host="host.docker.internal"
+  xdebug.client_port=9003
   xdebug.remote_handler=dbgp
   xdebug.start_with_request=yes
   ```
@@ -118,7 +108,8 @@
 
   ```Dockerfile
   ARG PHP_VERSION=8.2
-  FROM php:$PHP_VERSION-fpm-alpine RUN apk update && apk upgrade --no-cache
+  FROM php:$PHP_VERSION-fpm-alpine
+  RUN apk update && apk upgrade --no-cache
 
   # Xdebug tools
   # Tools to compile xdebug
