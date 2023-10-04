@@ -6,6 +6,8 @@ table.insert(dap.configurations.go, {
   type = "delve",
   name = "Custom: Launch Debug",
   request = "launch",
+  -- start the debugger in the entry file or you can have entry file here.
+  -- program = "main.go",
   program = "${file}",
   args = {},
 })
