@@ -44,8 +44,8 @@ archlinux installation with and without dual booting.
 
 ## Database & Email With Docker
 
-Checkout [docker/db](docker/db) directory to quickly setup database and a
-testing email service with a single command.
+Checkout [docker/docker](docker/docker) directory to quickly setup database and
+a testing email service with a single command.
 
 You may configure the docker-compose file to your needs.
 
