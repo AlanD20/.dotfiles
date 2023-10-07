@@ -1,4 +1,5 @@
 {
+  // THEME
   "editor.tokenColorCustomizations": {
     "comments": {
       "foreground": "#676B79",
@@ -73,8 +74,8 @@
     "editorHint.foreground": "#ffcc66",
     "editorHoverWidget.background": "#2f3b54",
     "editorHoverWidget.border": "#2f3b54",
-    "editorIndentGuide.activeBackground": "#8695b755",
-    "editorIndentGuide.background": "#8695b733",
+    "editorIndentGuide.activeBackground1": "#8695b755",
+    "editorIndentGuide.background1": "#8695b733",
     "editorInfo.foreground": "#5ccfe6",
     "editorInlayHint.background": "#171c28",
     "editorInlayHint.foreground": "#8695b799",

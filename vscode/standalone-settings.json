@@ -1,5 +1,6 @@
 {
   "window.title": "${rootPath}${separator}${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName}",
+  "window.titleBarStyle": "custom",
   "editor.linkedEditing": true,
   "editor.wordWrap": "on",
   "editor.tabSize": 2,
@@ -9,6 +10,7 @@
     //Not recommended for JavaScript Frameworks.
     "source.organizeImports": false
   },
+  // "editor.fontFamily": "MesloLGM Nerd Font",
   "editor.fontFamily": "Dank Mono",
   // "editor.fontFamily": "Hack",
   // "editor.fontFamily": "Fira Code",
@@ -36,6 +38,7 @@
   "workbench.editor.untitled.labelFormat": "name",
   "workbench.editor.wrapTabs": true,
   "workbench.editor.decorations.badges": true,
+  "workbench.editor.pinnedTabsOnSeparateRow": true,
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook",
     "*.db": "sqlite-viewer.option"
@@ -44,7 +47,8 @@
   "workbench.iconTheme": "material-icon-theme",
   "files.autoSave": "onWindowChange",
   "files.associations": {
-    "*.css": "tailwindcss"
+    "*.css": "tailwindcss",
+    "config": "plaintext"
   },
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
@@ -63,7 +67,7 @@
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
@@ -102,25 +106,13 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
   },
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-  "[blade]": {
-    "editor.defaultFormatter": "shufo.vscode-blade-formatter"
-  },
-  "[dockerfile]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-  },
   // "python.defaultInterpreterPath": "C:\\laragon\\bin\\python\\python-3.10\\python.exe",
-  "python.defaultInterpreterPath": "/usr/bin/python",
-  "python.formatting.autopep8Args": [
-    "--indent-size=2",
-    "--ignore=E121"
-  ],
+  "python.defaultInterpreterPath": "C:\\laragon\\bin\\python\\python-3.10\\python.exe",
   "terminal.integrated.enableBell": true,
   // "terminal.integrated.fontFamily": "Cascadia Code PL",
   // "terminal.integrated.fontFamily": "monospace",
-  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "terminal.integrated.fontFamily": "MesloLGM Nerd Font",
+  // "terminal.integrated.fontFamily": "MesloLGS NF",
   "terminal.integrated.defaultProfile.windows": "PowerShell",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.automationProfile.linux": {
@@ -216,7 +208,7 @@
   "git.autofetch": true,
   "reactSnippets.settings.typescriptPropsStatePrefix": "interface",
   "git.confirmSync": false,
-  "deno.path": "D:\\scoop\\shims\\deno",
+  "deno.path": "C:\\scoop\\shims\\deno.exe",
   "reactSnippets.settings.importReactOnTop": false,
   "[dockercompose]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
@@ -231,8 +223,7 @@
     "editor.semanticHighlighting.enabled": true
   },
   "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
-  // "C_Cpp.default.compilerPath": "C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin\\gcc.exe",
-  "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+  "C_Cpp.default.compilerPath": "C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin\\gcc.exe",
   "editor.accessibilitySupport": "off",
   "go.toolsManagement.autoUpdate": true,
   "gopls": {
@@ -256,18 +247,36 @@
     "MD033": false,
     "MD041": false
   },
-  "window.titleBarStyle": "custom",
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "vs-kubernetes": {
+    "vscode-kubernetes.minikube-path.linux": "/home/aland/.local/state/vs-kubernetes/tools/minikube/linux-amd64/minikube",
+    "vscode-kubernetes.kubectl-path.linux": "/home/aland/.local/state/vs-kubernetes/tools/kubectl/kubectl",
+    "vscode-kubernetes.helm-path.linux": "/home/aland/.local/state/vs-kubernetes/tools/helm/linux-amd64/helm",
+    "vs-kubernetes.knownKubeconfigs": [
+      "/home/aland/.kube/config"
+    ],
+    "vs-kubernetes.kubeconfig": "/home/aland/.kube/config"
+  },
+  "[blade]": {
+    "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+  },
   "workbench.colorTheme": "Panda Syntax",
   "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
-  "php-cs-fixer.lastDownload": 1680172722520,
+  "php-cs-fixer.lastDownload": 1696073019317,
   "editor.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
   "git.mergeEditor": true,
   "markdown.validate.enabled": true,
-  "zig.zls.path": "<ZLS_PATH>",
+  "zig.zls.path": "c:\\Users\\WWW\\AppData\\Roaming\\Code\\User\\globalStorage\\ziglang.vscode-zig\\zls_install\\zls.exe",
   "code-runner.clearPreviousOutput": true,
   "code-runner.runInTerminal": true,
   "code-runner.saveAllFilesBeforeRun": true,
   "code-runner.saveFileBeforeRun": true,
-  "telemetry.telemetryLevel": "off"
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "telemetry.telemetryLevel": "off",
+  "cloudcode.yaml.format.enable": true
 }

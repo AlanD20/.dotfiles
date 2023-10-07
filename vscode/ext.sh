@@ -23,7 +23,6 @@ code --install-extension bebo925.livewire-switcher
 code --install-extension bmewburn.vscode-intelephense-client
 code --install-extension bradlc.vscode-tailwindcss
 code --install-extension brittanychiang.halcyon-vscode
-code --install-extension bungcip.better-toml
 code --install-extension burkeholland.simple-react-snippets
 code --install-extension Cardinal90.multi-cursor-case-preserve
 code --install-extension cemuka.unity-code-snippets
@@ -54,16 +53,17 @@ code --install-extension EditorConfig.EditorConfig
 code --install-extension enkia.tokyo-night
 code --install-extension equinusocio.vsc-material-theme-icons
 code --install-extension esbenp.prettier-vscode
+code --install-extension fabiospampinato.vscode-diff
 code --install-extension fernandoescolar.vscode-solution-explorer
 code --install-extension firefox-devtools.vscode-firefox-debug
 code --install-extension formulahendry.auto-rename-tag
 code --install-extension formulahendry.code-runner
 code --install-extension foxundermoon.shell-format
 code --install-extension Fudge.auto-using
-code --install-extension GitHub.copilot
 code --install-extension GitHub.github-vscode-theme
 code --install-extension GitHub.vscode-pull-request-github
 code --install-extension golang.go
+code --install-extension googlecloudtools.cloudcode
 code --install-extension GrapeCity.gc-excelviewer
 code --install-extension GraphQL.vscode-graphql
 code --install-extension GraphQL.vscode-graphql-syntax
@@ -162,6 +162,7 @@ code --install-extension sperovita.alpinejs-syntax-highlight
 code --install-extension stpn.vscode-graphql
 code --install-extension sumneko.lua
 code --install-extension syler.sass-indented
+code --install-extension tamasfe.even-better-toml
 code --install-extension tinkertrain.theme-panda
 code --install-extension tonybaloney.vscode-pets
 code --install-extension twxs.cmake
@@ -174,6 +175,7 @@ code --install-extension vscjava.vscode-java-dependency
 code --install-extension vscjava.vscode-java-pack
 code --install-extension vscjava.vscode-java-test
 code --install-extension vscjava.vscode-maven
+code --install-extension vscodevim.vim
 code --install-extension vuhrmeister.vscode-meteor
 code --install-extension waderyan.gitblame
 code --install-extension WallabyJs.quokka-vscode
