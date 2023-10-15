@@ -4,6 +4,14 @@
 
 node_version="lts/hydrogen"
 
+check_failure() {
+  if [ "$?" -ne 0 ]; then
+    echo "Error: $1"
+    echo "Please re-run the script, exiting..."
+    exit 1
+  fi
+}
+
 stow_dirs=(
   alacritty
   albert
@@ -14,10 +22,13 @@ stow_dirs=(
   # flameshot
   gnupg
   lazygit
+  lazyvim # Choose between nvchad or lazyvim
   mako
-  nvim # Make sure to change nvchad or lazyvim to nvim
-  p10k
+  # nvchad
+  oh-my-posh
+  # p10k
   redshift
+  swappy
   sway
   swaylock
   # thunar
@@ -44,13 +55,15 @@ for dir in ${stow_dirs[@]}; do
 done
 
 echo "=========================================="
-echo "Caching fonts - important whenever you put new fonts at .local/share/fonts"
+echo "Caching fonts - Run 'fc-cache -rv' any time there is a file change at .local/share/fonts"
 echo "=========================================="
 
 fc-cache -rv
 
 # Load profile for antidote
 source "$ZDOTDIR/.zshrc"
+
+check_failure "Sourcing .zshrc shell environment"
 
 # bundle zsh plugins
 antidote bundle <"$ZDOTDIR/.zsh_plugins.txt" >"$ZDOTDIR/.zsh_plugins.zsh"
@@ -61,8 +74,12 @@ antidote bundle <"$ZDOTDIR/.zsh_plugins.txt" >"$ZDOTDIR/.zsh_plugins.zsh"
 # add zsh to valid login shell
 command -v zsh | sudo tee -a /etc/shells
 
+check_failure "Adding zsh to valid login shells"
+
 # Use zsh as default shell
 sudo usermod --shell $(which zsh) $USER
+
+check_failure "Changing user shell"
 
 # Remove auto-generated .zshrc by ohmyzsh
 rm "$ZDOTDIR/.zshrc"
@@ -72,6 +89,8 @@ stow zsh
 
 # Loads plugins and nvm
 source "$ZDOTDIR/.zshrc"
+
+check_failure "sourcing pre-configured zsh shell environment"
 
 # Change go mod path
 go env -w GOMODCACHE="$XDG_CACHE_HOME/go/pkg/mod"

@@ -9,15 +9,30 @@ if [ "$user" = "" ]; then
   exit 0
 fi
 
+echo "USE SUDO TO RUN THIS SCRIPT!! AND Pass Your user login to first arg"
+
+read -r -p "y to continue, any key to cancel: "
+
+if [ "${REPLY:0:1}" != 'y' ]; then
+  exit 1
+fi
+
 # Create a temporary directory
 mkdir "$temp"
 sudo chown "$user" -R "$user"
 cd "$temp" || exit
 
+check_failure() {
+  if [ "$?" -ne 0 ]; then
+    echo "Error: $1"
+    echo "Please re-run the script, exiting..."
+    exit 1
+  fi
+}
+
 pacman_pkgs=(
   #
   # Essentials
-  #
   git
   dos2unix
   net-tools
@@ -210,6 +225,8 @@ sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/ya
 
 cd yay-bin && su "$user" -c "makepkg -si --noconfirm"
 
+check_failure "yay installation"
+
 echo "=========================================="
 echo "💽 Install pacman packages"
 echo "=========================================="
@@ -234,12 +251,16 @@ echo "Installing Composer"
 echo "=========================================="
 curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer
 
+check_failure "Composer installation"
+
 echo "=========================================="
 echo "🖼️ Configuring zsh"
 echo "=========================================="
 
 # Load the profile script with zsh
-su "$user" -c "$(which zsh) ./install-profile.zsh"
+su "$user" -c "$(which zsh) ./sway-install-profile.zsh"
+
+check_failure "running user profile script"
 
 echo "=========================================="
 echo "Configure SSH"
@@ -252,6 +273,8 @@ echo "=========================================="
 echo "Install SpotX For Spotify"
 echo "=========================================="
 bash <(curl -sSL https://raw.githubusercontent.com/SpotX-CLI/SpotX-Linux/main/install.sh) -ce
+
+check_failure "SpotX installation"
 
 echo "=========================================="
 echo "Setup PHP"
@@ -304,6 +327,8 @@ chmod 666 /var/run/docker.sock
 # Adding user to the group
 usermod -a -g docker,flatpak,redis "$user"
 
+check_failure "Adding User to docker, flatpak, redis groups"
+
 bat <<MANUAL_TASKS
 ==============================================
             Remaining Manual Tasks....
@@ -311,8 +336,5 @@ bat <<MANUAL_TASKS
 
 - Change root password, if you want to:
 sudo passwd root
-
-- Configure p10k style:
-p10k configure
 
 MANUAL_TASKS
