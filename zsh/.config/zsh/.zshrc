@@ -114,3 +114,6 @@ neofetch
 
 # bun completions
 [ -s "/home/www/.local/share/bun/_bun" ] && source "/home/www/.local/share/bun/_bun"
+
+# evaluate direnv
+eval "$(direnv hook zsh)"

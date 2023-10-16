@@ -56,9 +56,13 @@ return {
         nls.builtins.formatting.pint.with({
           timeout = 10000000,
           command = "pint",
-          -- condition = function(utils)
-          --   return utils.has_file({ vim.fn.expand("~/.pint.json") }) or utils.root_has_file({ "pint.json" })
-          -- end,
+          condition = function(utils)
+            if utils.root_has_file({ ".php-cs-fixer.php" }) then
+              return false
+            end
+
+            return utils.has_file({ vim.fn.expand("~/.pint.json") }) or utils.root_has_file({ "pint.json" })
+          end,
           extra_args = function(params)
             local conf = FindOrFallback("pint.json", "~/.pint.json", {
               path = params.root,
@@ -73,6 +77,12 @@ return {
         }),
         nls.builtins.formatting.phpcsfixer.with({
           timeout = 10000,
+          extra_args = function(params)
+            return params.options and {
+              "--allow-risky",
+              "yes",
+            }
+          end,
         }),
         nls.builtins.diagnostics.php,
         -- nls.builtins.diagnostics.phpstan.with({
