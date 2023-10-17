@@ -9,7 +9,7 @@ if [ "$user" = "" ]; then
   exit 0
 fi
 
-echo "USE SUDO TO RUN THIS SCRIPT!! AND Pass Your user login to first arg"
+echo "USE SUDO TO RUN THIS SCRIPT NOT ROOT!! AND Pass Your user login to first arg"
 
 read -r -p "y to continue, any key to cancel: "
 
@@ -223,6 +223,8 @@ echo "Install yay"
 echo "=========================================="
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git
 
+# Change clone directory to user's owner
+chown -R "$user":"$user" "/home/$user/temp"
 cd yay-bin && su "$user" -c "makepkg -si --noconfirm"
 
 check_failure "yay installation"

@@ -60,6 +60,19 @@ echo "=========================================="
 
 fc-cache -rv
 
+# add zsh to valid login shell
+command -v zsh | sudo tee -a /etc/shells
+
+check_failure "Adding zsh to valid login shells"
+
+# Use zsh as default shell
+sudo usermod --shell $(which zsh) $USER
+
+check_failure "Changing user shell"
+
+source "common/.zshenv"
+source "~/.zshenv"
+
 # Load profile for antidote
 source "$ZDOTDIR/.zshrc"
 
@@ -70,16 +83,6 @@ antidote bundle <"$ZDOTDIR/.zsh_plugins.txt" >"$ZDOTDIR/.zsh_plugins.zsh"
 
 # Install ohmyzsh - installed from AUR
 # yes no | sh -c "$XDG_CACHE_HOME/antidote/*ohmyzsh*/tools/install.sh"
-
-# add zsh to valid login shell
-command -v zsh | sudo tee -a /etc/shells
-
-check_failure "Adding zsh to valid login shells"
-
-# Use zsh as default shell
-sudo usermod --shell $(which zsh) $USER
-
-check_failure "Changing user shell"
 
 # Remove auto-generated .zshrc by ohmyzsh
 rm "$ZDOTDIR/.zshrc"
