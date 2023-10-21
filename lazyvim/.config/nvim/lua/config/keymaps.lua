@@ -80,7 +80,7 @@ vim.keymap.set(
 )
 
 -- Someitmes the tmux navigator stops working, best option is to set it here as well.
-vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateUp<CR>", { silent = true, desc = "Tmux: Navigate to up pane" })
-vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateDown<CR>", { silent = true, desc = "Tmux: Navigate to down pane" })
+vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { silent = true, desc = "Tmux: Navigate to up pane" })
+vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { silent = true, desc = "Tmux: Navigate to down pane" })
 vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { silent = true, desc = "Tmux: Navigate to left pane" })
 vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { silent = true, desc = "Tmux: Navigate to right pane" })
