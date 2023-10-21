@@ -42,6 +42,19 @@ archlinux installation with and without dual booting.
     installed with user privileges. They will configure the user workspace and
     it copies user configurations.
 
+## Enable SSH-Agent
+
+```bash
+# Make sure to add your private key to `ssh-agent`
+ssh-add <path/to/private/key>
+
+# Check currently loaded private keys
+ssh-add -l
+
+# Auto-start/Enable ssh-agent service
+systemctl --user enable --now ssh-agent.service
+```
+
 ## Database & Email With Docker
 
 Checkout [docker/docker](docker/docker) directory to quickly setup database and

@@ -117,3 +117,6 @@ neofetch
 
 # evaluate direnv
 eval "$(direnv hook zsh)"
+
+# Evaluate ssh-agent
+eval `ssh-agent -s` &> /dev/null

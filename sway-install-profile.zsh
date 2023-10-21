@@ -117,3 +117,4 @@ systemctl --user enable ydotool
 systemctl --user enable pipewire
 systemctl --user enable wireplumber
 systemctl --user enable redshift
+systemctl --user enable --now ssh-agent.service

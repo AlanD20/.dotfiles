@@ -221,11 +221,10 @@ aur_pkgs=(
 echo "=========================================="
 echo "Install yay"
 echo "=========================================="
-sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git
+sudo pacman -S --noconfirm git base-devel # Make sure they are installed
 
 # Change clone directory to user's owner
-chown -R "$user":"$user" "/home/$user/temp"
-cd yay-bin && su "$user" -c "makepkg -si --noconfirm"
+su "$user" -c "cd /home/$user && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm"
 
 check_failure "yay installation"
 
@@ -316,12 +315,6 @@ systemctl start docker
 systemctl enable docker
 systemctl enable containerd
 systemctl enable bluetooth
-
-systemctl --user enable gnmoe-keyring-daemon
-systemctl --user enable ydotool
-systemctl --user enable pipewire
-systemctl --user enable wireplumber
-systemctl --user enable redshift
 
 # Fix docker permission
 chmod 666 /var/run/docker.sock

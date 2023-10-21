@@ -41,3 +41,5 @@ gpgsign = true
 # Always use ssh instead of https for my own account
 [url "git@github.com:AlanD20"]
         insteadOf = https://github.com/AlanD20
+[url "git@github.com:Ku-Ticks"]
+        insteadOf = https://github.com/Ku-Ticks
