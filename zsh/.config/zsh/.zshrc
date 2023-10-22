@@ -119,4 +119,7 @@ neofetch
 eval "$(direnv hook zsh)"
 
 # Evaluate ssh-agent
-eval `ssh-agent -s` &> /dev/null
+eval "$(ssh-agent -s)"
+
+# Add private key to keychain, require SSH passphrase when logging in.
+eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"

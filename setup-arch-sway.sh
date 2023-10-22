@@ -68,6 +68,7 @@ pacman_pkgs=(
   lxappearance # Modify GTK+ appearance
 
   gnome-keyring # Keychain to store secrets and passwords
+  keychain      # Store ssh private key for ssh agent
   libsecret     # Dependency for gnome-keyring
   seahorse      # Frontend gnome-keyring contorl
   keepassxc     # Frontend for keepass, a password manager, you could use this instead of gnome-keyring
