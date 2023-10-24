@@ -1,5 +1,5 @@
-version: "3.8"
-name: dev
+version: "3.9"
+name: local-dev-services
 services:
   # MYSQL Service
   mysql:
@@ -112,6 +112,36 @@ services:
       PMA_HOST: mysql
       PMA_USER: root
       PMA_PASSWORD: ""
+  # ======================
+  # ZooKeeper to manage services such as Kafka
+  zookeeper:
+    image: bitnami/zookeeper:3.9
+    ports:
+      - "2182:2181"
+    networks:
+      - default-net
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  # ======================
+  # Kafka
+  # More at: https://github.com/bitnami/containers/tree/main/bitnami/kafka
+  kafka:
+    depends_on:
+      - zookeeper
+    image: "bitnami/kafka:latest"
+    ports:
+      - 19092:19092
+    networks:
+      - default-net
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      # Listeners
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:19092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:19092
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
 # Enable network for Windows
 # Linux does't need separate network
 # ==========================
