@@ -129,6 +129,7 @@ as needed.
    ####
    pacman-key --init
    pacman-key --populate archlinux
+   pacman-key --populate archlinuxarm # For ARM Architecture
    ```
 
 5. **Partitioning, Formatting, Swap:**
