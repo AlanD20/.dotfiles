@@ -317,8 +317,11 @@ systemctl enable docker
 systemctl enable containerd
 systemctl enable bluetooth
 
-# Fix docker permission
-chmod 666 /var/run/docker.sock
+# Make sure docker group exists
+groupadd docker
+
+# If adding user to docker doesn't fix it, use this but it's not safe!
+# chmod 666 /var/run/docker.sock
 
 # Adding user to the group
 usermod -a -g docker,flatpak,redis "$user"
