@@ -42,6 +42,7 @@ stow_dirs=(
 echo "=========================================="
 echo "Installing antidote"
 echo "=========================================="
+# install it from github for non-arch distros
 # git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
 
 echo "=========================================="
