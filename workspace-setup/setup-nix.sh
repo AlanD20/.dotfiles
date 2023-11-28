@@ -8,9 +8,10 @@ nix_pkgs=(
   git
   zsh
   tmux
+  neovim
   stow
   fzf
-  exa
+  eza
   ripgrep
   bat
   direnv
@@ -18,12 +19,16 @@ nix_pkgs=(
   unzip
   meslo-lgs-nf
   sqlite
-  go
-  gopls
   lf # File manager
   lazygit
+  lazydocker
+  oh-my-posh
   # lldb   # Debugger
   delta # git pager
+
+  gopls
+  # krew
+  # skaffold
 )
 
 stow_dirs=(
@@ -56,7 +61,7 @@ nix_flag="--daemon"
 ###
 
 echo "🌎 Generate locale language"
-sudo locale-gen en_US-UTF-8
+sudo locale-gen en.US-UTF-8
 
 echo "=========================================="
 echo "Installing Composer"
