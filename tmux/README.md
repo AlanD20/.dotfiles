@@ -75,7 +75,7 @@ If you are using Catppuccin Theme, you have to manually copy the modules into
 
 - `prefix` + <kbd>I</kbd>: Install plugins.
 - `prefix` + <kbd>U</kbd>: Update plugins.
-- `prefix` + <kbd>R</kbd>: Reload tmux.
+- `prefix` + <kbd>R</kbd>: Re-source/reload tmux config.
 - `prefix` + <kbd>Ctrl</kbd> + <kbd>s</kbd>: Saves current session using
   resurrect.
 - `prefix` + <kbd>Ctrl</kbd> + <kbd>r</kbd>: Restores previous session using
