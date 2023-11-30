@@ -104,6 +104,7 @@ pacman_pkgs=(
   mupdf         # View pdf and other files
   # pandoc-cli  # Convert files from one markup format into another
   entr # Rerun scripts or commands after file changes
+  gdu  # Fast and easy analyzer to cleanup files
 
   #
   # languages
