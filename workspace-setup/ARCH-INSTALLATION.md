@@ -418,8 +418,11 @@ as needed.
        chainloader (${root})/EFI/Microsoft/Boot/bootmgfw.efi
    }
 
+   # Note: 'grub-update' is just a wrapper around 'grub-mkconfig'
    # 3. run this to generate the /boot/grub/menu.cfg file
-   update-grub
+    grub-mkconfig -o /boot/grub/grub.cfg
+   # or, since update-grub calls grub-mkconfig
+    update-grub
    ```
 
 4. Don’t forget to Enable your services.
