@@ -47,7 +47,7 @@
 - CLI Apps
 
 ```bash
-scoop install git gnupg sqlite curl neovim oh-my-posh nvm deno gh mingw openssl rustup zig-dev vagrant ripgrep git-aliases vcredist2022 delta
+scoop install git gnupg sqlite curl neovim oh-my-posh nvm deno gh mingw openssl rustup zig-dev vagrant ripgrep git-aliases vcredist2022 delta lazygit
 ```
 
 - GUI Apps
