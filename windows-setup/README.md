@@ -2,14 +2,19 @@
 
 ## Notice
 
-- Do not forget to change the computer name and my personal name to whatever you like in the config files by searching and replacing `<name>` to your name and `<pc-name>` to your user's pc name.
+- Do not forget to change the computer name and my personal name to whatever you
+  like in the config files by searching and replacing `<name>` to your name and
+  `<pc-name>` to your user's pc name.
 - [Here is a link to view all the windows commands inclduing documentations.](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands)
 
 ## Utility Apps/Installation
 
 - [**Chocolatey**](https://chocolatey.org/install#individual)
-- [**Scoop.sh**](https://scoop.sh/) and here is [**Scoop Documentation**](https://scoop-docs.vercel.app/docs/).
-  - You may also have to add other repositories such as `extras` and `versions` with the following command:
+- [**Scoop.sh**](https://scoop.sh/) and here is
+  [**Scoop Documentation**](https://scoop-docs.vercel.app/docs/).
+
+  - You may also have to add other repositories such as `extras` and `versions`
+    with the following command:
 
     ```bash
     scoop bucket list # Check current lists
@@ -18,14 +23,21 @@
     ```
 
 - [**WizTree**](https://diskanalyzer.com/): Visualizing disk to clear up spaces.
-- [**TCPView**](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview): Display running services with ports
-- [**Process Explorer**](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer): Bettter version of task manager
-- [**autoruns**](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns): Easily trace down running applications and auto startup apps.
-- [**Revo Uninstaller**](https://www.revouninstaller.com/): Uninstall an application including its registery values and user prefs.
-- [**ThrottleStop**](https://www.techpowerup.com/download/techpowerup-throttlestop/): Forcefully run CPU at the highest rate in Laptops or throttled CPUs.
-- [**WinDbg**](https://apps.microsoft.com/store/detail/windbg-preview/9PGJGD53TN86): Analyze dumped errors or logs.
+- [**TCPView**](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview):
+  Display running services with ports
+- [**Process Explorer**](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer):
+  Bettter version of task manager
+- [**autoruns**](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns):
+  Easily trace down running applications and auto startup apps.
+- [**Revo Uninstaller**](https://www.revouninstaller.com/): Uninstall an
+  application including its registery values and user prefs.
+- [**ThrottleStop**](https://www.techpowerup.com/download/techpowerup-throttlestop/):
+  Forcefully run CPU at the highest rate in Laptops or throttled CPUs.
+- [**WinDbg**](https://apps.microsoft.com/store/detail/windbg-preview/9PGJGD53TN86):
+  Analyze dumped errors or logs.
 - [**Many More SysInternal Utilities**](https://learn.microsoft.com/en-us/sysinternals/downloads/)
-- [**Bloatbox**](https://github.com/builtbybel/bloatbox): Remove bloated native applications.
+- [**Bloatbox**](https://github.com/builtbybel/bloatbox): Remove bloated native
+  applications.
 - [**Windows Optimizer**](https://github.com/hellzerg/optimizer)
 
 ---
@@ -35,13 +47,13 @@
 - CLI Apps
 
 ```bash
-scoop install git gnupg sqlite curl neovim oh-my-posh nvm deno gh mingw openssl rustup zig-dev vagrant ripgrep git-aliases
+scoop install git gnupg sqlite curl neovim oh-my-posh nvm deno gh mingw openssl rustup zig-dev vagrant ripgrep git-aliases vcredist2022 delta
 ```
 
 - GUI Apps
 
 ```bash
-scoop install notepadplusplus spotify discord powertoys winaero-tweaker tor-browser coretemp sharex ueli avidemux hxd 7zip winrar laragon wireshark zoom firefox vscode cpu-z postman rainmeter chatterino virtualbox-np
+scoop install notepadplusplus spotify discord powertoys winaero-tweaker tor-browser coretemp sharex ueli avidemux hxd 7zip winrar laragon wireshark zoom firefox vscode cpu-z postman rainmeter chatterino7 virtualbox-np keepassxc
 ```
 
 ---
@@ -51,7 +63,8 @@ scoop install notepadplusplus spotify discord powertoys winaero-tweaker tor-brow
 ##### Windows Terminal
 
 - Don't forget to change the GUID to your GUID Appliations.
-- You can generate GUID by creating a new profile, then use it to your customization.
+- You can generate GUID by creating a new profile, then use it to your
+  customization.
 
 ##### Enable systemd in WSL
 
@@ -73,7 +86,8 @@ systemctl list-unit-files --type=service
 
 ##### [Ueli App](https://ueli.app/)
 
-- Put the **ueli_config.json** contents to `C:\Users\%USERPROFILE%\AppData\Roaming\ueli\config.json`
+- Put the **ueli_config.json** contents to
+  `C:\Users\%USERPROFILE%\AppData\Roaming\ueli\config.json`
 - [Dracula Theme Pink Version](https://github.com/dracula/ueli)
 - Icons for ueli:
 
@@ -82,7 +96,8 @@ systemctl list-unit-files --type=service
 
 ##### [ShareX](https://getsharex.com/downloads/)
 
-- Put the **sharex_*.json** contents to `C:\Users\%USERPROFILE%\Documents\ShareX`
+- Put the **sharex\_\*.json** contents to
+  `C:\Users\%USERPROFILE%\Documents\ShareX`
 
 ##### [Winaero Tweaker](https://winaero.com/winaero-tweaker/)
 
