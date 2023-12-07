@@ -72,7 +72,7 @@ sudo usermod --shell $(which zsh) $USER
 check_failure "Changing user shell"
 
 source "common/.zshenv"
-source "~/.zshenv"
+source "$HOME/.zshenv"
 
 # Load profile for antidote
 source "$ZDOTDIR/.zshrc"

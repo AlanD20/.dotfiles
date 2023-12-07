@@ -228,7 +228,7 @@ sudo pacman -S --noconfirm git base-devel # Make sure they are installed
 # Change clone directory to user's owner
 su "$user" -c "cd /home/$user && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm"
 
-check_failure "yay installation"
+#check_failure "yay installation failed, you have to manually go to $HOME/yay-bin and run 'makepkg -si' then comment yay install in this script"
 
 echo "=========================================="
 echo "💽 Install pacman packages"
@@ -261,7 +261,7 @@ echo "🖼️ Configuring zsh"
 echo "=========================================="
 
 # Load the profile script with zsh
-su "$user" -c "$(which zsh) ./sway-install-profile.zsh"
+su "$user" -c "$(which zsh) $HOME/.dotfiles/sway-install-profile.zsh"
 
 check_failure "running user profile script"
 
