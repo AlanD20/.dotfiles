@@ -7,6 +7,12 @@
             "Manifests": 1889
         },
         {
+            "Name": "java",
+            "Source": "https://github.com/ScoopInstaller/Java",
+            "Updated": "2023-12-07T09:18:34+01:00",
+            "Manifests": 267
+        },
+        {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": "2023-12-07T21:56:35+01:00",
@@ -21,270 +27,298 @@
     ],
     "apps": [
         {
+            "Info": "",
             "Updated": "2023-12-06T23:35:51.8777759+01:00",
-            "Name": "7zip",
-            "Info": "",
             "Version": "23.01",
-            "Source": "main"
+            "Source": "main",
+            "Name": "7zip"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:10:45.9770621+01:00",
-            "Name": "avidemux",
-            "Info": "",
             "Version": "2.8.1",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "avidemux"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:11:00.2879744+01:00",
-            "Name": "chatterino7",
-            "Info": "",
             "Version": "7.4.6",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "chatterino7"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:11:02.7706762+01:00",
-            "Name": "coretemp",
-            "Info": "",
             "Version": "1.18.1",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "coretemp"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:11:04.8422989+01:00",
-            "Name": "cpu-z",
-            "Info": "",
             "Version": "2.08",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "cpu-z"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:11:06.6445814+01:00",
-            "Name": "curl",
-            "Info": "",
             "Version": "8.5.0_1",
-            "Source": "main"
+            "Source": "main",
+            "Name": "curl"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:32:14.9890666+01:00",
-            "Name": "dark",
-            "Info": "",
             "Version": "3.11.2",
-            "Source": "main"
+            "Source": "main",
+            "Name": "dark"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T09:49:22.2397942+01:00",
-            "Name": "delta",
-            "Info": "",
             "Version": "0.16.5",
-            "Source": "main"
+            "Source": "main",
+            "Name": "delta"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:12:19.936231+01:00",
-            "Name": "discord",
-            "Info": "",
             "Version": "1.0.9022-16",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "discord"
         },
         {
+            "Info": "",
+            "Updated": "2023-12-08T00:10:46.3123135+01:00",
+            "Version": "6.1",
+            "Source": "main",
+            "Name": "ffmpeg"
+        },
+        {
+            "Info": "",
             "Updated": "2023-12-07T00:12:39.4961144+01:00",
-            "Name": "firefox",
-            "Info": "",
             "Version": "120.0.1",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "firefox"
         },
         {
-            "Updated": "2023-12-07T00:12:46.5192999+01:00",
-            "Name": "gh",
             "Info": "",
-            "Version": "2.39.2",
-            "Source": "main"
+            "Updated": "2023-12-08T00:28:53.5710868+01:00",
+            "Version": "2.40.0",
+            "Source": "main",
+            "Name": "gh"
         },
         {
+            "Info": "",
             "Updated": "2023-12-06T23:37:27.6497231+01:00",
-            "Name": "git",
-            "Info": "",
             "Version": "2.43.0",
-            "Source": "main"
+            "Source": "main",
+            "Name": "git"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:12:47.1232716+01:00",
-            "Name": "git-aliases",
-            "Info": "",
             "Version": "0.3.5",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "git-aliases"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:12:54.4262019+01:00",
-            "Name": "gnupg",
-            "Info": "",
             "Version": "2.4.3",
-            "Source": "main"
+            "Source": "main",
+            "Name": "gnupg"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:13:35.7145791+01:00",
-            "Name": "hxd",
-            "Info": "",
             "Version": "2.5.0.0",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "hxd"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:12:55.4817957+01:00",
-            "Name": "innounp",
-            "Info": "",
             "Version": "0.50",
-            "Source": "main"
+            "Source": "main",
+            "Name": "innounp"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:14:04.4331018+01:00",
-            "Name": "keepassxc",
-            "Info": "",
             "Version": "2.7.6",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "keepassxc"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:18:36.2611474+01:00",
-            "Name": "laragon",
-            "Info": "",
             "Version": "6.0.0",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "laragon"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T23:40:06.23433+01:00",
-            "Name": "lazygit",
-            "Info": "",
             "Version": "0.40.2",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "lazygit"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:21:00.1992633+01:00",
-            "Name": "neovim",
-            "Info": "",
             "Version": "0.9.4",
-            "Source": "main"
+            "Source": "main",
+            "Name": "neovim"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:21:10.7326327+01:00",
-            "Name": "notepadplusplus",
-            "Info": "",
             "Version": "8.6",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "notepadplusplus"
         },
         {
-            "Updated": "2023-12-07T00:21:30.6270252+01:00",
-            "Name": "oh-my-posh",
             "Info": "",
-            "Version": "19.2.0",
-            "Source": "main"
+            "Updated": "2023-12-07T23:52:30.5889274+01:00",
+            "Version": "19.2.1",
+            "Source": "main",
+            "Name": "oh-my-posh"
         },
         {
+            "Info": "",
+            "Updated": "2023-12-08T00:11:41.6145284+01:00",
+            "Version": "11.0.2-9",
+            "Source": "java",
+            "Name": "openjdk11"
+        },
+        {
+            "Info": "",
             "Updated": "2023-12-07T00:31:39.356581+01:00",
-            "Name": "openssl",
-            "Info": "",
             "Version": "3.2.0",
-            "Source": "main"
+            "Source": "main",
+            "Name": "openssl"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:32:08.6757301+01:00",
-            "Name": "postman",
-            "Info": "",
             "Version": "10.19.7",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "postman"
         },
         {
-            "Updated": "2023-12-07T00:45:20.8804605+01:00",
-            "Name": "powertoys",
             "Info": "",
-            "Version": "0.76.0",
-            "Source": "extras"
+            "Updated": "2023-12-08T00:38:42.7861588+01:00",
+            "Version": "0.76.1",
+            "Source": "extras",
+            "Name": "powertoys"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:10:32.3363527+01:00",
-            "Name": "qtifw",
-            "Info": "",
             "Version": "4.6.1",
-            "Source": "main"
+            "Source": "main",
+            "Name": "qtifw"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:45:26.2919032+01:00",
-            "Name": "ripgrep",
-            "Info": "",
             "Version": "14.0.3",
-            "Source": "main"
+            "Source": "main",
+            "Name": "ripgrep"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:50:42.8006109+01:00",
-            "Name": "sharex",
-            "Info": "",
             "Version": "15.0.0",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "sharex"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:51:23.4459831+01:00",
-            "Name": "sqlite",
-            "Info": "",
             "Version": "3.44.2",
-            "Source": "main"
+            "Source": "main",
+            "Name": "sqlite"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:52:13.5379668+01:00",
-            "Name": "tor-browser",
-            "Info": "",
             "Version": "13.0.6",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "tor-browser"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T00:54:58.4798811+01:00",
-            "Name": "ueli",
-            "Info": "",
             "Version": "8.27.0",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "ueli"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T01:06:47.498335+01:00",
-            "Name": "vagrant",
-            "Info": "",
             "Version": "2.4.0",
-            "Source": "main"
+            "Source": "main",
+            "Name": "vagrant"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T01:24:19.3586589+01:00",
-            "Name": "vcredist2022",
-            "Info": "",
             "Version": "14.38.33130.0",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "vcredist2022"
         },
         {
-            "Updated": "2023-12-07T01:13:36.7895951+01:00",
-            "Name": "vscode",
             "Info": "",
-            "Version": "1.84.2",
-            "Source": "extras"
+            "Updated": "2023-12-08T00:49:59.1614736+01:00",
+            "Version": "1.85.0",
+            "Source": "extras",
+            "Name": "vscode"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T01:14:03.1636494+01:00",
-            "Name": "winaero-tweaker",
-            "Info": "",
             "Version": "1.55.0.0",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "winaero-tweaker"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T01:14:16.5899161+01:00",
-            "Name": "winrar",
-            "Info": "",
             "Version": "6.24",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "winrar"
         },
         {
+            "Info": "",
             "Updated": "2023-12-07T01:15:44.2033146+01:00",
-            "Name": "wireshark",
-            "Info": "",
             "Version": "4.2.0",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "wireshark"
         },
         {
-            "Updated": "2023-12-07T01:18:54.0307339+01:00",
-            "Name": "zoom",
             "Info": "",
+            "Updated": "2023-12-08T00:07:58.7684325+01:00",
+            "Version": "7.2.11",
+            "Source": "extras",
+            "Name": "xdman"
+        },
+        {
+            "Info": "",
+            "Updated": "2023-12-08T00:10:49.4872399+01:00",
+            "Version": "2021.12.17",
+            "Source": "main",
+            "Name": "youtube-dl"
+        },
+        {
+            "Info": "",
+            "Updated": "2023-12-07T01:18:54.0307339+01:00",
             "Version": "5.16.10.26186",
-            "Source": "extras"
+            "Source": "extras",
+            "Name": "zoom"
         }
     ]
 }

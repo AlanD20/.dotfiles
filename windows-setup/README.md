@@ -47,13 +47,17 @@
 - CLI Apps
 
 ```bash
-scoop install git gnupg sqlite curl neovim oh-my-posh nvm deno gh mingw openssl rustup zig-dev vagrant ripgrep git-aliases vcredist2022 delta lazygit
+scoop install git gnupg sqlite curl neovim oh-my-posh nvm deno gh mingw openssl rustup zig-dev vagrant ripgrep git-aliases vcredist2022 delta lazygit oh-my-posh
 ```
 
 - GUI Apps
 
 ```bash
-scoop install notepadplusplus spotify discord powertoys winaero-tweaker tor-browser coretemp sharex ueli avidemux hxd 7zip winrar laragon wireshark zoom firefox vscode cpu-z postman rainmeter chatterino7 virtualbox-np keepassxc
+scoop install notepadplusplus spotify discord powertoys winaero-tweaker tor-browser coretemp sharex ueli avidemux hxd 7zip winrar laragon wireshark zoom firefox vscode cpu-z postman rainmeter chatterino7 virtualbox-np keepassxc xdman
+
+# Required for xdmna
+scoop bucket add java
+scoop install ffmpeg youtube-dl java/openjdk11
 ```
 
 ---
