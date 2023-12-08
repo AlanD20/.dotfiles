@@ -66,6 +66,7 @@ pacman_pkgs=(
   ydotool      # similar to xdotool for wayland, programmatically send events and inputs
   mako         # Wayland notification
   lxappearance # Modify GTK+ appearance
+  redshift
 
   gnome-keyring # Keychain to store secrets and passwords
   keychain      # Store ssh private key for ssh agent
@@ -228,7 +229,7 @@ sudo pacman -S --noconfirm git base-devel # Make sure they are installed
 # Change clone directory to user's owner
 su "$user" -c "cd /home/$user && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm"
 
-#check_failure "yay installation failed, you have to manually go to $HOME/yay-bin and run 'makepkg -si' then comment yay install in this script"
+check_failure "yay installation failed, you have to manually go to $HOME/yay-bin then run 'makepkg -si' then comment yay install in this script"
 
 echo "=========================================="
 echo "💽 Install pacman packages"

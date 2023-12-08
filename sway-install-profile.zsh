@@ -113,7 +113,7 @@ npm install npm@latest yarn@latest pnpm@latest --location=global
 echo "=========================================="
 echo "🔃 System Service"
 echo "=========================================="
-systemctl --user enable gnmoe-keyring-daemon
+systemctl --user enable gnmoe-keyring-gnome
 systemctl --user enable ydotool
 systemctl --user enable pipewire
 systemctl --user enable wireplumber
