@@ -21,6 +21,16 @@
 - `Flameshot Screen Capture`: To set shortcut, search for shortcut and add
   `flameshot` application, then set shortcut for `Take Screenshot`.
 
+## Onedrive with Abraunegg
+
+```bash
+onedrive # To login
+
+onedrive --synchronize --verbose # Sync everything
+
+onedrive --monitor -m --monitor-internal 60 # a running process that syncs every 60 seconds
+```
+
 ## Nginx
 
 - On Arch-based distributions, nginx doesn't have `sites-available` and

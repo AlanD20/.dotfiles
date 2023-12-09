@@ -220,6 +220,7 @@ aur_pkgs=(
   nordic-theme # GTK3 theme
   zig-bin
   metadata-cleaner
+  onedrive-abraunegg # Onedrive sync for keepass db
 )
 
 echo "=========================================="
