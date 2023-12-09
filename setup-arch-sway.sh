@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Pass the user so it installs on behalf of the user
-user=$1
+user="$1"
+pwd="$PWD"
 temp="/home/$user/temp"
 
 if [ "$user" = "" ]; then
@@ -244,8 +245,10 @@ echo "💽 Install AUR packages using yay"
 echo "=========================================="
 
 for package in "${aur_pkgs[@]}"; do
-  su "$user" -c "echo y | LANG=C yay --noprovides --answerdiff None --answerclean None --mflags '--noconfirm' $package"
+  su "$user" -c "yay -Sy $package"
 done
+
+check_failure "Most probably yay failed to insall packages, please install them manually."
 
 # Fix debug file
 sudo sed 's/;//' -i xdebug.ini
@@ -262,7 +265,8 @@ echo "🖼️ Configuring zsh"
 echo "=========================================="
 
 # Load the profile script with zsh
-su "$user" -c "$(which zsh) $HOME/.dotfiles/sway-install-profile.zsh"
+cd "$pwd" || exit 1
+su "$user" -c "$(which zsh) $pwd/sway-install-profile.zsh"
 
 check_failure "running user profile script"
 
