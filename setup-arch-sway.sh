@@ -76,6 +76,12 @@ pacman_pkgs=(
   keepassxc     # Frontend for keepass, a password manager, you could use this instead of gnome-keyring
 
   #
+  # Vulkan with Nvidia
+  #
+  vulkan-intel
+  vulkan-validation-layers
+
+  #
   # CLI Utils
   #
   tmux                # Terminal multiplexer
@@ -153,8 +159,8 @@ pacman_pkgs=(
   nginx          # Web server
   docker         # Manage Containers
   containerd
-  docker-compose # manage multiple containers within a single file
-  redis          # Caching database
+  # docker-compose # manage multiple containers within a single file
+  # redis          # Caching database
 
   #
   # Fonts

@@ -12,6 +12,9 @@ check_failure() {
   fi
 }
 
+# Make sure this path exist to avoid conflicts and making parent dir linked
+mkdir -p $HOME/.local/bin $HOME/.local/share/fonts
+
 stow_dirs=(
   alacritty
   albert

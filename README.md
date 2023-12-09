@@ -42,6 +42,14 @@ archlinux installation with and without dual booting.
     installed with user privileges. They will configure the user workspace and
     it copies user configurations.
 
+## Nvidia Drivers
+
+Take a look at this repo to
+[install nvidia drivers on arch](https://github.com/koryahannu/arch-nvidia-drivers-installation-guide).
+
+With sway, use vulkan renderer, for that, you may have to install `vulkan-intel`
+and `vulkan-validation-layers`
+
 ## Enable SSH-Agent
 
 ```bash

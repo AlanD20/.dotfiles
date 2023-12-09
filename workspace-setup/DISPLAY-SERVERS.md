@@ -22,7 +22,7 @@
   - install the wayland package and `xwayland` to support X11.
 
     ```bash
-    sudo pacman -S wayland xorg-xwayland wayland-protocols
+    sudo pacman -S wayland xorg-xwayland wayland-protocols wl-clipboard
     ```
 
   - If you are using QT applications, you may need to install the wayland
@@ -36,10 +36,9 @@
     `/etc/profile` or `~/.profile`.
 
     ```bash
+    export MOZ_ENABLE_WAYLAND=1          # Enable wayland for mozilla
     # export WLR_BACKENDS=wayland # comma-separated list of backends to use (available backends: libinput, drm, wayland, x11, headless, noop)
     # export WAYLAND_DISPLAY=wayland-1
-    export WLR_NO_HARDWARE_CURSORS=1     # set to 1 to use software cursors instead of hardware cursors
     export WLR_RENDERER_ALLOW_SOFTWARE=1 # Enable 3d rendering
     export WLR_DIRECT_TTY='alacritty'    # Specifies the tty to be used (instead of using /dev/tty)
-    export MOZ_ENABLE_WAYLAND=1          # Enable wayland for mozilla
     ```

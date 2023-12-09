@@ -55,6 +55,14 @@
   export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
   export QT_STYLE_OVERRIDE=Nordic
   export MOZ_ENABLE_WAYLAND=1
+
+  export CLUTTER_BACKEND=wayland
+  export SDL_VIDEODRIVER=wayland
+  export XDG_SESSION_TYPE=wayland
+  export WLR_NO_HARDWARE_CURSORS=1     # set to 1 to use software cursors instead of hardware cursors
+  export WLR_RENDERER=vulkan           # Fix screen flickering for nvidia drivers, requires vulkan-validation-layers
+  export XWAYLAND_NO_GLAMOR=1          # Fix flickering for nvidia for apps running under xwayland
+  export WLR_DRM_NO_ATOMIC=1 # Fix sway freezes when startup
   ```
 
 ## Configuration
