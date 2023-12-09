@@ -45,7 +45,7 @@ archlinux installation with and without dual booting.
 ## Nvidia Drivers
 
 Take a look at this repo to
-[install nvidia drivers on arch](https://github.com/koryahannu/arch-nvidia-drivers-installation-guide).
+[install nvidia drivers on arch](https://github.com/korvahannu/arch-nvidia-drivers-installation-guide).
 
 With sway, use vulkan renderer, for that, you may have to install `vulkan-intel`
 and `vulkan-validation-layers`
