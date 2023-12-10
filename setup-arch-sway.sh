@@ -170,7 +170,7 @@ pacman_pkgs=(
   nginx  # Web server
   docker # Manage Containers
   containerd
-  # docker-compose # manage multiple containers within a single file
+  docker-compose # manage multiple containers within a single file
   # redis          # Caching database
   ansible
 
