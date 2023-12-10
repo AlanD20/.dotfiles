@@ -6,8 +6,8 @@
   sudo pacman -S lxappearance qt5ct gnome-themes-extra gtk-engines gtk-engine-murrine
 
   # Theme
-  sudo pacman -S papirus-icon-theme adwaita-qt6
-  yay -S lightly-qt nordic-theme
+  sudo pacman -S papirus-icon-theme
+  yay -S adwaita-qt5-git adwaita-qt6-git lightly-qt nordic-theme
   ```
 
 - Export these values in your login shell.
