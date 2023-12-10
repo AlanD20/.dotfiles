@@ -48,6 +48,7 @@ pacman_pkgs=(
   zip
   unzip
   jq # CLI json processor
+  less
 
   #
   # Base
@@ -113,6 +114,11 @@ pacman_pkgs=(
   # pandoc-cli  # Convert files from one markup format into another
   entr # Rerun scripts or commands after file changes
   gdu  # Fast and easy analyzer to cleanup files
+  dmenu
+  gvfs
+  pavucontrol # GUI to control audio devices
+  unrar       # Unrar a rar file
+  woff2       # Support for woff2 font
 
   #
   # languages
@@ -120,6 +126,7 @@ pacman_pkgs=(
   go
   gopls
   php
+  lua
 
   #
   # Language packages
@@ -155,12 +162,17 @@ pacman_pkgs=(
   pipewire-jack  # Support for jack
   libpulse       # Sound server
   wireplumber    # Pipewire session/policy manager
-  sqlite         # Lightweight file database
-  nginx          # Web server
-  docker         # Manage Containers
+
+  #
+  # Dev tools
+  #
+  sqlite # Lightweight file database
+  nginx  # Web server
+  docker # Manage Containers
   containerd
   # docker-compose # manage multiple containers within a single file
   # redis          # Caching database
+  ansible
 
   #
   # Fonts
@@ -205,15 +217,18 @@ pacman_pkgs=(
   gtk-engines
   gtk-engine-murrine
   papirus-icon-theme # Icons
-  adwaita-qt6        # Theme for qt6
 
+  breeze
+  breeze-icons
 )
 
 aur_pkgs=(
+  albert
   oh-my-zsh-git
   oh-my-posh-bin
   tmux-plugin-manager # tpm for tmux
   code-minimap        # Required for minimap-vim
+  mycli
   lazydocker
   visual-studio-code-bin
   google-chrome
@@ -227,6 +242,9 @@ aur_pkgs=(
   zig-bin
   metadata-cleaner
   onedrive-abraunegg # Onedrive sync for keepass db
+
+  adwaita-qt5 # Theme for qt5
+  adwaita-qt6 # Theme for qt6
 )
 
 echo "=========================================="
