@@ -80,6 +80,7 @@ pacman_pkgs=(
   # Vulkan with Nvidia
   #
   vulkan-intel
+  vulkan-headers
   vulkan-validation-layers
 
   #
