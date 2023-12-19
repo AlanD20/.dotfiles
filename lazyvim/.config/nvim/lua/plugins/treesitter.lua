@@ -34,6 +34,8 @@ return {
         -- "python",
         "rust",
         "scss",
+        -- "terraform",
+        -- "hcl",
         "sql",
         "svelte",
         "query",
@@ -49,7 +51,7 @@ return {
       opts.playground = vim.tbl_deep_extend("force", {
         enable = true,
         disable = {},
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+        updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
         persist_queries = false, -- Whether the query persists across vim sessions
         query_linter = {
           enable = true,

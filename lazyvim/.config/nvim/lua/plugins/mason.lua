@@ -4,13 +4,17 @@ return {
     opts = {
       ensure_installed = {
         -- Others
-        "shellcheck",
-        "shfmt",
         "nginx-language-server",
         "emmet-language-server",
         "emmet-ls",
-        "bash-language-server",
         "ruff-lsp",
+
+        -- Shell scripts
+        "shfmt",
+        "beautysh",
+        "shellcheck",
+        "shellharden",
+        "bash-language-server",
 
         -- lua
         "lua-language-server",
@@ -72,6 +76,16 @@ return {
         -- Docker
         "dockerfile-language-server",
         "docker-compose-language-service",
+
+        -- Code scans for vulnerabilities
+        "snyk",
+        "trivy",
+
+        -- Terraform
+        "terraform-ls",
+        "tflint",
+        "tfsec",
+        "tflint",
 
         -- zig
         "zls",

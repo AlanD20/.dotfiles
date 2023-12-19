@@ -127,6 +127,7 @@ pacman_pkgs=(
   gopls
   php
   lua
+  terraform
 
   #
   # Language packages
