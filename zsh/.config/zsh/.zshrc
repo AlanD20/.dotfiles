@@ -104,17 +104,6 @@ source "$ZDOTDIR/.zsh_plugins.zsh"
 # bun completions
 [ -s "$XDG_DATA_HOME/.bun/_bun" ] && source "$XDG_DATA_HOME/.bun/_bun"
 
-
-#
-# Run/Start
-#
-
-gpgconf --launch gpg-agent
-neofetch
-
-# bun completions
-[ -s "/home/www/.local/share/bun/_bun" ] && source "/home/www/.local/share/bun/_bun"
-
 # evaluate direnv
 eval "$(direnv hook zsh)"
 
@@ -124,3 +113,18 @@ eval "$(direnv hook zsh)"
 # Add private key to keychain, require SSH passphrase when logging in.
 eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_ed25519)"
 eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"
+
+
+# Source all files in include directory
+if [ -d "$ZDOTDIR/includes" ]; then
+  for src in $ZDOTDIR/includes/*; do
+    source $src;
+  done
+fi
+
+#
+# Run/Start
+#
+
+gpgconf --launch gpg-agent
+neofetch
