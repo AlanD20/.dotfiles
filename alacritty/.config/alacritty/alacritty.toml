@@ -1,0 +1,141 @@
+live_config_reload = true
+
+[env]
+TERM = "alacritty"
+github = "https://github.com/AlanD20"
+
+[shell]
+program = "/usr/bin/zsh"
+
+[window]
+decorations = "none"
+decorations_theme_variant = "Dark"
+dynamic_title = true
+opacity = 0.9
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 8
+y = 6
+
+[cursor]
+blink_interval = 750
+blink_timeout = 5
+unfocused_hollow = true
+
+[cursor.style]
+blinking = "Always"
+shape = "Block"
+
+[scrolling]
+history = 100000
+multiplier = 3
+
+[selection]
+save_to_clipboard = false
+
+[font]
+size = 14
+
+[font.bold]
+family = "Dank Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Dank Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "Dank Mono"
+style = "Italic"
+
+[font.normal]
+family = "Dank Mono"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "Shift"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mode = "AppCursor"
+mods = "Shift"
+
+[colors.bright]
+black = "#444b6a"
+blue = "#7da6ff"
+cyan = "#0db9d7"
+green = "#b9f27c"
+magenta = "#bb9af7"
+red = "#ff7a93"
+white = "#acb0d0"
+yellow = "#ff9e64"
+
+[colors.normal]
+black = "#32344a"
+blue = "#7aa2f7"
+cyan = "#449dab"
+green = "#9ece6a"
+magenta = "#ad8ee6"
+red = "#f7768e"
+white = "#787c99"
+yellow = "#e0af68"
+
+[colors.primary]
+background = "#1a1b26"
+foreground = "#a9b1d6"
+
+# [schemes.tokyo-night.bright]
+# black = "#444b6a"
+# blue = "#7da6ff"
+# cyan = "#0db9d7"
+# green = "#b9f27c"
+# magenta = "#bb9af7"
+# red = "#ff7a93"
+# white = "#acb0d0"
+# yellow = "#ff9e64"
+#
+# [schemes.tokyo-night.normal]
+# black = "#32344a"
+# blue = "#7aa2f7"
+# cyan = "#449dab"
+# green = "#9ece6a"
+# magenta = "#ad8ee6"
+# red = "#f7768e"
+# white = "#787c99"
+# yellow = "#e0af68"
+#
+# [schemes.tokyo-night.primary]
+# background = "#1a1b26"
+# foreground = "#a9b1d6"
+#
+# [schemes.tokyo-night-storm.bright]
+# black = "#444b6a"
+# blue = "#7da6ff"
+# cyan = "#0db9d7"
+# green = "#b9f27c"
+# magenta = "#bb9af7"
+# red = "#ff7a93"
+# white = "#acb0d0"
+# yellow = "#ff9e64"
+#
+# [schemes.tokyo-night-storm.normal]
+# black = "#32344a"
+# blue = "#7aa2f7"
+# cyan = "#449dab"
+# green = "#9ece6a"
+# magenta = "#ad8ee6"
+# red = "#f7768e"
+# white = "#9699a8"
+# yellow = "#e0af68"
+#
+# [schemes.tokyo-night-storm.primary]
+# background = "#24283b"
+# foreground = "#a9b1d6"
+
