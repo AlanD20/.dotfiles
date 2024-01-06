@@ -29,6 +29,7 @@ stow_dirs=(
   mako
   # nvchad
   oh-my-posh
+  onedrive
   # p10k
   redshift
   swappy

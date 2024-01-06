@@ -11,3 +11,6 @@ zsh/**/.zhistory
 zsh/**/.zsh_plugins.zsh
 zsh/**/includes/**/*.*
 !zsh/**/includes/**/.gitkeep
+
+onedrive/**/*/*.*
+onedrive/**/*/refresh_token

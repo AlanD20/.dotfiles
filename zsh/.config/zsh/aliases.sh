@@ -44,7 +44,7 @@ alias ss-redis="ss start redis-server"
 # PHP
 alias pa="php artisan"
 alias pa-clear="php artisan clear && \
-                php artisan clear-compiled && \
+                php artisan clear-compiled &&- \
                 php artisan config:clear && \
                 php artisan cache:clear && \
                 php artisan view:clear && \
@@ -58,6 +58,13 @@ alias cdo="composer dump-autoload -o"
 
 alias gcls="clone_single_branch"
 alias dc="docker compose"
+
+# Abraunegg OneDrive
+alias onesync="onedrive --synchronize --verbose --force"
+alias oneup="onedrive --synchronize --verbose --force --upload-only"
+alias onedown="onedrive --synchronize --verbose --force --download-only"
+alias oneshare="onedrive --create-share-link"
+alias onestatus="onedrive --display-sync-status"
 
 # Personal
 alias econf="\cd $DOTFILES && $EDITOR"

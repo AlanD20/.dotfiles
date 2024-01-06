@@ -28,7 +28,14 @@ onedrive # To login
 
 onedrive --synchronize --verbose # Sync everything
 
+# Automatic Sync
+
+## Method 1
 onedrive --monitor -m --monitor-internal 60 # a running process that syncs every 60 seconds
+
+## Method 2: Enable as service and configure monitoring in onedrive config
+systemctl --user enable onedrive.service
+systemctl --user start onedrive.service
 ```
 
 ## Nginx
