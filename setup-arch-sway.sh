@@ -47,7 +47,8 @@ pacman_pkgs=(
   openssh
   zip
   unzip
-  jq # CLI json processor
+  jq   # CLI json processor
+  bind # dig CLI
   less
 
   #
