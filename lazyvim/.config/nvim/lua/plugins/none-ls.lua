@@ -34,23 +34,13 @@ return {
       sources = {
         -- shell & bash
         nls.builtins.formatting.shfmt,
-        nls.builtins.formatting.beautysh.with({
-          extra_args = {
-            "-i",
-            "2",
-          },
-        }),
         nls.builtins.formatting.shellharden,
 
         -- webdev stuff
-        nls.builtins.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
         nls.builtins.formatting.prettierd,
 
         -- Lua
         nls.builtins.formatting.stylua,
-
-        -- cpp
-        nls.builtins.formatting.clang_format,
 
         -- php
         nls.builtins.formatting.pint.with({
@@ -91,7 +81,6 @@ return {
               }
           end,
         }),
-        nls.builtins.diagnostics.php,
         -- nls.builtins.diagnostics.phpstan.with({
         --   temp_dir = "/tmp",
         -- }),
@@ -113,7 +102,6 @@ return {
         nls.builtins.formatting.golines,
 
         -- python
-        nls.builtins.diagnostics.flake8,
         nls.builtins.formatting.black,
 
         -- yaml
