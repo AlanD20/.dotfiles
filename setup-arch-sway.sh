@@ -226,6 +226,7 @@ pacman_pkgs=(
 )
 
 aur_pkgs=(
+  downgrade # Easily downgrade packages from A.L.A or cache
   albert
   oh-my-zsh-git
   oh-my-posh-bin
