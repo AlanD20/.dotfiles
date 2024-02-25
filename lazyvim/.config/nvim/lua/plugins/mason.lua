@@ -29,6 +29,7 @@ return {
         "eslint-lsp",
         "deno",
         "prettierd",
+        "vue-language-server",
 
         -- c/cpp
         "clangd",
