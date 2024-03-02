@@ -47,8 +47,10 @@ archlinux installation with and without dual booting.
 Take a look at this repo to
 [install nvidia drivers on arch](https://github.com/korvahannu/arch-nvidia-drivers-installation-guide).
 
-With sway, use vulkan renderer, for that, you may have to install `vulkan-intel`
-and `vulkan-validation-layers`
+After installing the nvidia drivers, use hyprland guide on Nvidia drivers to also finish some additional configuration if you still have issues with screen flickering or nvidia drivers aren't being used properly, [Hyprland Guide on Nvidia](https://wiki.hyprland.org/hyprland-wiki/pages/Nvidia/)
+
+- With sway, use vulkan renderer, for that, you may have to install `vulkan-intel` and `vulkan-validation-layers`.
+- Brightnessctl not working properly on nvidia drivers? Try to add `acpi_backlight=native` to `GRUB_CMDLINE_LINUX_DEFAULT` in `/etc/default/grub`.
 
 ## Enable SSH-Agent
 

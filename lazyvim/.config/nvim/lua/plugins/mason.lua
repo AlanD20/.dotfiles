@@ -8,6 +8,8 @@ return {
         "emmet-language-server",
         "emmet-ls",
         "ruff-lsp",
+        "markdownlint",
+        "markdownlint-cli2",
 
         -- Shell scripts
         "shfmt",

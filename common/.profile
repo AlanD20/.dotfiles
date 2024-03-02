@@ -12,6 +12,8 @@ export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 export MOZ_ENABLE_WAYLAND=1 # Enable wayland for mozilla
 # export QT_STYLE_OVERRIDE=adwaita-dark
 
+export LIBVA_DRIVER_NAME=nvidia
+
 # Wayland Specifics
 # export WLR_BACKENDS=wayland # comma-separated list of backends to use (available backends: libinput, drm, wayland, x11, headless, noop)
 # export WAYLAND_DISPLAY=wayland-1
