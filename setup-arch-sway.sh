@@ -50,6 +50,9 @@ pacman_pkgs=(
   jq   # CLI json processor
   bind # dig CLI
   less
+  lsof
+  strace
+  htop
 
   #
   # Base

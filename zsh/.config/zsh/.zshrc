@@ -115,8 +115,8 @@ eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_ed25519)"
 eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"
 
 
-# Source all files in include directory
-if [ -d "$ZDOTDIR/includes" ]; then
+# Source all files in 'includes' directory and has to have files
+if [ -d "$ZDOTDIR/includes" ] && [ -z "$(ls -A $ZDOTDIR/includes)" ]; then
   for src in $ZDOTDIR/includes/*; do
     source $src;
   done

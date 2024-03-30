@@ -50,7 +50,7 @@ Take a look at this repo to
 After installing the nvidia drivers, use hyprland guide on Nvidia drivers to also finish some additional configuration if you still have issues with screen flickering or nvidia drivers aren't being used properly, [Hyprland Guide on Nvidia](https://wiki.hyprland.org/hyprland-wiki/pages/Nvidia/)
 
 - With sway, use vulkan renderer, for that, you may have to install `vulkan-intel` and `vulkan-validation-layers`.
-- Brightnessctl not working properly on nvidia drivers? Try to add `acpi_backlight=native` to `GRUB_CMDLINE_LINUX_DEFAULT` in `/etc/default/grub`.
+- Brightnessctl not working properly on nvidia drivers? Try to add `acpi_backlight=native` to `GRUB_CMDLINE_LINUX_DEFAULT` in `/etc/default/grub`. (Don't forget to do `sudo grub-mkconfig -o /boot/grub/grub.cfg` after changes.)
 
 ## Enable SSH-Agent
 
@@ -125,3 +125,4 @@ Make sure to enable the following flags for Chromium
   internet. There are several ways to go about it: (1) Restarting your computer
   (2) Stopping `dhcpcd` service then restart `NetworkManager` service, after
   that, start `dhcpcd` service again. This should solve the problem.
+- If you have issues with `shared lib** is not found`, you might already have the library but a newer version instead while the package might require an older version. You may check the `/usr/lib` if that library exist, if so, you may create a symbolic link pointing the required library version to the latest version.
