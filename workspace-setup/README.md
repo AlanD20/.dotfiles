@@ -16,6 +16,10 @@ Want to install another desktop/window environment? Take a look at
 [archinstall profiles](https://github.com/archlinux/archinstall/tree/master/archinstall/default_profiles).
 It's a good start to install necessary packages for each environment.
 
+## Built AUR Packages?
+
+You may use [Chaotic-AUR](https://aur.chaotic.cx/) to download already built packages from AUR repository.
+
 ## Resources
 
 - **[Official KDE Wiki](https://wiki.archlinux.org/title/KDE)**
