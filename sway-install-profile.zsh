@@ -35,6 +35,7 @@ stow_dirs=(
   swappy
   sway
   swaylock
+  systemd
   # thunar
   tmux
   wallpapers
