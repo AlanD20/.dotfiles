@@ -23,3 +23,7 @@ viewimg() {
     feh "$1"
   fi
 }
+
+fetch_origin_branch() {
+  git fetch origin "$1:$1"
+}

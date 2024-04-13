@@ -1,4 +1,4 @@
-# remove duplicat entries from $PATH
+# remove duplicate entries from $PATH
 typeset -U PATH path
 
 # Uncomment the following line to use case-sensitive completion.
@@ -70,10 +70,13 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 export BUN_INSTALL="$XDG_DATA_HOME/bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# Rust
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 # export PATH="$PATH:$CARGO_HOME/bin"
 
+# Go
+export GO11MODULE=on
 
 # autoload -Uz compinit && compinit
 setopt autocd beep extendedglob nomatch notify

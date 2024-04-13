@@ -10,7 +10,6 @@ alias ad-update="antidote bundle < $ZDOTDIR/.zsh_plugins.txt > $ZDOTDIR/.zsh_plu
 # Open
 alias fp="fzf --preview=\"bat --color=always --style=plain {}\" --preview-window=\"border:rounded\" --border=rounded --prompt=\"$ \" --pointer=\"->\""
 alias v="nvim"
-alias vim="nvim"
 alias vfd='nvim `fd . --type d | fzf`'
 alias vff='nvim `fd . --type f | fzf`'
 alias lz="lazygit"
@@ -57,6 +56,7 @@ alias cuo="composer update -o"
 alias cdo="composer dump-autoload -o"
 
 alias gcls="clone_single_branch"
+alias gfo="fetch_origin_branch"
 alias dc="docker compose"
 
 # Abraunegg OneDrive
@@ -69,3 +69,4 @@ alias onestatus="onedrive --display-sync-status"
 # Personal
 alias econf="\cd $DOTFILES && $EDITOR"
 alias rr="source $ZDOTDIR/.zshrc"
+alias penv=". ~/builds/python-venv/bin/activate"
