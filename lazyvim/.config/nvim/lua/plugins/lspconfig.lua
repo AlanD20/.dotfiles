@@ -30,6 +30,7 @@ return {
         cssls = {},
         -- clang = {},
         denols = {},
+        golangci_lint_ls = {},
         emmet_ls = {
           filetypes = {
             "blade",
@@ -85,6 +86,10 @@ return {
         sqlls = {},
         lua_ls = {},
         yamlls = {},
+        jqls = {},
+        terraformls = {},
+        typos_lsp = {},
+        jsonls = {},
         zls = {},
       },
       setup = {

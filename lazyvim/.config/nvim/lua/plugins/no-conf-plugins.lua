@@ -1,14 +1,5 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
-    dependencies = { "hrsh7th/cmp-emoji" },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      local cmp = require("cmp")
-      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
-    end,
-  },
-  {
     -- Add blade indentations
     "jwalton512/vim-blade",
   },
@@ -16,6 +7,15 @@ return {
     "rcarriga/nvim-notify",
     opts = {
       background_colour = "#000000",
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+      on_open = function(win)
+        vim.api.nvim_win_set_config(win, { zindex = 100 })
+      end,
     },
   },
   {
@@ -65,5 +65,16 @@ return {
   {
     -- Move between tmux panes and vim windows with Ctrl-<jkhl>
     "christoomey/vim-tmux-navigator",
+  },
+  {
+    "echasnovski/mini.comment",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        custom_commentstring = function()
+          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+        end,
+      },
+    },
   },
 }

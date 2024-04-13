@@ -1,7 +1,8 @@
+-- This is an experimental formatting, it's here for reference
 return {
   {
     "mhartington/formatter.nvim",
-    enabled = false,
+    enabled = false, -- DISABLED!!!!
     depdendencies = {
       "jose-elias-alvarez/null-ls.nvim",
     },

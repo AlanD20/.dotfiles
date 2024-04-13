@@ -10,6 +10,9 @@ return {
         "ruff-lsp",
         "markdownlint",
         "markdownlint-cli2",
+        "codespell",
+        "typos",
+        "typos-lsp",
 
         -- Shell scripts
         "shfmt",
@@ -42,6 +45,7 @@ return {
         "golangci-lint-langserver",
         "golangci-lint",
         "delve",
+        "goimports",
         "goimports-reviser",
         "golines",
         "gofumpt",
@@ -70,11 +74,15 @@ return {
 
         -- JSON
         "json-lsp",
+        "fixjson",
+        "jq",
+        "jq-lsp",
 
         -- yaml
         "yaml-language-server",
         "yamllint",
         "yamlfmt",
+        "yamlfix",
 
         -- Docker
         "dockerfile-language-server",
@@ -88,7 +96,10 @@ return {
         "terraform-ls",
         "tflint",
         "tfsec",
-        "tflint",
+
+        -- Ansible
+        "ansible-language-server",
+        "ansible-lint",
 
         -- zig
         "zls",
