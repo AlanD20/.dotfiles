@@ -119,7 +119,7 @@ eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"
 
 
 # Source all files in 'includes' directory and has to have files
-if [ -d "$ZDOTDIR/includes" ] && [ -z "$(ls -A $ZDOTDIR/includes)" ]; then
+if [ -d "$ZDOTDIR/includes" ] && [ -n "$(\ls -A --ignore '.*' $ZDOTDIR/includes)" ]; then
   for src in $ZDOTDIR/includes/*; do
     source $src;
   done
