@@ -5,6 +5,11 @@ clone_single_branch() {
   git clone --single-branch --branch "$@"
 }
 
+# https://github.com/jqlang/jq/issues/884#issuecomment-525574290
+jjq() {
+  jq -R -r "${1:-.} as \$line | try fromjson catch \$line"
+}
+
 # Previews
 viewdoc() {
   if [ "$1" = "" ]; then
