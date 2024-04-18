@@ -9,7 +9,7 @@ return {
         -- ['*'] = { 'global linter' },
         -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
         -- ['_'] = { 'fallback linter' },
-        ["*"] = { "typos", "codespell", "trivy" },
+        ["*"] = { "typos", "codespell" },
         sh = { "shellcheck" },
         python = { "flake8" },
         php = { "phpstan" },

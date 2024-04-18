@@ -90,7 +90,6 @@ return {
 
         -- Code scans for vulnerabilities
         "snyk",
-        "trivy",
 
         -- Terraform
         "terraform-ls",
