@@ -48,6 +48,7 @@ pacman_pkgs=(
   zip
   unzip
   jq   # CLI json processor
+  yq   # CLI yaml processor
   bind # dig CLI
   less
   lsof
