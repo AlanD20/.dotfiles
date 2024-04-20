@@ -113,7 +113,7 @@ code --list-extensions | % { "code --install-extension $_" } # Windows PowerShel
 - Laravel sinippets
 - Live server
 - Livewire goto
-- Livewire Language SUpport
+- Livewire Language SSupport
 - Livewire Switcher
 - Lua
 - Markdown All in One By Yu Zhang

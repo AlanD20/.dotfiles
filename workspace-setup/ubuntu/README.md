@@ -55,7 +55,7 @@
 
 ## Add Startup Programs
 
-- Open Tweaks applicaiton, then go to `Startup Applications`. After that, add both flameshot and Ulauncher applications to the startup alogn with any other applications you would like to run when the computer is powered on.
+- Open Tweaks application, then go to `Startup Applications`. After that, add both flameshot and Ulauncher applications to the startup alogn with any other applications you would like to run when the computer is powered on.
 
 ## Troubleshooting
 

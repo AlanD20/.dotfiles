@@ -1,6 +1,6 @@
 # Display Server Protocols
 
-- **Xorg Instalaltion**
+- **Xorg Installations**
 
   - Xorg is a legacy display server protocol, the new alternative is wayland.
 
@@ -17,7 +17,7 @@
     exec startkde
     ```
 
-- **Wayland Instalaltion**
+- **Wayland Installations**
 
   - install the wayland package and `xwayland` to support X11.
 

@@ -358,7 +358,7 @@ as needed.
    Include = /etc/pacman.d/mirrorlist
 
    # Enable pacman parallel downloading
-   # Add or uncomment the follwoing in /etc/pacman.conf
+   # Add or uncomment the following in /etc/pacman.conf
    [options]
    ParallelDownloads=5
    ```

@@ -77,7 +77,7 @@ pacman_pkgs=(
   gnome-keyring # Keychain to store secrets and passwords
   keychain      # Store ssh private key for ssh agent
   libsecret     # Dependency for gnome-keyring
-  seahorse      # Frontend gnome-keyring contorl
+  seahorse      # Frontend gnome-keyring control
   keepassxc     # Frontend for keepass, a password manager, you could use this instead of gnome-keyring
 
   #
@@ -94,12 +94,12 @@ pacman_pkgs=(
   zsh                 # Main shell instead of bash
   stow                # easily manage .dot files
   fzf                 # fuzzy finder for files and directories
-  eza                 # better ls command (exa is unmainted)
+  eza                 # better ls command (exa is unmaintained)
   ripgrep             # Better grep
   bat                 # Better cat command
   direnv              # Loading env variables for current working directory
   lf                  # CLI File manager
-  lazygit             # Manage git
+  lazygit             # TUI for git
   fd                  # Quick file finder
   git-delta           # git pager
   perl-image-exiftool # Show image and file metadata
@@ -280,7 +280,7 @@ for package in "${aur_pkgs[@]}"; do
   su "$user" -c "yay -Sy $package"
 done
 
-check_failure "Most probably yay failed to insall packages, please install them manually."
+check_failure "Most probably yay failed to install packages, please install them manually."
 
 # Fix debug file
 sudo sed 's/;//' -i xdebug.ini

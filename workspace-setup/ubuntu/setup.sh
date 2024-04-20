@@ -54,11 +54,11 @@ update_upgrade
 # Install apt packages
 
 echo "=========================================="
-echo "🧩 Updating kernals..."
+echo "🧩 Updating kernels..."
 echo "=========================================="
 sudo apt -y install "linux-headers-$(uname -r)"
 echo "=========================================="
-echo "✅ Kernal updated successfully!"
+echo "✅ Kernel updated successfully!"
 echo "=========================================="
 
 ###

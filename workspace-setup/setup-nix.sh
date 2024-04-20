@@ -123,7 +123,7 @@ echo "=========================================="
 echo "🖼️ Configuring zsh"
 echo "=========================================="
 
-# source .proflie for nix-env that installed zsh
+# source .profile for nix-env that installed zsh
 source "$HOME/.profile"
 
 # Load the profile script with zsh
