@@ -125,6 +125,7 @@ pacman_pkgs=(
   pavucontrol # GUI to control audio devices
   unrar       # Unrar a rar file
   woff2       # Support for woff2 font
+  k9s         # TUI for Kubernetes
 
   #
   # languages

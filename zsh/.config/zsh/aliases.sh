@@ -13,6 +13,9 @@ alias v="nvim"
 alias vfd='nvim `fd . --type d | fzf`'
 alias vff='nvim `fd . --type f | fzf`'
 alias lz="lazygit"
+alias dz="lazydocker"
+alias kz="k9s --readonly"
+alias kzf="k9s --write"
 
 # GPG
 alias rgpg="gpg-connect-agent RELOADAGENT /bye" # Reload gpg
