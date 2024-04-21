@@ -127,6 +127,8 @@ pacman_pkgs=(
   woff2       # Support for woff2 font
   k9s         # TUI for Kubernetes
   fff         # Fast file-manager
+  # kmon      # Linux Kernel Manager and Activity Monitor
+  tldr # tldr for man pages
 
   #
   # languages
@@ -182,6 +184,7 @@ pacman_pkgs=(
   docker-compose # manage multiple containers within a single file
   # redis          # Caching database
   ansible
+  # mitmproxy # powerful HTTP proxy
 
   #
   # Fonts
@@ -252,6 +255,7 @@ aur_pkgs=(
   zig-bin
   metadata-cleaner
   onedrive-abraunegg # Onedrive sync for keepass db
+  jqp-bin            # A TUI playground for jq
 
   adwaita-qt5 # Theme for qt5
   adwaita-qt6 # Theme for qt6

@@ -6,7 +6,7 @@ clone_single_branch() {
 }
 
 # https://github.com/jqlang/jq/issues/884#issuecomment-525574290
-jjq() {
+jql() {
   jq -R -r "${1:-.} as \$line | try fromjson catch \$line"
 }
 
@@ -38,4 +38,9 @@ fetch_origin_branch() {
 f() {
   fff "$@"
   cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit 1
+}
+
+# jqp is a TUI playground for jq
+jqq() {
+  \jqp -t dracula -f "$@"
 }

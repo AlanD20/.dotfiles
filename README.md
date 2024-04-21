@@ -126,3 +126,4 @@ Make sure to enable the following flags for Chromium
   (2) Stopping `dhcpcd` service then restart `NetworkManager` service, after
   that, start `dhcpcd` service again. This should solve the problem.
 - If you have issues with `shared lib** is not found`, you might already have the library but a newer version instead while the package might require an older version. You may check the `/usr/lib` if that library exist, if so, you may create a symbolic link pointing the required library version to the latest version.
+- Looking for TUI apps? Take a look at [toolleeo/Awesome list](https://github.com/toolleeo/cli-apps) or [rothgar/Awesome TUIs](https://github.com/rothgar/awesome-tuis)
