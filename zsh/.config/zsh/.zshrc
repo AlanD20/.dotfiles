@@ -108,7 +108,7 @@ source "$ZDOTDIR/.zsh_plugins.zsh"
 [ -s "$XDG_DATA_HOME/.bun/_bun" ] && source "$XDG_DATA_HOME/.bun/_bun"
 
 # evaluate direnv
-eval "$(direnv hook zsh)"
+# eval "$(direnv hook zsh)"
 
 # Evaluate ssh-agent
 # eval "$(ssh-agent -s)"

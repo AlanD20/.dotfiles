@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Custom git
+# Clone single branch
 clone_single_branch() {
   git clone --single-branch --branch "$@"
 }
@@ -29,6 +29,7 @@ viewimg() {
   fi
 }
 
+# fetch and create branch locally without checking out
 fetch_origin_branch() {
   git fetch origin "$1:$1"
 }
