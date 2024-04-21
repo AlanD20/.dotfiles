@@ -66,6 +66,17 @@ export FZF_CTRL_R_OPTS="
 
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 
+# fff
+export FFF_FAV1=$HOME/dev
+export FFF_FAV2=$HOME/temp
+export FFF_FAV3=$HOME/.local/bin
+export FFF_FAV4=$HOME/.dotfiles
+export FFF_FAV5=
+export FFF_FAV6=
+export FFF_FAV7=
+export FFF_FAV8=
+export FFF_FAV9=/
+
 # Bun
 export BUN_INSTALL="$XDG_DATA_HOME/bun"
 export PATH="$BUN_INSTALL/bin:$PATH"

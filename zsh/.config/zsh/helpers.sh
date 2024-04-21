@@ -33,3 +33,9 @@ viewimg() {
 fetch_origin_branch() {
   git fetch origin "$1:$1"
 }
+
+# cd on exist for fff
+f() {
+  fff "$@"
+  cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit 1
+}
