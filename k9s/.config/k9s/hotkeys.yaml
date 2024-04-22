@@ -22,6 +22,10 @@ hotKeys:
     command: pods
   shift-5:
     shortCut: Shift-5
+    description: Viewing Configmaps
+    command: configmaps
+  shift-6:
+    shortCut: Shift-6
     description: Viewing Ingress
     command: ingress
   shift-9:
