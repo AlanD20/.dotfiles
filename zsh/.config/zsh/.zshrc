@@ -89,6 +89,19 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 # Go
 export GO11MODULE=on
 
+# Yaml Fix
+export YAMLFIX_LINE_LENGTH=140
+export YAMLFIX_COMMENTS_REQUIRE_STARTING_SPACE='true'
+export YAMLFIX_EXPLICIT_START='false'
+export YAMLFIX_SEQUENCE_STYLE='keep_style'
+export YAMLFIX_quote_basic_values='false'
+export YAMLFIX_quote_representation='"'
+export YAMLFIX_COMMENTS_WHITELINES="1"
+export YAMLFIX_preserve_quotes="true"
+
+# Mason
+export PATH="$PATH:$XDG_DATA_HOME/nvim/mason/bin"
+
 # autoload -Uz compinit && compinit
 setopt autocd beep extendedglob nomatch notify
 

@@ -1,13 +1,12 @@
----
-version: '3.9'
-name: local-dev-services
+version: "3.9"
+name: "local-dev-services"
 services:
   # MYSQL Service
   mysql:
-    image: mysql
+    image: "mysql"
     ports:
       - "3306:3306"
-    restart: always
+    restart: "always"
     networks:
       - default-net
     # You may enable the following, if authentication plugin doesnt work
@@ -18,11 +17,11 @@ services:
       # MYSQL_USER: admin
       # MYSQL_PASSWORD: password
       MYSQL_ALLOW_EMPTY_PASSWORD: true
-      MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
+      MYSQL_AUTHENTICATION_PLUGIN: "mysql_native_password"
     healthcheck:
       retries: 10
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 10s
+      timeout: "10s"
     # Very fast io performance
     tmpfs:
       - /var/lib/mysql
@@ -33,11 +32,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '6'
-          memory: 800M
+          cpus: "6"
+          memory: "800M"
         reservations:
-          cpus: '4'
-          memory: 600M
+          cpus: "4"
+          memory: "600M"
   # ======================
   # PostgreSQL Service
   # postgres:
@@ -73,15 +72,15 @@ services:
   # ======================
   # Email Testing Service
   mailpit:
-    image: axllent/mailpit
+    image: "axllent/mailpit"
     ports:
       - "1025:1025"
       - "8225:8025"
-    restart: unless-stopped
+    restart: "unless-stopped"
     networks:
-      - default-net
+      - "default-net"
     environment:
-      MP_DATA_FILE: /home
+      MP_DATA_FILE: "/home"
     volumes:
       - ./mailpit-data:/home
   # ======================
@@ -100,27 +99,27 @@ services:
     depends_on:
       - mysql
     # Save your eyes with this lightweight image, or enable the official one
-    image: beeyev/phpmyadmin-lightweight:latest
+    image: "beeyev/phpmyadmin-lightweight:latest"
     # image: phpmyadmin
     tty: true
     ports:
       - "8080:80"
-    restart: unless-stopped
+    restart: "unless-stopped"
     networks:
-      - default-net
+      - "default-net"
     environment:
-      TZ: CET
-      PMA_HOST: mysql
-      PMA_USER: root
-      PMA_PASSWORD: ''
+      TZ: "CET"
+      PMA_HOST: "mysql"
+      PMA_USER: "root"
+      PMA_PASSWORD: ""
   # ======================
   # ZooKeeper to manage services such as Kafka
   zookeeper:
-    image: bitnami/zookeeper:3.9
+    image: "bitnami/zookeeper:3.9"
     ports:
       - "2182:2181"
     networks:
-      - default-net
+      - "default-net"
     environment:
       - ZOOKEEPER_CLIENT_PORT=2181
       - ALLOW_ANONYMOUS_LOGIN=yes
@@ -129,12 +128,12 @@ services:
   # More at: https://github.com/bitnami/containers/tree/main/bitnami/kafka
   kafka:
     depends_on:
-      - zookeeper
-    image: bitnami/kafka:latest
+      - "zookeeper"
+    image: "bitnami/kafka:latest"
     ports:
-      - 19092:19092
+      - "19092:19092"
     networks:
-      - default-net
+      - "default-net"
     environment:
       - KAFKA_BROKER_ID=1
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
@@ -148,4 +147,4 @@ services:
 # ==========================
 networks:
   default-net:
-    driver: bridge
+    driver: "bridge"
