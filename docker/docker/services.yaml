@@ -25,6 +25,11 @@ services:
     # Very fast io performance
     tmpfs:
       - /var/lib/mysql
+    # Binding is better than typical volume mounting, but create mysql-data dir first.
+    # volumes:
+    #   - type: "bind"
+    #     source: "./mysql-data"
+    #     target: "/var/lib/mysql"
     # Volumes have a slow io performance, known issue!
     # volumes:
     #   - ./mysql-data:/var/lib/mysql:delegated
@@ -142,6 +147,19 @@ services:
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:19092
       - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+  # =======================
+  # Cassandra DB
+  # Takes a while to bootup like 6s
+  cass:
+    image: cassandra:latest
+    restart: on-failure
+    ports:
+      - "19042:9042"
+    # Run this command after booting to create a keyspace
+    # command: |
+    #	echo "CREATE KEYSPACE dev WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'datacenter1' : 1 };" | cqlsh
+    networks:
+      - default-net
 # Enable network for Windows
 # Linux doesn't need separate network
 # ==========================
