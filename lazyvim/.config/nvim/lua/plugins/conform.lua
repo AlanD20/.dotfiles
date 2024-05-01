@@ -33,9 +33,9 @@ return {
             --   "phpcsfixer",
           },
           blade = { "blade_formatter" },
-          go = {
+          go = { --overwrites lazyvim conform list
             -- they are included with lazyvim golang plugin
-            -- "gofmt",
+            "gofmt",
             -- "gofumpt",
             { "goimports_reviser", "goimports" },
             "golines",
