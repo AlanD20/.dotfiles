@@ -154,4 +154,4 @@ fi
 #
 
 gpgconf --launch gpg-agent
-neofetch
+fastfetch

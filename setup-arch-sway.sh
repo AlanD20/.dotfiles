@@ -129,6 +129,7 @@ pacman_pkgs=(
   fff         # Fast file-manager
   # kmon      # Linux Kernel Manager and Activity Monitor
   tldr # tldr for man pages
+  fastfetch
 
   #
   # languages

@@ -260,7 +260,7 @@ as needed.
    pacstrap -K /mnt base base-devel linux-lts linux-firmware linux-headers intel-ucode networkmanager dhcpcd pipewire bluez bluez-utils wpa_supplicant netctl ntfs-3g gnome-keyring
 
    # Install necessary applications
-   pacstrap -K /mnt inetutils net-tools sudo htop openssh ufw git nano vim neovim neofetch cups dialog
+   pacstrap -K /mnt inetutils net-tools sudo htop openssh ufw git nano vim neovim fastfetch cups dialog
    ```
 
    - Basic Arch Linux installation: `base`
