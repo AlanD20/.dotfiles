@@ -127,9 +127,10 @@ pacman_pkgs=(
   woff2       # Support for woff2 font
   k9s         # TUI for Kubernetes
   fff         # Fast file-manager
-  # kmon      # Linux Kernel Manager and Activity Monitor
-  tldr # tldr for man pages
+  tldr        # tldr for man pages
+  ncdu        # Disk analyzer cleanup
   fastfetch
+  # kmon      # Linux Kernel Manager and Activity Monitor
 
   #
   # languages
