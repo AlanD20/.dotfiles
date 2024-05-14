@@ -115,9 +115,18 @@ nvm alias default $node_version
 nvm use default
 npm install npm@latest yarn@latest pnpm@latest --location=global
 
-# Install k9s catppuccin theme
+echo "=========================================="
+echo "Installing k9s catppuccin theme"
+echo "=========================================="
 OUT="${XDG_CONFIG_HOME:-$HOME/.config}/k9s/skins"
 curl -L https://github.com/catppuccin/k9s/archive/main.tar.gz | tar xz -C "$OUT" --strip-components=2 k9s-main/dist
+
+echo "=========================================="
+echo "Installing python 3.11.7"
+echo "=========================================="
+
+pyenv install 3.11.7
+pyenv global 3.11.7
 
 echo "=========================================="
 echo "🔃 System Service"

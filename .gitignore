@@ -10,6 +10,7 @@ gnupg/.gnupg/*
 zsh/**/.zcompdump*
 zsh/**/.zhistory
 zsh/**/.zsh_plugins.zsh
+zsh/**/.zdirs
 zsh/**/includes/**/*.*
 !zsh/**/includes/**/.gitkeep
 

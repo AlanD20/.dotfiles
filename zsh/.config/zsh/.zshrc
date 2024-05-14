@@ -141,6 +141,12 @@ source "$ZDOTDIR/.zsh_plugins.zsh"
 eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_ed25519)"
 eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"
 
+# pyenv
+if command -v pyenv; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
 
 # Source all files in 'includes' directory and has to have files
 if [ -d "$ZDOTDIR/includes" ] && [ -n "$(\ls -A --ignore '.*' $ZDOTDIR/includes)" ]; then
@@ -149,8 +155,9 @@ if [ -d "$ZDOTDIR/includes" ] && [ -n "$(\ls -A --ignore '.*' $ZDOTDIR/includes)
   done
 fi
 
+
 #
-# Run/Start
+# Startups
 #
 
 gpgconf --launch gpg-agent

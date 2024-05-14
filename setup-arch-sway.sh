@@ -129,6 +129,7 @@ pacman_pkgs=(
   fff         # Fast file-manager
   tldr        # tldr for man pages
   ncdu        # Disk analyzer cleanup
+  pyenv       # Python version manager
   fastfetch
   # kmon      # Linux Kernel Manager and Activity Monitor
 
