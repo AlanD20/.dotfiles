@@ -1,10 +1,14 @@
+if true then
+  return {}
+end
+
 -- This is an experimental formatting, it's here for reference
 return {
   {
     "mhartington/formatter.nvim",
     enabled = false, -- DISABLED!!!!
-    depdendencies = {
-      "jose-elias-alvarez/null-ls.nvim",
+    dependencies = {
+      "nvimtools/none-ls.nvim",
     },
     opts = {
       filetype = {

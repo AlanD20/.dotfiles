@@ -1,7 +1,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
-    versoin = false, -- stable is too old?
+    version = false, -- stable is too old?
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -73,7 +73,7 @@ return {
     "L3MON4D3/LuaSnip",
     build = (not LazyVim.is_win())
         and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
-        or nil,
+      or nil,
     dependencies = {
       {
         "rafamadriz/friendly-snippets",

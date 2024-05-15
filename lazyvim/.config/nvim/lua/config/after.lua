@@ -12,3 +12,12 @@ parser_config.blade = {
 }
 
 vim.treesitter.language.register("blade", "blade")
+
+-- Enable autocompletion for vim-dadbod
+-- local cmp = require("cmp")
+-- cmp.setup.filetype({ "sql" }, {
+--   sources = {
+--     { name = "vim-dadbod-completion" },
+--     { name = "buffer" },
+--   },
+-- })
