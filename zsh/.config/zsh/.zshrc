@@ -102,31 +102,40 @@ export YAMLFIX_preserve_quotes="true"
 # Mason
 export PATH="$PATH:$XDG_DATA_HOME/nvim/mason/bin"
 
-# autoload -Uz compinit && compinit
+# Zinit - zsh plugin manager
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Load plugins
+source "$ZDOTDIR/zsh_plugins.sh"
+
+# Load autocompletion
+autoload -Uz compinit && compinit
 setopt autocd beep extendedglob nomatch notify
+
+# replay autocompletions
+zinit cdreplay -q
 
 ZSH_WEB_SEARCH_ENGINES=(yt "https://www.youtube.com/results?search_query=")
 ZSH_WEB_SEARCH_ENGINES=(yth "https://www.youtube.com/")
 
 
-[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 [ -f "$ZDOTDIR/helpers.sh" ] && source "$ZDOTDIR/helpers.sh"
 [ -f "$ZDOTDIR/aliases.sh" ] && source "$ZDOTDIR/aliases.sh"
 [ -f "$CARGO_HOME/env" ] && source "$CARGO_HOME/env"
 
-# To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
-# [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
-
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/themes/aland20-custom-theme.omp.json)"
 
-# source antidote
+# Antidote setup, source antidote
 # source ${ZDOTDIR:-}/.antidote/antidote.zsh
-source '/usr/share/zsh-antidote/antidote.zsh'
+# source '/usr/share/zsh-antidote/antidote.zsh'
 
 # initialize plugins statically with ${ZDOTDIR:-$HOME}/zsh_plugins.txt
-antidote load "$ZDOTDIR/.zsh_plugins.txt"
+# antidote load "$ZDOTDIR/.zsh_plugins.txt"
+# source "$ZDOTDIR/.zsh_plugins.zsh"
 
-source "$ZDOTDIR/.zsh_plugins.zsh"
 
 # bun completions
 [ -s "$XDG_DATA_HOME/.bun/_bun" ] && source "$XDG_DATA_HOME/.bun/_bun"

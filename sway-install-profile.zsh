@@ -44,9 +44,9 @@ stow_dirs=(
   zsh
 )
 
-echo "=========================================="
-echo "Installing antidote"
-echo "=========================================="
+#echo "=========================================="
+#echo "Installing antidote"
+#echo "=========================================="
 # install it from github for non-arch distros
 # git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
 
@@ -83,15 +83,6 @@ source "$HOME/.zshenv"
 source "$ZDOTDIR/.zshrc"
 
 check_failure "Sourcing .zshrc shell environment"
-
-# bundle zsh plugins
-antidote bundle <"$ZDOTDIR/.zsh_plugins.txt" >"$ZDOTDIR/.zsh_plugins.zsh"
-
-# Install ohmyzsh - installed from AUR
-# yes no | sh -c "$XDG_CACHE_HOME/antidote/*ohmyzsh*/tools/install.sh"
-
-# Remove auto-generated .zshrc by ohmyzsh
-rm "$ZDOTDIR/.zshrc"
 
 # create a new symlink
 stow zsh
