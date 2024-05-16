@@ -17,8 +17,17 @@ bindkey "^[^[[D" backward-word
 
 # History file
 export HISTFILE="$ZDOTDIR/.zhistory"
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory sharehistory hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups
+setopt hist_ignore_space # Commands starting with space won't be saved
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
+# Style completion
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:completion:cd:*' fzf preview 'ls $realpath'
 
 # Export vscode bin path for WSL
 # export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"
@@ -99,7 +108,7 @@ export YAMLFIX_quote_representation='"'
 export YAMLFIX_COMMENTS_WHITELINES="1"
 export YAMLFIX_preserve_quotes="true"
 
-# Mason
+# Mason binaries
 export PATH="$PATH:$XDG_DATA_HOME/nvim/mason/bin"
 
 # Zinit - zsh plugin manager
@@ -143,7 +152,7 @@ eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/themes/aland20-
 # evaluate direnv
 # eval "$(direnv hook zsh)"
 
-# Evaluate ssh-agent
+# Evaluate ssh-agent, using keychain instead
 # eval "$(ssh-agent -s)"
 
 # Add private key to keychain, require SSH passphrase when logging in.
@@ -151,7 +160,7 @@ eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_ed25519)"
 eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"
 
 # pyenv
-if command -v pyenv; then
+if command -v pyenv &>/dev/null; then
   export PYENV_ROOT="$HOME/.pyenv"
   [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
