@@ -71,3 +71,4 @@ alias onestatus="onedrive --display-sync-status"
 # Personal
 alias econf="\cd $DOTFILES && $EDITOR"
 alias rr="source $ZDOTDIR/.zshrc"
+alias keepass="keepassxc &"

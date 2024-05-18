@@ -175,12 +175,15 @@ eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/themes/aland20-
 # evaluate direnv
 # eval "$(direnv hook zsh)"
 
-# Evaluate ssh-agent, using keychain instead
-# eval "$(ssh-agent -s)"
+# Evaluate ssh-agent, using KeepassXC to add keys to ssh agent
+# run `keepassxc &` to open keepassxc GUI with $SSH_AUTH_SOCK
+# set with current seasson, then it should automatically add
+# the keys to the agent.
+eval "$(ssh-agent -s)"
 
 # Add private key to keychain, require SSH passphrase when logging in.
-eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_ed25519)"
-eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"
+#eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_ed25519)"
+#eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"
 
 # Source all files in 'includes' directory and has to have files
 if [ -d "$ZDOTDIR/includes" ] && [ -n "$(\ls -A --ignore '.*' $ZDOTDIR/includes)" ]; then
