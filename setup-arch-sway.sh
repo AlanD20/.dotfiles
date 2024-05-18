@@ -158,6 +158,8 @@ pacman_pkgs=(
   python-pip # Python package manager
   python-setuptools
   python-requests
+  python-pyqt5
+  python-pyqt6
 
   #
   # Albert Plugins
