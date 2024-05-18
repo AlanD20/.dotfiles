@@ -137,7 +137,8 @@ zinit cdreplay -q
 ZSH_WEB_SEARCH_ENGINES=(yt "https://www.youtube.com/results?search_query=")
 ZSH_WEB_SEARCH_ENGINES=(yth "https://www.youtube.com/")
 
-
+# Uncomment if oh-my-zsh is necessary
+# [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 [ -f "$ZDOTDIR/helpers.sh" ] && source "$ZDOTDIR/helpers.sh"
 [ -f "$ZDOTDIR/aliases.sh" ] && source "$ZDOTDIR/aliases.sh"
 [ -f "$CARGO_HOME/env" ] && source "$CARGO_HOME/env"
