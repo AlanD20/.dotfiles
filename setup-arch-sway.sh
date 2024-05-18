@@ -250,8 +250,8 @@ aur_pkgs=(
   google-chrome
   spotify
   postman-agent
+  #zsh-antidote # Manag zsh plugins
   anydesk-bin  # Remote desktop
-  zsh-antidote # Manag zsh plugins
   xdman8       # Download Manager
   lightly-qt   # Modern style for qt applications
   nordic-theme # GTK3 theme
