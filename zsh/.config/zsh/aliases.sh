@@ -10,7 +10,6 @@ alias ad-update="antidote bundle < $ZDOTDIR/.zsh_plugins.txt > $ZDOTDIR/.zsh_plu
 # Open
 alias fp="fzf --preview=\"bat --color=always --style=plain {}\" --preview-window=\"border:rounded\" --border=rounded --prompt=\"$ \" --pointer=\"->\""
 alias v="nvim"
-alias vfd='nvim `fd . --type d | fzf`'
 alias vff='nvim `fd . --type f | fzf`'
 alias lz="lazygit"
 alias dz="lazydocker"
@@ -72,4 +71,3 @@ alias onestatus="onedrive --display-sync-status"
 # Personal
 alias econf="\cd $DOTFILES && $EDITOR"
 alias rr="source $ZDOTDIR/.zshrc"
-alias penv=". ~/builds/python-venv/bin/activate"

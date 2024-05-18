@@ -28,9 +28,24 @@ setopt hist_ignore_space # Commands starting with space won't be saved
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
-# Style completion
+# ZSH Styling
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:completion:cd:*' fzf preview 'ls $realpath'
+
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:completion:cd:*' fzf --preview 'ls $realpath'
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+# default fzf flags
+zstyle ':fzf-tab:*' fzf-flags '--height=65%' '--layout=reverse' '--border' '--margin=1' '--padding=1'
+
 
 # Export vscode bin path for WSL
 # export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"
