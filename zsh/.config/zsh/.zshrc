@@ -111,6 +111,13 @@ export YAMLFIX_preserve_quotes="true"
 # Mason binaries
 export PATH="$PATH:$XDG_DATA_HOME/nvim/mason/bin"
 
+# pyenv
+if command -v pyenv &>/dev/null; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
 # Zinit - zsh plugin manager
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -158,13 +165,6 @@ eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/themes/aland20-
 # Add private key to keychain, require SSH passphrase when logging in.
 eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_ed25519)"
 eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"
-
-# pyenv
-if command -v pyenv &>/dev/null; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
 
 # Source all files in 'includes' directory and has to have files
 if [ -d "$ZDOTDIR/includes" ] && [ -n "$(\ls -A --ignore '.*' $ZDOTDIR/includes)" ]; then
