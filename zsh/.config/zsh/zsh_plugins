@@ -1,5 +1,3 @@
-#!/bin/sh
-
 zinit snippet OMZP::git
 zinit snippet OMZP::git-extras
 zinit snippet OMZP::fzf
@@ -21,5 +19,6 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit snippet 'https://github.com/belak/zsh-utils/blob/main/utility/utility.plugin.zsh'
 # zinit snippet 'https://github.com/belak/zsh-utils/blob/main/completion/completion.plugin.zsh'
 
-# CLI Tab completion with fzf
+# ZSH Tab completion with fzf
 zinit light Aloxaf/fzf-tab
+

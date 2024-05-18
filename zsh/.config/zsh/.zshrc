@@ -7,6 +7,9 @@ CASE_SENSITIVE="true"
 # Vi keybinding
 # bindkey -v
 
+# emacs keybinding
+bindkey -e
+
 # Fix Shift + arrows to move
 bindkey "^[[1;2C" forward-word
 bindkey "^[[1;2D" backward-word
@@ -58,21 +61,18 @@ export BAT_THEME="ansi"
 # Use @@ as the trigger sequence instead of the default **
 export FZF_COMPLETION_TRIGGER='@@'
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!{.git,.cache}'"
-export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --margin=1 --padding=1"
+export FZF_DEFAULT_OPTS="--height=65% --layout=reverse --border --margin=1 --padding=1"
 # export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type l $FD_OPTIONS"
-
 # Preview file content using bat (https://github.com/sharkdp/fd)
 export FZF_CTRL_T_OPTS="
 --preview 'bat -n --color=always {}'
 --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-
 export FZF_CTRL_R_OPTS="
 --preview 'echo {}' --preview-window up:3:hidden:wrap
 --bind 'ctrl-/:toggle-preview'
 --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
 --color header:italic
 --header 'Press CTRL-Y to copy command into clipboard'"
-
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 
 # fff
@@ -125,7 +125,7 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Load plugins
-source "$ZDOTDIR/zsh_plugins.sh"
+source "$ZDOTDIR/zsh_plugins"
 
 # Load autocompletion
 autoload -Uz compinit && compinit
