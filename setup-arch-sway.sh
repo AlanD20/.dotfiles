@@ -217,6 +217,7 @@ pacman_pkgs=(
   obs-studio
   gimp # Image editing
   libreoffice-fresh
+  pika-backup # Backup personal files
 
   #
   #
