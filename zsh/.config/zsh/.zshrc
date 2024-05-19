@@ -175,13 +175,24 @@ eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/themes/aland20-
 # evaluate direnv
 # eval "$(direnv hook zsh)"
 
-# Evaluate ssh-agent, using KeepassXC to add keys to ssh agent
-# run `keepassxc &` to open keepassxc GUI with $SSH_AUTH_SOCK
-# set with current seasson, then it should automatically add
-# the keys to the agent.
-eval "$(ssh-agent -s)"
+# We have to set SSH_AUTH_SOCK at user session level
+# to allow KeepassXC load the keys once and reuse
+# the same agent for the entire user session.
+# * KeepassXC already manages adding/deleting the keys when db locked.
+# * Keep in mind that ssh-agent for the user has to be enabled at /run/user/*.
+# * You have to run 'keepassxc &' to set '$SSH_AUTH_SOCK' variable, or you
+# * confirm that you have installed a 'passphrase dialog' on your machine or
+# uncheck 'require user confirmation' for the key in KeepassXC.
+# * * ref: https://github.com/keepassxreboot/keepassxc/issues/2606
+# * * ref: https://wiki.archlinux.org/title/SSH_keys#Alternative_passphrase_dialogs
+# may override it on KeepassXC app.
+# ref: https://stackoverflow.com/a/38980986/13362195
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-# Add private key to keychain, require SSH passphrase when logging in.
+# Evaluate ssh-agent per profile
+#eval "$(ssh-agent -s)"
+
+# Automatically add keys to keychain, require SSH passphrase when logging in.
 #eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_ed25519)"
 #eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"
 
