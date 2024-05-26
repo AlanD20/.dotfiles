@@ -130,7 +130,8 @@ pacman_pkgs=(
   tldr        # tldr for man pages
   ncdu        # Disk analyzer cleanup
   pyenv       # Python version manager
-  fastfetch
+  fastfetch   # neofetch but faster
+  asciinema   # Ascii to record shell session
   # kmon      # Linux Kernel Manager and Activity Monitor
 
   #
