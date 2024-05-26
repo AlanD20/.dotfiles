@@ -14,7 +14,11 @@ return {
         ---@type table<string, conform.FormatterUnit[]>
         formatters_by_ft = {
           -- Use the "*" filetype to run formatters on all filetypes.
-          ["*"] = { "codespell", "typos" },
+          ["*"] = {
+            -- Disable codespell. UGGHH! auto-corrects false positive words in codebase projects
+            --"codespell",
+            "typos",
+          },
           -- Use the "_" filetype to run formatters on filetypes that don't
           -- have other formatters configured.
           lua = { "stylua" },

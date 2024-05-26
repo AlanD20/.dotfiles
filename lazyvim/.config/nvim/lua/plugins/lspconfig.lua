@@ -88,7 +88,11 @@ return {
         yamlls = {},
         jqls = {},
         terraformls = {},
-        typos_lsp = {},
+        typos_lsp = {
+          init_options = {
+            diagnosticSeverity = "Warning",
+          },
+        },
         jsonls = {},
         zls = {},
       },
