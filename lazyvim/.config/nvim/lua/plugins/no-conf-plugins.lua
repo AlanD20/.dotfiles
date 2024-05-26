@@ -66,17 +66,6 @@ return {
     -- Move between tmux panes and vim windows with Ctrl-<jkhl>
     "christoomey/vim-tmux-navigator",
   },
-  {
-    "echasnovski/mini.comment",
-    event = "VeryLazy",
-    opts = {
-      options = {
-        custom_commentstring = function()
-          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
-        end,
-      },
-    },
-  },
   -- Database querying UI
   -- { "tpope/vim-dadbod" },
   -- { "kristijanhusak/vim-dadbod-completion" },
