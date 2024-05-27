@@ -16,35 +16,71 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import any extras modules here
+
+    -- Coding
+    { import = "lazyvim.plugins.extras.coding.luasnip" },
+    { import = "lazyvim.plugins.extras.coding.yanky" },
+
+    -- Dap
     { import = "lazyvim.plugins.extras.dap.core" },
     { import = "lazyvim.plugins.extras.dap.nlua" },
-    { import = "lazyvim.plugins.extras.util.dot" },
-    { import = "lazyvim.plugins.extras.util.project" },
-    { import = "lazyvim.plugins.extras.editor.mini-diff" },
-    { import = "lazyvim.plugins.extras.coding.mini-surround" },
-    -- { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- { import = "lazyvim.plugins.extras.lsp.none-ls" }, -- null-ls migrate
-    { import = "lazyvim.plugins.extras.editor.navic" },
-    { import = "lazyvim.plugins.extras.editor.mini-files" },
-    { import = "lazyvim.plugins.extras.editor.aerial" },
-    { import = "lazyvim.plugins.extras.editor.leap" },
-    { import = "lazyvim.plugins.extras.coding.yanky" },
+
+    -- Editor
+    { import = "lazyvim.plugins.extras.editor.aerial" }, -- Show file symbols overveiw
+    { import = "lazyvim.plugins.extras.editor.harpoon2" }, -- Bookmark files
+    { import = "lazyvim.plugins.extras.editor.illuminate" }, -- highlight words when cursor is on a word
+    { import = "lazyvim.plugins.extras.editor.leap" }, -- use 's' to quickly jump around words
+    { import = "lazyvim.plugins.extras.editor.mini-diff" }, -- <leader>go to show git diff within buffer
+    { import = "lazyvim.plugins.extras.editor.mini-files" }, -- <leader>fm to open quick file explorer and open files
+    { import = "lazyvim.plugins.extras.editor.mini-move" }, -- Alt+<jklh> to move around line(s)
+    { import = "lazyvim.plugins.extras.editor.trouble-v3" }, -- better comments
+    { import = "lazyvim.plugins.extras.editor.navic" }, -- Shows quick symbol overview for current context
+    { import = "lazyvim.plugins.extras.editor.outline" }, -- Similar to aerial
+    { import = "lazyvim.plugins.extras.coding.mini-surround" }, -- Add/Replace/Delete surrounding 'gz<a,r,d>'
+    { import = "lazyvim.plugins.extras.editor.refactoring" }, -- Refactoring util
+
+    -- Formatting
     { import = "lazyvim.plugins.extras.formatting.black" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
-    { import = "lazyvim.plugins.extras.linting.eslint" },
+
+    -- Languages
+    { import = "lazyvim.plugins.extras.lang.ansible" },
+    -- { import = "lazyvim.plugins.extras.lang.clangd" },
     { import = "lazyvim.plugins.extras.lang.cmake" },
     { import = "lazyvim.plugins.extras.lang.docker" },
     { import = "lazyvim.plugins.extras.lang.go" },
+    -- { import = "lazyvim.plugins.extras.lang.helm" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.python" },
-    { import = "lazyvim.plugins.extras.test.core" },
     -- { import = "lazyvim.plugins.extras.lang.rust" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
     { import = "lazyvim.plugins.extras.lang.terraform" },
+    { import = "lazyvim.plugins.extras.lang.toml" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
+    --{ import = "lazyvim.plugins.extras.lang.vue" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
+
+    -- Linting
+    { import = "lazyvim.plugins.extras.linting.eslint" },
+
+    -- LSP
+    -- { import = "lazyvim.plugins.extras.lsp.none-ls" }, -- null-ls migrate
+
+    -- Test
+    { import = "lazyvim.plugins.extras.test.core" },
+
+    -- UI
+    { import = "lazyvim.plugins.extras.ui.mini-indentscope" }, -- Shows start/end of a scope
+    { import = "lazyvim.plugins.extras.ui.treesitter-context" }, -- Sticky function/class names while in scope
+    -- { import = "lazyvim.plugins.extras.ui.treesitter-rewrite" }, -- TODO: disable for now...
+    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+
+    -- Utils
+    { import = "lazyvim.plugins.extras.util.dot" }, -- Shell scripting utilities
+    { import = "lazyvim.plugins.extras.util.mini-hipatterns" }, -- show hex or texts with background colors?
+    { import = "lazyvim.plugins.extras.util.project" },
+
     -- import/override with your plugins
     { import = "plugins" },
   },
