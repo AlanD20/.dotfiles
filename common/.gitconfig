@@ -38,6 +38,9 @@ gpgsign = true
 [diff]
     colorMoved = default
 
+[credential]
+  helper = !/usr/lib/git-core/git-credential-libsecret
+
 # Always use ssh instead of https for my own account
 [url "git@github.com:AlanD20"]
         insteadOf = https://github.com/AlanD20
