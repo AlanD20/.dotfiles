@@ -1,8 +1,9 @@
-.vscode
+.vscode/
 common/.config/gtk-3.0/bookmarks
 thunar/.config/Thunar/*.scm
 tmux/.config/tmux/plugins/*
 k9s/.config/k9s/skins/*.yaml
+!common/.vscode
 
 gnupg/.gnupg/*
 !gnupg/.gnupg/gpg-agent-conf

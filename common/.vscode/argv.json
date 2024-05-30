@@ -1,0 +1,5 @@
+{
+	"password-store": "gnome-libsecret",
+	"enable-crash-reporter": false,
+	"crash-reporter-id": ""
+}
