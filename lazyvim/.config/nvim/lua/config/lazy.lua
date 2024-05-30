@@ -33,7 +33,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.editor.mini-diff" }, -- <leader>go to show git diff within buffer
     { import = "lazyvim.plugins.extras.editor.mini-files" }, -- <leader>fm to open quick file explorer and open files
     { import = "lazyvim.plugins.extras.editor.mini-move" }, -- Alt+<jklh> to move around line(s)
-    { import = "lazyvim.plugins.extras.editor.trouble-v3" }, -- better comments
     { import = "lazyvim.plugins.extras.editor.navic" }, -- Shows quick symbol overview for current context
     { import = "lazyvim.plugins.extras.editor.outline" }, -- Similar to aerial
     { import = "lazyvim.plugins.extras.coding.mini-surround" }, -- Add/Replace/Delete surrounding 'gz<a,r,d>'
