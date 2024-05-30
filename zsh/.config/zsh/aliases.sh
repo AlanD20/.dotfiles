@@ -5,7 +5,7 @@
 # WINHOME=$(wslpath "$(wslvar USERPROFILE)")
 
 # Bundle zsh plugins via antidote
-alias ad-update="antidote bundle < $ZDOTDIR/.zsh_plugins.txt > $ZDOTDIR/.zsh_plugins.zsh"
+# alias ad-update="antidote bundle < $ZDOTDIR/.zsh_plugins.txt > $ZDOTDIR/.zsh_plugins.zsh"
 
 # Open
 alias fp="fzf --preview=\"bat --color=always --style=plain {}\" --preview-window=\"border:rounded\" --border=rounded --prompt=\"$ \" --pointer=\"->\""
