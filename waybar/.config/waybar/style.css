@@ -146,11 +146,30 @@ tooltip label {
   }
 }
 
+@keyframes full-battery-blink {
+  from {
+    background-color: transparent;
+    color: shade(@blue, 0.8);
+  }
+  to {
+    background-color: shade(@green, 0.7);
+    color: @text;
+  }
+}
+
 #battery.critical:not(.charging) {
   padding: 0 8px;
   border-radius: 4px;
   font-weight: bold;
   animation: battery-blink 500ms infinite;
+  animation-direction: alternate;
+}
+
+#battery.full {
+  padding: 0 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  animation: full-battery-blink 500ms infinite;
   animation-direction: alternate;
 }
 

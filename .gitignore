@@ -12,6 +12,7 @@ zsh/**/.zcompdump*
 zsh/**/.zhistory
 zsh/**/.zsh_plugins.zsh
 zsh/**/.zdirs
+zsh/**/.cache
 zsh/**/includes/**/*.*
 !zsh/**/includes/**/.gitkeep
 

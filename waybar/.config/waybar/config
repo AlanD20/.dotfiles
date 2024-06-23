@@ -210,7 +210,8 @@
   "battery": {
     "interval": 1,
     "states": {
-      "good": 90,
+      "full": 90,
+      "good": 89,
       "warning": 30,
       "critical": 20
     },
