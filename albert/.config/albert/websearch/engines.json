@@ -1,5 +1,6 @@
 [
     {
+        "fallback": true,
         "iconPath": ":duckduckgo",
         "id": "ccede706",
         "name": "DuckDuckGo",
@@ -7,6 +8,7 @@
         "url": "https://duckduckgo.com/?q=%s"
     },
     {
+        "fallback": true,
         "iconPath": ":github",
         "id": "5df96bee",
         "name": "GitHub",
@@ -14,6 +16,7 @@
         "url": "https://github.com/search?utf8=✓&q=%s"
     },
     {
+        "fallback": true,
         "iconPath": ":google",
         "id": "e3b336a7",
         "name": "Google",
@@ -21,6 +24,7 @@
         "url": "https://www.google.com/search?q=%s"
     },
     {
+        "fallback": true,
         "iconPath": ":maps",
         "id": "f45d496f",
         "name": "Google Maps",
@@ -28,6 +32,7 @@
         "url": "https://www.google.com/maps/search/%s/"
     },
     {
+        "fallback": true,
         "iconPath": ":wolfram",
         "id": "cfbcf6ed",
         "name": "Wolfram Alpha",
@@ -35,6 +40,7 @@
         "url": "https://www.wolframalpha.com/input/?i=%s"
     },
     {
+        "fallback": true,
         "iconPath": ":youtube",
         "id": "66b02e12",
         "name": "Youtube",

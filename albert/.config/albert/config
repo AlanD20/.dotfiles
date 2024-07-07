@@ -120,7 +120,7 @@ trigger=url
 
 [websearch]
 enabled=true
-fallback_hanlder_enabled=true
+fallback_handler_enabled=true
 global_handler_enabled=true
 trigger="search "
 
@@ -128,12 +128,14 @@ trigger="search "
 alwaysOnTop=true
 clearOnHide=true
 clientShadow=true
+darkTheme=Nord
 displayIcons=true
 displayScrollbar=false
 followCursor=true
 hideOnFocusLoss=true
 historySearch=true
 itemCount=6
+lightTheme=Nord
 quitOnClose=false
 showCentered=true
 showFallbacksOnEmpty=true
