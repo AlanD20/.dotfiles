@@ -132,6 +132,7 @@ pacman_pkgs=(
   pyenv       # Python version manager
   fastfetch   # neofetch but faster
   asciinema   # Ascii to record shell session
+  atuin       # Powerful TUI sqlite db to store command history
   # kmon      # Linux Kernel Manager and Activity Monitor
 
   #

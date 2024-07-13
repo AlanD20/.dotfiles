@@ -18,6 +18,7 @@ mkdir -p $HOME/.local/bin $HOME/.local/share/fonts
 stow_dirs=(
   alacritty
   albert
+  atuin
   bin
   common
   docker
@@ -57,7 +58,8 @@ echo "=========================================="
 for dir in ${stow_dirs[@]}; do
   echo "Stowing $dir"
   # LC_ALL=C fixes perl locale warning
-  LC_ALL=C stow $dir
+  # gracefully run stow and adopt
+  LC_ALL=C stow $dir --adopt
 done
 
 echo "=========================================="

@@ -22,3 +22,6 @@ zinit snippet 'https://github.com/belak/zsh-utils/blob/main/utility/utility.plug
 # ZSH Tab completion with fzf
 zinit light Aloxaf/fzf-tab
 
+# Powerful TUI sqlite db to store command history
+zinit light atuinsh/atuin
+

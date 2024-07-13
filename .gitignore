@@ -13,6 +13,7 @@ zsh/**/.zhistory
 zsh/**/.zsh_plugins.zsh
 zsh/**/.zdirs
 zsh/**/.cache
+zsh/**/atuin*
 zsh/**/includes/**/*.*
 !zsh/**/includes/**/.gitkeep
 
