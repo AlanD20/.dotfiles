@@ -1,14 +1,22 @@
+#!/usr/bin/env zsh
+
+# This script runs by the login user to keep all the permissions
+
 ###
 # Configs
 ###
 
 node_version="lts/hydrogen"
 
-check_failure() {
+fail() {
+  echo "Error: $1"
+  echo "Please re-run the script, exiting..."
+  exit 1
+}
+
+should_fail() {
   if [ "$?" -ne 0 ]; then
-    echo "Error: $1"
-    echo "Please re-run the script, exiting..."
-    exit 1
+    fail "$1"
   fi
 }
 
@@ -71,28 +79,28 @@ fc-cache -rv
 # add zsh to valid login shell
 command -v zsh | sudo tee -a /etc/shells
 
-check_failure "Adding zsh to valid login shells"
+should_fail "Adding zsh to valid login shells"
 
 # Use zsh as default shell
 sudo usermod --shell $(which zsh) $USER
 
-check_failure "Changing user shell"
+should_fail "Changing user shell"
 
 source "common/.zshenv"
 source "$HOME/.zshenv"
 
-# Load profile for antidote
+# Load ZSH profile
 source "$ZDOTDIR/.zshrc"
 
-check_failure "Sourcing .zshrc shell environment"
+should_fail "Sourcing .zshrc shell environment"
 
-# create a new symlink
+# finally, link zsh config
 stow zsh
 
 # Loads plugins and nvm
 source "$ZDOTDIR/.zshrc"
 
-check_failure "sourcing pre-configured zsh shell environment"
+should_fail "sourcing pre-configured zsh shell environment"
 
 # Change go mod path
 go env -w GOMODCACHE="$XDG_CACHE_HOME/go/pkg/mod"

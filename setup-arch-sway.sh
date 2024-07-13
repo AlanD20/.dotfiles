@@ -1,35 +1,39 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Pass the user so it installs on behalf of the user
 user="$1"
-pwd="$PWD"
-temp="/home/$user/temp"
+script_path="$PWD"
+
+echo "Use your login user with 'sudo' to run this script."
+echo "Required args: "
+echo "\$1: <user>"
+
+fail() {
+  echo "Error: $1"
+  echo "Please re-run the script, exiting..."
+  exit 1
+}
+
+should_fail() {
+  if [ "$?" -ne 0 ]; then
+    fail "$1"
+  fi
+}
 
 if [ "$user" = "" ]; then
-  echo "User is required!"
-  exit 0
+  fail "User is required!"
 fi
-
-echo "USE SUDO TO RUN THIS SCRIPT NOT ROOT!! AND Pass Your user login to first arg"
 
 read -r -p "y to continue, any key to cancel: "
 
 if [ "${REPLY:0:1}" != 'y' ]; then
-  exit 1
+  echo "Script canceled!"
+  exit 0
 fi
 
 # Create a temporary directory
-mkdir "$temp"
-sudo chown "$user" -R "$user"
+temp=$(mktemp -d)
 cd "$temp" || exit
-
-check_failure() {
-  if [ "$?" -ne 0 ]; then
-    echo "Error: $1"
-    echo "Please re-run the script, exiting..."
-    exit 1
-  fi
-}
 
 pacman_pkgs=(
   #
@@ -272,88 +276,94 @@ aur_pkgs=(
 echo "=========================================="
 echo "Install yay"
 echo "=========================================="
-sudo pacman -S --noconfirm git base-devel # Make sure they are installed
 
-# Change clone directory to user's owner
-su "$user" -c "cd /home/$user && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm"
-
-check_failure "yay installation failed, you have to manually go to $HOME/yay-bin then run 'makepkg -si' then comment yay install in this script"
+if ! command -v yay; then
+  sudo pacman -S --noconfirm git base-devel # Make sure they are installed
+  su "$user" -c "cd $temp && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm"
+  should_fail "yay installation failed! install 'yay' manually."
+else
+  echo "yay is already installed. continue..."
+fi
 
 echo "=========================================="
 echo "💽 Install pacman packages"
 echo "=========================================="
 
-for package in "${pacman_pkgs[@]}"; do
-  pacman -S --noconfirm "$package"
-done
+pacman_list=$(printf "%s " "${pacman_pkgs[@]}")
+pacman -S --noconfirm "$pacman_list"
 
 echo "=========================================="
 echo "💽 Install AUR packages using yay"
 echo "=========================================="
 
-for package in "${aur_pkgs[@]}"; do
-  su "$user" -c "yay -Sy $package"
-done
-
-check_failure "Most probably yay failed to install packages, please install them manually."
-
-# Fix debug file
-sudo sed 's/;//' -i xdebug.ini
+yay_list=$(printf "%s " "${aur_pkgs[@]}")
+su "$user" -c "yay -Sy $yay_list"
 
 echo "=========================================="
 echo "Installing Composer"
 echo "=========================================="
-curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer
+if ! command -v php; then
+  echo "php command is not found, skipping composer installation."
+else
+  php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+fi
 
-check_failure "Composer installation"
+if command -v spotify; then
+  echo "=========================================="
+  echo "Install SpotX For Spotify"
+  echo "=========================================="
+  bash <(curl -sSL https://raw.githubusercontent.com/SpotX-CLI/SpotX-Linux/main/install.sh) -ce
+fi
 
 echo "=========================================="
-echo "🖼️ Configuring zsh"
+echo "🖼️ ZSH Configuration"
 echo "=========================================="
 
 # Load the profile script with zsh
-cd "$pwd" || exit 1
-su "$user" -c "$(which zsh) $pwd/sway-install-profile.zsh"
+cd "$script_path" || should_fail "Script path no longer exist."
+su "$user" -c "$(which zsh) $script_path/sway-install-profile.zsh"
 
-check_failure "running user profile script"
+should_fail "running user profile script"
 
 echo "=========================================="
-echo "Configure SSH"
+echo "💽 Configuration Setup"
 echo "=========================================="
 
+echo "------------------------------------------"
+echo "Enabling SSH"
+echo "------------------------------------------"
 sed -i 's/#Port 22/Port 22/I' /etc/ssh/sshd_config
 sed -i 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/I' /etc/ssh/sshd_config
 
-echo "=========================================="
-echo "Install SpotX For Spotify"
-echo "=========================================="
-bash <(curl -sSL https://raw.githubusercontent.com/SpotX-CLI/SpotX-Linux/main/install.sh) -ce
+if command -v php; then
+  # Fix debug file
+  sudo sed 's/;//' -i xdebug.ini
 
-check_failure "SpotX installation"
-
-echo "=========================================="
-echo "Setup PHP"
-echo "=========================================="
-sed -i 's/;cgi.fix_pathinfo=0/cgi.fix_pathinfo=1/I' /etc/php/php.ini
-sed -i 's/;extension=bcmath/extension=bcmath/I' /etc/php/php.ini
-sed -i 's/;extension=fileinfo/extension=fileinfo/I' /etc/php/php.ini
-sed -i 's/;extension=gd/extension=gd/I' /etc/php/php.ini
-sed -i 's/;extension=imap/extension=imap/I' /etc/php/php.ini
-sed -i 's/;extension=mbstring/extension=mbstring/I' /etc/php/php.ini
-sed -i 's/;extension=exif/extension=exif/I' /etc/php/php.ini
-sed -i 's/;extension=mysqli/extension=mysqli/I' /etc/php/php.ini
-sed -i 's/;extension=sqlite3/extension=sqlite3/I' /etc/php/php.ini
-sed -i 's/;extension=openssl/extension=openssl/I' /etc/php/php.ini
-sed -i 's/;extension=pdo_mysql/extension=pdo_mysql/I' /etc/php/php.ini
-sed -i 's/;extension=pdo_sqlite/extension=pdo_sqlite/I' /etc/php/php.ini
-sed -i 's/;extension=sockets/extension=sockets/I' /etc/php/php.ini
-sed -i 's/;extension=intl/extension=intl/I' /etc/php/php.ini
-sed -i 's/;extension=sodium/extension=sodium/I' /etc/php/php.ini
-sed -i 's/;extension=igbinary.so/extension=igbinary.so/I' /etc/php/php.ini
-sed -i 's/;igbinary.compact_strings=On/igbinary.compact_strings=On/I' /etc/php/php.ini
-sed -i 's/;extension=redis/extension=redis/I' /etc/php/php.ini
-sed -i 's/;extension=redis/extension=redis/I' /etc/php/conf.d/redis.ini
-sed -i 's/;extension=iconv/extension=iconv/I' /etc/php/php.ini
+  echo "=========================================="
+  echo "Modify php.ini file"
+  echo "=========================================="
+  sed -i 's/;cgi.fix_pathinfo=0/cgi.fix_pathinfo=1/I' /etc/php/php.ini
+  sed -i 's/;extension=bcmath/extension=bcmath/I' /etc/php/php.ini
+  sed -i 's/;extension=fileinfo/extension=fileinfo/I' /etc/php/php.ini
+  sed -i 's/;extension=gd/extension=gd/I' /etc/php/php.ini
+  sed -i 's/;extension=imap/extension=imap/I' /etc/php/php.ini
+  sed -i 's/;extension=mbstring/extension=mbstring/I' /etc/php/php.ini
+  sed -i 's/;extension=exif/extension=exif/I' /etc/php/php.ini
+  sed -i 's/;extension=mysqli/extension=mysqli/I' /etc/php/php.ini
+  sed -i 's/;extension=sqlite3/extension=sqlite3/I' /etc/php/php.ini
+  sed -i 's/;extension=openssl/extension=openssl/I' /etc/php/php.ini
+  sed -i 's/;extension=pdo_mysql/extension=pdo_mysql/I' /etc/php/php.ini
+  sed -i 's/;extension=pdo_sqlite/extension=pdo_sqlite/I' /etc/php/php.ini
+  sed -i 's/;extension=sockets/extension=sockets/I' /etc/php/php.ini
+  sed -i 's/;extension=intl/extension=intl/I' /etc/php/php.ini
+  sed -i 's/;extension=sodium/extension=sodium/I' /etc/php/php.ini
+  sed -i 's/;extension=igbinary.so/extension=igbinary.so/I' /etc/php/php.ini
+  sed -i 's/;igbinary.compact_strings=On/igbinary.compact_strings=On/I' /etc/php/php.ini
+  sed -i 's/;extension=redis/extension=redis/I' /etc/php/php.ini
+  sed -i 's/;extension=redis/extension=redis/I' /etc/php/conf.d/redis.ini
+  sed -i 's/;extension=iconv/extension=iconv/I' /etc/php/php.ini
+fi
 
 echo "=========================================="
 echo "🔃 System Service"
@@ -379,7 +389,7 @@ groupadd docker
 # Adding user to the group
 usermod -a -g docker,flatpak,redis "$user"
 
-check_failure "Adding User to docker, flatpak, redis groups"
+should_fail "Adding User to docker, flatpak, redis groups"
 
 bat <<MANUAL_TASKS
 ==============================================
