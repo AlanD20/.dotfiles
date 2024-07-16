@@ -249,6 +249,7 @@ pacman_pkgs=(
 aur_pkgs=(
   downgrade # Easily downgrade packages from A.L.A or cache
   albert
+  go-task-bin # Taskfile is a task runner/build tool like GNU Make
   oh-my-zsh-git
   oh-my-posh-bin
   tmux-plugin-manager # tpm for tmux
