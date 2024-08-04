@@ -13,16 +13,12 @@ trigger=alb
 
 [applications]
 enabled=true
+fuzzy=true
 global_handler_enabled=true
 trigger=files
-use_generic_name=true
-use_keywords=true
-
-[applications_xdg]
-enabled=true
-fuzzy=true
 use_exec=true
 use_generic_name=true
+use_keywords=true
 
 [arch_wiki]
 enabled=true
