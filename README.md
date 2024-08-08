@@ -109,7 +109,7 @@ Make sure to enable the following flags for Chromium
   `Ctrl + Alt + f4`, , and so on.
 - To find font names, you may use `fc-list` with grep to filter out your font.
 
-  ```jsx
+  ```bash
   fc-list | grep -i meslolgmnerd
   ```
 

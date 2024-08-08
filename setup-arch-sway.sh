@@ -268,7 +268,7 @@ aur_pkgs=(
   zig-bin
   metadata-cleaner
   onedrive-abraunegg # Onedrive sync for keepass db
-  jqp-bin            # A TUI playground for jq
+  jqp                # A TUI playground for jq
 
   adwaita-qt5 # Theme for qt5
   adwaita-qt6 # Theme for qt6
