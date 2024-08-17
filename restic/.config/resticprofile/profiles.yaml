@@ -1,0 +1,75 @@
+version: "2"
+#
+# Scheduler is not an option since repo password is stored in secret service and
+# secret-tool requires a DBUS session (GUI) to get the secret :( i'll do it manually
+# with a helper script
+#
+global:
+  # run 'snapshots' when no command is specified when invoking resticprofile
+  default-command: snapshots
+  # scheduler: systemd
+  # schedule-priority: background
+  # schedule-after-network-online: true
+  # Ask restic to unlock a stale lock when its age is more than 2 hours
+  # and the option "force-inactive-lock" is enabled in the profile.
+  restic-stale-lock-age: 2h
+groups:
+  aland20:
+    profiles:
+      - notes
+      - storage
+profiles:
+  base:
+    password-command: secret-tool lookup service 'borg:restic'
+    force-inactive-lock: true
+    # retention policy for profile root
+    # retention is a special section that run the "forget" command
+    # before or after a backup
+    retention:
+      before-backup: false
+      after-backup: true
+      keep-daily: 1
+      keep-hourly: 1
+      keep-weekly: 1
+      keep-monthly: 1
+      keep-within: 3h
+      prune: true
+      # host can be a boolean ('true' meaning current hostname)
+      # or a string to specify a different hostname
+      host: "{{.Env.RESTIC_HOSTNAME}}"
+    # prune:  # Unnecessary since retention runs after backup
+    #   schedule: "*-*-* 9:45:00"
+    #   schedule-permission: user
+    #   schedule-lock-wait: 1h
+    backup:
+      # schedule: "*-*-* 09:00:00"
+      # schedule-permission: user
+      verbose: true
+    check:
+    # schedule: "*-*-* 10:37:10"
+    # schedule-permission: user
+    # schedule-lock-wait: 15m
+    copy:
+      # schedule: "*-*-* 09:30:00"
+      # schedule-permission: user
+      # schedule-lock-wait: 15m
+      password-command: secret-tool lookup service 'borg:restic'
+      snapshot: latest
+  notes:
+    inherit: base
+    repository: "{{.Env.RESTIC_NOTES_REPO}}"
+    lock: /tmp/resticprofile-notes.lock
+    backup:
+      source:
+        - "{{.Env.RESTIC_NOTES_PATH}}"
+    copy:
+      repository: "{{.Env.RESTIC_NOTES_BACKUP_PATH}}"
+  storage:
+    inherit: base
+    repository: "{{.Env.RESTIC_STORAGE_REPO}}"
+    lock: /tmp/resticprofile-storage.lock
+    backup:
+      source:
+        - "{{.Env.RESTIC_STORAGE_PATH}}"
+    copy:
+      repository: "{{.Env.RESTIC_STORAGE_BACKUP_PATH}}"

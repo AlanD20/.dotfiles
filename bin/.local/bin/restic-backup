@@ -1,0 +1,36 @@
+#!/usr/bin/sh
+
+check_state() {
+  last_exit=$?
+
+  if [ "$last_exit" -ne 0 ]; then
+    notify-send -u critical "Error: Backup failed!
+
+    $(cat /tmp/fd7.log)"
+    exit "$last_exit"
+  fi
+}
+
+echo "-----------------------------------------------------------------"
+echo "--------------------- [ ] Backup Starting.. ---------------------"
+echo "-----------------------------------------------------------------"
+
+notify-send -t 750 -u normal "Backup started..."
+
+resticprofile -n aland20 backup 2>&1 | tee /tmp/fd7.log
+check_state
+
+resticprofile -n aland20 check 2>&1 | tee /tmp/fd7.log
+check_state
+
+resticprofile -n aland20 copy 2>&1 | tee /tmp/fd7.log
+check_state
+
+# Cleanup
+rm /tmp/fd7.log
+
+notify-send -t 750 -u Normal "Success: Backup completed!"
+
+echo "-----------------------------------------------------------------"
+echo "--------------------- [x] Backup Successful ---------------------"
+echo "-----------------------------------------------------------------"

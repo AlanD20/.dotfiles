@@ -138,6 +138,7 @@ pacman_pkgs=(
   asciinema   # Ascii to record shell session
   atuin       # Powerful TUI sqlite db to store command history
   # kmon      # Linux Kernel Manager and Activity Monitor
+  restic # Backup CLI Util
 
   #
   # languages
@@ -269,6 +270,7 @@ aur_pkgs=(
   metadata-cleaner
   onedrive-abraunegg # Onedrive sync for keepass db
   jqp                # A TUI playground for jq
+  resticprofile-bin  # Wrapper for restic with ease of configuration
 
   adwaita-qt5 # Theme for qt5
   adwaita-qt6 # Theme for qt6
