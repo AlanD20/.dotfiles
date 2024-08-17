@@ -13,6 +13,7 @@ return {
         "codespell",
         "typos",
         "typos-lsp",
+        -- "puppet-editor-services",
 
         -- Shell scripts
         "shfmt",
@@ -57,6 +58,7 @@ return {
         "pint",
         "intelephense",
         "php-debug-adapter",
+        "phpcs",
         "php-cs-fixer",
         "phpstan",
         "blade-formatter",

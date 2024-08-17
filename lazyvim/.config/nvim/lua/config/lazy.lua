@@ -20,6 +20,7 @@ require("lazy").setup({
     -- Coding
     { import = "lazyvim.plugins.extras.coding.luasnip" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
+    { import = "lazyvim.plugins.extras.coding.neogen" }, -- Better annotation
 
     -- Dap
     { import = "lazyvim.plugins.extras.dap.core" },
@@ -44,15 +45,18 @@ require("lazy").setup({
 
     -- Languages
     { import = "lazyvim.plugins.extras.lang.ansible" },
-    -- { import = "lazyvim.plugins.extras.lang.clangd" },
+    { import = "lazyvim.plugins.extras.lang.clangd" },
     { import = "lazyvim.plugins.extras.lang.cmake" },
     { import = "lazyvim.plugins.extras.lang.docker" },
+    { import = "lazyvim.plugins.extras.lang.git" },
     { import = "lazyvim.plugins.extras.lang.go" },
     -- { import = "lazyvim.plugins.extras.lang.helm" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.python" },
+    { import = "lazyvim.plugins.extras.lang.php" },
     -- { import = "lazyvim.plugins.extras.lang.rust" },
+    { import = "lazyvim.plugins.extras.lang.sql" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
     { import = "lazyvim.plugins.extras.lang.terraform" },
     { import = "lazyvim.plugins.extras.lang.toml" },

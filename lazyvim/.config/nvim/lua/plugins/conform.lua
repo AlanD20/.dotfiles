@@ -11,7 +11,6 @@ return {
           quiet = false, -- not recommended to change
           lsp_fallback = true, -- not recommended to change
         },
-        ---@type table<string, conform.FormatterUnit[]>
         formatters_by_ft = {
           -- Use the "*" filetype to run formatters on all filetypes.
           ["*"] = {
@@ -26,28 +25,39 @@ return {
           -- Conform will run multiple formatters sequentially
           python = { "isort", "black" },
           -- Use a sub-list to run only the first available formatter
-          html = { { "prettierd", "prettier" } },
-          css = { { "prettierd", "prettier" } },
-          javascript = { { "prettierd", "prettier" } },
-          typescript = { { "prettierd", "prettier" } },
-          typescriptreact = { { "prettierd", "prettier" } },
-          javascriptreact = { { "prettierd", "prettier" } },
+          html = { "prettierd" },
+          css = { "prettierd" },
+          javascript = { "prettierd" },
+          typescript = { "prettierd" },
+          typescriptreact = { "prettierd" },
+          javascriptreact = { "prettierd" },
           php = {
             "pint",
-            --   "phpcsfixer",
+            "php_cs_fixer",
           },
           blade = { "blade_formatter" },
           go = { --overwrites lazyvim conform list
             -- they are included with lazyvim golang plugin
             "gofmt",
             -- "gofumpt",
-            { "goimports_reviser", "goimports" },
+            "goimports_reviser",
             "golines",
           },
           json = { "fixjson" },
           yaml = {
             "yamlfmt",
             "yamlfix",
+          },
+        },
+        stop_after_first = {
+          html = { "prettier" },
+          css = { "prettier" },
+          javascript = { "prettier" },
+          typescript = { "prettier" },
+          typescriptreact = { "prettier" },
+          javascriptreact = { "prettier" },
+          go = {
+            "goimports",
           },
         },
         -- The options you set here will be merged with the builtin formatters.

@@ -12,7 +12,10 @@ return {
         ["*"] = { "typos", "codespell" },
         sh = { "shellcheck" },
         python = { "flake8" },
-        php = { "phpstan" },
+        php = {
+          -- "phpcs",
+          "phpstan",
+        },
         yaml = { "yamllint" },
         tf = { "tfsec", "tflint" },
         markdown = { "markdownlint" },
