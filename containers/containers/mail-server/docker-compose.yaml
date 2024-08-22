@@ -1,0 +1,29 @@
+name: "mail-dev"
+services:
+  # ======================
+  # Mail Hog
+  # mailhog:
+  #   image: mailhog/mailhog:latest
+  #   ports:
+  #     - "1025:1025"
+  #     - "8225:8025"
+  #   networks:
+  #     - mail-net
+  #   restart: on-failure
+  # ======================
+  # Mail pit - Modern
+  mailpit:
+    image: "axllent/mailpit"
+    ports:
+      - "1025:1025"
+      - "8225:8025"
+    restart: "unless-stopped"
+    networks:
+      - "mail-net"
+    environment:
+      MP_DATA_FILE: "/home"
+    volumes:
+      - ./mailpit-data:/home
+networks:
+  mail-net:
+    driver: "bridge"

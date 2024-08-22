@@ -44,3 +44,14 @@ f() {
 jqq() {
   \jqp -t dracula -f "$@"
 }
+
+# Easy docker ssh as user
+dssh() {
+  if ! command -v docker; then
+    exit 1
+  fi
+
+  user=${2:-root}
+  cmd=${3:-/bin/bash}
+  docker exec --user "$user" -it "$1" "$cmd"
+}

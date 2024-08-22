@@ -1,0 +1,87 @@
+name: "kafka-cluster"
+services:
+  # ZooKeeper for kafka
+  zookeeper:
+    image: "bitnami/zookeeper:3.9"
+    ports:
+      - "2182:2181"
+    networks:
+      - "kafka-net"
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  # ======================
+  # Kafka Broker
+  # More at: https://github.com/bitnami/containers/tree/main/bitnami/kafka
+  kafka1:
+    depends_on:
+      - "zookeeper"
+    image: "bitnami/kafka:3.8"
+    ports:
+      - "19092:19092"
+    networks:
+      - "kafka-net"
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka1:19094,PLAINTEXT_HOST://localhost:19092
+      - KAFKA_LISTENERS=PLAINTEXT://kafka1:19094,PLAINTEXT_HOST://0.0.0.0:19092
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=2
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_NUM_PARTITIONS=32
+      - KAFKA_CFG_DEFAULT_REPLICATION_FACTOR=2
+    user: root
+    command: |
+      /bin/bash -c "apt update && \
+      apt install -y tmux ncurses-bin vim && \
+      /opt/bitnami/scripts/kafka/run.sh"
+  kafka2:
+    depends_on:
+      - "zookeeper"
+    image: "bitnami/kafka:3.8"
+    ports:
+      - "29092:29092"
+    networks:
+      - "kafka-net"
+    environment:
+      - KAFKA_BROKER_ID=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka2:29094,PLAINTEXT_HOST://localhost:29092
+      - KAFKA_LISTENERS=PLAINTEXT://kafka2:29094,PLAINTEXT_HOST://0.0.0.0:29092
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=2
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_NUM_PARTITIONS=32
+      - KAFKA_CFG_DEFAULT_REPLICATION_FACTOR=2
+    user: root
+    command: |
+      /bin/bash -c "apt update && \
+      apt install -y tmux ncurses-bin vim && \
+      /opt/bitnami/scripts/kafka/run.sh"
+  kafka3:
+    depends_on:
+      - "zookeeper"
+    image: "bitnami/kafka:3.8"
+    ports:
+      - "39092:39092"
+    networks:
+      - "kafka-net"
+    environment:
+      - KAFKA_BROKER_ID=3
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka3:39094,PLAINTEXT_HOST://localhost:39092
+      - KAFKA_LISTENERS=PLAINTEXT://kafka3:39094,PLAINTEXT_HOST://0.0.0.0:39092
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=2
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_NUM_PARTITIONS=32
+      - KAFKA_CFG_DEFAULT_REPLICATION_FACTOR=2
+    user: root
+    command: |
+      /bin/bash -c "apt update && \
+      apt install -y tmux ncurses-bin vim && \
+      /opt/bitnami/scripts/kafka/run.sh"
+networks:
+  kafka-net:
+    driver: bridge

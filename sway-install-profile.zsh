@@ -29,7 +29,7 @@ stow_dirs=(
   atuin
   bin
   common
-  docker
+  containers
   easyeffects
   # flameshot
   gnupg
