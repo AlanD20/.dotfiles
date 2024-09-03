@@ -51,6 +51,7 @@ After installing the nvidia drivers, use hyprland guide on Nvidia drivers to als
 
 - With sway, use vulkan renderer, for that, you may have to install `vulkan-intel` and `vulkan-validation-layers`.
 - Brightnessctl not working properly on nvidia drivers? Try to add `acpi_backlight=native` to `GRUB_CMDLINE_LINUX_DEFAULT` in `/etc/default/grub`. (Don't forget to do `sudo grub-mkconfig -o /boot/grub/grub.cfg` after changes.)
+- Don't forget to Enable this kernel module parameter for nvidia: [Preserve Video Memory After Suspend](https://wiki.archlinux.org/title/NVIDIA/Tips_and_tricks#Preserve_video_memory_after_suspend)
 
 ## Enable SSH-Agent
 
