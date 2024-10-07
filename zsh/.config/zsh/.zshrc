@@ -139,9 +139,6 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Load plugins
-source "$ZDOTDIR/zsh_plugins"
-
 # Load autocompletion
 autoload -Uz compinit && compinit
 setopt autocd beep extendedglob nomatch notify
@@ -152,13 +149,17 @@ zinit cdreplay -q
 ZSH_WEB_SEARCH_ENGINES=(yt "https://www.youtube.com/results?search_query=")
 ZSH_WEB_SEARCH_ENGINES=(yth "https://www.youtube.com/")
 
-# Uncomment if oh-my-zsh is necessary
-# [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
+# Uncomment if oh-my-zsh is necessary, although you don't need it even on WSL
+#[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 [ -f "$ZDOTDIR/helpers.sh" ] && source "$ZDOTDIR/helpers.sh"
 [ -f "$ZDOTDIR/aliases.sh" ] && source "$ZDOTDIR/aliases.sh"
 [ -f "$CARGO_HOME/env" ] && source "$CARGO_HOME/env"
 
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/themes/aland20-custom-theme.omp.json)"
+
+# Load plugins
+source "$ZDOTDIR/zsh_plugins"
+
 
 # Antidote setup, source antidote
 # source ${ZDOTDIR:-}/.antidote/antidote.zsh
