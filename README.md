@@ -117,6 +117,10 @@ Make sure to enable the following flags for Chromium
 - To copy output or input to clipboard use `xclip` for Xorg and `wl-copy`
   (install `wl-clipboard`) for Wayland.
 - **[A2DP Bluetooth Arch Wiki](https://wiki.archlinux.org/title/bluetooth_headset)**
+  - enable Secure Simple Pairing (SSP) mode to avoid manual pin authentication for bluetooth connections
+    ```bash
+    sudo btmgmt ssp on
+    ```
 - Here are a few documentations to enable Dark mode:
   - **[Switching Dark Mode Wiki](https://wiki.archlinux.org/title/Dark_mode_switching)**
   - **[GTK Configuration](https://wiki.archlinux.org/title/GTK#Configuration)**
