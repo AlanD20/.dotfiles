@@ -1,6 +1,9 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      { "nushell/tree-sitter-nu" },
+    },
     opts = function(_, opts)
       vim.list_extend(opts.highlight, {
         enable = true,
@@ -33,7 +36,7 @@ return {
         "graphql",
         "java",
         "bash",
-        "blade",
+        "blade", -- Manual Installation
         "comment",
         "css",
         "dockerfile",
@@ -51,6 +54,7 @@ return {
         "lua",
         "markdown",
         "markdown_inline",
+        "nu", -- manual installation, queries = https://github.com/nushell/tree-sitter-nu/blob/main/installation/neovim.md
         -- "puppet",
         "php",
         "phpdoc",
