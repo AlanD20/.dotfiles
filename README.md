@@ -121,6 +121,7 @@ Make sure to enable the following flags for Chromium
     ```bash
     sudo btmgmt ssp on
     ```
+  - You might have to change the `ControllerMode` to `bredr` at `/etc/bluetooth/main.conf`, then restart the bluetooth service.
 - Here are a few documentations to enable Dark mode:
   - **[Switching Dark Mode Wiki](https://wiki.archlinux.org/title/Dark_mode_switching)**
   - **[GTK Configuration](https://wiki.archlinux.org/title/GTK#Configuration)**

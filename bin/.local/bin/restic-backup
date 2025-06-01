@@ -23,8 +23,15 @@ check_state
 resticprofile -n aland20 check 2>&1 | tee /tmp/fd7.log
 check_state
 
-resticprofile -n aland20 copy 2>&1 | tee /tmp/fd7.log
+resticprofile -n aland20 prune 2>&1 | tee /tmp/fd7.log
 check_state
+
+resticprofile -n notes copy 2>&1 | tee /tmp/fd7.log
+check_state
+
+### Repair if necessary
+# resticprofile -n aland20 repair index
+# resticprofile -n aland20 repair snapshots
 
 # Cleanup
 rm /tmp/fd7.log
