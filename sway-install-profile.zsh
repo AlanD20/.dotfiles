@@ -129,6 +129,9 @@ echo "=========================================="
 pyenv install 3.11.7
 pyenv global 3.11.7
 
+# python3 dependencies
+pip3 build installer wheel setuptools_scm
+
 echo "=========================================="
 echo "🔃 System Service"
 echo "=========================================="

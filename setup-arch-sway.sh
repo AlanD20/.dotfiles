@@ -245,6 +245,9 @@ pacman_pkgs=(
 
   breeze
   breeze-icons
+
+  # libraries
+  gpsd
 )
 
 aur_pkgs=(
