@@ -62,9 +62,9 @@ alias gfo="fetch_origin_branch"
 alias dc="docker compose"
 
 # Abraunegg OneDrive
-alias onesync="onedrive --synchronize --verbose --force"
-alias oneup="onedrive --synchronize --verbose --force --upload-only"
-alias onedown="onedrive --synchronize --verbose --force --download-only"
+alias onesync="onedrive --sync --verbose --force"
+alias oneup="onedrive --sync --verbose --force --upload-only"
+alias onedown="onedrive --sync --verbose --force --download-only"
 alias oneshare="onedrive --create-share-link"
 alias onestatus="onedrive --display-sync-status"
 
