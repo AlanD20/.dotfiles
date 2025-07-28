@@ -29,7 +29,7 @@
     version as well. Also, qt5ct to customize qt applications.
 
     ```bash
-    sudo pacman -S qt5-wayland qt6-wayland
+    sudo pacman -S qt5-wayland qt6-wayland qt5ct
     ```
 
   - You should export the following environments in your login shell

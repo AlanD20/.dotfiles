@@ -271,9 +271,10 @@ aur_pkgs=(
   nordic-theme # GTK3 theme
   zig-bin
   metadata-cleaner
-  onedrive-abraunegg # Onedrive sync for keepass db
-  jqp                # A TUI playground for jq
-  resticprofile-bin  # Wrapper for restic with ease of configuration
+  onedrive-abraunegg      # Onedrive sync for keepass db
+  jqp                     # A TUI playground for jq
+  resticprofile-bin       # Wrapper for restic with ease of configuration
+  libva-nvidia-driver-git # Resolve crashing electron apps
 
   adwaita-qt5 # Theme for qt5
   adwaita-qt6 # Theme for qt6
