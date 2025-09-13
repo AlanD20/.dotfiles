@@ -9,10 +9,18 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export QT_QPA_PLATFORM="xcb"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-export MOZ_ENABLE_WAYLAND=1 # Enable wayland for mozilla
 # export QT_STYLE_OVERRIDE=adwaita-dark
 
+# Important if you want to utilize hardware acceleration:
+# https://wiki.archlinux.org/title/Hardware_video_acceleration
 export LIBVA_DRIVER_NAME=nvidia
+export VDPAU_DRIVER=nvidia
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export GBM_BACKEND=nvidia-drm
+
+# Firefox
+export MOZ_DISABLE_RDD_SANDBOX=1
+export MOZ_ENABLE_WAYLAND=1 # Enable wayland for mozilla
 
 # Wayland Specifics
 # export WLR_BACKENDS=wayland # comma-separated list of backends to use (available backends: libinput, drm, wayland, x11, headless, noop)
@@ -27,6 +35,7 @@ export XWAYLAND_NO_GLAMOR=1          # Fix flickering for apps running under xwa
 export WLR_DIRECT_TTY='alacritty'    # Specifies the tty to be used (instead of using /dev/tty)
 export WLR_DRM_NO_ATOMIC=1           # Fix sway freezing during startup
 # export WLR_DRM_DEVICES=/dev/dri/card1 # Specify what card to use
+export EGL_PLATFORM=wayland
 
 if [ "$WAYLAND_DISPLAY" = "" ] && [ "$XDG_VTNR" -eq 1 ]; then
   dbus-run-session sway --unsupported-gpu # With nvidia drivers, omit exec

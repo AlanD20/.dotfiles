@@ -1,0 +1,5 @@
+--disable-gpu
+--ignore-gpu-blocklist
+--ozone-platform-hint=auto
+--password-store="gnome-libsecret"
+--enable-features=WebRTCPipeWireCapturer,AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoEncoder,AcceleratedVideoDecodeLinuxGL
