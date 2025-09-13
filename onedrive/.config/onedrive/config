@@ -9,5 +9,5 @@
 log_dir = "/var/log/onedrive/"
 force_session_upload = "true"
 delay_inotify_processing = "true"
-enable_logging = "true"
+#enable_logging = "true"
 
