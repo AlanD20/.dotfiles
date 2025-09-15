@@ -50,8 +50,26 @@ Take a look at this repo to
 After installing the nvidia drivers, use hyprland guide on Nvidia drivers to also finish some additional configuration if you still have issues with screen flickering or nvidia drivers aren't being used properly, [Hyprland Guide on Nvidia](https://wiki.hyprland.org/hyprland-wiki/pages/Nvidia/)
 
 - With sway, use vulkan renderer, for that, you may have to install `vulkan-intel` and `vulkan-validation-layers`.
-- Brightnessctl not working properly on nvidia drivers? Try to add `acpi_backlight=native` to `GRUB_CMDLINE_LINUX_DEFAULT` in `/etc/default/grub`. (Don't forget to do `sudo grub-mkconfig -o /boot/grub/grub.cfg` after changes.)
+- Brightnessctl not working properly on nvidia drivers? Try adding `acpi_backlight=native` to `GRUB_CMDLINE_LINUX_DEFAULT` in `/etc/default/grub`. (Don't forget to do `sudo grub-mkconfig -o /boot/grub/grub.cfg` after changes.), this will force using the gpu-native interface.
+  - also force the nvidia interface to be used
+  ```bash
+  # Grab the interface
+  ls /sys/class/backlight
+
+  # Create a new rule, by putting this content to force using it. Rule at /etc/udev/rules.d/99-backlight.rules
+  ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="nvidia_wmi_ec_backlight", \
+    RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness", \
+    RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
+  ```
 - Don't forget to Enable this kernel module parameter for nvidia: [Preserve Video Memory After Suspend](https://wiki.archlinux.org/title/NVIDIA/Tips_and_tricks#Preserve_video_memory_after_suspend)
+- These environment variables are essential if you want to utilize hardware acceleration with your GPU. Read about [Hardware Video Acceleration](https://wiki.archlinux.org/title/Hardware_video_acceleration).
+  ```bash
+  # best to put at /etc/profile or read more at https://wiki.archlinux.org/title/Environment_variables
+  export LIBVA_DRIVER_NAME=nvidia
+  export VDPAU_DRIVER=nvidia
+  export __GLX_VENDOR_LIBRARY_NAME=nvidia
+  export GBM_BACKEND=nvidia-drm
+  ```
 
 ## Enable SSH-Agent
 
