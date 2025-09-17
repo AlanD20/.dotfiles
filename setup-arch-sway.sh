@@ -33,7 +33,7 @@ fi
 
 # Create a temporary directory
 temp=$(mktemp -d)
-cd "$temp" || exit
+chown "$user":root "$temp" && cd "$temp" || exit
 
 pacman_pkgs=(
   #
@@ -194,9 +194,9 @@ pacman_pkgs=(
   docker # Manage Containers
   containerd
   docker-compose # manage multiple containers within a single file
-  # redis          # Caching database
   ansible
   # mitmproxy # powerful HTTP proxy
+  tree-sitter-cli # needed for lazyvim
 
   #
   # Fonts
@@ -376,7 +376,6 @@ echo "=========================================="
 echo "🔃 System Service"
 echo "=========================================="
 systemctl stop php-fpm
-systemctl stop redis
 systemctl stop nginx
 systemctl stop sshd
 
@@ -394,9 +393,9 @@ groupadd docker
 # chmod 666 /var/run/docker.sock
 
 # Adding user to the group
-usermod -a -g docker,flatpak,redis "$user"
+usermod -a -g docker,flatpak "$user"
 
-should_fail "Adding User to docker, flatpak, redis groups"
+should_fail "Adding User to docker, flatpak, groups"
 
 bat <<MANUAL_TASKS
 ==============================================
