@@ -7,7 +7,7 @@ return {
         "nginx-language-server",
         "emmet-language-server",
         "emmet-ls",
-        "ruff-lsp",
+        "ruff",
         "markdownlint",
         "markdownlint-cli2",
         "codespell",
