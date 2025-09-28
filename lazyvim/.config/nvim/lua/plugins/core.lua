@@ -52,13 +52,6 @@ return {
   -- Bufferline custom keymaps
   {
     "akinsho/bufferline.nvim",
-    -- catppuccin currently broken, merge WIP: https://github.com/LazyVim/LazyVim/pull/6354#issuecomment-3208908984
-    init = function()
-      local bufline = require("catppuccin.groups.integrations.bufferline")
-      function bufline.get()
-        return bufline.get_theme()
-      end
-    end,
     keys = {
       { "<leader>bdd", "<cmd>bdelete<CR>", desc = "Close current buffer" },
       { "<leader>bdr", "<cmd>BufferLineCloseRight<CR>", desc = "Close all buffers to the right" },

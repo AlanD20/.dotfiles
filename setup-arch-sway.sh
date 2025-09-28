@@ -137,6 +137,7 @@ pacman_pkgs=(
   fastfetch   # neofetch but faster
   asciinema   # Ascii to record shell session
   atuin       # Powerful TUI sqlite db to store command history
+  bmon        # bandwidth monitor and rate estimator
   # kmon      # Linux Kernel Manager and Activity Monitor
   restic # Backup CLI Util
 
