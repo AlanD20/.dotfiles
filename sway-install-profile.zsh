@@ -131,6 +131,11 @@ pyenv global 3.11.7
 
 # python3 dependencies
 pip3 build installer wheel setuptools_scm
+pip3 install uv
+
+# pipx tools
+uv tool install mycli
+
 
 echo "=========================================="
 echo "🔃 System Service"
