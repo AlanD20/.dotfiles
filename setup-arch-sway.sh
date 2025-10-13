@@ -140,6 +140,7 @@ pacman_pkgs=(
   bmon        # bandwidth monitor and rate estimator
   # kmon      # Linux Kernel Manager and Activity Monitor
   restic # Backup CLI Util
+  man-db
 
   #
   # languages
