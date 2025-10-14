@@ -11,6 +11,7 @@ Available guides:
 - [Swaywm](SWAYWM.md)
 - [KDE](KDE.md)
 - [Applications](APPLICATIONS.md)
+- [Secure Boot with Grub](secure-boot.md)
 
 Want to install another desktop/window environment? Take a look at
 [archinstall profiles](https://github.com/archlinux/archinstall/tree/master/archinstall/default_profiles).
