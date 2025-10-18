@@ -1,0 +1,13 @@
+[Keyboard]
+RepeatDelay=200
+
+[Libinput][10248][514][ASUF1204:00 2808:0202 Touchpad]
+NaturalScroll=true
+PointerAcceleration=0.200
+ScrollFactor=2
+
+[Libinput][4152][6228][SteelSeries SteelSeries Aerox 5 Wireless]
+ScrollFactor=1.5
+
+[Mouse]
+cursorTheme=Sweet-cursors

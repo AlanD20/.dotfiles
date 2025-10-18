@@ -1,0 +1,51 @@
+[01f28c9f-05b5-44d3-bdd3-61d03798f45a]
+Description=alacritty
+desktops=a85999ea-c441-45a5-a862-794023461a11
+desktopsrule=3
+maximizehoriz=true
+maximizehorizrule=3
+maximizevert=true
+maximizevertrule=3
+types=1
+wmclass=alacritty Alacritty
+wmclasscomplete=true
+wmclassmatch=1
+
+[9d65ecb1-5cc6-4e8c-93b2-f5c8f86af893]
+Description=chrome
+desktops=ea556b65-2d14-42fb-8325-f0ddf5b648e1
+desktopsrule=3
+maximizehoriz=true
+maximizehorizrule=3
+maximizevert=true
+maximizevertrule=3
+wmclass=google-chrome
+wmclassmatch=1
+
+[General]
+count=4
+rules=d3cedc14-5dd6-4997-abb9-d1747d55d549,9d65ecb1-5cc6-4e8c-93b2-f5c8f86af893,01f28c9f-05b5-44d3-bdd3-61d03798f45a,db59334a-2b5f-43bd-8037-9ff866bf4cd5
+
+[d3cedc14-5dd6-4997-abb9-d1747d55d549]
+Description=keepass
+Enabled=false
+desktops=af72909b-b1f3-4513-a98a-c9bf70cc7f6e
+desktopsrule=3
+maximizehoriz=true
+maximizehorizrule=3
+maximizevert=true
+maximizevertrule=3
+title=db-secrets.kdbx [Locked] - KeePassXC
+types=1
+wmclass=keepassxc org.keepassxc.KeePassXC
+wmclasscomplete=true
+wmclassmatch=1
+
+[db59334a-2b5f-43bd-8037-9ff866bf4cd5]
+Description=Spotify
+desktops=135da2ff-a9e9-4a18-930a-e41807c4e33d
+desktopsrule=3
+types=1
+wmclass=spotify Spotify
+wmclasscomplete=true
+wmclassmatch=1
