@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# fail if we encounter an error
+set -eux -o pipefail
+
 # This script runs by the login user to keep all the permissions
 
 ###

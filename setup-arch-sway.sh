@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# fail if we encounter an error
+set -eux -o pipefail
+
 # Pass the user so it installs on behalf of the user
 user="$1"
 script_path="$PWD"
