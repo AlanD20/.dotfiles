@@ -80,6 +80,9 @@ return {
         "jq",
         "jq-lsp",
 
+        -- rust
+        -- "rust-analyzer",
+
         -- yaml
         "yaml-language-server",
         "yamllint",
