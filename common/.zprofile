@@ -30,12 +30,12 @@ export GBM_BACKEND=nvidia-drm
 export MOZ_DISABLE_RDD_SANDBOX=1
 export MOZ_ENABLE_WAYLAND=1 # Enable wayland for mozilla
 
-# Wayland Specifics
+# Wayland/x11 Specifics
 # export WLR_BACKENDS=wayland # comma-separated list of backends to use (available backends: libinput, drm, wayland, x11, headless, noop)
 # export WAYLAND_DISPLAY=wayland-1
-export CLUTTER_BACKEND=wayland
-export SDL_VIDEODRIVER=wayland
-export EGL_PLATFORM=wayland
+export CLUTTER_BACKEND=wayland # Choices: x11, wayland
+export SDL_VIDEODRIVER=wayland # Choices: x11, wayland
+export EGL_PLATFORM=wayland # Choices: x11, wayland
 export XWAYLAND_NO_GLAMOR=1 # Fix flickering for apps running under xwayland
 
 # wlroot

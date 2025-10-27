@@ -1,0 +1,7 @@
+--ozone-platform=wayland
+--password-store="gnome-libsecret"
+--use-gl=egl
+--enable-features=UseOzonePlatform,WaylandWindowDecorations,VaapiVideoDecodeLinuxGL,WebRTCPipeWireCapturer
+--disable-features=UseChromeOSDirectVideoDecoder
+--password-store=gnome-libsecret
+--ignore-gpu-blocklist

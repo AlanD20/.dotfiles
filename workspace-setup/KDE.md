@@ -5,13 +5,25 @@
 1. We need to install the following packages.
 
    ```bash
-   sudo pacman -S plasma plasma-desktop plasma-wayland-session kde-applications kdeplasma-addons sddm
+   sudo pacman -S plasma plasma-desktop plasma-wayland-session kde-applications kdeplasma-addons kwin kwin-wayland sddm
+   ```
+   - for `x11`, make sure these are also installed
+   ```bash
+    sudo pacman -S plasma-meta kwin-x11 \
+      xorg-server xorg-xinit xorg-xrandr xorg-xset xorg-xdpyinfo \
+      mesa-utils \
+      vulkan-icd-loader
    ```
 
-2. Auto start KDE by executing `startkde` at `~/.initrc`.
 
+2. Two ways to start KDE,
+  - use SDDM to start KDE
+  - Create an entry in `/usr/share/xsessions/plasma.desktop`.
    ```bash
-   exec startkde
+      [Desktop Entry]
+      Exec=/usr/bin/startplasma-x11
+      DesktopNames=KDE
+      Name=Plasma (x11)
    ```
 
 3. Enable `sddm` service. Then reboot. After that, KDE plasma should load.

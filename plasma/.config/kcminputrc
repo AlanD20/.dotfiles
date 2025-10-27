@@ -10,4 +10,6 @@ ScrollFactor=2
 ScrollFactor=1.5
 
 [Mouse]
+X11LibInputXAccelProfileFlat=true
+XLbInptPointerAcceleration=0.4
 cursorTheme=Sweet-cursors
