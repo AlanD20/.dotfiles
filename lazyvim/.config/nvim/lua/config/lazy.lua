@@ -88,7 +88,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.markdown" },
     --{ import = "lazyvim.plugins.extras.lang.nix" },
     { import = "lazyvim.plugins.extras.lang.nushell" },
-    { import = "lazyvim.plugins.extras.lang.dotnet" },
+    -- { import = "lazyvim.plugins.extras.lang.dotnet" },
     { import = "lazyvim.plugins.extras.lang.php" },
     { import = "lazyvim.plugins.extras.lang.python" },
     -- { import = "lazyvim.plugins.extras.lang.ruby" },
