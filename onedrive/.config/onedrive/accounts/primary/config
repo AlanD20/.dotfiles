@@ -1,0 +1,5 @@
+sync_dir = "/home/www/OneDrive"
+force_session_upload = "true"
+delay_inotify_processing = "true"
+inotify_delay = "20"
+

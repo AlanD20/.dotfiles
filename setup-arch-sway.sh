@@ -283,6 +283,8 @@ aur_pkgs=(
   resticprofile-bin       # Wrapper for restic with ease of configuration
   libva-nvidia-driver-git # Resolve crashing electron apps
 
+  onedrivegui-git # OneDrive GUI
+
   adwaita-qt5 # Theme for qt5
   adwaita-qt6 # Theme for qt6
 )
