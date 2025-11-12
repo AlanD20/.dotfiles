@@ -153,6 +153,7 @@ pacman_pkgs=(
   php
   lua
   terraform
+  rustup # Install this one to manage rust versions via pacman
 
   #
   # Language packages
@@ -172,6 +173,7 @@ pacman_pkgs=(
   python-requests
   python-pyqt5
   python-pyqt6
+  tk # needed for pyenv install
 
   #
   # Albert Plugins

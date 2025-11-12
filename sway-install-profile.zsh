@@ -9,7 +9,7 @@ set -eux -o pipefail
 # Configs
 ###
 
-node_version="lts/hydrogen"
+node_version="lts/jod"
 
 fail() {
   echo "Error: $1"
@@ -122,18 +122,18 @@ npm install npm@latest yarn@latest pnpm@latest --location=global
 echo "=========================================="
 echo "Installing k9s catppuccin theme"
 echo "=========================================="
-OUT="${XDG_CONFIG_HOME:-$HOME/.config}/k9s/skins"
+export OUT="${XDG_CONFIG_HOME:-$HOME/.config}/k9s/skins"
 curl -L https://github.com/catppuccin/k9s/archive/main.tar.gz | tar xz -C "$OUT" --strip-components=2 k9s-main/dist
 
 echo "=========================================="
-echo "Installing python 3.11.7"
+echo "Installing python 3.11"
 echo "=========================================="
 
-pyenv install 3.11.7
-pyenv global 3.11.7
+pyenv install 3.11
+pyenv global 3.11
 
 # python3 dependencies
-pip3 build installer wheel setuptools_scm
+pip3 install build installer wheel setuptools_scm
 pip3 install uv
 
 # pipx tools
@@ -143,7 +143,6 @@ uv tool install mycli
 echo "=========================================="
 echo "🔃 System Service"
 echo "=========================================="
-systemctl --user enable gnmoe-keyring-gnome
 systemctl --user enable ydotool
 systemctl --user enable pipewire
 systemctl --user enable wireplumber

@@ -1,9 +1,9 @@
 git:
-  paging:
-    colorArg: always
-    # GitHub issues 907: https://github.com/jesseduffield/lazygit/issues/907
-    # --dark or --light is needed due to auto-detection causes lag: https://github.com/jesseduffield/lazygit/issues/3405
-    pager: delta --paging=never --24-bit-color=never --dark
+  pagers:
+    - colorArg: always
+      # GitHub issues 907: https://github.com/jesseduffield/lazygit/issues/907
+      # --dark or --light is needed due to auto-detection causes lag: https://github.com/jesseduffield/lazygit/issues/3405
+      pager: delta --paging=never --24-bit-color=never --dark
 os:
   edit: "nvim {{filename}}"
   editInTerminal: true

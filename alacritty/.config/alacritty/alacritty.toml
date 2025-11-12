@@ -42,19 +42,19 @@ save_to_clipboard = false
 size = 14
 
 [font.bold]
-family = "Dank Mono"
+family = "DankMono Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "Dank Mono"
+family = "DankMono Nerd Font"
 style = "Bold Italic"
 
 [font.italic]
-family = "Dank Mono"
+family = "DankMono Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "Dank Mono"
+family = "DankMono Nerd Font"
 style = "Regular"
 
 [[keyboard.bindings]]
