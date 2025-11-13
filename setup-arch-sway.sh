@@ -144,6 +144,7 @@ pacman_pkgs=(
   # kmon      # Linux Kernel Manager and Activity Monitor
   restic # Backup CLI Util
   man-db
+  wl-clipboard # Or xclip for x11
 
   #
   # languages
