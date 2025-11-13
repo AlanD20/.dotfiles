@@ -1,0 +1,32 @@
+[Spotify]
+Description=Spotify
+desktops=223d8484-6e59-4af6-a37b-291cef1c3a48
+desktopsrule=3
+types=1
+wmclass=spotify Spotify
+wmclasscomplete=true
+wmclassmatch=1
+
+[alacritty]
+Description=alacritty
+desktops=9c0e24a7-8955-4528-acb6-7a7c6fa09e0f
+desktopsrule=3
+maximizehoriz=true
+maximizehorizrule=3
+maximizevert=true
+maximizevertrule=3
+types=1
+wmclass=alacritty Alacritty
+wmclasscomplete=true
+wmclassmatch=1
+
+[chrome]
+Description=chrome
+desktops=eb9282a8-e9c4-4f67-afa6-77a288d6caff
+desktopsrule=3
+maximizehoriz=true
+maximizehorizrule=3
+maximizevert=true
+maximizevertrule=3
+wmclass=google-chrome
+wmclassmatch=1
