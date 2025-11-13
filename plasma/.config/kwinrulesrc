@@ -32,5 +32,18 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=3
-rules=20b75c2c-3e0c-49b8-a9df-04a2ab2422fc,6753e3e6-2240-49f3-b1ac-c35bcb94c5b0,0bd502e1-58cb-42c9-8cc9-7bb7a808d3ce
+count=4
+rules=ea3bc803-cd27-437c-9120-2ea974c08725,20b75c2c-3e0c-49b8-a9df-04a2ab2422fc,6753e3e6-2240-49f3-b1ac-c35bcb94c5b0,0bd502e1-58cb-42c9-8cc9-7bb7a808d3ce
+
+[ea3bc803-cd27-437c-9120-2ea974c08725]
+Description=KeePassXC
+desktops=0d41936a-d75b-49aa-8076-3d31121dd320
+desktopsrule=3
+maximizehoriz=true
+maximizehorizrule=3
+maximizevert=true
+maximizevertrule=3
+types=1
+wmclass=org.keepassxc.KeePassXC
+wmclasscomplete=true
+wmclassmatch=2

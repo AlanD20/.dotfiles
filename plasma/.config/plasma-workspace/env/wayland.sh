@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 export QT_QPA_PLATFORM="wayland" # Choices: wayland, xcb (x11)
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP="plasma" # Choices: sway, plasma
@@ -10,6 +11,7 @@ export LIBVA_DRIVER_NAME=nvidia
 export VDPAU_DRIVER=nvidia
 export __GLX_VENDOR_LIBRARY_NAME=nvidia
 export GBM_BACKEND=nvidia-drm
+export NVD_BACKEND=direct
 
 # Firefox
 export MOZ_DISABLE_RDD_SANDBOX=1
