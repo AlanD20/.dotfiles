@@ -1,3 +1,7 @@
 [Plugins]
 browserhistoryEnabled=false
 browsertabsEnabled=false
+krunner_bookmarksrunnerEnabled=false
+
+[Plugins][Favorites]
+plugins=krunner_sessions,krunner_powerdevil,krunner_services,krunner_systemsettings

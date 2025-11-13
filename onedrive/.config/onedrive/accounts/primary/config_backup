@@ -1,5 +1,5 @@
 sync_dir = "/home/www/OneDrive"
-enable_logging = "true"
 force_session_upload = "true"
 delay_inotify_processing = "true"
+inotify_delay = "20"
 
