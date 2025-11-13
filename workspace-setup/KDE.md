@@ -2,31 +2,19 @@
 
 ## KDE Installation
 
-1. We need to install the following packages.
+1. We need to install the following packages. [More additional recommendation can be found here](https://community.kde.org/Distributions/Packaging_Recommendations)
 
    ```bash
-   sudo pacman -S plasma plasma-desktop plasma-wayland-session kde-applications kdeplasma-addons kwin kwin-wayland sddm
-   ```
-   - for `x11`, make sure these are also installed
-   ```bash
-    sudo pacman -S plasma-meta kwin-x11 \
-      xorg-server xorg-xinit xorg-xrandr xorg-xset xorg-xdpyinfo \
-      mesa-utils \
-      vulkan-icd-loader
-   ```
+   # Base layer
+   sudo pacman -S plasma-meta sddm
 
+   # Extra applications
+   sudo pacman -S dolphin dolphin-plugins ark gwenview okular spectacle kate filelight konsole kcalc kio-extras ffmpegthumbs kdegraphics-thumbnailers qt6-imageformats kimageformats elisa kdialog baloo-widgets kde-inotify-survey kdeconnect power-profiles-daemon xdg-desktop-portal-gtk
 
-2. Two ways to start KDE,
-  - use SDDM to start KDE
-  - Create an entry in `/usr/share/xsessions/plasma.desktop`.
-   ```bash
-      [Desktop Entry]
-      Exec=/usr/bin/startplasma-x11
-      DesktopNames=KDE
-      Name=Plasma (x11)
+   yay -S xwaylandvideobridge
    ```
 
-3. Enable `sddm` service. Then reboot. After that, KDE plasma should load.
+2. Enable `sddm` service. Then reboot. After that, KDE plasma should load.
 
    ```bash
    sudo systemctl enable sddm

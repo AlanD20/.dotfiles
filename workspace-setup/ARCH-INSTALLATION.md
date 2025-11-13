@@ -257,10 +257,13 @@ as needed.
    pacstrap -K /mnt <packages>
 
    # Install linux base packages and necessary tools
-   pacstrap -K /mnt base base-devel linux-lts linux-firmware linux-headers intel-ucode networkmanager dhcpcd pipewire bluez bluez-utils wpa_supplicant netctl ntfs-3g gnome-keyring
+   pacstrap -K /mnt base base-devel linux-lts linux-firmware linux-headers intel-ucode networkmanager dhcpcd pipewire wpa_supplicant netctl ntfs-3g bluez bluez-utils
 
    # Install necessary applications
    pacstrap -K /mnt inetutils net-tools sudo htop openssh ufw git nano vim neovim fastfetch cups dialog
+
+   # Extra if you need
+   pacstrap -K /mnt 
    ```
 
    - Basic Arch Linux installation: `base`
@@ -324,6 +327,9 @@ as needed.
    # Change hostname
    echo "ArchLinux" >> /etc/hostname
 
+   # If sudo  group is not there, create it
+   groupadd sudo
+
    # Add users with home directory
    useradd -G sudo,wheel,storage,power,audio,video,input -m <user>
    passwd <user>      # Set user password
@@ -368,10 +374,13 @@ as needed.
    - **[List of Applications](https://wiki.archlinux.org/title/List_of_applications/Utilities)**
    - Here are a few programs that may get you started with Arch Linux:
      ```bash
-     sudo pacman -S firefox gnome-keyring libsecret seahorse blueman brightnessctl playerctl acpi pipewire pipewire-alsa pipewire-pulse wireplumber qtkeychain-qt5 openssl-1.1 feh thunar grim slurp mako mupdf ydotool gvfs
+     pacman -S firefox libsecret brightnessctl playerctl acpi pipewire pipewire-alsa pipewire-pulse wireplumber mupdf ydotool
+
+     # Extra apps if using Tiling Window Managers
+     pacman -S  gnome-keyring seahorse blueman qtkeychain-qt5 openssl-1.1 feh thunar grim slurp mako gvfs
      ```
      - Stores passwords and encryption keys: `gnome-keyring`, `libsecret`,
-       `seahorse` (GUI for gnome-keyring)
+       `seahorse` (GUI for gnome-keyring), perhaps you may go for `keepassxc`
      - Bluetooth GUI: `blueman`
      - Network Manager GUI: `network-manager-applet`
      - Brightness & Audio Control: `brightnessctl`, `playerctl`
