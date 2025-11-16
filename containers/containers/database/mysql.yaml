@@ -1,13 +1,13 @@
-name: "db-dev"
+name: "mysql"
 services:
   # MYSQL Service
   mysql:
-    image: "mysql"
+    image: mysql
     ports:
       - "3306:3306"
-    restart: "always"
+    restart: always
     networks:
-      - db-net
+      - net
     # You may enable the following, if authentication plugin doesnt work
     # command: "--authentication_policy=mysql_native_password"
     environment:
@@ -42,26 +42,6 @@ services:
           cpus: "4"
           memory: "600M"
   # ======================
-  # PostgreSQL Service
-  # postgres:
-  #   image: postgres:14.1-alpine
-  #   ports:
-  #     - "5432:5432"
-  #   restart: always
-  #   networks:
-  #     - db-net
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: password
-  #     POSTGRESQL_DATABASE: mydb
-  #  # Very fast io performance
-  #   tmpfs:
-  #     - /var/lib/postgresql/data
-  #  # Volumes have a slow io performance, known issue!
-  #   volumes:
-  #     - ./postgres-data:/var/lib/postgresql/data
-  #     - ./postgres-data/init.sql:/docker-entrypoint-initdb.d/init.sql  # If you want to have a init query
-  # ======================
   # PhpMyAdmin to manage database with GUI
   phpmyadmin:
     depends_on:
@@ -72,14 +52,14 @@ services:
     tty: true
     ports:
       - "8080:80"
-    restart: "unless-stopped"
+    restart: unless-stopped
     networks:
-      - "db-net"
+      - "net"
     environment:
       TZ: "CET"
       PMA_HOST: "mysql"
       PMA_USER: "root"
       PMA_PASSWORD: ""
 networks:
-  db-net:
+  net:
     driver: "bridge"

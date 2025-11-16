@@ -1,6 +1,6 @@
 /**/*/mailpit-data
-/**/*/ail-data
 /**/*/b-data
-/**/*/ysql-data
-/**/*/ostgres-data
-/**/*/edis-data
+/**/*/mysql-data
+/**/*/postgres-data
+/**/*/pgadmin-data
+/**/*/mongo-data

@@ -1,0 +1,38 @@
+name: "postgres"
+services:
+  postgres:
+    image: postgres:17-alpine
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - net
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRESQL_DATABASE: mydb
+      # Very fast io performance
+    tmpfs:
+      - /var/lib/postgresql/data
+      # Volumes have a slow io performance, known issue!
+    # volumes:
+    #   - ./postgres-data:/var/lib/postgresql/data
+    #   - ./postgres-data/init.sql:/docker-entrypoint-initdb.d/init.sql  # If you want to have a init query
+  # ======================
+  # PGAdmin Service
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    ports:
+      - "8888:80"
+    restart: always
+    networks:
+      - net
+    environment:
+      PGADMIN_DEFAULT_EMAIL: app@aland20.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      # volumes:
+      #   - ./pgadmin-data:/var/lib/pgadmin
+networks:
+  net:
+    driver: "bridge"
