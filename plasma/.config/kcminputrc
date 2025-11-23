@@ -2,6 +2,7 @@
 RepeatDelay=200
 
 [Libinput][10248][514][ASUF1204:00 2808:0202 Touchpad]
+Enabled=true
 NaturalScroll=true
 PointerAcceleration=0.200
 ScrollFactor=2
