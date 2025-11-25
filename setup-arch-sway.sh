@@ -168,6 +168,8 @@ pacman_pkgs=(
   php-snmp
   php-sqlite
   php-sodium
+  php-xsl
+  php-pgsql
   xdebug     # PHP Debugger
   python-pip # Python package manager
   python-setuptools
