@@ -1,6 +1,6 @@
 [0bd502e1-58cb-42c9-8cc9-7bb7a808d3ce]
 Description=chrome
-desktops=eb9282a8-e9c4-4f67-afa6-77a288d6caff
+desktops=383fa8fe-483e-4a02-b00d-ea2dc6ad81cf
 desktopsrule=3
 maximizehoriz=true
 maximizehorizrule=3
@@ -11,7 +11,7 @@ wmclassmatch=1
 
 [20b75c2c-3e0c-49b8-a9df-04a2ab2422fc]
 Description=alacritty
-desktops=9c0e24a7-8955-4528-acb6-7a7c6fa09e0f
+desktops=8678d1e0-44ee-43dd-b7cf-877110703a26
 desktopsrule=3
 maximizehoriz=true
 maximizehorizrule=3
@@ -24,7 +24,7 @@ wmclassmatch=1
 
 [6753e3e6-2240-49f3-b1ac-c35bcb94c5b0]
 Description=Spotify
-desktops=223d8484-6e59-4af6-a37b-291cef1c3a48
+desktops=41426720-d536-4c17-899f-ee7616a16848
 desktopsrule=3
 types=1
 wmclass=spotify Spotify
@@ -37,7 +37,7 @@ rules=ea3bc803-cd27-437c-9120-2ea974c08725,20b75c2c-3e0c-49b8-a9df-04a2ab2422fc,
 
 [ea3bc803-cd27-437c-9120-2ea974c08725]
 Description=KeePassXC
-desktops=0d41936a-d75b-49aa-8076-3d31121dd320
+desktops=d6517cf6-b17f-46cf-9422-180c43e4cdac
 desktopsrule=3
 maximizehoriz=true
 maximizehorizrule=3

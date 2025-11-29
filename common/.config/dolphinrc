@@ -9,6 +9,7 @@ ShowCopyMoveMenu=true
 
 [General]
 BrowseThroughArchives=true
+ConfirmClosingMultipleTabs=false
 LockPanels=false
 OpenExternallyCalledFolderInNewTab=true
 OpenNewTabAfterLastTab=true
