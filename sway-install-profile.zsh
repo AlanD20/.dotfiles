@@ -126,6 +126,12 @@ export OUT="${XDG_CONFIG_HOME:-$HOME/.config}/k9s/skins"
 curl -L https://github.com/catppuccin/k9s/archive/main.tar.gz | tar xz -C "$OUT" --strip-components=2 k9s-main/dist
 
 echo "=========================================="
+echo "Installing resticprofile"
+echo "=========================================="
+export RESTICPROFILE_OUT="$HOME/.local/bin"
+curl -L https://github.com/creativeprojects/resticprofile/releases/download/v0.32.0/resticprofile_0.32.0_linux_amd64.tar.gz | tar xz -C "$RESTICPROFILE_OUT" --strip-components=1 resticprofile
+
+echo "=========================================="
 echo "Installing python 3.11"
 echo "=========================================="
 

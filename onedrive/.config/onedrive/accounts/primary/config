@@ -1,5 +1,5 @@
 sync_dir = "/mnt/backups/archlinux/OneDrive"
 force_session_upload = "true"
 delay_inotify_processing = "true"
-inotify_delay = "20"
+inotify_delay = "25"
 

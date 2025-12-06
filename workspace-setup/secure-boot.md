@@ -60,3 +60,19 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
   sudo sbctl verify
   sudo sbctl status
   ```
+
+# Restore EFI Variables
+
+1. Updating PK (Platform Key) requires being in Setup Mode. Put your computer into **Setup Mode** by going into BIOS and then reset the Platform keys.
+2. Install `efi-updatevar` package.
+3. Then simply update the variables:
+  ```bash
+  # 1. Setup mode required to restore PK first
+  sudo efi-updatevar -f old_PK.esl PK
+
+  # 2. Normal or Setup mode is fine to restore these after PK is restored.
+  sudo efi-updatevar -f old_KEK.esl KEK
+  sudo efi-updatevar -f old_db.esl db
+  sudo efi-updatevar -f old_dbx.esl dbx
+
+  ```
