@@ -20,14 +20,17 @@ notify-send -t 750 -u normal "Backup started..."
 resticprofile -n aland20 backup 2>&1 | tee /tmp/fd7.log
 check_state
 
-resticprofile -n aland20 check 2>&1 | tee /tmp/fd7.log
+resticprofile -n aland20 forget --keep-daily 1 --keep-monthly 7
 check_state
 
 resticprofile -n aland20 prune 2>&1 | tee /tmp/fd7.log
 check_state
 
-resticprofile -n notes copy 2>&1 | tee /tmp/fd7.log
+resticprofile -n aland20 check 2>&1 | tee /tmp/fd7.log
 check_state
+
+# resticprofile -n aland20 copy 2>&1 | tee /tmp/fd7.log
+# check_state
 
 ### Repair if necessary
 # resticprofile -n aland20 repair index
