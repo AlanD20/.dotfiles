@@ -157,8 +157,12 @@ ZSH_WEB_SEARCH_ENGINES=(yth "https://www.youtube.com/")
 
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/themes/aland20-custom-theme.omp.json)"
 
-# Load plugins
+# Load zsh plugins
 source "$ZDOTDIR/zsh_plugins"
+
+autoload edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
 
 
 # Antidote setup, source antidote
