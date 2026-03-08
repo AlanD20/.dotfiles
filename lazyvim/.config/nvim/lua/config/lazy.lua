@@ -53,6 +53,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.coding.luasnip" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
     { import = "lazyvim.plugins.extras.coding.neogen" }, -- Better annotation
+    { import = "lazyvim.plugins.extras.coding.mini-comment" }, -- Add comment with gc
+    { import = "lazyvim.plugins.extras.coding.mini-surround" }, -- Add/Replace/Delete surrounding 'gz<a,r,d>'
 
     -- Dap
     { import = "lazyvim.plugins.extras.dap.core" },
@@ -68,8 +70,10 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.editor.mini-move" }, -- Alt+<jklh> to move around line(s)
     { import = "lazyvim.plugins.extras.editor.navic" }, -- Shows quick symbol overview for current context
     { import = "lazyvim.plugins.extras.editor.outline" }, -- Similar to aerial
-    { import = "lazyvim.plugins.extras.coding.mini-surround" }, -- Add/Replace/Delete surrounding 'gz<a,r,d>'
     { import = "lazyvim.plugins.extras.editor.refactoring" }, -- Refactoring util
+    { import = "lazyvim.plugins.extras.editor.overseer" }, -- Task runner <leader>o supports composer, npm, etc..
+    { import = "lazyvim.plugins.extras.editor.snacks_explorer" },
+    { import = "lazyvim.plugins.extras.editor.snacks_picker" },
 
     -- Formatting
     { import = "lazyvim.plugins.extras.formatting.black" },
