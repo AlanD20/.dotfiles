@@ -145,6 +145,9 @@ pacman_pkgs=(
   restic # Backup CLI Util
   man-db
   wl-clipboard # Or xclip for x11
+  squashfs-tools
+  cdrtools
+  openbsd-netcat
 
   #
   # languages
