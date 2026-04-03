@@ -5,10 +5,10 @@ return {
     build = "cargo install --locked code-minimap",
     cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
     keys = {
-      { "<leader>umt", "<cmd>MinimapToggle<CR>", desc = "Toggle Minimap" },
-      { "<leader>umr", "<cmd>MinimapRefresh<CR>", desc = "Force Refresh Minimap" },
-      { "<leader>ums", "<cmd>MinimapRescan<CR>", desc = "Force recalculation of minimap scaling ratio" },
-      { "<leader>umu", "<cmd>MinimapUpdateHighlight<CR>", desc = "Force Update Minimap Highlights" },
+      { "<leader>uMt", "<cmd>MinimapToggle<CR>", desc = "Toggle Minimap" },
+      { "<leader>uMr", "<cmd>MinimapRefresh<CR>", desc = "Force Refresh Minimap" },
+      { "<leader>uMs", "<cmd>MinimapRescan<CR>", desc = "Force recalculation of minimap scaling ratio" },
+      { "<leader>uMu", "<cmd>MinimapUpdateHighlight<CR>", desc = "Force Update Minimap Highlights" },
     },
     init = function()
       vim.cmd("let g:minimap_width = 10")
