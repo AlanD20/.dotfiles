@@ -21,6 +21,9 @@ return {
     "catppuccin/nvim",
     opts = {
       transparent_background = true,
+      float = {
+        transparent = true,
+      },
       term_colors = true,
       blink_cmp = true,
     },
@@ -39,7 +42,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "catppuccin-nvim",
       -- colorscheme = "tokyonight",
       -- colorscheme = "onedark",
     },

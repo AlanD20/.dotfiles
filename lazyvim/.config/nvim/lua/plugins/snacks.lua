@@ -48,7 +48,6 @@ return {
           height = 0.8,
           wo = {
             winblend = 0, -- 0 = fully transparent, increase for more opacity
-            winhighlight = "Normal:Normal,FloatBorder:Normal",
           },
         },
       },
