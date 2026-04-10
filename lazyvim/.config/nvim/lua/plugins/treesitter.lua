@@ -31,11 +31,11 @@ return {
         "markdown",
         "markdown_inline",
         "nu", -- manual installation, queries = https://github.com/nushell/tree-sitter-nu/blob/main/installation/neovim.md
-        -- "puppet",
+        "puppet",
         "php",
         "phpdoc",
         "prisma",
-        -- "python",
+        "python",
         "rust",
         "scss",
         -- "terraform",

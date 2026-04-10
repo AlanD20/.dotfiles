@@ -22,8 +22,7 @@ return {
           -- have other formatters configured.
           lua = { "stylua" },
           sh = { "shfmt", "shellharden" },
-          -- Conform will run multiple formatters sequentially
-          python = { "isort", "black" },
+        python = { "ruff_organize_imports", "ruff_format" },
           -- Use a sub-list to run only the first available formatter
           html = { "prettierd" },
           css = { "prettierd" },
@@ -31,23 +30,11 @@ return {
           typescript = { "prettierd" },
           typescriptreact = { "prettierd" },
           javascriptreact = { "prettierd" },
-          php = {
-            "pint",
-            "php_cs_fixer",
-          },
+          php = { "pint" },
           blade = { "blade_formatter" },
-          go = { --overwrites lazyvim conform list
-            -- they are included with lazyvim golang plugin
-            "gofmt",
-            -- "gofumpt",
-            "goimports_reviser",
-            "golines",
-          },
+          go = { "gofmt", "goimports" },
           json = { "fixjson" },
-          yaml = {
-            "yamlfmt",
-            "yamlfix",
-          },
+          yaml = { "yamlfmt" },
         },
         stop_after_first = {
           html = { "prettier" },
@@ -91,16 +78,10 @@ return {
             stdin = false,
           },
           fixjson = {
-            condition = function(_)
-              return true
-            end,
             command = "fixjson",
-            args = {
-              "-w",
-              "$FILENAME",
-            },
-            stdin = false,
+            stdin = true,
           },
+
           -- dprint = {
           --   condition = function(ctx)
           --     return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]

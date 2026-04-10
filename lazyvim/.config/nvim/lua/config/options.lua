@@ -7,3 +7,7 @@
 vim.g.lazyvim_php_lsp = "intelephense"
 vim.g.snacks_animate = false
 vim.g.lazyvim_picker = "snacks" -- fzf or snacks
+
+vim.g.lazyvim_python_lsp = "pyright"
+vim.g.lazyvim_python_ruff = "ruff"
+vim.g.loaded_python3_provider = 0

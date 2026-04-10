@@ -137,6 +137,20 @@ return {
   {
     -- Move between tmux panes and vim windows with Ctrl-<jkhl>
     "christoomey/vim-tmux-navigator",
+    lazy = false,
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+    },
+    keys = {
+      { "<c-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Tmux: Navigate Left" },
+      { "<c-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Tmux: Navigate Down" },
+      { "<c-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Tmux: Navigate Up" },
+      { "<c-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Tmux: Navigate Right" },
+    },
   },
   -- Database querying UI
   -- { "tpope/vim-dadbod" },

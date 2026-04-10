@@ -8,18 +8,13 @@ return {
         "emmet-language-server",
         "emmet-ls",
         "ruff",
-        "markdownlint",
-        "markdownlint-cli2",
-        "codespell",
         "typos",
         "typos-lsp",
-        -- "puppet-editor-services",
+        "puppet-editor-services",
 
         -- Shell scripts
         "shfmt",
-        "beautysh",
         "shellcheck",
-        "shellharden",
         "bash-language-server",
 
         -- lua
@@ -33,7 +28,6 @@ return {
         "typescript-language-server",
         "tailwindcss-language-server",
         "eslint-lsp",
-        "deno",
         "prettierd",
         "vue-language-server",
 
@@ -43,32 +37,20 @@ return {
 
         -- go
         "gopls",
-        "golangci-lint-langserver",
-        "golangci-lint",
         "delve",
         "goimports",
-        "goimports-reviser",
         "golines",
-        "gofumpt",
-        "gomodifytags",
-        "gotests",
-        "impl",
 
         -- php
         "pint",
         "intelephense",
         "php-debug-adapter",
-        "phpcs",
-        "php-cs-fixer",
         "phpstan",
         "blade-formatter",
-        "php-debug-adapter",
 
         -- python
         "pyright",
-        "python-lsp-server",
-        "flake8",
-        "black",
+        "ruff",
         "debugpy",
 
         -- sql
@@ -77,29 +59,22 @@ return {
         -- JSON
         "json-lsp",
         "fixjson",
-        "jq",
-        "jq-lsp",
 
         -- rust
-        -- "rust-analyzer",
+        "rust-analyzer",
 
         -- yaml
         "yaml-language-server",
         "yamllint",
         "yamlfmt",
-        "yamlfix",
 
         -- Docker
         "dockerfile-language-server",
         "docker-compose-language-service",
 
-        -- Code scans for vulnerabilities
-        "snyk",
-
         -- Terraform
         "terraform-ls",
         "tflint",
-        "tfsec",
 
         -- Ansible
         "ansible-language-server",

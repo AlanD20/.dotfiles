@@ -18,12 +18,39 @@ return {
       },
     },
     opts = {
-      bigfile = { enabled = true },
+      bigfile = {
+        enabled = true,
+        size = 10 * 1024 * 1024,
+        line_length = 10000,
+      },
       dashboard = { enabled = true },
       explorer = { enabled = true },
       picker = {
         enabled = true,
         sources = {},
+        limit_live = 10000,
+        matcher = {
+          fuzzy = true,
+          smartcase = true,
+          cwd_bonus = false,
+          frecency = false,
+          history_bonus = false,
+        },
+        files = {
+          follow = false,
+          exclude = {
+            "**/__pycache__",
+            "**/.venv",
+            "**/venv",
+            "**/.pytest_cache",
+            "**/.mypy_cache",
+            "**/node_modules",
+            "**/.git",
+          },
+        },
+        grep = {
+          limit = 10000,
+        },
       },
       indent = { enabled = true },
       input = { enabled = true },
