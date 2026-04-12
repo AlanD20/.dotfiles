@@ -103,6 +103,7 @@ STOW_DIRS: list[str] = [
     "lazyvim",  # Choose between nvchad or lazyvim
     # "nvchad",
     "oh-my-posh",
+    "opencode",
     # "p10k",
     "redshift",
     "systemd",

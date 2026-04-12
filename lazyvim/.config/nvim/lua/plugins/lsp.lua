@@ -20,11 +20,16 @@ return {
           settings = {
             python = {
               analysis = {
-                -- Only analyze open files (not entire workspace) - major speedup
                 diagnosticMode = "openFilesOnly",
                 autoSearchPaths = false,
                 useLibraryCodeForTypes = true,
-                typeCheckingMode = "basic", -- "off" for max speed, "strict" for max safety
+                typeCheckingMode = "basic",
+                diagnosticSeverityOverrides = {
+                  reportGeneralTypeIssues = "warning",
+                  reportPossiblyUnbound = "warning",
+                  reportUnusedExpression = "warning",
+                  reportUndefinedVariable = "warning",
+                },
                 ignore = {
                   "**/node_modules",
                   "**/__pycache__",
