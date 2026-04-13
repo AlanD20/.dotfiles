@@ -62,6 +62,7 @@ PIP3_PKGS_EXTRA: list[str] = [
 
 UV_TOOLS: list[str] = [
     "mycli",
+    "sqlit-tui",
 ]
 
 # ---------------------------------------------------------------------------
@@ -368,7 +369,7 @@ KDE_PKGS: list[str] = [
     "kde-inotify-survey",
     "dolphin",
     "dolphin-plugins",
-    "kdegraphics-thumbnailers",
+    "kdegraphics-thumbnails",
     "kdenetwork-filesharing",
     "kimageformats",
     "kio-extras",
