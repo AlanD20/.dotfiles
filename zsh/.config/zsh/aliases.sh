@@ -10,7 +10,8 @@
 # Open
 alias fp="fzf --preview=\"bat --color=always --style=plain {}\" --preview-window=\"border:rounded\" --border=rounded --prompt=\"$ \" --pointer=\"->\""
 alias v="nvim"
-alias vff='nvim `fd . --type f | fzf`'
+alias vfd='nvim `fd . --type f | fzf`'
+alias vfp='nvim `fp`'
 alias lz="lazygit"
 alias dz="lazydocker"
 alias kz="k9s --readonly"
@@ -19,18 +20,13 @@ alias kzf="k9s --write"
 # GPG
 alias rgpg="gpg-connect-agent RELOADAGENT /bye" # Reload gpg
 alias tgpg="echo test | gpg --clearsign"        # Test gpg
-alias ncrgpg="gpg --encrypt --armor -r"         # Encrypt file using gpg
-alias dcrgpg="gpg --decrypt"                    # Decrypt file using gpg
+alias encgpg="gpg --encrypt --armor -r"         # Encrypt file using gpg
+alias decgpg="gpg --decrypt"                    # Decrypt file using gpg
 
 # System
 alias cdf='cd `fd . --type d | fzf`'
 alias cls="clear"
 alias mkp="mkdir -pv"
-alias ss="sudo systemctl"
-alias ssu="systemctl --user"
-alias sr="sudo systemctl restart"
-alias sj="sudo journalctl"
-alias sju="journalctl --user"
 
 # Exa
 # More flags at https://github.com/ogham/exa#command-line-options
