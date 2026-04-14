@@ -425,6 +425,44 @@ Pointers: [File paths only - no content summaries]
 
 ---
 
+# QUESTION vs COMMAND DISAMBIGUATION (MANDATORY - ZERO TOLERANCE)
+
+**IF user input matches ANY pattern below → STOP → ANSWER ONLY → WAIT FOR EXPLICIT COMMAND**
+
+| Pattern | User Input Example | Your Required Action | What You Must NOT Do |
+|---------|-------------------|---------------------|---------------------|
+| **"Should..."** | "Should these files export...?" | Answer: "Yes, current pattern is X. Do you want me to add them?" | **NEVER** implement after answering |
+| **"What about..."** | "What about X?" | Answer what X is. Ask: "Do you want me to change X?" | **NEVER** assume implied go-ahead |
+| **"Can we..."** | "Can we do X?" | Answer feasibility. Ask: "Do you want me to implement it?" | **NEVER** treat as permission |
+| **"How..."** | "How does this work?" | Explain. Full stop. | **NEVER** offer to change anything |
+| **"Why..."** | "Why is it like this?" | Explain. Full stop. | **NEVER** propose fixes unless asked |
+| **"Do you think..."** | "Do you think we should...?" | Give opinion. Ask: "Do you want me to proceed?" | **NEVER** act on your own advice |
+
+**ONLY execute when user EXPLICITLY states:**
+
+```
+✅ "Do it"
+✅ "Implement that"
+✅ "Yes, add it"  
+✅ "Go ahead"
+✅ "Make the change"
+✅ "Proceed"
+✅ "Update the file"
+```
+
+**VIOLATION CONSEQUENCE:** Any implementation after answering a question without explicit command = **IMMEDIATE FAIL**.
+
+---
+
+## FLOW STATE CHECKPOINT
+
+After completing ANY implementation task:
+1. **RESET MODE** - You are now in CONSULT mode, not EXECUTE mode
+2. Next user input MUST be categorized fresh (don't carry momentum)
+3. **Momentum is NOT permission** - Previous "yes" doesn't apply to new questions
+
+---
+
 # FINAL CHECKLIST (Before Any Action)
 
 **MANDATORY VERIFICATION:**
