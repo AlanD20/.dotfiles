@@ -9,6 +9,13 @@ maximizevertrule=3
 wmclass=google-chrome
 wmclassmatch=1
 
+[0ec70a23-d3ad-4b13-96c6-7adc3c2d21e9]
+desktops=\\0
+desktopsrule=2
+title=mpv-pip
+titlematch=2
+wmclassmatch=2
+
 [20b75c2c-3e0c-49b8-a9df-04a2ab2422fc]
 Description=alacritty
 desktops=8678d1e0-44ee-43dd-b7cf-877110703a26
@@ -22,28 +29,52 @@ wmclass=alacritty Alacritty
 wmclasscomplete=true
 wmclassmatch=1
 
-[6753e3e6-2240-49f3-b1ac-c35bcb94c5b0]
-Description=Spotify
-desktops=41426720-d536-4c17-899f-ee7616a16848
+[70ce37ec-0525-4498-a931-b728794784b3]
+Description=Application settings for OneDriveGUI
+desktops=2b7d806c-9645-4598-afff-002409366b31
 desktopsrule=3
-types=1
-wmclass=spotify Spotify
+wmclass=python3.14 OneDriveGUI
 wmclasscomplete=true
 wmclassmatch=1
 
-[General]
-count=4
-rules=ea3bc803-cd27-437c-9120-2ea974c08725,20b75c2c-3e0c-49b8-a9df-04a2ab2422fc,6753e3e6-2240-49f3-b1ac-c35bcb94c5b0,0bd502e1-58cb-42c9-8cc9-7bb7a808d3ce
-
-[ea3bc803-cd27-437c-9120-2ea974c08725]
-Description=KeePassXC
-desktops=d6517cf6-b17f-46cf-9422-180c43e4cdac
+[77422ca2-f85c-4382-80f0-e15249a20ff0]
+Description=Application settings for com.stremio.stremio
+desktops=e4bd72bc-3d77-4c23-8d24-8c1b317d8709
 desktopsrule=3
-maximizehoriz=true
-maximizehorizrule=3
-maximizevert=true
-maximizevertrule=3
-types=1
-wmclass=org.keepassxc.KeePassXC
+wmclass=\scom.stremio.stremio
 wmclasscomplete=true
+wmclassmatch=1
+
+[8d231caf-1552-4e73-83d8-2ce9030f0044]
+Description=mpv-pip
+desktops=\\0
+desktopsrule=2
+title=mpv-pip
+titlematch=2
+wmclass=mpv
+wmclassmatch=2
+
+[General]
+count=7
+rules=77422ca2-f85c-4382-80f0-e15249a20ff0,c68392a4-f2ba-49c3-b8dc-3b1abd2028a1,70ce37ec-0525-4498-a931-b728794784b3,bfa20b16-98f5-43a4-a410-a14d756f7faf,20b75c2c-3e0c-49b8-a9df-04a2ab2422fc,0bd502e1-58cb-42c9-8cc9-7bb7a808d3ce,8d231caf-1552-4e73-83d8-2ce9030f0044
+
+[bfa20b16-98f5-43a4-a410-a14d756f7faf]
+Description=Application settings for spotify
+desktops=2b7d806c-9645-4598-afff-002409366b31
+desktopsrule=3
+wmclass=spotify
+wmclassmatch=1
+
+[c68392a4-f2ba-49c3-b8dc-3b1abd2028a1]
+Description=Application settings for org.keepassxc.KeePassXC
+desktops=3712affd-32fc-4e02-b8f8-8664556ef02b
+desktopsrule=3
+wmclass=keepassxc org.keepassxc.KeePassXC
+wmclasscomplete=true
+wmclassmatch=1
+
+[e130dfc3-2e63-43f8-90b3-dc3f740cbfd9]
+Description=mpv-pip
+desktops=\\0
+desktopsrule=2
 wmclassmatch=2

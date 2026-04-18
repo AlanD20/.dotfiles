@@ -1,0 +1,18 @@
+#!/bin/bash
+# PiP player - plays URL in small always-on-top window
+# Usage: pip-play "STREAM_URL"
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <STREAM_URL>"
+    exit 1
+fi
+
+WAYLAND_DISPLAY=wayland-0 mpv --geometry=400x225 \
+    --autofit-larger=400x225 \
+    --autofit-smaller=400x225 \
+    --ontop-level=desktop \
+    --force-window=immediate \
+    --no-border \
+    --gpu-context=wayland \
+    --title="mpv-pip" \
+    "$1"
