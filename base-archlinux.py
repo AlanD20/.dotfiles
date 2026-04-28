@@ -105,6 +105,8 @@ EXTRA_PACKAGES: list[str] = [
     "btrfs-progs",
     # System
     "lvm2",
+    # ZRAM swap (replaces swap partition)
+    "zram-generator",
 ]
 
 EXTRA_APPS: list[str] = [
@@ -989,6 +991,22 @@ def arch_chroot_setup(
         )
     else:
         print(f"  [dry-run] Would write to {env_path}:\n{env_content}")
+
+    # ── ZRAM swap configuration ─────────────────────────────────────────────
+    print("\n  [9.16] Configuring zram-generator swap ...")
+    zram_conf_path = "/mnt/etc/systemd/zram-generator.conf"
+    zram_conf_content = """\
+[zram0]
+zram-size = ram / 2
+compression-algorithm = zstd
+"""
+    if not dry_run:
+        with open(zram_conf_path, "w") as fh:
+            fh.write(zram_conf_content)
+        run_in_chroot("systemctl daemon-reload", dry_run=dry_run)
+    else:
+        print(f"  [dry-run] Would write to {zram_conf_path}:\n{zram_conf_content}")
+        print("  [dry-run] Would run: systemctl daemon-reload")
 
     print("\n  ✔  arch-chroot configuration complete.")
 
