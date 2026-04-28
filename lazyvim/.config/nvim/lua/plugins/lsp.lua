@@ -67,10 +67,10 @@ return {
           settings = {
             intelephense = {
               files = {
+                maxSize = 5000000,
                 exclude = {
                   "**/.git/**",
                   "**/node_modules/**",
-                  "**/vendor/**",
                   "**/.idea/**",
                   "**/.vscode/**",
                   "**/storage/**",
