@@ -182,17 +182,24 @@ return {
           keys = {
             { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
           },
-          root_dir = function(fname)
-            return require("lspconfig.util").root_pattern(
-              "Makefile",
-              "configure.ac",
-              "configure.in",
-              "config.h.in",
-              "meson.build",
-              "meson_options.txt",
-              "build.ninja"
-            )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname) or require("lspconfig.util").find_git_ancestor(fname)
-          end,
+          root_markers = {
+            ".clangd",
+            ".clang-tidy",
+            ".clang-format",
+            "compile_commands.json",
+            "compile_flags.txt",
+            "configure.ac",
+            "configure.in",
+            "config.h.in",
+            "Makefile",
+            "meson.build",
+            "meson_options.txt",
+            "build.ninja",
+            ".git",
+          },
+          -- Allow clangd to start even when no project marker is found
+          -- (e.g. a single standalone C file)
+          workspace_required = false,
           capabilities = {
             offsetEncoding = { "utf-16" },
           },
