@@ -65,7 +65,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.editor.harpoon2" }, -- Bookmark files
     { import = "lazyvim.plugins.extras.editor.illuminate" }, -- highlight words when cursor is on a word
     { import = "lazyvim.plugins.extras.editor.leap" }, -- use 's' to quickly jump around words
-    { import = "lazyvim.plugins.extras.editor.mini-diff" }, -- <leader>go to show git diff within buffer
+    -- { import = "lazyvim.plugins.extras.editor.mini-diff" }, -- Disabled in favor of gitsigns
     { import = "lazyvim.plugins.extras.editor.mini-files" }, -- <leader>fm to open quick file explorer and open files
     { import = "lazyvim.plugins.extras.editor.mini-move" }, -- Alt+<jklh> to move around line(s)
     { import = "lazyvim.plugins.extras.editor.navic" }, -- Shows quick symbol overview for current context
