@@ -18,6 +18,29 @@ vim.keymap.set(
   { silent = true, desc = "Colorizer: Reload all buffers" }
 )
 
+-- Toggle between regex and literal search for snacks grep
+vim.g.snacks_grep_regex = vim.g.snacks_grep_regex ~= false -- default true
+
+local function toggle_grep_regex()
+  vim.g.snacks_grep_regex = not vim.g.snacks_grep_regex
+  local mode = vim.g.snacks_grep_regex and "regex" or "literal"
+  vim.notify("Grep search mode: " .. mode, vim.log.levels.INFO)
+end
+
+local function live_grep_with_toggle(opts)
+  opts = vim.deepcopy(opts or {})
+  opts.regex = vim.g.snacks_grep_regex
+  if not opts.cwd and opts.root ~= false then
+    opts.cwd = LazyVim.root()
+  end
+  Snacks.picker.grep(opts)
+end
+
+vim.keymap.set("n", "<leader>ugr", toggle_grep_regex, { desc = "Toggle grep regex/literal" })
+vim.keymap.set("n", "<leader>sg", function() live_grep_with_toggle() end, { desc = "Grep (Root Dir)" })
+vim.keymap.set("n", "<leader>sG", function() live_grep_with_toggle({ root = false }) end, { desc = "Grep (cwd)" })
+vim.keymap.set("n", "<leader>/", function() live_grep_with_toggle() end, { desc = "Grep (Root Dir)" })
+
 vim.keymap.set(
   "n",
   "gat",
