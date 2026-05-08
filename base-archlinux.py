@@ -814,7 +814,7 @@ def arch_chroot_setup(
     run_in_chroot("groupadd -f sudo", dry_run=dry_run)
     shell_path = "/bin/zsh" if default_shell == "zsh" else "/bin/bash"
     run_in_chroot(
-        f"useradd -G sudo,wheel,storage,power,audio,video,input -m {user} "
+        f"useradd -G sudo,wheel,storage,power,audio,video,input,disk -m {user} "
         f"-s {shell_path}",
         dry_run=dry_run,
     )
