@@ -7,19 +7,19 @@ return {
         "nginx-language-server",
         "emmet-language-server",
         "emmet-ls",
-        "ruff",
+        -- "ruff",
         "typos",
         "typos-lsp",
         "puppet-editor-services",
 
         -- Shell scripts
-        "shfmt",
+        -- "shfmt",
         "shellcheck",
         "bash-language-server",
 
         -- lua
         "lua-language-server",
-        "stylua",
+        -- "stylua",
 
         -- web dev
         "css-lsp",
@@ -37,8 +37,8 @@ return {
 
         -- go
         "gopls",
-        "delve",
-        "goimports",
+        -- "delve",
+        -- "goimports",
         "golines",
 
         -- php
@@ -74,11 +74,11 @@ return {
 
         -- Terraform
         "terraform-ls",
-        "tflint",
+        -- "tflint",
 
         -- Ansible
         "ansible-language-server",
-        "ansible-lint",
+        -- "ansible-lint",
 
         -- zig
         "zls",
