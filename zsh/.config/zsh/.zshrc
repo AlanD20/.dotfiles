@@ -192,7 +192,12 @@ bindkey "^X^E" edit-command-line
 # * * ref: https://wiki.archlinux.org/title/SSH_keys#Alternative_passphrase_dialogs
 # may override it on KeepassXC app.
 # ref: https://stackoverflow.com/a/38980986/13362195
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+if [[ "$(uname)" == "Darwin" ]]; then
+    # KeePassXC SSH agent
+    export SSH_AUTH_SOCK="$TMPDIR/org.keepassx.ssh-agent"
+else
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+fi
 
 # Evaluate ssh-agent per profile
 #eval "$(ssh-agent -s)"
