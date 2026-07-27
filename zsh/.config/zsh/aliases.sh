@@ -28,9 +28,9 @@ alias cdf='cd `fd . --type d | fzf`'
 alias cls="clear"
 alias mkp="mkdir -pv"
 
-# Exa
-# More flags at https://github.com/ogham/exa#command-line-options
-alias ls="exa -a --icons --git --group-directories-first"
+# Eza (modern exa replacement)
+# More flags at https://github.com/eza-community/eza
+alias ls="eza -a --icons --git --group-directories-first"
 alias lls="ls -l"
 alias la="lls --git-ignore"
 alias tree="lls --tree --git-ignore"
