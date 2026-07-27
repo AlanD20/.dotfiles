@@ -245,6 +245,7 @@ PACMAN_PKGS: list[str] = [
     "docker-compose",  # manage multiple containers within a single file
     "ansible",
     "tree-sitter-cli",  # needed for lazyvim
+    "mise",  # Local dev task runner/env
     #
     # Fonts
     "woff2-font-awesome",
