@@ -157,6 +157,11 @@ ZSH_WEB_SEARCH_ENGINES=(yth "https://www.youtube.com/")
 
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/themes/aland20-custom-theme.omp.json)"
 
+# Load command-not-found only on non-macOS (slow brew lookup on Darwin)
+if [[ "$(uname)" != "Darwin" ]]; then
+    zinit snippet OMZP::command-not-found
+fi
+
 # Load zsh plugins
 source "$ZDOTDIR/zsh_plugins"
 

@@ -4,7 +4,7 @@ zinit snippet OMZP::fzf
 zinit snippet OMZP::tmux
 zinit snippet OMZP::gpg-agent
 zinit snippet OMZP::colored-man-pages
-zinit snippet OMZP::command-not-found
+# zinit snippet OMZP::command-not-found  # loaded conditionally in .zshrc
 zinit snippet OMZP::web-search
 zinit snippet OMZP::fancy-ctrl-z
 zinit snippet OMZP::history
