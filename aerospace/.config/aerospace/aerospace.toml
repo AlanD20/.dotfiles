@@ -2,22 +2,54 @@ config-version = 2
 start-at-login = true
 auto-reload-config = true
 
-enable-normalization-flatten-containers = true
+# ---------------------------------------------------------------------------
+# App assignments (on-window-detected callbacks)
+# Mirrors Sway's workspace assignments and scratchpad logic
+# ---------------------------------------------------------------------------
+on-window-detected = [
+    # Browser → workspace 1
+    {
+        if = 'test %{app-bundle-id} = com.google.Chrome || test %{app-bundle-id} = org.mozilla.firefox',
+        run = 'move-node-to-workspace 1',
+    },
+    # Terminal → workspace 2
+    {
+        if = 'test %{app-bundle-id} = com.mitchellh.ghostty',
+        run = 'move-node-to-workspace 2',
+    },
+    # Spotify → float on workspace 5
+    {
+        if = 'test %{app-bundle-id} = com.spotify.client',
+        run = ['layout floating', 'move-node-to-workspace 5'],
+    },
+    # KeepassXC → workspace 5
+    {
+        if = 'test %{app-bundle-id} = org.keepassxc.keepassxc',
+        run = ['layout floating', 'move-node-to-workspace 5'],
+    },
+    # Obsidian → workspace 4
+    {
+        if = 'test %{app-bundle-id} = md.obsidian',
+        run = 'move-node-to-workspace 4',
+    },
+]
+
+enable-normalization-flatten-containers = false
 enable-normalization-opposite-orientation-for-nested-containers = true
 
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
-accordion-padding = 30
+accordion-padding = 0
 
 focus-follows-mouse.enabled = false
 
 gaps.inner.horizontal = 4
 gaps.inner.vertical = 4
-gaps.outer.left = 6
-gaps.outer.bottom = 6
-gaps.outer.top = 6
-gaps.outer.right = 6
+gaps.outer.left = 0
+gaps.outer.bottom = 0
+gaps.outer.top = 0
+gaps.outer.right = 0
 
 persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
@@ -40,16 +72,16 @@ PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 [mode.main.binding]
 
 # -- Workspaces: Alt+1..0 (same as Sway) ------------------------------------
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
-alt-0 = 'workspace 10'
+cmd-shift-1 = 'workspace 1'
+cmd-shift-2 = 'workspace 2'
+cmd-shift-3 = 'workspace 3'
+cmd-shift-4 = 'workspace 4'
+cmd-shift-5 = 'workspace 5'
+cmd-shift-6 = 'workspace 6'
+cmd-shift-7 = 'workspace 7'
+cmd-shift-8 = 'workspace 8'
+cmd-shift-9 = 'workspace 9'
+cmd-shift-0 = 'workspace 10'
 
 # -- Move window to workspace: Alt+Shift+1..0 (same as Sway) ----------------
 alt-shift-1 = 'move-node-to-workspace 1; workspace 1'
@@ -84,12 +116,7 @@ cmd-shift-up = 'move up'
 cmd-shift-right = 'move right'
 
 # -- Terminal: Alt+Enter (same as Sway) -------------------------------------
-alt-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
-
-# -- Launcher: Alt+d (Sway: $mod+d → albert)
-#    On macOS, use Raycast or Alfred as replacement.
-#    Install: brew install --cask raycast
-alt-d = 'exec-and-forget open -n /Applications/Raycast.app'
+alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
 
 # -- Kill focused window: Alt+Shift+q (same as Sway) ------------------------
 alt-shift-q = 'close'
@@ -111,64 +138,16 @@ alt-b = 'split horizontal'
 alt-v = 'split vertical'
 
 # -- Tabbed layout: Alt+w (Sway: $mod+w layout tabbed) ----------------------
-alt-w = 'layout accordion horizontal vertical'
+alt-w = 'layout h_accordion'
 
 # -- Stacking layout: Alt+s (Sway: $mod+s layout stacking) ------------------
 alt-s = 'layout v_accordion'
-
-# -- Focus parent/child aren't directly supported in Aerospace ---------------
-
-# -- Scratchpad: no direct Aerospace equivalent.
-#    Use floating windows + specific workspace instead.
-#    Cmd+1/2/3 for app toggles (replaces Sway scratchpad toggles)
-cmd-1 = '''exec-and-forget osascript -e \
-'tell application "Alacritty" to if it is running then
-    tell application "System Events" to tell process "Alacritty"
-        if visible then set visible to false else set visible to true
-    end tell
-else
-    open location "alacritty://"
-end if' '''
-
-cmd-2 = 'exec-and-forget osascript -e \'tell application "Spotify" to activate\''
-cmd-3 = '''exec-and-forget osascript -e \
-'tell application "Finder" to if it is running then
-    tell application "System Events" to tell process "Finder"
-        if visible then set visible to false else set visible to true
-    end tell
-end if' '''
-
-# -- Back and forth: Alt+Tab (same as Sway) ---------------------------------
-alt-tab = 'workspace-back-and-forth'
-
-# -- Move workspace to monitor: Alt+Shift+Tab (Sway: same) ------------------
-alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # -- Resize mode: Alt+r (same as Sway) --------------------------------------
 alt-r = 'mode resize'
 
 # -- Reload config: Alt+Shift+c (Sway: $mod+Shift+c) ------------------------
 alt-shift-c = 'reload-config'
-
-# -- Lock screen: Cmd+] (Sway: $mod2+]) -------------------------------------
-cmd-bracketright = 'exec-and-forget osascript -e \'tell application "System Events" to keystroke "q" using {command down, control down}\''
-
-# -- Screenshot: Ctrl+Alt+f/s/w (same as Sway) ------------------------------
-ctrl-alt-f = '''exec-and-forget screencapture -T0 -x \
-~/Desktop/screenshot_$(date +%Y%m%d_%H%M%S).png'''
-ctrl-alt-s = '''exec-and-forget screencapture -i -x \
-~/Desktop/screenshot_$(date +%Y%m%d_%H%M%S).png'''
-ctrl-alt-w = '''exec-and-forget screencapture -iW -x \
-~/Desktop/screenshot_$(date +%Y%m%d_%H%M%S).png'''
-
-# -- Discord mute: Alt+m (Sway: same) ---------------------------------------
-alt-m = 'exec-and-forget osascript -e \'tell application "System Events" to keystroke "m" using {option down}\''
-
-# -- Volume keys (macOS handles these natively, but explicit bindings): ------
-#    No explicit bindings needed — macOS F-key behavior works by default.
-
-# -- Workspace navigation via swipe gestures (Sway: bindgesture) ------------
-#    Not directly supported in Aerospace.
 
 # ---------------------------------------------------------------------------
 # Service / resize mode — mirrors Sway's resize mode
@@ -197,55 +176,3 @@ r = ['flatten-workspace-tree', 'mode main']
 # Return to main mode
 esc = 'mode main'
 enter = 'mode main'
-
-# ---------------------------------------------------------------------------
-# App assignments (on-window-detected callbacks)
-# Mirrors Sway's workspace assignments and scratchpad logic
-# ---------------------------------------------------------------------------
-on-window-detected = [
-    # Terminal → workspace 2
-    {
-        if = 'test %{app-bundle-id} = org.alacritty',
-        run = 'move-node-to-workspace 2',
-    },
-    # Browser → workspace 1
-    {
-        if = 'test %{app-bundle-id} = com.google.Chrome || test %{app-bundle-id} = org.mozilla.firefox',
-        run = 'move-node-to-workspace 1',
-    },
-    # IDE (VSCode) → workspace 3
-    {
-        if = 'test %{app-bundle-id} = com.microsoft.VSCode',
-        run = 'move-node-to-workspace 3',
-    },
-    # Discord → workspace 4
-    {
-        if = 'test %{app-bundle-id} = com.hnc.Discord',
-        run = 'move-node-to-workspace 4',
-    },
-    # Spotify → float on workspace 5
-    {
-        if = 'test %{app-bundle-id} = com.spotify.client',
-        run = ['layout floating', 'move-node-to-workspace 5'],
-    },
-    # KeepassXC → workspace 6
-    {
-        if = 'test %{app-bundle-id} = org.keepassxc.keepassxc',
-        run = ['layout floating', 'move-node-to-workspace 6'],
-    },
-    # JetBrains IDEs → workspace 7
-    {
-        if = 'test %{app-bundle-id} = com.jetbrains.intellilij || test %{app-bundle-id} = com.jetbrains.phpstorm',
-        run = 'move-node-to-workspace 7',
-    },
-    # Terminal.app / iTerm2 fallback → workspace 2
-    {
-        if = 'test %{app-bundle-id} = com.apple.Terminal || test %{app-bundle-id} = com.googlecode.iterm2',
-        run = 'move-node-to-workspace 2',
-    },
-    # Obsidian → workspace 8
-    {
-        if = 'test %{app-bundle-id} = md.obsidian',
-        run = 'move-node-to-workspace 8',
-    },
-]
