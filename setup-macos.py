@@ -46,7 +46,6 @@ NODE_VERSION = "lts/krypton"
 PYENV_VERSION = "3.13"
 RESTICPROFILE_VERSION = "0.32.0"
 NVM_VERSION = "v0.40.1"
-DANKMONO_VERSION = "1.2.0"
 
 PIP3_PKGS: list[str] = [
     "build",
@@ -76,7 +75,6 @@ STOW_DIRS: list[str] = [
     "lazyvim",
     "oh-my-posh",
     "opencode",
-    "systemd",
     "tmux",
     "zsh",
 ]
@@ -97,13 +95,8 @@ BREW_FORMULAE: list[str] = [
     "wget",
     "neovim",
     "vim",
-    "nano",
-    "openssh",
     "jq",
     "yq",
-    "bind",
-    "less",
-    "lsof",
     "htop",
     # Shell & terminal
     "zsh",
@@ -158,12 +151,9 @@ BREW_FORMULAE: list[str] = [
     "ripgrep-all",
     "sqlite",
     "docker",
-    "docker-compose",
+    "colima",
     "helm",
     "zig",
-    "squashfs",
-    "cdrtools",
-    "netcat",
     # Libraries
     "gnupg",
     # Albert/Qt deps — not needed on macOS
@@ -259,19 +249,6 @@ def get_brew_bin() -> str:
     return f"{get_brew_prefix()}/bin/brew"
 
 
-def run_cmd(args: list[str], *, cwd: str | None = None, sudo: bool = False) -> None:
-    """Run a command. Optionally prefix with sudo."""
-    cmd = ["sudo"] + args if sudo else args
-    subprocess.run(cmd, check=True, cwd=cwd)
-
-
-def run_cmd_manual(
-    args: list[str], *, cwd: str | None = None, sudo: bool = False
-) -> None:
-    """Run a command interactively (for --manual mode)."""
-    cmd = ["sudo"] + args if sudo else args
-    subprocess.run(cmd, check=False, cwd=cwd)
-
 
 def run_as_user(cmd: str, *, cwd: str | None = None) -> None:
     """Run *cmd* via a login shell (respects user env)."""
@@ -311,6 +288,9 @@ def install_brew_packages(skip_brew: bool = False, manual: bool = False) -> None
         return
 
     ensure_homebrew(manual)
+
+    print_step("Updating Homebrew")
+    subprocess.run(["brew", "update"], check=False)
 
     install_cmd = ["brew", "install"]
     if not manual:
@@ -352,6 +332,15 @@ def install_brew_fonts(manual: bool = False) -> None:
 # ---------------------------------------------------------------------------
 
 
+def ensure_xcode_cli_tools() -> None:
+    """Install Xcode Command Line Tools if not already present."""
+    if subprocess.run(["xcode-select", "-p"], capture_output=True).returncode != 0:
+        print_step("Installing Xcode Command Line Tools")
+        subprocess.run(["xcode-select", "--install"], check=False)
+        print("  Please complete the installation and re-run this script.")
+        sys.exit(0)
+
+
 def configure_macos_defaults() -> None:
     """Apply macOS system preferences via defaults write."""
     print_step("Configuring macOS system preferences")
@@ -362,6 +351,20 @@ def configure_macos_defaults() -> None:
 
     for domain, key, typ, value in MACOS_DEFAULTS:
         subprocess.run(["defaults", "write", domain, key, typ, value], check=False)
+
+    # Screenshot location
+    screenshots_dir = os.path.expanduser("~/Pictures/Screenshots")
+    os.makedirs(screenshots_dir, exist_ok=True)
+    subprocess.run(
+        ["defaults", "write", "com.apple.screencapture", "location", "-string", screenshots_dir],
+        check=False,
+    )
+
+    # Trackpad: tap to click
+    subprocess.run(
+        ["defaults", "write", "com.apple.AppleMultitouchTrackpad", "Clicking", "-bool", "true"],
+        check=False,
+    )
 
     # Restart affected apps
     subprocess.run(["killall", "Finder"], check=False)
@@ -381,14 +384,41 @@ def configure_ssh() -> None:
     )
 
 
+def configure_touchid_sudo() -> None:
+    """Enable Touch ID for sudo authentication (macOS Sonoma+)."""
+    print_step("Configuring Touch ID for sudo")
+    pam_path = "/etc/pam.d/sudo_local"
+    if os.path.exists(pam_path):
+        with open(pam_path) as f:
+            if "pam_tid.so" in f.read():
+                print("  Touch ID already configured")
+                return
+    tmp = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".pam")
+    tmp.write("# sudo_local: local config for sudo\n")
+    tmp.write("auth       sufficient     pam_tid.so\n")
+    tmp.close()
+    subprocess.run(["sudo", "cp", tmp.name, pam_path], check=False)
+    subprocess.run(["sudo", "chmod", "444", pam_path], check=False)
+    os.unlink(tmp.name)
+
+
 # ---------------------------------------------------------------------------
 # Service management (brew services / launchctl)
 # ---------------------------------------------------------------------------
 
 BREW_SERVICES: list[str] = [
-    "docker",
     "php",
+    "colima",
 ]
+
+
+def configure_colima() -> None:
+    """Switch Docker context to colima so docker CLI works."""
+    subprocess.run(
+        ["docker", "context", "use", "colima"],
+        check=False,
+        capture_output=True,
+    )
 
 
 def enable_services(manual: bool = False) -> None:
@@ -433,11 +463,12 @@ def install_node_via_nvm(node_version: str) -> None:
 
 
 def configure_go() -> None:
-    """Set GOMODCACHE to the XDG cache directory."""
+    """Install gopls and set GOMODCACHE to the XDG cache directory."""
     if not command_exists("go"):
         print("  go not found — skipping. Install with: brew install go")
         return
     print_step("Configuring Go")
+    run_as_user("go install golang.org/x/tools/gopls@latest")
     run_as_user('go env -w GOMODCACHE="$XDG_CACHE_HOME/go/pkg/mod"')
 
 
@@ -603,9 +634,9 @@ def install_dankmono_font() -> None:
 
     install_cmd = (
         'FONT_DIR="$HOME/Library/Fonts"; '
-        'mkdir -p "$FONT_DIR/DankMono-Nerd-Font"; '
+        'mkdir -p "$FONT_DIR"; '
         "curl -sL https://github.com/saifulapm/my-fonts/archive/refs/heads/main.tar.gz "
-        '| tar xz -C "$FONT_DIR/DankMono-Nerd-Font" --strip-components=2 '
+        '| tar xz -C "$FONT_DIR" --strip-components=2 '
         "'my-fonts-main/DankMono Nerd Font'"
     )
     run_as_user(install_cmd)
@@ -675,9 +706,13 @@ def configure_shell() -> None:
 def run_setup(args: argparse.Namespace, script_path: str) -> None:
     """Execute all setup steps, gated by flags."""
 
+    # Xcode CLI tools (prerequisite for most things)
+    ensure_xcode_cli_tools()
+
     # macOS defaults
     if args.defaults:
         configure_macos_defaults()
+        configure_touchid_sudo()
 
     # Homebrew packages (CLI tools)
     if not args.skip_brew:
@@ -727,6 +762,7 @@ def run_setup(args: argparse.Namespace, script_path: str) -> None:
     # Services
     if args.services:
         enable_services(manual=args.manual)
+        configure_colima()
 
     # SSH
     if args.ssh:
