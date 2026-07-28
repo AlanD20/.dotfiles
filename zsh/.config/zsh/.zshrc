@@ -192,12 +192,12 @@ bindkey "^X^E" edit-command-line
 # * * ref: https://wiki.archlinux.org/title/SSH_keys#Alternative_passphrase_dialogs
 # may override it on KeepassXC app.
 # ref: https://stackoverflow.com/a/38980986/13362195
-if [[ "$(uname)" == "Darwin" ]]; then
-    # KeePassXC SSH agent
-    export SSH_AUTH_SOCK="$TMPDIR/keepassxc-$USER.socket"
-else
+if [[ "$(uname)" != "Darwin" ]]; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
+# macOS: no override needed — ssh-agent is managed by launchd (com.openssh.ssh-agent).
+# KeePassXC acts as a client and adds keys to the system agent automatically.
+# Overriding SSH_AUTH_SOCK to keepassxc's internal socket breaks ssh-add on macOS.
 
 # Evaluate ssh-agent per profile
 #eval "$(ssh-agent -s)"
