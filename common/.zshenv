@@ -69,3 +69,4 @@ export VISUAL="nvim"
 # else
 #   export EDITOR='nvim'
 # fi
+. "$HOME/.cargo/env"

@@ -194,7 +194,7 @@ bindkey "^X^E" edit-command-line
 # ref: https://stackoverflow.com/a/38980986/13362195
 if [[ "$(uname)" == "Darwin" ]]; then
     # KeePassXC SSH agent
-    export SSH_AUTH_SOCK="$TMPDIR/org.keepassx.ssh-agent"
+    export SSH_AUTH_SOCK="$TMPDIR/keepassxc-$USER.socket"
 else
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
@@ -207,7 +207,7 @@ fi
 #eval "$(keychain --quiet --nogui --eval --agents ssh $HOME/.ssh/id_rsa)"
 
 # Source all files in 'includes' directory and has to have files
-if [ -d "$ZDOTDIR/includes" ] && [ -n "$(\ls -A --ignore '.*' $ZDOTDIR/includes)" ]; then
+if [ -d "$ZDOTDIR/includes" ] && [ -n "$(print -l $ZDOTDIR/includes/*(N.))" ]; then
   for src in $ZDOTDIR/includes/*; do
     source $src;
   done
