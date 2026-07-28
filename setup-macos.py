@@ -192,6 +192,12 @@ BREW_CASKS: list[str] = [
     "postman",
     "anydesk",
     "onedrive",
+    # Productivity
+    "raycast",
+    "alt-tab",
+    "stats",
+    # System audio EQ (replaces easyeffects on macOS)
+    # "eqmac",
     # Window manager
     "nikitabobko/tap/aerospace",
 ]
