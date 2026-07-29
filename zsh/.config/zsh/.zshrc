@@ -118,11 +118,6 @@ export FFF_FAV9=/
 export BUN_INSTALL="$XDG_DATA_HOME/bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Rust
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-export PATH="$PATH:$CARGO_HOME/bin"
-
 # Go
 export GO11MODULE=on
 
@@ -166,7 +161,6 @@ ZSH_WEB_SEARCH_ENGINES=(yth "https://www.youtube.com/")
 #[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 [ -f "$ZDOTDIR/helpers.sh" ] && source "$ZDOTDIR/helpers.sh"
 [ -f "$ZDOTDIR/aliases.sh" ] && source "$ZDOTDIR/aliases.sh"
-[ -f "$CARGO_HOME/env" ] && source "$CARGO_HOME/env"
 
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/themes/aland20-custom-theme.omp.json)"
 

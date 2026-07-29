@@ -63,10 +63,15 @@ fi
 export EDITOR="nvim"
 export VISUAL="nvim"
 
+# Rustup respects these locations on every platform. Keep them here rather
+# than sourcing rustup's generated env file, which hardcodes ~/.cargo.
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+[[ -d "$CARGO_HOME/bin" ]] && export PATH="$CARGO_HOME/bin:$PATH"
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
 #   export EDITOR='nvim'
 # fi
-. "$HOME/.cargo/env"
