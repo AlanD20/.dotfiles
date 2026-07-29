@@ -442,14 +442,21 @@ def install_node_via_nvm(node_version: str) -> None:
     """Install/upgrade nvm and install node."""
     print_step(f"Installing Node via nvm ({node_version})")
 
-    nvm_dir = os.path.expanduser("~/.nvm")
+    # Keep NVM aligned with the shared XDG-based zsh configuration.
+    xdg_data_home = os.environ.get(
+        "XDG_DATA_HOME", os.path.expanduser("~/.local/share")
+    )
+    nvm_dir = os.path.join(xdg_data_home, "nvm")
     nvm_sh = os.path.join(nvm_dir, "nvm.sh")
+    nvm_env = os.environ.copy()
+    nvm_env["NVM_DIR"] = nvm_dir
 
     if not os.path.exists(nvm_sh):
         subprocess.run(
             f"curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{NVM_VERSION}/install.sh | bash",
             shell=True,
             check=True,
+            env=nvm_env,
         )
 
     nvm_cmds = (
@@ -459,7 +466,9 @@ def install_node_via_nvm(node_version: str) -> None:
         f"nvm use default && "
         f"npm install npm@latest yarn@latest pnpm@latest --location=global"
     )
-    subprocess.run(nvm_cmds, shell=True, check=True, executable="/bin/zsh")
+    subprocess.run(
+        nvm_cmds, shell=True, check=True, executable="/bin/zsh", env=nvm_env
+    )
 
 
 def configure_go() -> None:
