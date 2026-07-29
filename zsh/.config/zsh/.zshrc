@@ -63,6 +63,19 @@ export LC_ALL="en_US.UTF-8"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export NVM_COMPLETION=true
 # export NVM_LAZY_LOAD=true # If enabled, the npm bin path will not be added
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  source "$NVM_DIR/nvm.sh"
+
+  # NVM v0.40.6 parses aliases with patterns that fail when EXTENDED_GLOB is
+  # enabled. Keep it enabled globally, but disable it while NVM runs. Remove
+  # this wrapper once NVM fixes its EXTENDED_GLOB compatibility.
+  functions -c nvm _nvm
+  nvm() {
+    setopt localoptions noextendedglob
+    _nvm "$@"
+  }
+fi
+[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
 
 # GPG
 export GPG_TTY=$(tty)

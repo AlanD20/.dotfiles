@@ -10,7 +10,6 @@ zinit snippet OMZP::fancy-ctrl-z
 zinit snippet OMZP::history
 
 zinit light rupa/z
-zinit light lukechilds/zsh-nvm
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 # zinit light zsh-users/zsh-syntax-highlighting
@@ -24,4 +23,3 @@ zinit light Aloxaf/fzf-tab
 
 # Powerful TUI sqlite db to store command history
 zinit light atuinsh/atuin
-
