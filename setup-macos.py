@@ -13,17 +13,20 @@ Usage:
     python3 setup-macos.py [flags]
 
 Flags:
-    --stow             Stow dotfiles, configure zsh shell
-    --nvm [VERSION]    Install/upgrade nvm and install node (default: lts/krypton)
+    --brew             Install the base Homebrew CLI formulae
+    --stow             Stow dotfiles without adopting conflicting local files
+    --brew-zsh         Set Homebrew zsh as the login shell
+    --xcode            Validate full Xcode for native/iOS development
+    --nvm [VERSION]    Install NVM if needed and install Node (default: lts/krypton)
     --go               Install Go + gopls, configure GOMODCACHE
     --rust             Install rustup and set nightly as default toolchain
-    --k9s-theme        Download and extract catppuccin k9s theme
-    --resticprofile [VERSION]  Download and extract resticprofile binary (default: 0.32.0)
+    --k9s-theme SHA    Install Catppuccin k9s theme from an immutable Git commit
+    --resticprofile    Install resticprofile through Homebrew
     --pyenv [VERSION]  Install Python via pyenv (default: 3.13)
-    --font             Install Nerd Fonts via homebrew/cask-fonts
+    --font             Install Nerd Fonts via Homebrew casks
     --ssh              Enable SSH (Remote Login)
     --php              Install PHP, Composer, configure php.ini extensions
-    --services         Enable background services (docker, php)
+    --services         Enable Colima; PHP is started only with --php
     --gui              Install GUI applications (browsers, editors, media, office)
     --mas              Install Mac App Store apps via mas (requires prior iCloud sign-in)
     --skip-brew        Skip Homebrew formula/cask installation
@@ -31,8 +34,10 @@ Flags:
 """
 
 import argparse
+import getpass
 import os
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -44,8 +49,7 @@ import tempfile
 
 NODE_VERSION = "lts/krypton"
 PYENV_VERSION = "3.13"
-RESTICPROFILE_VERSION = "0.32.0"
-NVM_VERSION = "v0.40.1"
+NVM_VERSION = "v0.40.3"
 
 PIP3_PKGS: list[str] = [
     "build",
@@ -120,7 +124,6 @@ BREW_FORMULAE: list[str] = [
     "k9s",
     "lazydocker",
     "restic",
-    "resticprofile",
     "asciinema",
     "atuin",
     "bmon",
@@ -136,10 +139,7 @@ BREW_FORMULAE: list[str] = [
     "mpv",
     "mupdf",
     # Dev & build
-    "python",
-    "php",
     "lua",
-    "go",
     "terraform",
     "ansible",
     "meson",
@@ -150,8 +150,6 @@ BREW_FORMULAE: list[str] = [
     "mise",
     "ripgrep-all",
     "sqlite",
-    "docker",
-    "colima",
     "helm",
     "zig",
     # Libraries
@@ -219,7 +217,7 @@ MACOS_DEFAULTS: list[tuple[str, str, str, str]] = [
     ("NSGlobalDomain", "KeyRepeat", "-int", "2"),
     ("NSGlobalDomain", "InitialKeyRepeat", "-int", "15"),
     ("NSGlobalDomain", "AppleShowAllExtensions", "-bool", "true"),
-    ("NSGlobalDomain", "AppleShowAllFiles", "-bool", "true"),
+    ("com.apple.finder", "AppleShowAllFiles", "-bool", "true"),
     ("NSGlobalDomain", "NSDocumentSaveNewDocumentsToCloud", "-bool", "false"),
     ("NSGlobalDomain", "NSTableViewDefaultSizeMode", "-int", "2"),
     ("NSGlobalDomain", "NSWindowShouldDragOnGesture", "-bool", "true"),
@@ -238,26 +236,50 @@ MACOS_DEFAULTS: list[tuple[str, str, str, str]] = [
 # ---------------------------------------------------------------------------
 
 
-def get_brew_prefix() -> str:
-    """Return Homebrew prefix, detecting Apple Silicon vs Intel."""
-    if os.path.exists("/opt/homebrew/bin/brew"):
-        return "/opt/homebrew"
-    return "/usr/local"
-
-
 def get_brew_bin() -> str:
-    return f"{get_brew_prefix()}/bin/brew"
+    """Return Homebrew's executable without relying on the caller's PATH."""
+    if brew_bin := shutil.which("brew"):
+        return brew_bin
+    for candidate in ["/opt/homebrew/bin/brew", "/usr/local/bin/brew"]:
+        if os.path.isfile(candidate):
+            return candidate
+    raise RuntimeError("Homebrew is not installed or its executable cannot be found")
 
 
 
-def run_as_user(cmd: str, *, cwd: str | None = None) -> None:
-    """Run *cmd* via a login shell (respects user env)."""
-    subprocess.run(cmd, shell=True, check=True, cwd=cwd, executable="/bin/zsh")
+def run_as_user(cmd: str, *, cwd: str | None = None, env: dict[str, str] | None = None) -> None:
+    """Run a shell command with an explicit environment."""
+    subprocess.run(cmd, shell=True, check=True, cwd=cwd, executable="/bin/zsh", env=env)
 
 
 def command_exists(name: str) -> bool:
     """Return True if *name* resolves to an executable on PATH."""
     return shutil.which(name) is not None
+
+
+def require_version(value: str, pattern: str, flag: str) -> str:
+    """Reject shell metacharacters in user-provided version arguments."""
+    if not re.fullmatch(pattern, value):
+        raise ValueError(f"{flag} has an unsupported version format: {value}")
+    return value
+
+
+def xdg_environment() -> dict[str, str]:
+    """Return a process environment consistent with the shared dotfiles."""
+    env = os.environ.copy()
+    home_dir = os.path.expanduser("~")
+    data_home = env.setdefault("XDG_DATA_HOME", f"{home_dir}/.local/share")
+    env.setdefault("XDG_CONFIG_HOME", f"{home_dir}/.config")
+    env.setdefault("XDG_CACHE_HOME", f"{home_dir}/.cache")
+    env["CARGO_HOME"] = f"{data_home}/cargo"
+    env["RUSTUP_HOME"] = f"{data_home}/rustup"
+    env["PATH"] = f"{env['CARGO_HOME']}/bin:{env['PATH']}"
+    return env
+
+
+def run_brew(args: list[str], **kwargs: object) -> subprocess.CompletedProcess[bytes]:
+    """Run Homebrew using its resolved executable path."""
+    return subprocess.run([get_brew_bin(), *args], check=True, **kwargs)
 
 
 def print_step(title: str) -> None:
@@ -274,12 +296,17 @@ def print_step(title: str) -> None:
 
 def ensure_homebrew(manual: bool = False) -> None:
     """Install Homebrew if not already present."""
-    if command_exists("brew"):
+    try:
+        get_brew_bin()
+    except RuntimeError:
+        pass
+    else:
         print("Homebrew already installed.")
         return
     print_step("Installing Homebrew")
     cmd = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-    subprocess.run(cmd, shell=True, check=not manual)
+    subprocess.run(cmd, shell=True, check=True)
+    get_brew_bin()
 
 
 def install_brew_packages(skip_brew: bool = False, manual: bool = False) -> None:
@@ -290,41 +317,38 @@ def install_brew_packages(skip_brew: bool = False, manual: bool = False) -> None
     ensure_homebrew(manual)
 
     print_step("Updating Homebrew")
-    subprocess.run(["brew", "update"], check=False)
+    run_brew(["update"])
 
-    install_cmd = ["brew", "install"]
+    install_cmd = ["install"]
     if not manual:
         install_cmd += ["--quiet", "--no-ask"]
 
     print_step("Installing Homebrew formulae (CLI tools)")
-    for pkg in BREW_FORMULAE:
-        subprocess.run(install_cmd + [pkg], check=False)
+    run_brew(install_cmd + BREW_FORMULAE)
 
 
 def install_brew_casks(manual: bool = False) -> None:
     """Install GUI applications via Homebrew casks."""
     ensure_homebrew(manual)
 
-    install_cmd = ["brew", "install", "--cask"]
+    install_cmd = ["install", "--cask"]
     if not manual:
         install_cmd += ["--quiet", "--no-ask"]
 
     print_step("Installing GUI applications (casks)")
-    for cask in BREW_CASKS:
-        subprocess.run(install_cmd + [cask], check=False)
+    run_brew(install_cmd + BREW_CASKS)
 
 
 def install_brew_fonts(manual: bool = False) -> None:
     """Install Nerd Fonts via homebrew/cask-fonts."""
     ensure_homebrew(manual)
 
-    install_cmd = ["brew", "install", "--cask"]
+    install_cmd = ["install", "--cask"]
     if not manual:
         install_cmd += ["--quiet", "--no-ask"]
 
     print_step("Installing Nerd Fonts")
-    for font in BREW_FONTS:
-        subprocess.run(install_cmd + [font], check=False)
+    run_brew(install_cmd + BREW_FONTS)
 
 
 # ---------------------------------------------------------------------------
@@ -341,29 +365,36 @@ def ensure_xcode_cli_tools() -> None:
         sys.exit(0)
 
 
+def ensure_full_xcode() -> None:
+    """Validate that full Xcode, not only Command Line Tools, is active."""
+    developer_dir = subprocess.check_output(["xcode-select", "-p"], text=True).strip()
+    if not developer_dir.endswith("/Contents/Developer"):
+        raise RuntimeError(
+            "Full Xcode is required. Install it from the App Store, then run "
+            "sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer."
+        )
+    subprocess.run(["xcodebuild", "-version"], check=True)
+
+
 def configure_macos_defaults() -> None:
     """Apply macOS system preferences via defaults write."""
     print_step("Configuring macOS system preferences")
 
-    # Kill affected apps first to avoid conflicts
-    for app in ["Finder", "Dock"]:
-        subprocess.run(["killall", app], check=False)
-
     for domain, key, typ, value in MACOS_DEFAULTS:
-        subprocess.run(["defaults", "write", domain, key, typ, value], check=False)
+        subprocess.run(["defaults", "write", domain, key, typ, value], check=True)
 
     # Screenshot location
     screenshots_dir = os.path.expanduser("~/Pictures/Screenshots")
     os.makedirs(screenshots_dir, exist_ok=True)
     subprocess.run(
         ["defaults", "write", "com.apple.screencapture", "location", "-string", screenshots_dir],
-        check=False,
+        check=True,
     )
 
     # Trackpad: tap to click
     subprocess.run(
         ["defaults", "write", "com.apple.AppleMultitouchTrackpad", "Clicking", "-bool", "true"],
-        check=False,
+        check=True,
     )
 
     # Restart affected apps
@@ -375,12 +406,8 @@ def configure_ssh() -> None:
     """Enable SSH Remote Login on macOS."""
     print_step("Enabling SSH (Remote Login)")
     subprocess.run(
-        ["sudo", "launchctl", "load", "-w", "/System/Library/LaunchDaemons/ssh.plist"],
-        check=False,
-    )
-    subprocess.run(
         ["sudo", "systemsetup", "-setremotelogin", "on"],
-        check=False,
+        check=True,
     )
 
 
@@ -397,9 +424,11 @@ def configure_touchid_sudo() -> None:
     tmp.write("# sudo_local: local config for sudo\n")
     tmp.write("auth       sufficient     pam_tid.so\n")
     tmp.close()
-    subprocess.run(["sudo", "cp", tmp.name, pam_path], check=False)
-    subprocess.run(["sudo", "chmod", "444", pam_path], check=False)
-    os.unlink(tmp.name)
+    try:
+        subprocess.run(["sudo", "cp", tmp.name, pam_path], check=True)
+        subprocess.run(["sudo", "chmod", "444", pam_path], check=True)
+    finally:
+        os.unlink(tmp.name)
 
 
 # ---------------------------------------------------------------------------
@@ -416,21 +445,18 @@ def configure_colima() -> None:
     """Switch Docker context to colima so docker CLI works."""
     subprocess.run(
         ["docker", "context", "use", "colima"],
-        check=False,
+        check=True,
         capture_output=True,
     )
 
 
-def enable_services(manual: bool = False) -> None:
+def enable_services(services: list[str]) -> None:
     """Start and enable background services via brew services."""
     print_step("Enabling background services")
 
-    for service in BREW_SERVICES:
+    for service in services:
         print(f"  Starting {service}...")
-        subprocess.run(
-            ["brew", "services", "start", service],
-            check=False,
-        )
+        run_brew(["services", "start", service])
 
 
 # ---------------------------------------------------------------------------
@@ -440,6 +466,7 @@ def enable_services(manual: bool = False) -> None:
 
 def install_node_via_nvm(node_version: str) -> None:
     """Install/upgrade nvm and install node."""
+    node_version = require_version(node_version, r"(?:lts/[a-z]+|v?\d+(?:\.\d+){0,2})", "--nvm")
     print_step(f"Installing Node via nvm ({node_version})")
 
     # Keep NVM aligned with the shared XDG-based zsh configuration.
@@ -462,7 +489,8 @@ def install_node_via_nvm(node_version: str) -> None:
     nvm_cmds = (
         f". {nvm_sh} && "
         f"nvm install {node_version} && "
-        f"nvm alias default {node_version} && "
+        # Store the resolved semantic version, not a shorthand such as 24.18.
+        f"nvm alias default \"$(nvm version {node_version})\" && "
         f"nvm use default && "
         f"npm install npm@latest yarn@latest pnpm@latest --location=global"
     )
@@ -474,63 +502,66 @@ def install_node_via_nvm(node_version: str) -> None:
 def configure_go() -> None:
     """Install gopls and set GOMODCACHE to the XDG cache directory."""
     if not command_exists("go"):
-        print("  go not found — skipping. Install with: brew install go")
-        return
+        ensure_homebrew()
+        run_brew(["install", "go"])
     print_step("Configuring Go")
-    run_as_user("go install golang.org/x/tools/gopls@latest")
-    run_as_user('go env -w GOMODCACHE="$XDG_CACHE_HOME/go/pkg/mod"')
+    go_env = xdg_environment()
+    run_as_user("go install golang.org/x/tools/gopls@latest", env=go_env)
+    run_as_user('go env -w GOMODCACHE="$XDG_CACHE_HOME/go/pkg/mod"', env=go_env)
 
 
 def configure_rust() -> None:
     """Install rustup if missing and set nightly as default."""
     print_step("Configuring Rust")
 
-    if not command_exists("rustup"):
+    rust_env = xdg_environment()
+    rustup_bin = os.path.join(rust_env["CARGO_HOME"], "bin", "rustup")
+    if not os.path.exists(rustup_bin):
         subprocess.run(
             "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y",
             shell=True,
-            check=False,
+            check=True,
+            env=rust_env,
         )
 
-    if command_exists("rustup"):
-        run_as_user("rustup toolchain install nightly && rustup default nightly")
+    subprocess.run([rustup_bin, "toolchain", "install", "nightly"], check=True, env=rust_env)
+    subprocess.run([rustup_bin, "default", "nightly"], check=True, env=rust_env)
 
 
 def install_python_via_pyenv(pyenv_version: str) -> None:
     """Install Python via pyenv, set global, install pip and uv packages."""
+    pyenv_version = require_version(pyenv_version, r"\d+\.\d+(?:\.\d+)?", "--pyenv")
     print_step(f"Installing Python {pyenv_version} via pyenv")
 
     if not command_exists("pyenv"):
-        subprocess.run(["brew", "install", "pyenv"], check=True)
+        run_brew(["install", "pyenv"])
 
-    run_as_user(f"pyenv install {pyenv_version}")
-    run_as_user(f"pyenv global {pyenv_version}")
+    pyenv_bin = shutil.which("pyenv")
+    if not pyenv_bin:
+        raise RuntimeError("pyenv was installed but is not available on PATH")
+    subprocess.run([pyenv_bin, "install", "--skip-existing", pyenv_version], check=True)
+    subprocess.run([pyenv_bin, "global", pyenv_version], check=True)
+    python_bin = subprocess.check_output([pyenv_bin, "which", "python"], text=True).strip()
 
-    pip_core = " ".join(PIP3_PKGS)
-    run_as_user(f"pip3 install {pip_core}")
-
-    pip_extra = " ".join(PIP3_PKGS_EXTRA)
-    run_as_user(f"pip3 install {pip_extra}")
+    subprocess.run([python_bin, "-m", "pip", "install", *PIP3_PKGS], check=True)
+    subprocess.run([python_bin, "-m", "pip", "install", *PIP3_PKGS_EXTRA], check=True)
 
     for tool in UV_TOOLS:
-        run_as_user(f"uv tool install {tool}")
+        subprocess.run([python_bin, "-m", "uv", "tool", "install", tool], check=True)
 
 
 def install_php() -> None:
     """Install PHP extensions via pecl and configure php.ini."""
     if not command_exists("php"):
-        print("  php not found — skipping. Install with: brew install php")
-        return
+        ensure_homebrew()
+        run_brew(["install", "php"])
 
     print_step("Configuring PHP")
 
     if not command_exists("composer"):
-        subprocess.run(["brew", "install", "composer"], check=False)
+        run_brew(["install", "composer"])
 
-    subprocess.run(
-        ["pecl", "install", "xdebug"],
-        check=False,
-    )
+    subprocess.run(["pecl", "install", "xdebug"], check=True)
 
     # Enable common PHP extensions in php.ini
     ini_path = None
@@ -564,7 +595,7 @@ def install_php() -> None:
         for ext in extensions:
             subprocess.run(
                 ["sed", "-i", "", f"s/;extension={ext}/extension={ext}/", ini_path],
-                check=False,
+                check=True,
             )
 
 
@@ -580,28 +611,21 @@ def stow_dotfiles(script_path: str, extra_dirs: list[str] | None = None) -> None
     os.makedirs(os.path.expanduser("~/.local/bin"), exist_ok=True)
     os.makedirs(os.path.expanduser("~/.local/share/fonts"), exist_ok=True)
 
-    all_dirs = STOW_DIRS + (extra_dirs or [])
+    all_dirs = [directory for directory in STOW_DIRS if directory != "zsh"] + (extra_dirs or [])
 
     for stow_dir in all_dirs:
         print(f"  Stowing {stow_dir}")
         subprocess.run(
-            ["stow", stow_dir, "--adopt"],
-            check=False,
+            ["stow", "--restow", stow_dir],
+            check=True,
             cwd=script_path,
         )
 
     # Link zsh config last after env is loaded
     subprocess.run(
-        ["stow", "zsh", "--adopt"],
-        check=False,
+        ["stow", "--restow", "zsh"],
+        check=True,
         cwd=script_path,
-    )
-
-    # Source .zshrc to load plugins
-    subprocess.run(
-        "zsh -c 'source $ZDOTDIR/.zshrc'",
-        shell=True,
-        check=False,
     )
 
 
@@ -610,45 +634,30 @@ def stow_dotfiles(script_path: str, extra_dirs: list[str] | None = None) -> None
 # ---------------------------------------------------------------------------
 
 
-def install_k9s_theme() -> None:
-    """Download and extract the catppuccin k9s skin theme."""
-    print_step("Installing k9s catppuccin theme")
-
-    install_cmd = (
-        'OUT="${XDG_CONFIG_HOME:-$HOME/.config}/k9s/skins"; '
-        'mkdir -p "$OUT"; '
-        "curl -L https://github.com/catppuccin/k9s/archive/main.tar.gz "
-        '| tar xz -C "$OUT" --strip-components=2 k9s-main/dist'
+def install_k9s_theme(revision: str) -> None:
+    """Install the Catppuccin k9s skins from an immutable Git revision."""
+    revision = require_version(revision, r"[0-9a-f]{40}", "--k9s-theme")
+    print_step(f"Installing k9s catppuccin theme ({revision[:12]})")
+    output_dir = os.path.join(
+        os.environ.get("XDG_CONFIG_HOME", os.path.expanduser("~/.config")),
+        "k9s",
+        "skins",
     )
-    run_as_user(install_cmd)
+    with tempfile.TemporaryDirectory(prefix="k9s-theme-") as temp_dir:
+        repository_dir = os.path.join(temp_dir, "k9s")
+        subprocess.run(
+            ["git", "clone", "--no-checkout", "https://github.com/catppuccin/k9s.git", repository_dir],
+            check=True,
+        )
+        subprocess.run(["git", "-C", repository_dir, "checkout", "--detach", revision], check=True)
+        shutil.copytree(os.path.join(repository_dir, "dist"), output_dir, dirs_exist_ok=True)
 
 
-def install_resticprofile(version: str) -> None:
-    """Download and extract the resticprofile binary to ~/.local/bin."""
-    print_step(f"Installing resticprofile {version}")
-
-    install_cmd = (
-        'OUT="$HOME/.local/bin"; '
-        'mkdir -p "$OUT"; '
-        f"curl -L https://github.com/creativeprojects/resticprofile/releases/download/"
-        f"v{version}/resticprofile_{version}_darwin_$(uname -m).tar.gz "
-        '| tar xz -C "$OUT" --strip-components=1 resticprofile'
-    )
-    run_as_user(install_cmd)
-
-
-def install_dankmono_font() -> None:
-    """Download and install DankMono Nerd Font."""
-    print_step("Installing DankMono Nerd Font")
-
-    install_cmd = (
-        'FONT_DIR="$HOME/Library/Fonts"; '
-        'mkdir -p "$FONT_DIR"; '
-        "curl -sL https://github.com/saifulapm/my-fonts/archive/refs/heads/main.tar.gz "
-        '| tar xz -C "$FONT_DIR" --strip-components=2 '
-        "'my-fonts-main/DankMono Nerd Font'"
-    )
-    run_as_user(install_cmd)
+def install_resticprofile() -> None:
+    """Install resticprofile through Homebrew to avoid duplicate binaries."""
+    print_step("Installing resticprofile")
+    ensure_homebrew()
+    run_brew(["install", "resticprofile"])
 
 
 # ---------------------------------------------------------------------------
@@ -662,16 +671,17 @@ MAS_APPS: dict[str, int] = {
 }
 
 
-def install_mas_apps(manual: bool = False) -> None:
+def install_mas_apps() -> None:
     """Install Mac App Store apps via mas."""
     print_step("Installing Mac App Store apps")
 
     if not command_exists("mas"):
-        subprocess.run(["brew", "install", "mas"], check=True)
+        ensure_homebrew()
+        run_brew(["install", "mas"])
 
     for name, app_id in MAS_APPS.items():
         print(f"  Installing {name}...")
-        subprocess.run(["mas", "install", str(app_id)], check=False)
+        subprocess.run(["mas", "install", str(app_id)], check=True)
 
 
 # ---------------------------------------------------------------------------
@@ -681,8 +691,7 @@ def install_mas_apps(manual: bool = False) -> None:
 
 def configure_shell() -> None:
     """Set Homebrew zsh as the default shell if not already."""
-    brew_prefix = get_brew_prefix()
-    brew_zsh = f"{brew_prefix}/bin/zsh"
+    brew_zsh = os.path.join(os.path.dirname(get_brew_bin()), "zsh")
 
     if not os.path.exists(brew_zsh):
         print("  brew zsh not found, skipping shell change.")
@@ -690,7 +699,7 @@ def configure_shell() -> None:
 
     # Check if brew zsh is in /etc/shells
     with open("/etc/shells") as f:
-        shells = f.read()
+        shells = f.read().splitlines()
 
     if brew_zsh not in shells:
         print(f"  Adding {brew_zsh} to /etc/shells...")
@@ -701,10 +710,12 @@ def configure_shell() -> None:
         )
 
     # Change shell if not already brew zsh
-    current_shell = os.environ.get("SHELL", "")
+    current_shell = subprocess.check_output(
+        ["dscl", ".", "-read", f"/Users/{getpass.getuser()}", "UserShell"], text=True
+    ).split()[-1]
     if current_shell != brew_zsh:
         print(f"  Changing default shell to {brew_zsh}...")
-        subprocess.run(["chsh", "-s", brew_zsh], check=False)
+        subprocess.run(["chsh", "-s", brew_zsh], check=True)
 
 
 # ---------------------------------------------------------------------------
@@ -718,13 +729,19 @@ def run_setup(args: argparse.Namespace, script_path: str) -> None:
     # Xcode CLI tools (prerequisite for most things)
     ensure_xcode_cli_tools()
 
+    if args.xcode:
+        ensure_full_xcode()
+
     # macOS defaults
     if args.defaults:
         configure_macos_defaults()
+
+    if args.touchid_sudo:
         configure_touchid_sudo()
 
-    # Homebrew packages (CLI tools)
-    if not args.skip_brew:
+    # Base formulae are opt-in. Languages and containers are installed only by
+    # their matching flags below.
+    if args.brew and not args.skip_brew:
         install_brew_packages(skip_brew=False, manual=args.manual)
 
     # GUI applications
@@ -734,7 +751,6 @@ def run_setup(args: argparse.Namespace, script_path: str) -> None:
     # Fonts
     if args.font:
         install_brew_fonts(manual=args.manual)
-        install_dankmono_font()
 
     # Stow dotfiles
     if args.stow:
@@ -742,7 +758,8 @@ def run_setup(args: argparse.Namespace, script_path: str) -> None:
         stow_dotfiles(script_path, extra_dirs)
 
     # Shell
-    if args.stow:
+    if args.brew_zsh:
+        ensure_homebrew(args.manual)
         configure_shell()
 
     # Language runtimes
@@ -763,14 +780,19 @@ def run_setup(args: argparse.Namespace, script_path: str) -> None:
 
     # Theme / tools
     if args.k9s_theme:
-        install_k9s_theme()
+        install_k9s_theme(args.k9s_theme)
 
     if args.resticprofile:
-        install_resticprofile(args.resticprofile)
+        install_resticprofile()
 
     # Services
     if args.services:
-        enable_services(manual=args.manual)
+        ensure_homebrew(args.manual)
+        run_brew(["install", "docker", "colima"])
+        services = ["colima"]
+        if args.php:
+            services.insert(0, "php")
+        enable_services(services)
         configure_colima()
 
     # SSH
@@ -779,7 +801,7 @@ def run_setup(args: argparse.Namespace, script_path: str) -> None:
 
     # Mac App Store
     if args.mas:
-        install_mas_apps(manual=args.manual)
+        install_mas_apps()
 
     print_step("Setup complete")
     print("Remember to:")
@@ -801,6 +823,11 @@ def parse_args() -> argparse.Namespace:
         )
     )
     parser.add_argument(
+        "--brew",
+        action="store_true",
+        help="Install the base Homebrew CLI formulae.",
+    )
+    parser.add_argument(
         "--defaults",
         action="store_true",
         help="Apply macOS system preferences (Finder, Dock, etc.).",
@@ -808,7 +835,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--stow",
         action="store_true",
-        help="Stow dotfiles and configure zsh shell.",
+        help="Stow dotfiles without adopting conflicting local files.",
+    )
+    parser.add_argument(
+        "--brew-zsh",
+        action="store_true",
+        help="Set Homebrew zsh as the login shell.",
+    )
+    parser.add_argument(
+        "--xcode",
+        action="store_true",
+        help="Validate that full Xcode is installed and selected.",
     )
     parser.add_argument(
         "--nvm",
@@ -816,7 +853,7 @@ def parse_args() -> argparse.Namespace:
         nargs="?",
         const=NODE_VERSION,
         default=None,
-        help=f"Install/upgrade nvm and install node version (default: {NODE_VERSION}).",
+        help=f"Install NVM if needed and install Node (default: {NODE_VERSION}).",
     )
     parser.add_argument(
         "--go",
@@ -830,17 +867,14 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--k9s-theme",
-        action="store_true",
         dest="k9s_theme",
-        help="Download and extract catppuccin k9s theme.",
+        metavar="SHA",
+        help="Install Catppuccin k9s theme from an immutable 40-character Git SHA.",
     )
     parser.add_argument(
         "--resticprofile",
-        type=str,
-        nargs="?",
-        const=RESTICPROFILE_VERSION,
-        default=None,
-        help=f"Download and extract resticprofile binary (default: {RESTICPROFILE_VERSION}).",
+        action="store_true",
+        help="Install resticprofile through Homebrew.",
     )
     parser.add_argument(
         "--pyenv",
@@ -853,7 +887,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--font",
         action="store_true",
-        help="Install Nerd Fonts via homebrew/cask-fonts and DankMono.",
+        help="Install Nerd Fonts via Homebrew casks.",
+    )
+    parser.add_argument(
+        "--touchid-sudo",
+        action="store_true",
+        dest="touchid_sudo",
+        help="Enable Touch ID authentication for sudo.",
     )
     parser.add_argument(
         "--ssh",
@@ -868,7 +908,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--services",
         action="store_true",
-        help="Enable background services (docker, php).",
+        help="Enable Colima; PHP is started only when --php is also given.",
     )
     parser.add_argument(
         "--gui",
@@ -883,7 +923,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--skip-brew",
         action="store_true",
-        help="Skip installing Homebrew packages.",
+        help="Deprecated compatibility flag; base formulae are opt-in via --brew.",
     )
     parser.add_argument(
         "--manual",
