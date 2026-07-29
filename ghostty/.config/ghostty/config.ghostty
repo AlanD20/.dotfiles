@@ -1,6 +1,6 @@
 term = xterm-ghostty
 
-command = /usr/bin/zsh
+command = /bin/zsh
 
 window-decoration = none
 background-opacity = 0.9
