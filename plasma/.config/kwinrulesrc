@@ -55,8 +55,20 @@ wmclass=mpv
 wmclassmatch=2
 
 [General]
-count=7
-rules=77422ca2-f85c-4382-80f0-e15249a20ff0,c68392a4-f2ba-49c3-b8dc-3b1abd2028a1,70ce37ec-0525-4498-a931-b728794784b3,bfa20b16-98f5-43a4-a410-a14d756f7faf,20b75c2c-3e0c-49b8-a9df-04a2ab2422fc,0bd502e1-58cb-42c9-8cc9-7bb7a808d3ce,8d231caf-1552-4e73-83d8-2ce9030f0044
+count=8
+rules=77422ca2-f85c-4382-80f0-e15249a20ff0,c68392a4-f2ba-49c3-b8dc-3b1abd2028a1,70ce37ec-0525-4498-a931-b728794784b3,bfa20b16-98f5-43a4-a410-a14d756f7faf,20b75c2c-3e0c-49b8-a9df-04a2ab2422fc,0bd502e1-58cb-42c9-8cc9-7bb7a808d3ce,8d231caf-1552-4e73-83d8-2ce9030f0044,b6a8a23c-567a-4fde-af96-b46947f72d22
+
+[b6a8a23c-567a-4fde-af96-b46947f72d22]
+Description=ghostty
+desktops=8678d1e0-44ee-43dd-b7cf-877110703a26
+desktopsrule=3
+maximizehoriz=true
+maximizehorizrule=3
+maximizevert=true
+maximizevertrule=3
+wmclass=ghostty com.mitchellh.ghostty
+wmclasscomplete=true
+wmclassmatch=1
 
 [bfa20b16-98f5-43a4-a410-a14d756f7faf]
 Description=Application settings for spotify
@@ -78,3 +90,8 @@ Description=mpv-pip
 desktops=\\0
 desktopsrule=2
 wmclassmatch=2
+
+[e1b06eee-75bb-458d-87f5-bb1018fd90d2]
+desktopsrule=3
+maximizehorizrule=3
+maximizevertrule=3
