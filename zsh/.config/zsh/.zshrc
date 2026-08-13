@@ -141,6 +141,10 @@ if command -v pyenv &>/dev/null; then
   eval "$(pyenv init -)"
 fi
 
+if command -v rbenv &>/dev/null; then
+  eval "$(rbenv init - zsh)"
+fi
+
 # Zinit - zsh plugin manager
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
