@@ -69,7 +69,7 @@ UV_TOOLS: list[str] = [
 
 STOW_DIRS: list[str] = [
     "aerospace",
-    "alacritty",
+    "ghostty",
     "atuin",
     "bin",
     "common",
@@ -246,8 +246,9 @@ def get_brew_bin() -> str:
     raise RuntimeError("Homebrew is not installed or its executable cannot be found")
 
 
-
-def run_as_user(cmd: str, *, cwd: str | None = None, env: dict[str, str] | None = None) -> None:
+def run_as_user(
+    cmd: str, *, cwd: str | None = None, env: dict[str, str] | None = None
+) -> None:
     """Run a shell command with an explicit environment."""
     subprocess.run(cmd, shell=True, check=True, cwd=cwd, executable="/bin/zsh", env=env)
 
@@ -387,13 +388,27 @@ def configure_macos_defaults() -> None:
     screenshots_dir = os.path.expanduser("~/Pictures/Screenshots")
     os.makedirs(screenshots_dir, exist_ok=True)
     subprocess.run(
-        ["defaults", "write", "com.apple.screencapture", "location", "-string", screenshots_dir],
+        [
+            "defaults",
+            "write",
+            "com.apple.screencapture",
+            "location",
+            "-string",
+            screenshots_dir,
+        ],
         check=True,
     )
 
     # Trackpad: tap to click
     subprocess.run(
-        ["defaults", "write", "com.apple.AppleMultitouchTrackpad", "Clicking", "-bool", "true"],
+        [
+            "defaults",
+            "write",
+            "com.apple.AppleMultitouchTrackpad",
+            "Clicking",
+            "-bool",
+            "true",
+        ],
         check=True,
     )
 
@@ -466,7 +481,9 @@ def enable_services(services: list[str]) -> None:
 
 def install_node_via_nvm(node_version: str) -> None:
     """Install/upgrade nvm and install node."""
-    node_version = require_version(node_version, r"(?:lts/[a-z]+|v?\d+(?:\.\d+){0,2})", "--nvm")
+    node_version = require_version(
+        node_version, r"(?:lts/[a-z]+|v?\d+(?:\.\d+){0,2})", "--nvm"
+    )
     print_step(f"Installing Node via nvm ({node_version})")
 
     # Keep NVM aligned with the shared XDG-based zsh configuration.
@@ -490,13 +507,11 @@ def install_node_via_nvm(node_version: str) -> None:
         f". {nvm_sh} && "
         f"nvm install {node_version} && "
         # Store the resolved semantic version, not a shorthand such as 24.18.
-        f"nvm alias default \"$(nvm version {node_version})\" && "
+        f'nvm alias default "$(nvm version {node_version})" && '
         f"nvm use default && "
         f"npm install npm@latest yarn@latest pnpm@latest --location=global"
     )
-    subprocess.run(
-        nvm_cmds, shell=True, check=True, executable="/bin/zsh", env=nvm_env
-    )
+    subprocess.run(nvm_cmds, shell=True, check=True, executable="/bin/zsh", env=nvm_env)
 
 
 def configure_go() -> None:
@@ -524,7 +539,9 @@ def configure_rust() -> None:
             env=rust_env,
         )
 
-    subprocess.run([rustup_bin, "toolchain", "install", "nightly"], check=True, env=rust_env)
+    subprocess.run(
+        [rustup_bin, "toolchain", "install", "nightly"], check=True, env=rust_env
+    )
     subprocess.run([rustup_bin, "default", "nightly"], check=True, env=rust_env)
 
 
@@ -541,7 +558,9 @@ def install_python_via_pyenv(pyenv_version: str) -> None:
         raise RuntimeError("pyenv was installed but is not available on PATH")
     subprocess.run([pyenv_bin, "install", "--skip-existing", pyenv_version], check=True)
     subprocess.run([pyenv_bin, "global", pyenv_version], check=True)
-    python_bin = subprocess.check_output([pyenv_bin, "which", "python"], text=True).strip()
+    python_bin = subprocess.check_output(
+        [pyenv_bin, "which", "python"], text=True
+    ).strip()
 
     subprocess.run([python_bin, "-m", "pip", "install", *PIP3_PKGS], check=True)
     subprocess.run([python_bin, "-m", "pip", "install", *PIP3_PKGS_EXTRA], check=True)
@@ -611,7 +630,9 @@ def stow_dotfiles(script_path: str, extra_dirs: list[str] | None = None) -> None
     os.makedirs(os.path.expanduser("~/.local/bin"), exist_ok=True)
     os.makedirs(os.path.expanduser("~/.local/share/fonts"), exist_ok=True)
 
-    all_dirs = [directory for directory in STOW_DIRS if directory != "zsh"] + (extra_dirs or [])
+    all_dirs = [directory for directory in STOW_DIRS if directory != "zsh"] + (
+        extra_dirs or []
+    )
 
     for stow_dir in all_dirs:
         print(f"  Stowing {stow_dir}")
@@ -646,11 +667,21 @@ def install_k9s_theme(revision: str) -> None:
     with tempfile.TemporaryDirectory(prefix="k9s-theme-") as temp_dir:
         repository_dir = os.path.join(temp_dir, "k9s")
         subprocess.run(
-            ["git", "clone", "--no-checkout", "https://github.com/catppuccin/k9s.git", repository_dir],
+            [
+                "git",
+                "clone",
+                "--no-checkout",
+                "https://github.com/catppuccin/k9s.git",
+                repository_dir,
+            ],
             check=True,
         )
-        subprocess.run(["git", "-C", repository_dir, "checkout", "--detach", revision], check=True)
-        shutil.copytree(os.path.join(repository_dir, "dist"), output_dir, dirs_exist_ok=True)
+        subprocess.run(
+            ["git", "-C", repository_dir, "checkout", "--detach", revision], check=True
+        )
+        shutil.copytree(
+            os.path.join(repository_dir, "dist"), output_dir, dirs_exist_ok=True
+        )
 
 
 def install_resticprofile() -> None:
