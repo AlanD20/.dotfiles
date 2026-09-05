@@ -50,32 +50,21 @@ zstyle ':fzf-tab:*' fzf-flags '--height=65%' '--layout=reverse' '--border' '--ma
 # Export vscode bin path for WSL
 # export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"
 
-# Export term colors
-export TERM="xterm-256color"
+# Older tmux configuration advertises xterm (8 colors). Keep gray suggestions
+# available there while preserving richer terminal types such as xterm-ghostty.
+if [[ $TERM == xterm ]]; then
+  export TERM=xterm-256color
+fi
 
 # You may need to manually set your language environment
 export LANGUAGE="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-# Export nvm completion settings for lukechilds/zsh-nvm plugin
-# Note: This must be exported before the plugin is bundled
+# Zinit loads the lightweight NVM adapter below; Node initializes on first use.
 export NVM_DIR="$XDG_DATA_HOME/nvm"
+export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
-# export NVM_LAZY_LOAD=true # If enabled, the npm bin path will not be added
-if [[ -s "$NVM_DIR/nvm.sh" ]]; then
-  source "$NVM_DIR/nvm.sh"
-
-  # NVM v0.40.6 parses aliases with patterns that fail when EXTENDED_GLOB is
-  # enabled. Keep it enabled globally, but disable it while NVM runs. Remove
-  # this wrapper once NVM fixes its EXTENDED_GLOB compatibility.
-  functions -c nvm _nvm
-  nvm() {
-    setopt localoptions noextendedglob
-    _nvm "$@"
-  }
-fi
-[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
 
 # GPG
 export GPG_TTY=$(tty)
@@ -98,9 +87,15 @@ export FZF_CTRL_T_OPTS="
 export FZF_CTRL_R_OPTS="
 --preview 'echo {}' --preview-window up:3:hidden:wrap
 --bind 'ctrl-/:toggle-preview'
---bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
 --color header:italic
 --header 'Press CTRL-Y to copy command into clipboard'"
+if (( $+commands[pbcopy] )); then
+  FZF_CTRL_R_OPTS+=" --bind 'ctrl-y:execute-silent(printf %s {2..} | pbcopy)+abort'"
+elif [[ -n $WAYLAND_DISPLAY ]] && (( $+commands[wl-copy] )); then
+  FZF_CTRL_R_OPTS+=" --bind 'ctrl-y:execute-silent(printf %s {2..} | wl-copy)+abort'"
+elif (( $+commands[xclip] )); then
+  FZF_CTRL_R_OPTS+=" --bind 'ctrl-y:execute-silent(printf %s {2..} | xclip -selection clipboard)+abort'"
+fi
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 
 # fff
@@ -151,15 +146,37 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Load autocompletion
+# Register additional completion definitions before initializing the cache.
+zinit light zsh-users/zsh-completions
+
+# Initialize once; NVM's adapter would otherwise initialize it prematurely.
 autoload -Uz compinit && compinit
 setopt autocd beep extendedglob nomatch notify
+
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  zinit light lukechilds/zsh-nvm
+
+  # Preserve NVM's EXTENDED_GLOB workaround both during lazy initialization
+  # and during subsequent nvm calls. The plugin also wraps global Node tools.
+  functions -c _zsh_nvm_load _dotfiles_zsh_nvm_load
+  _zsh_nvm_load() {
+    setopt localoptions noextendedglob
+    _dotfiles_zsh_nvm_load
+    functions -c _zsh_nvm_nvm _nvm
+    _zsh_nvm_nvm() {
+      setopt localoptions noextendedglob
+      _nvm "$@"
+    }
+  }
+fi
 
 # replay autocompletions
 zinit cdreplay -q
 
-ZSH_WEB_SEARCH_ENGINES=(yt "https://www.youtube.com/results?search_query=")
-ZSH_WEB_SEARCH_ENGINES=(yth "https://www.youtube.com/")
+ZSH_WEB_SEARCH_ENGINES=(
+  yt "https://www.youtube.com/results?search_query="
+  yth "https://www.youtube.com/"
+)
 
 # Uncomment if oh-my-zsh is necessary, although you don't need it even on WSL
 #[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
@@ -175,6 +192,7 @@ fi
 
 # Load zsh plugins
 source "$ZDOTDIR/zsh_plugins"
+source "$ZDOTDIR/fzf-completion.zsh"
 
 autoload edit-command-line
 zle -N edit-command-line
@@ -191,7 +209,7 @@ bindkey "^X^E" edit-command-line
 
 
 # bun completions
-[ -s "$XDG_DATA_HOME/.bun/_bun" ] && source "$XDG_DATA_HOME/.bun/_bun"
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 
 # evaluate direnv
 # eval "$(direnv hook zsh)"
@@ -236,3 +254,6 @@ fi
 
 gpgconf --launch gpg-agent
 fastfetch
+
+# Install highlighting after completion and other ZLE widgets.
+zinit light zdharma-continuum/fast-syntax-highlighting

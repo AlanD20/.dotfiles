@@ -10,10 +10,7 @@ zinit snippet OMZP::fancy-ctrl-z
 zinit snippet OMZP::history
 
 zinit light rupa/z
-zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-# zinit light zsh-users/zsh-syntax-highlighting
-zinit light zdharma-continuum/fast-syntax-highlighting
 
 zinit snippet 'https://github.com/belak/zsh-utils/blob/main/utility/utility.plugin.zsh'
 # zinit snippet 'https://github.com/belak/zsh-utils/blob/main/completion/completion.plugin.zsh'
