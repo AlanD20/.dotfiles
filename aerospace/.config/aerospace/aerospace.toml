@@ -4,7 +4,8 @@ auto-reload-config = true
 
 # ---------------------------------------------------------------------------
 # App assignments (on-window-detected callbacks)
-# Mirrors Sway's workspace assignments and scratchpad logic
+# Browser/terminal/notes workspaces, plus workspace 5 for utility apps.
+# Utility windows use a workspace rather than Sway's scratchpad.
 # ---------------------------------------------------------------------------
 on-window-detected = [
     # Browser → workspace 1
@@ -66,113 +67,135 @@ after-startup-command = []
 PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 
 # ---------------------------------------------------------------------------
-# Main mode — mirrors Sway keybindings
-# Sway: $mod = Alt (Mod1)   $mod2 = Cmd (Mod4)
+# Main mode — workspace shortcuts match Sway.
+# Cmd navigation stays available to macOS apps; use Ctrl+Alt+Space to manage windows.
 # ---------------------------------------------------------------------------
 [mode.main.binding]
 
-# -- Workspaces: Alt+1..0 (same as Sway) ------------------------------------
-cmd-shift-1 = 'workspace 1'
-cmd-shift-2 = 'workspace 2'
-cmd-shift-3 = 'workspace 3'
-cmd-shift-4 = 'workspace 4'
-cmd-shift-5 = 'workspace 5'
-cmd-shift-6 = 'workspace 6'
-cmd-shift-7 = 'workspace 7'
-cmd-shift-8 = 'workspace 8'
-cmd-shift-9 = 'workspace 9'
-cmd-shift-0 = 'workspace 10'
+# Switch workspaces; sending a window does not follow it.
+alt-shift-1 = 'workspace 1'
+alt-shift-2 = 'workspace 2'
+alt-shift-3 = 'workspace 3'
+alt-shift-4 = 'workspace 4'
+alt-shift-5 = 'workspace 5'
+alt-shift-6 = 'workspace 6'
+alt-shift-7 = 'workspace 7'
+alt-shift-8 = 'workspace 8'
+alt-shift-9 = 'workspace 9'
+alt-shift-0 = 'workspace 10'
 
-# -- Move window to workspace: Alt+Shift+1..0 (same as Sway) ----------------
-alt-shift-1 = 'move-node-to-workspace 1; workspace 1'
-alt-shift-2 = 'move-node-to-workspace 2; workspace 2'
-alt-shift-3 = 'move-node-to-workspace 3; workspace 3'
-alt-shift-4 = 'move-node-to-workspace 4; workspace 4'
-alt-shift-5 = 'move-node-to-workspace 5; workspace 5'
-alt-shift-6 = 'move-node-to-workspace 6; workspace 6'
-alt-shift-7 = 'move-node-to-workspace 7; workspace 7'
-alt-shift-8 = 'move-node-to-workspace 8; workspace 8'
-alt-shift-9 = 'move-node-to-workspace 9; workspace 9'
-alt-shift-0 = 'move-node-to-workspace 10; workspace 10'
+ctrl-alt-shift-1 = 'move-node-to-workspace 1'
+ctrl-alt-shift-2 = 'move-node-to-workspace 2'
+ctrl-alt-shift-3 = 'move-node-to-workspace 3'
+ctrl-alt-shift-4 = 'move-node-to-workspace 4'
+ctrl-alt-shift-5 = 'move-node-to-workspace 5'
+ctrl-alt-shift-6 = 'move-node-to-workspace 6'
+ctrl-alt-shift-7 = 'move-node-to-workspace 7'
+ctrl-alt-shift-8 = 'move-node-to-workspace 8'
+ctrl-alt-shift-9 = 'move-node-to-workspace 9'
+ctrl-alt-shift-0 = 'move-node-to-workspace 10'
 
-# -- Focus movement: Cmd+h/j/k/l + arrow keys (Sway: $mod2+h/j/k/l) --------
-cmd-h = 'focus left'
-cmd-j = 'focus down'
-cmd-k = 'focus up'
-cmd-l = 'focus right'
-cmd-left = 'focus left'
-cmd-down = 'focus down'
-cmd-up = 'focus up'
-cmd-right = 'focus right'
+alt-tab = 'workspace-back-and-forth'
+# Visit utilities; press again to return to the previous workspace.
+alt-minus = 'workspace --auto-back-and-forth 5'
 
-# -- Move window: Cmd+Shift+h/j/k/l + arrows (Sway: $mod2+Shift+h/j/k/l) ---
-cmd-shift-h = 'move left'
-cmd-shift-j = 'move down'
-cmd-shift-k = 'move up'
-cmd-shift-l = 'move right'
-cmd-shift-left = 'move left'
-cmd-shift-down = 'move down'
-cmd-shift-up = 'move up'
-cmd-shift-right = 'move right'
-
-# -- Terminal: Alt+Enter (same as Sway) -------------------------------------
+ctrl-alt-space = 'mode window'
 alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
-
-# -- Kill focused window: Alt+Shift+q (same as Sway) ------------------------
 alt-shift-q = 'close'
-
-# -- Fullscreen: Alt+f (same as Sway) ---------------------------------------
 alt-f = 'fullscreen'
-
-# -- Toggle floating/tiling: Alt+Shift+Space (same as Sway) -----------------
 alt-shift-space = 'layout floating tiling'
-
-# -- Focus mode toggle: Alt+Space (Sway: $mod+Space focus mode_toggle) ------
-alt-space = 'layout floating tiling'
-
-# -- Layout: Alt+e → toggle tiles orientation (Sway: toggle split) ----------
 alt-e = 'layout tiles horizontal vertical'
-
-# -- Split: Alt+b splith → split horizontal, Alt+v splitv → split vertical --
 alt-b = 'split horizontal'
 alt-v = 'split vertical'
-
-# -- Tabbed layout: Alt+w (Sway: $mod+w layout tabbed) ----------------------
+# Accordion layouts approximate Sway tabs/stacking, without a tab bar.
 alt-w = 'layout h_accordion'
-
-# -- Stacking layout: Alt+s (Sway: $mod+s layout stacking) ------------------
 alt-s = 'layout v_accordion'
-
-# -- Resize mode: Alt+r (same as Sway) --------------------------------------
 alt-r = 'mode resize'
-
-# -- Reload config: Alt+Shift+c (Sway: $mod+Shift+c) ------------------------
 alt-shift-c = 'reload-config'
 
 # ---------------------------------------------------------------------------
-# Service / resize mode — mirrors Sway's resize mode
+# Window mode: Ctrl+Alt+Space. Familiar Herdr keys for desktop operations.
+# Stay in this mode for repeated operations; Esc/Enter returns to the app.
 # ---------------------------------------------------------------------------
-[mode.resize.binding]
+[mode.window.binding]
 
-# Vim-style resize
-h = 'resize width -50'
-j = 'resize height +50'
-k = 'resize height -50'
-l = 'resize width +50'
+# Focus with hjkl/arrows; Shift swaps windows in that direction.
+h = 'focus left'
+j = 'focus down'
+k = 'focus up'
+l = 'focus right'
+left = 'focus left'
+down = 'focus down'
+up = 'focus up'
+right = 'focus right'
+shift-h = 'swap left'
+shift-j = 'swap down'
+shift-k = 'swap up'
+shift-l = 'swap right'
+shift-left = 'swap left'
+shift-down = 'swap down'
+shift-up = 'swap up'
+shift-right = 'swap right'
 
-# Arrow key resize
-left = 'resize width -50'
-down = 'resize height +50'
-up = 'resize height -50'
-right = 'resize width +50'
+# Herdr-inspired last-pane, zoom, resize, and arrange keys.
+tab = 'focus-back-and-forth || workspace-back-and-forth'
+shift-m = 'fullscreen'
+r = 'mode resize'
+space = 'mode arrange'
 
-# Smart resize
-minus = 'resize smart -50'
-equal = 'resize smart +50'
+# Desktop operations keep their own conventions.
+f = 'layout floating tiling'
+u = ['workspace --auto-back-and-forth 5', 'mode main']
+backtick = ['workspace-back-and-forth', 'mode main']
+alt-left = 'focus-monitor left'
+alt-down = 'focus-monitor down'
+alt-up = 'focus-monitor up'
+alt-right = 'focus-monitor right'
+alt-shift-left = 'move-node-to-monitor --focus-follows-window left'
+alt-shift-down = 'move-node-to-monitor --focus-follows-window down'
+alt-shift-up = 'move-node-to-monitor --focus-follows-window up'
+alt-shift-right = 'move-node-to-monitor --focus-follows-window right'
 
-# Layout reset
-r = ['flatten-workspace-tree', 'mode main']
-
-# Return to main mode
 esc = 'mode main'
 enter = 'mode main'
+ctrl-alt-space = 'mode main'
+
+# ---------------------------------------------------------------------------
+# Arrange: window mode, Space. Familiar Space/e/Esc keys from Herdr-arrange.
+# This is a binding mode, not a popup. Grouping and reset are desktop extensions.
+# ---------------------------------------------------------------------------
+[mode.arrange.binding]
+space = 'test %{window-layout} = h_tiles && layout v_tiles || (test %{window-layout} = v_tiles && layout h_accordion) || (test %{window-layout} = h_accordion && layout v_accordion) || layout h_tiles'
+e = 'balance-sizes'
+h = 'layout h_tiles'
+v = 'layout v_tiles'
+w = 'layout h_accordion'
+s = 'layout v_accordion'
+f = 'layout floating tiling'
+r = ['flatten-workspace-tree', 'layout tiles', 'balance-sizes']
+ctrl-h = 'join-with left'
+ctrl-j = 'join-with down'
+ctrl-k = 'join-with up'
+ctrl-l = 'join-with right'
+esc = 'mode main'
+enter = 'mode main'
+ctrl-alt-space = 'mode main'
+
+# ---------------------------------------------------------------------------
+# Resize: window mode, r, then hjkl/arrows; Esc exits.
+# Keep Sway's 35-unit step; display scaling differs from terminal cell sizing.
+# ---------------------------------------------------------------------------
+[mode.resize.binding]
+h = 'resize width -35'
+j = 'resize height +35'
+k = 'resize height -35'
+l = 'resize width +35'
+left = 'resize width -35'
+down = 'resize height +35'
+up = 'resize height -35'
+right = 'resize width +35'
+minus = 'resize smart -35'
+equal = 'resize smart +35'
+esc = 'mode main'
+enter = 'mode main'
+ctrl-alt-space = 'mode main'
