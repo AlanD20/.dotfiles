@@ -1,5 +1,8 @@
 term = xterm-ghostty
 
+# Avoid io_uring waits inflating Linux I/O pressure metrics.
+async-backend = epoll
+
 command = /bin/zsh
 
 window-decoration = none

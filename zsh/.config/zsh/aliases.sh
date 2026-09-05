@@ -20,6 +20,7 @@ alias kzf="k9s --write"
 # GPG
 alias rgpg="gpg-connect-agent RELOADAGENT /bye" # Reload gpg
 alias tgpg="echo test | gpg --clearsign"        # Test gpg
+alias rgpg="gpgconf --reload gpg-agent"         # Reload/lock gpg
 alias encgpg="gpg --encrypt --armor -r"         # Encrypt file using gpg
 alias decgpg="gpg --decrypt"                    # Decrypt file using gpg
 
