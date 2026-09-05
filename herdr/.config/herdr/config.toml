@@ -1,0 +1,83 @@
+onboarding = false
+# Adapted from tmux/.config/tmux/tmux.conf for Herdr 0.8.2.
+# Prefix means press Ctrl+A, release, then press the action key.
+
+[theme]
+name = "catppuccin"
+auto_switch = false
+
+[terminal]
+new_cwd = "follow"
+
+[keys]
+prefix = "ctrl+a"
+reload_config = "prefix+shift+r"
+detach = "prefix+d"
+close_workspace = "prefix+shift+q"
+
+# Workspaces approximate tmux sessions; tabs approximate tmux windows.
+new_workspace = "prefix+shift+c"
+switch_workspace = "alt+1..9"
+next_agent = "prefix+n"
+previous_agent = "prefix+p"
+workspace_picker = "prefix+s"
+settings = "prefix+alt+s"
+new_tab = "prefix+c"
+close_tab = "prefix+shift+x"
+rename_tab = "prefix+,"
+switch_tab = "prefix+1..9"
+previous_tab = "alt+shift+h"
+next_tab = "alt+shift+l"
+move_tab_previous = "prefix+ctrl+h"
+move_tab_next = "prefix+ctrl+l"
+
+split_horizontal = "prefix+minus"
+split_vertical = "prefix+_"
+focus_pane_left = ["prefix+h", "ctrl+h"]
+focus_pane_down = ["prefix+j", "ctrl+j"]
+focus_pane_up = ["prefix+k", "ctrl+k"]
+focus_pane_right = ["prefix+l", "ctrl+l"]
+resize_mode = "prefix+r"
+zoom = "prefix+shift+m"
+
+# Swaps are directional, not cyclic.
+swap_pane_left = "prefix+shift+h"
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+
+copy_mode = "prefix+enter"
+# Return to the last pane across tabs/workspaces instead of cycling panes.
+last_pane = "prefix+tab"
+cycle_pane_next = ""
+cycle_pane_previous = ""
+
+[[keys.command]]
+key = "prefix+space"
+type = "plugin_action"
+command = "herdr-arrange.open"
+description = "Arrange panes (Space cycles, e balances)"
+
+[[keys.command]]
+key = "prefix+shift+b"
+type = "plugin_action"
+command = "zenbu-labs.terminal-browser.open-split"
+description = "Open Terminal Browser"
+
+[experimental]
+kitty_graphics = true
+
+[ui]
+mouse_capture = true
+copy_on_select = true
+prompt_new_tab_name = false
+prompt_new_workspace_name = false
+tab_bar_position = "top"
+pane_borders = true
+pane_outer_borders = false
+pane_gaps = false
+window_title = "{hostname}: {workspace} - {tab}"
+
+show_agent_labels_on_pane_borders = true
+[ui.toast]
+delivery = "herdr"
