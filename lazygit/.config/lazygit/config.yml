@@ -1,11 +1,28 @@
+gui:
+  nerdFontsVersion: "3"
+  showNumstatInFilesView: true
+  showDivergenceFromBaseBranch: arrowAndNumber
+  expandFocusedSidePanel: true
 git:
   diffRenderers:
-    - colorArg: always
+    - name: Delta side-by-side
+      colorArg: always
       # GitHub issues 907: https://github.com/jesseduffield/lazygit/issues/907
       # --dark or --light is needed due to auto-detection causes lag: https://github.com/jesseduffield/lazygit/issues/3405
-      command: delta --paging=never --24-bit-color=never --dark
+      command: delta --paging=never --24-bit-color=never --dark --side-by-side
+    - name: Delta compact
+      colorArg: always
+      # Delta's boolean CLI flag cannot override side-by-side=true in gitconfig.
+      command: >-
+        GIT_CONFIG_PARAMETERS="${GIT_CONFIG_PARAMETERS-} 'delta.side-by-side=false'"
+        delta --paging=never --24-bit-color=never --dark
 os:
-  edit: "nvim {{filename}}"
-  editInTerminal: true
+  editPreset: nvim
+customCommands:
+  - key: <f4>
+    context: files
+    description: Open Diffview (resolve conflicts in Neovim)
+    command: nvim -c DiffviewOpen
+    output: terminal
 refresher:
   fetchInterval: 300
