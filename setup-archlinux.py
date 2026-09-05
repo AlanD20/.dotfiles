@@ -347,6 +347,7 @@ GUI_PKGS: list[str] = [
 SWAY_PKGS: list[str] = [
     "sway",
     "swaylock",
+    "swayidle",
     "waybar",
     "wofi",
     "mako",

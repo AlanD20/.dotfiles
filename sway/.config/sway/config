@@ -20,9 +20,7 @@ set $term alacritty
 
 
 # Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-set $menu albert | xargs swaymsg --
+set $menu albert show
 # Second launcher to run background processes
 set $menu2 wofi --show drun -I
 
@@ -54,4 +52,4 @@ bar {
 
 
 include /etc/sway/config.d/*
-include $XDG_CONFIG_HOME/sway/*.conf
+include *.conf
