@@ -74,6 +74,7 @@ return {
   {
     -- Add blade indentations
     "jwalton512/vim-blade",
+    ft = "blade",
   },
   {
     "rcarriga/nvim-notify",

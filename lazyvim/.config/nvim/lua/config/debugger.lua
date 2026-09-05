@@ -1,30 +1,38 @@
--- Debugger configurations
+-- Custom debugger examples. Loaded from init.lua, but DAP is only required
+-- after a debugging command/key loads it. Keep language adapters in LazyExtras.
+LazyVim.on_load("nvim-dap", function()
+  local dap = require("dap")
 
-local dap = require("dap")
+  -- Add entries under their Neovim filetype. These appear alongside defaults
+  -- when you use <leader>dc. Edit program/args/pathMappings for your project.
+  local configurations = {
+    go = {
+      {
+        type = "delve",
+        name = "Custom: Launch Debug",
+        request = "launch",
+        -- Use "${workspaceFolder}/main.go" for a fixed entry file.
+        program = "${file}",
+        args = {},
+      },
+    },
+    php = {
+      {
+        name = "Custom: Listen for Xdebug",
+        type = "php",
+        request = "launch",
+        port = 9003,
+        -- Map the remote/container source directory to your local project.
+        -- pathMappings = {
+        --   ["/var/www/webapp"] = "${workspaceFolder}",
+        -- },
+      },
+    },
+  }
 
--- Ensure Go DAP configuration table exists before adding custom config
-if dap.configurations.go then
-  table.insert(dap.configurations.go, {
-    type = "delve",
-    name = "Custom: Launch Debug",
-    request = "launch",
-    -- start the debugger in the entry file or you can have entry file here.
-    -- program = "main.go",
-    program = "${file}",
-    args = {},
-  })
-end
-
--- Ensure PHP DAP configuration table exists before adding custom config
-if dap.configurations.php then
-  table.insert(dap.configurations.php, {
-    name = "Custom: Listen for Xdebug",
-    type = "php",
-    request = "launch",
-    port = 9003,
-    -- Mapping paths for remote debugging
-    -- pathMappings = {
-    --   ["/var/www/webapp"] = "${workspaceFolder}",
-    -- },
-  })
-end
+  -- A separate provider keeps adapter setup from overwriting custom entries.
+  -- See :help dap-providers-configs and :help dap-configuration.
+  dap.providers.configs["custom-debugger"] = function(bufnr)
+    return vim.deepcopy(configurations[vim.bo[bufnr].filetype] or {})
+  end
+end)

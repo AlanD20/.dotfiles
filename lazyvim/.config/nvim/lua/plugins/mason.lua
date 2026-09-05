@@ -6,10 +6,8 @@ return {
         -- Others
         "nginx-language-server",
         "emmet-language-server",
-        "emmet-ls",
         -- "ruff",
         "typos",
-        "typos-lsp",
         "puppet-editor-services",
 
         -- Shell scripts
@@ -25,7 +23,6 @@ return {
         "css-lsp",
         "html-lsp",
         "js-debug-adapter",
-        "typescript-language-server",
         "tailwindcss-language-server",
         "eslint-lsp",
         "prettierd",

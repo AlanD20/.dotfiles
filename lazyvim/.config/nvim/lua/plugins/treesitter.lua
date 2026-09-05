@@ -1,18 +1,18 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      { "nushell/tree-sitter-nu" },
-    },
     opts = {
+      -- Use vim-blade's indentation while Treesitter handles highlighting.
+      indent = { enable = true, disable = { "blade" } },
       ensure_installed = {
-        -- Some are disabled due to comes with lazyvim plugins
+        -- Additional languages are cheap until a buffer uses their parser.
+        -- LazyVim merges these with the parsers supplied by language extras.
         "c",
         "cpp",
         "graphql",
         "java",
         "bash",
-        "blade", -- Manual Installation
+        "blade",
         "comment",
         "css",
         "dockerfile",
@@ -30,9 +30,10 @@ return {
         "lua",
         "markdown",
         "markdown_inline",
-        "nu", -- manual installation, queries = https://github.com/nushell/tree-sitter-nu/blob/main/installation/neovim.md
+        "nu",
         "puppet",
         "php",
+        "php_only", -- PHP expressions injected into Blade templates
         "phpdoc",
         "prisma",
         "python",

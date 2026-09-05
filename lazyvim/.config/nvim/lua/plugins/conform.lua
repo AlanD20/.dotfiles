@@ -1,101 +1,52 @@
 return {
   {
     "stevearc/conform.nvim",
-    opts = function()
-      ---@class ConformOpts
-      local opts = {
-        -- LazyVim will use these options when formatting with the conform.nvim formatter
-        default_format_opts = {
-          timeout_ms = 3000,
-          async = false, -- not recommended to change
-          quiet = false, -- not recommended to change
-          lsp_fallback = true, -- not recommended to change
-        },
-        formatters_by_ft = {
-          -- Use the "*" filetype to run formatters on all filetypes.
-          ["*"] = {
-            -- Disable codespell. UGGHH! auto-corrects false positive words in codebase projects
-            --"codespell",
-            "typos",
-          },
-          -- Use the "_" filetype to run formatters on filetypes that don't
-          -- have other formatters configured.
-          lua = { "stylua" },
-          sh = { "shfmt", "shellharden" },
-        python = { "ruff_organize_imports", "ruff_format" },
-          -- Use a sub-list to run only the first available formatter
-          html = { "prettierd" },
-          css = { "prettierd" },
-          javascript = { "prettierd" },
-          typescript = { "prettierd" },
-          typescriptreact = { "prettierd" },
-          javascriptreact = { "prettierd" },
-          php = { "pint" },
-          blade = { "blade_formatter" },
-          go = { "gofmt", "goimports" },
-          json = { "fixjson" },
-          yaml = { "yamlfmt" },
-        },
-        stop_after_first = {
-          html = { "prettier" },
-          css = { "prettier" },
-          javascript = { "prettier" },
-          typescript = { "prettier" },
-          typescriptreact = { "prettier" },
-          javascriptreact = { "prettier" },
-          go = {
-            "goimports",
-          },
-        },
-        -- The options you set here will be merged with the builtin formatters.
-        -- You can also define any custom formatters here.
-        ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
-        formatters = {
-          -- injected = { options = { ignore_errors = true, timeout_ms = 1000 } },
-          typos = {
-            condition = function(_)
-              return true
-            end,
-            command = "typos",
-            args = {
-              "-w",
-              "$FILENAME",
-            },
-          },
-          pint = {
-            cwd = require("conform.util").root_file({ "pint.json" }),
-            require_cwd = true,
-          },
-          blade_formatter = {
-            command = "blade-formatter",
-            args = {
-              "--write",
-              "$FILENAME",
-              "--wrap-attributes",
-              "force-expand-multiline",
-              -- "--sort-tailwindcss-classes",
-            },
-            stdin = false,
-          },
-          fixjson = {
-            command = "fixjson",
-            stdin = true,
-          },
+    opts = function(_, opts)
+      -- Extend the language extras instead of replacing their formatters and
+      -- default_format_opts (including LSP fallback and injected languages).
+      local util = require("conform.util")
+      local fixer_configs = { ".php-cs-fixer.php", ".php-cs-fixer.dist.php" }
 
-          -- dprint = {
-          --   condition = function(ctx)
-          --     return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
-          --   end,
-          -- },
-          --
-          -- # Example of using shfmt with extra args
-          -- shfmt = {
-          --   prepend_args = { "-i", "2", "-ci" },
-          -- },
-        },
+      for _, ft in ipairs({
+        "css",
+        "graphql",
+        "handlebars",
+        "html",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "less",
+        "scss",
+        "typescript",
+        "typescriptreact",
+        "vue",
+      }) do
+        opts.formatters_by_ft[ft] = { "prettierd", "prettier", stop_after_first = true }
+      end
+
+      opts.formatters_by_ft.python = { "ruff_organize_imports", "ruff_format" }
+      opts.formatters_by_ft.php = { "pint", "php_cs_fixer", stop_after_first = true }
+      opts.formatters_by_ft.blade = { "blade-formatter" }
+      opts.formatters_by_ft.yaml = { "yamlfmt" }
+      -- Spelling is diagnostic-only; saving must not rename identifiers or
+      -- rewrite strings. Shell formatting likewise leaves quoting to the author.
+
+      opts.formatters.pint = {
+        cwd = util.root_file({ "pint.json", "composer.json", ".git" }),
+        condition = function(_, ctx)
+          -- Respect projects that explicitly use PHP-CS-Fixer. Pint otherwise
+          -- works with its defaults, including projects without a pint.json.
+          return vim.fs.root(ctx.dirname, fixer_configs) == nil
+            or vim.fs.root(ctx.dirname, { "pint.json", "vendor/bin/pint" }) ~= nil
+        end,
       }
-
-      return opts
+      opts.formatters.php_cs_fixer = {
+        cwd = util.root_file({ ".php-cs-fixer.php", ".php-cs-fixer.dist.php", "composer.json" }),
+      }
+      opts.formatters["blade-formatter"] = {
+        prepend_args = { "--wrap-attributes", "force-expand-multiline" },
+      }
     end,
   },
 }
