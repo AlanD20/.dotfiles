@@ -11,7 +11,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ $OSTYPE == darwin* ]]; then
     export XDG_CONFIG_DIRS="/opt/homebrew/etc:/etc"
     export XDG_DATA_DIRS="/opt/homebrew/share:/usr/local/share:/usr/share"
     export XDG_RUNTIME_DIR="$TMPDIR"
@@ -35,7 +35,7 @@ if [[ -d /opt/homebrew/bin ]]; then
 fi
 
 # User configuration
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ $OSTYPE == darwin* ]]; then
     export MANPATH="/opt/homebrew/share/man:$MANPATH"
 else
     export MANPATH="/usr/local/man:$MANPATH"
@@ -49,7 +49,7 @@ else
 fi
 
 # Compilation flags (macOS only)
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ $OSTYPE == darwin* ]]; then
     export ARCHFLAGS="-arch arm64"
 fi
 

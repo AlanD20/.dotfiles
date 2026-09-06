@@ -186,7 +186,7 @@ ZSH_WEB_SEARCH_ENGINES=(
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/themes/aland20-custom-theme.omp.json)"
 
 # Load command-not-found only on non-macOS (slow brew lookup on Darwin)
-if [[ "$(uname)" != "Darwin" ]]; then
+if [[ $OSTYPE != darwin* ]]; then
     zinit snippet OMZP::command-not-found
 fi
 
@@ -226,7 +226,7 @@ bindkey "^X^E" edit-command-line
 # * * ref: https://wiki.archlinux.org/title/SSH_keys#Alternative_passphrase_dialogs
 # may override it on KeepassXC app.
 # ref: https://stackoverflow.com/a/38980986/13362195
-if [[ "$(uname)" != "Darwin" ]]; then
+if [[ $OSTYPE != darwin* ]]; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
 # macOS: no override needed — ssh-agent is managed by launchd (com.openssh.ssh-agent).
