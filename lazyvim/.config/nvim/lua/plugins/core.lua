@@ -138,6 +138,7 @@ return {
   {
     -- Move between tmux panes and vim windows with Ctrl-<jkhl>
     "christoomey/vim-tmux-navigator",
+    cond = vim.env.HERDR_ENV ~= "1",
     lazy = false,
     cmd = {
       "TmuxNavigateLeft",
@@ -151,6 +152,42 @@ return {
       { "<c-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Tmux: Navigate Down" },
       { "<c-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Tmux: Navigate Up" },
       { "<c-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Tmux: Navigate Right" },
+    },
+  },
+  {
+    "mrjones2014/smart-splits.nvim",
+    cond = vim.env.HERDR_ENV == "1",
+    lazy = false,
+    opts = { multiplexer_integration = "herdr", at_edge = "stop" },
+    keys = {
+      {
+        "<c-h>",
+        function()
+          require("smart-splits").move_cursor_left()
+        end,
+        desc = "Navigate Left",
+      },
+      {
+        "<c-j>",
+        function()
+          require("smart-splits").move_cursor_down()
+        end,
+        desc = "Navigate Down",
+      },
+      {
+        "<c-k>",
+        function()
+          require("smart-splits").move_cursor_up()
+        end,
+        desc = "Navigate Up",
+      },
+      {
+        "<c-l>",
+        function()
+          require("smart-splits").move_cursor_right()
+        end,
+        desc = "Navigate Right",
+      },
     },
   },
   -- Database querying UI

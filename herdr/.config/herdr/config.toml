@@ -21,6 +21,10 @@ switch_workspace = "alt+1..9"
 next_agent = "prefix+n"
 previous_agent = "prefix+p"
 workspace_picker = "prefix+s"
+navigate_workspace_down = ["j", "down"]
+navigate_workspace_up = ["k", "up"]
+navigate_pane_down = "ctrl+j"
+navigate_pane_up = "ctrl+k"
 settings = "prefix+alt+s"
 new_tab = "prefix+c"
 close_tab = "prefix+shift+x"
@@ -33,12 +37,12 @@ move_tab_next = "prefix+ctrl+l"
 
 split_horizontal = "prefix+minus"
 split_vertical = "prefix+_"
-focus_pane_left = ["prefix+h", "ctrl+h"]
-focus_pane_down = ["prefix+j", "ctrl+j"]
-focus_pane_up = ["prefix+k", "ctrl+k"]
-focus_pane_right = ["prefix+l", "ctrl+l"]
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
 resize_mode = "prefix+r"
-zoom = "prefix+shift+m"
+zoom = "prefix+z"
 
 # Swaps are directional, not cyclic.
 swap_pane_left = "prefix+shift+h"
@@ -47,10 +51,58 @@ swap_pane_up = "prefix+shift+k"
 swap_pane_right = "prefix+shift+l"
 
 copy_mode = "prefix+enter"
+edit_scrollback = "prefix+e" # Uses EDITOR=nvim from common/.zshenv.
 # Return to the last pane across tabs/workspaces instead of cycling panes.
 last_pane = "prefix+tab"
 cycle_pane_next = ""
 cycle_pane_previous = ""
+
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "smart-splits.nvim.left"
+description = "Navigate left through Neovim / Herdr"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "smart-splits.nvim.down"
+description = "Navigate down through Neovim / Herdr"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "smart-splits.nvim.up"
+description = "Navigate up through Neovim / Herdr"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "smart-splits.nvim.right"
+description = "Navigate right through Neovim / Herdr"
+
+[[keys.command]]
+key = "prefix+shift+m"
+type = "plugin_action"
+command = "herdr-arrange.open-tree"
+description = "Move pane to another tab or workspace"
+
+# Popup app slots: Ctrl+1..0 after the prefix. Add apps as needed.
+[[keys.command]]
+key = "prefix+ctrl+1"
+type = "popup"
+command = "lazygit"
+width = "90%"
+height = "90%"
+description = "LazyGit popup"
+
+[[keys.command]]
+key = "prefix+ctrl+2"
+type = "popup"
+command = "htop"
+width = "90%"
+height = "90%"
+description = "htop popup"
 
 [[keys.command]]
 key = "prefix+space"

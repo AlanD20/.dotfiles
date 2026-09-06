@@ -34,23 +34,28 @@ The prefix is **Ctrl+A**. After it, use:
 | `H/J/K/L` | Swap the pane left/down/up/right |
 | `r` | Resize mode: `h/j/k/l` to resize, `Esc` to exit |
 | `Space` | Arrange popup: `Space` cycles layouts, `e` balances, `Esc` closes |
+| `M` | Move-pane tree: choose another tab or workspace |
+| `Ctrl+2` | htop popup; `q` closes |
+| `Ctrl+1` | LazyGit popup in the current directory; quit LazyGit to close |
+| `e` | Open scrollback in Neovim; search with `/`, copy with `"+y`, quit with `:q` |
 | `B` | Open Terminal Browser in a right split |
 | `Tab` | Return to the last focused pane across tabs/workspaces |
 | `n` / `p` | Next / previous agent |
-| `M` | Zoom pane |
+| `z` | Toggle pane zoom |
 | `Enter` | Copy mode; `v` selects, `y` copies, `Esc` cancels |
 | `c` / `,` / `1..9` | Create, rename, or select a tab |
 | `Ctrl+h` / `Ctrl+l` | Move the current tab left / right |
 | `X` | Close the current tab |
 | `Q` | Close the current workspace |
-| `C` / `s` | Create a workspace / open workspace navigation |
+| `C` / `s` | Create a workspace / open workspace navigation (`j/k`, then Enter) |
 | `R` / `d` | Reload config / detach |
 | `?` / `Alt+s` | Help / settings |
 
 **Alt+1..9** jumps directly to a workspace without the prefix.
 **Alt+Shift+H/L** switches previous/next tabs without the prefix.
-**Ctrl+H/J/K/L** focuses the left/down/up/right pane without the prefix.
-These direct shortcuts are handled by Herdr, including while an editor is focused.
+**Ctrl+H/J/K/L** moves through Neovim splits first, then into neighboring Herdr
+panes at editor edges. Prefix+h/j/k/l always selects Herdr panes directly.
+In a shell, a key is passed through when there is no neighboring pane.
 They also take precedence over browser Ctrl+L/Ctrl+K; use the browser's Alt+K
 command palette or click the URL bar.
 
@@ -72,8 +77,8 @@ Differences from tmux:
 - Swapping is directional rather than tmux's next/previous pane ordering.
   Resizing uses Herdr's step size rather than tmux's explicit two cells; the
   tmux 600 ms repeat timeout is not ported.
-- Vim-aware Ctrl+hjkl navigation, custom copy-mode keys, Ctrl+L history clearing,
-  fzf URL/copycat helpers, and resurrect save/restore shortcuts are not ported.
+- Custom copy-mode keys, fzf URL/copycat helpers, and resurrect save/restore
+  shortcuts are not ported.
   Herdr has its own copy mode and persistent sessions.
 - Top tabs and Catppuccin are retained. tmux's status modules, pane CWD labels,
   and exact numbering/rename policies are not reproduced. Herdr manages its
@@ -81,3 +86,24 @@ Differences from tmux:
 
 Reference: https://herdr.dev/docs/configuration/ and
 https://herdr.dev/docs/config-reference/.
+
+Seamless Neovim navigation uses `mrjones2014/smart-splits.nvim` (version pinned
+in LazyVim's lockfile). Install Neovim plugins, then register its Herdr half:
+
+```sh
+herdr plugin link "$HOME/.local/share/nvim/lazy/smart-splits.nvim" --enabled
+herdr server reload-config
+```
+
+Requires `jq`. Restart existing Neovim instances to load the mappings. The
+Herdr integration is selected explicitly; outside Herdr the existing tmux
+navigator remains active. At the outermost editor edge navigation stops.
+Upstream: https://github.com/mrjones2014/smart-splits.nvim#herdr
+
+Popup launcher slots use prefix followed by Ctrl+1 through Ctrl+0. Ctrl+1 opens LazyGit and Ctrl+2 opens htop; add more `type = "popup"` commands as needed. Prefix+f
+remains free. Modified digits require an outer terminal that reports them
+distinctly (such as the current Ghostty with extended keyboard reporting).
+
+In workspace navigation, j/k selects workspaces (arrows also work); Ctrl+j/k
+selects panes vertically. Popups run until the app exits or the popup closes;
+closing ends the popup terminal rather than keeping a hidden session.

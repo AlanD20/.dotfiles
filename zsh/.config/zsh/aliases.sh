@@ -14,6 +14,7 @@ alias vfd='nvim `fd . --type f | fzf`'
 alias vfp='nvim `fp`'
 alias lz="lazygit"
 alias dz="lazydocker"
+alias hd="herdr"
 alias kz="k9s --readonly"
 alias kzf="k9s --write"
 

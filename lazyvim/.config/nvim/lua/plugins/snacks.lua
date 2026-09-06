@@ -1,3 +1,17 @@
+-- Explorer has buffer-local mappings that override the global split navigator.
+local explorer_navigation = {}
+if vim.env.HERDR_ENV == "1" then
+  for key, direction in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
+    explorer_navigation["<c-" .. key .. ">"] = {
+      function()
+        require("smart-splits")["move_cursor_" .. direction]()
+      end,
+      mode = { "n", "i" },
+      desc = "Navigate " .. direction,
+    }
+  end
+end
+
 return {
   {
     "folke/snacks.nvim",
@@ -27,7 +41,14 @@ return {
       explorer = { enabled = true },
       picker = {
         enabled = true,
-        sources = {},
+        sources = {
+          explorer = {
+            win = {
+              input = { keys = explorer_navigation },
+              list = { keys = explorer_navigation },
+            },
+          },
+        },
         limit_live = 10000,
         matcher = {
           fuzzy = true,
