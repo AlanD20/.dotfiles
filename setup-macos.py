@@ -430,14 +430,15 @@ def configure_touchid_sudo() -> None:
     """Enable Touch ID for sudo authentication (macOS Sonoma+)."""
     print_step("Configuring Touch ID for sudo")
     pam_path = "/etc/pam.d/sudo_local"
+    content = ""
     if os.path.exists(pam_path):
         with open(pam_path) as f:
-            if "pam_tid.so" in f.read():
+            content = f.read()
+            if re.search(r"^\s*auth\s+\S+\s+pam_tid\.so(?:\s|$)", content, re.MULTILINE):
                 print("  Touch ID already configured")
                 return
     tmp = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".pam")
-    tmp.write("# sudo_local: local config for sudo\n")
-    tmp.write("auth       sufficient     pam_tid.so\n")
+    tmp.write("auth       sufficient     pam_tid.so\n" + content)
     tmp.close()
     try:
         subprocess.run(["sudo", "cp", tmp.name, pam_path], check=True)
@@ -634,17 +635,20 @@ def stow_dotfiles(script_path: str, extra_dirs: list[str] | None = None) -> None
         extra_dirs or []
     )
 
+    target = os.path.expanduser("~")
+    subprocess.run(["stow", "--target", target, "--restow", "--simulate", *all_dirs, "zsh"], check=True, cwd=script_path)
+
     for stow_dir in all_dirs:
         print(f"  Stowing {stow_dir}")
         subprocess.run(
-            ["stow", "--restow", stow_dir],
+            ["stow", "--target", target, "--restow", stow_dir],
             check=True,
             cwd=script_path,
         )
 
     # Link zsh config last after env is loaded
     subprocess.run(
-        ["stow", "--restow", "zsh"],
+        ["stow", "--target", target, "--restow", "zsh"],
         check=True,
         cwd=script_path,
     )

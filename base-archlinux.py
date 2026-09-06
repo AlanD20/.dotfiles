@@ -13,6 +13,8 @@ Flags:
 """
 
 import argparse
+import getpass
+import stat
 import os
 import re
 import shutil
@@ -151,7 +153,10 @@ def run_cmd(
     capture_output: bool = False,
 ) -> subprocess.CompletedProcess:
     """Run a command, optionally in dry-run mode."""
-    print(f"  $ {' '.join(args)}")
+    display = list(args)
+    if "--passphrase" in display:
+        display[display.index("--passphrase") + 1] = "<redacted>"
+    print(f"  $ {' '.join(display)}")
     if dry_run:
         return subprocess.CompletedProcess(args, returncode=0, stdout=b"", stderr=b"")
     return subprocess.run(
@@ -418,7 +423,7 @@ NameResolvingService=resolvconf
             print("  Invalid selection.")
 
         # Ask for passphrase
-        passphrase = input(
+        passphrase = getpass.getpass(
             "  Enter WiFi passphrase (leave empty for open network): "
         ).strip()
 
@@ -548,7 +553,11 @@ def partition_disk(*, dry_run: bool = False) -> tuple[bool, str, str, str, str]:
     input("  Press ENTER to open cfdisk ...")
 
     if not dry_run:
-        subprocess.run(["cfdisk", disk], check=False)
+        # Editing an in-use disk's partition table can damage mounted filesystems.
+        mounted = subprocess.check_output(["lsblk", "-nro", "MOUNTPOINTS", disk], text=True)
+        if mounted.strip():
+            raise ValueError(f"Refusing to partition a disk in use: {disk}")
+        subprocess.run(["cfdisk", disk], check=True)
     else:
         print(f"  [dry-run] Would run: cfdisk {disk}")
 
@@ -567,6 +576,19 @@ def partition_disk(*, dry_run: bool = False) -> tuple[bool, str, str, str, str]:
     else:
         swap_part = ""
         print("  No swap partition — skipping.")
+
+    partitions = [root_part, efi_part] + ([swap_part] if swap_part else [])
+    if len(set(map(os.path.realpath, partitions))) != len(partitions):
+        raise ValueError("Root, EFI and swap must be different devices")
+    if not dry_run:
+        for partition in partitions:
+            if not stat.S_ISBLK(os.stat(partition).st_mode):
+                raise ValueError(f"Not a block device: {partition}")
+            mounted = subprocess.check_output(["lsblk", "-nro", "MOUNTPOINTS", partition], text=True)
+            if mounted.strip():
+                raise ValueError(f"Refusing to format or reuse a device in use: {partition}")
+    if swap_part and not confirm(f"  This will ERASE all data on swap device {swap_part}. Proceed?"):
+        sys.exit("Swap formatting canceled before any filesystem was changed")
 
     # ── Format root ──────────────────────────────────────────────────────────
     print(f"\n  Formatting root partition {root_part} as ext4 ...")
@@ -665,12 +687,11 @@ def rank_mirrors(*, dry_run: bool = False) -> None:
             run_cmd(["pacman", "-Sy", "--noconfirm", "pacman-contrib"], dry_run=dry_run)
         print("\n  Running rankmirrors (top 10) — this may take a few minutes ...")
         if not dry_run:
+            output = subprocess.check_output(["rankmirrors", "-n", "10", mirrorlist_bak], text=True)
+            if not re.search(r"^Server\s*=", output, re.MULTILINE):
+                raise ValueError("rankmirrors returned no servers; mirrorlist preserved")
             with open(mirrorlist, "w") as out_fh:
-                result = subprocess.run(
-                    ["rankmirrors", "-n", "10", mirrorlist_bak],
-                    stdout=out_fh,
-                    check=True,
-                )
+                out_fh.write(output)
         else:
             print(
                 f"  [dry-run] Would run: rankmirrors -n 10 {mirrorlist_bak} > {mirrorlist}"
@@ -754,12 +775,29 @@ def generate_fstab(*, dry_run: bool = False) -> None:
 
     print("  Running: genfstab -U /mnt >> /mnt/etc/fstab")
     if not dry_run:
-        with open("/mnt/etc/fstab", "a") as fstab_fh:
-            subprocess.run(
-                ["genfstab", "-U", "/mnt"],
-                stdout=fstab_fh,
-                check=True,
-            )
+        generated = subprocess.check_output(["genfstab", "-U", "/mnt"], text=True)
+        try:
+            with open("/mnt/etc/fstab") as fh:
+                existing = fh.read()
+        except FileNotFoundError:
+            existing = ""
+        entries = [line.split() for line in existing.splitlines() if line.strip() and not line.lstrip().startswith("#")]
+        additions = []
+        for line in generated.splitlines():
+            fields = line.split()
+            if not fields or fields[0].startswith("#"):
+                continue
+            if len(fields) < 6:
+                raise ValueError("Incomplete genfstab output; existing file preserved")
+            if fields in entries:
+                continue
+            if any(len(entry) >= 2 and entry[1] == fields[1] and fields[2] != "swap" for entry in entries):
+                raise ValueError(f"Conflicting fstab entry for {fields[1]}; existing file preserved")
+            additions.append(line)
+            entries.append(fields)
+        if additions:
+            with open("/mnt/etc/fstab", "a") as fstab_fh:
+                fstab_fh.write("\n" + "\n".join(additions) + "\n")
         print("  Contents of /mnt/etc/fstab:")
         with open("/mnt/etc/fstab") as fh:
             print(fh.read())
@@ -1099,7 +1137,7 @@ def finalize(*, dry_run: bool = False) -> None:
     banner("STEP 12 — Finalize & Reboot")
 
     print("  Unmounting all partitions safely (umount -R /mnt) ...")
-    run_cmd(["umount", "-R", "/mnt"], check=False, dry_run=dry_run)
+    run_cmd(["umount", "-R", "/mnt"], dry_run=dry_run)
 
     print()
     print("  ╔══════════════════════════════════════════════════════════════╗")
@@ -1188,6 +1226,16 @@ def gather_info() -> dict:
     if not confirm("  Confirm these settings and begin installation?"):
         print("  Aborted by user.")
         sys.exit(0)
+
+    # These values are interpolated into shell commands inside the chroot.
+    patterns = [(username, r"[a-z_][a-z0-9_-]*"),
+                (hostname, r"[a-zA-Z0-9][a-zA-Z0-9.-]*"),
+                (timezone, r"[a-zA-Z0-9_+-]+(?:/[a-zA-Z0-9_+-]+)*"),
+                (locale, r"[a-zA-Z0-9_.@-]+(?: UTF-8)?"),
+                (pyenv_version, r"(?:[A-Za-z0-9][A-Za-z0-9._+-]*)?"),
+                (nvm_version, r"(?:[A-Za-z0-9][A-Za-z0-9._/+*-]*)?")]
+    if any(not re.fullmatch(pattern, value) for value, pattern in patterns):
+        raise ValueError("Invalid installation input; refusing unsafe shell interpolation")
 
     return {
         "username": username,

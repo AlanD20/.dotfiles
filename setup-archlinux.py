@@ -35,6 +35,9 @@ Flags:
 
 import argparse
 import os
+import pwd
+import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -908,10 +911,14 @@ def stow_dotfiles(
 
     all_dirs = STOW_DIRS + (extra_dirs or [])
 
+    target = pwd.getpwnam(user).pw_dir
+    stow_args = ["stow", "--target", target]
+    # Check all packages before linking anything; never overwrite repository files.
+    run_as_user(user, "LC_ALL=C " + shlex.join(stow_args + ["--simulate", *all_dirs, "zsh"]), cwd=script_path)
+
     for stow_dir in all_dirs:
         print(f"Stowing {stow_dir}")
-        # LC_ALL=C fixes perl locale warning; --adopt gracefully handles existing files
-        run_as_user(user, f"LC_ALL=C stow {stow_dir} --adopt", cwd=script_path)
+        run_as_user(user, "LC_ALL=C " + shlex.join(stow_args + [stow_dir]), cwd=script_path)
 
     print("==========================================")
     print(
@@ -931,7 +938,7 @@ def stow_dotfiles(
     os.environ.update(captured_env)
 
     # Finally link the zsh config after env is loaded
-    run_as_user(user, "LC_ALL=C stow zsh --adopt", cwd=script_path)
+    run_as_user(user, "LC_ALL=C " + shlex.join(stow_args + ["zsh"]), cwd=script_path)
 
     # Source .zshrc again to load plugins and nvm
     run_as_user(user, "zsh -c 'source $ZDOTDIR/.zshrc'")
@@ -1348,6 +1355,15 @@ def main() -> None:
         sys.exit(1)
 
     user = user.strip()
+    pwd.getpwnam(user)  # Reject unknown accounts before making changes.
+    if not re.fullmatch(r"[a-z_][a-z0-9_-]*[$]?", user):
+        sys.exit("Invalid target username")
+    for flag, pattern in (("nvm", r"[A-Za-z0-9][A-Za-z0-9._/+*-]*"),
+                          ("pyenv", r"[A-Za-z0-9][A-Za-z0-9._+-]*"),
+                          ("resticprofile", r"\d+\.\d+\.\d+")):
+        value = getattr(args, flag)
+        if value and not re.fullmatch(pattern, value):
+            sys.exit(f"Invalid --{flag} version")
 
     script_path = os.path.dirname(os.path.abspath(__file__))
 
