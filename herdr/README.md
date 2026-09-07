@@ -5,16 +5,17 @@ Install from the repository root with `stow --target="$HOME" herdr`.
 The existing `~/.config/herdr` directory keeps logs and session state outside
 the repository; only the main config is linked.
 
-Install the layout popup separately (requires Go 1.24.2+):
-`herdr plugin install crierr/herdr-arrange`.
-Configured with version 0.2.1, upstream commit
-`1060f44c31569fc43283cef34f1710adb6ffdcaf`.
-
-Install Terminal Browser separately on each machine:
+Install all three plugins after stowing `herdr` and `lazyvim`:
 
 ```sh
-herdr plugin install zenbu-labs/terminal-browser/herdr-plugin
+./herdr/install-plugins.sh
 ```
+
+Requires Herdr, Neovim, Git, jq, and Go 1.24.2+ for the Arrange build.
+The script installs each Herdr plugin in the list in order, without specifying
+commit revisions. It then installs missing smart-splits through Lazy.nvim,
+links its Herdr integration, and reloads the running Herdr server.
+LazyGit and htop are installed separately with your system package manager.
 
 Configured with Terminal Browser plugin 0.1.1 (browser 0.8.0). Browser graphics
 require a Kitty-graphics-capable outer terminal; Herdr's graphics support is
@@ -88,12 +89,7 @@ Reference: https://herdr.dev/docs/configuration/ and
 https://herdr.dev/docs/config-reference/.
 
 Seamless Neovim navigation uses `mrjones2014/smart-splits.nvim` (version pinned
-in LazyVim's lockfile). Install Neovim plugins, then register its Herdr half:
-
-```sh
-herdr plugin link "$HOME/.local/share/nvim/lazy/smart-splits.nvim" --enabled
-herdr server reload-config
-```
+in LazyVim's lockfile). `install-plugins.sh` registers its Herdr half automatically.
 
 Requires `jq`. Restart existing Neovim instances to load the mappings. The
 Herdr integration is selected explicitly; outside Herdr the existing tmux
