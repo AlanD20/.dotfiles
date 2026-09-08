@@ -2,6 +2,9 @@
 common/.config/gtk-3.0/bookmarks
 thunar/.config/Thunar/*.scm
 tmux/.config/tmux/plugins/*
+# Herdr writes runtime state here when Stow links the whole directory.
+herdr/.config/herdr/*
+!herdr/.config/herdr/config.toml
 k9s/.config/k9s/skins/*.yaml
 common/.vscode/extensions
 !common/.vscode

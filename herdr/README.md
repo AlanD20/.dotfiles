@@ -2,8 +2,10 @@
 
 Adapted from this repository's tmux config; validated with Herdr 0.8.2.
 Install from the repository root with `stow --target="$HOME" herdr`.
-The existing `~/.config/herdr` directory keeps logs and session state outside
-the repository; only the main config is linked.
+With an existing `~/.config/herdr` directory, Stow links individual files.
+On a fresh environment it can link the whole directory, so Herdr's logs,
+sockets, session state, plugin files, and update metadata land inside the repo.
+Git ignores everything under `herdr/.config/herdr/` except `config.toml`.
 
 Install all three plugins after stowing `herdr` and `lazyvim`:
 
