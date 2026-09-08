@@ -1,0 +1,3 @@
+.config/nushell/history.*
+.config/nushell/plugin.msgpackz*
+.config/nushell/*.bak*
