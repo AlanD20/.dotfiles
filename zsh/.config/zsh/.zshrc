@@ -61,9 +61,9 @@ export LANGUAGE="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-# Zinit loads the lightweight NVM adapter below; Node initializes on first use.
+# Load Node during shell startup so child processes can find npm/npx too.
 export NVM_DIR="$XDG_DATA_HOME/nvm"
-export NVM_LAZY_LOAD=true
+export NVM_LAZY_LOAD=false
 export NVM_COMPLETION=true
 
 # GPG
@@ -154,19 +154,15 @@ autoload -Uz compinit && compinit
 setopt autocd beep extendedglob nomatch notify
 
 if [[ -s "$NVM_DIR/nvm.sh" ]]; then
-  zinit light lukechilds/zsh-nvm
-
-  # Preserve NVM's EXTENDED_GLOB workaround both during lazy initialization
-  # and during subsequent nvm calls. The plugin also wraps global Node tools.
-  functions -c _zsh_nvm_load _dotfiles_zsh_nvm_load
-  _zsh_nvm_load() {
+  # NVM needs EXTENDED_GLOB disabled during initialization and later calls.
+  () {
     setopt localoptions noextendedglob
-    _dotfiles_zsh_nvm_load
-    functions -c _zsh_nvm_nvm _nvm
-    _zsh_nvm_nvm() {
-      setopt localoptions noextendedglob
-      _nvm "$@"
-    }
+    zinit light lukechilds/zsh-nvm
+  }
+  functions -c _zsh_nvm_nvm _nvm
+  _zsh_nvm_nvm() {
+    setopt localoptions noextendedglob
+    _nvm "$@"
   }
 fi
 
