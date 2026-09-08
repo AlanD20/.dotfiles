@@ -50,17 +50,32 @@ Take a look at this repo to
 After installing the nvidia drivers, use hyprland guide on Nvidia drivers to also finish some additional configuration if you still have issues with screen flickering or nvidia drivers aren't being used properly, [Hyprland Guide on Nvidia](https://wiki.hyprland.org/hyprland-wiki/pages/Nvidia/)
 
 - With sway, use vulkan renderer, for that, you may have to install `vulkan-intel` and `vulkan-validation-layers`.
-- Brightnessctl not working properly on nvidia drivers? Try adding `acpi_backlight=native` to `GRUB_CMDLINE_LINUX_DEFAULT` in `/etc/default/grub`. (Don't forget to do `sudo grub-mkconfig -o /boot/grub/grub.cfg` after changes.), this will force using the gpu-native interface.
-  - also force the nvidia interface to be used
-  ```bash
-  # Grab the interface
-  ls /sys/class/backlight
+- Brightness changes in KDE/brightnessctl but the panel stays dim? On the ASUS TUF F15 FX507ZI4 with an RTX 4070, `acpi_backlight=native` exposed `nvidia_0`, which accepted brightness values without changing the panel. Enabling the firmware controller with `nvidia_wmi_ec_backlight force=1` restored physical brightness control (verified on KDE Wayland, 2026-09-07).
 
-  # Create a new rule, by putting this content to force using it. Rule at /etc/udev/rules.d/99-backlight.rules
-  ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="nvidia_wmi_ec_backlight", \
-    RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness", \
-    RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
+  Test the firmware controller first; this requires compatible firmware and is not a universal NVIDIA fix. Keep the existing `acpi_backlight=native` boot parameter for this workaround. Reload only the backlight module:
+
+  ```bash
+  ls /sys/class/backlight
+  sudo modprobe -r nvidia_wmi_ec_backlight
+  sudo modprobe nvidia_wmi_ec_backlight force=1
+  brightnessctl -d nvidia_wmi_ec_backlight set 100%
+
+  # KDE: rediscover the controller, then test the brightness slider.
+  systemctl --user restart plasma-powerdevil.service
   ```
+
+  If the panel physically responds, add this line to `/etc/modprobe.d/nvidia-wmi-ec-backlight.conf`:
+
+  ```conf
+  options nvidia_wmi_ec_backlight force=1
+  ```
+
+  Rebuild the initramfs for the kernel in use (`sudo mkinitcpio -p linux-g14` on this laptop; use the matching preset for other kernels). This was completed successfully; persistence still needs verification after the next reboot.
+
+  A udev rule changing the `brightness` file's permissions does **not** select or enable a backlight controller. See the [upstream kernel explanation of the force option](https://www.spinics.net/lists/platform-driver-x86/msg36883.html).
+
+  To undo the persistent workaround, remove the `options nvidia_wmi_ec_backlight force=1` line, rebuild the same initramfs, and reboot.
+
 - Don't forget to Enable this kernel module parameter for nvidia: [Preserve Video Memory After Suspend](https://wiki.archlinux.org/title/NVIDIA/Tips_and_tricks#Preserve_video_memory_after_suspend)
 - These environment variables are essential if you want to utilize hardware acceleration with your GPU. Read about [Hardware Video Acceleration](https://wiki.archlinux.org/title/Hardware_video_acceleration).
   ```bash
