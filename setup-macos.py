@@ -49,7 +49,7 @@ import tempfile
 
 NODE_VERSION = "lts/krypton"
 PYENV_VERSION = "3.13"
-NVM_VERSION = "v0.40.3"
+NVM_VERSION = "v0.40.7"
 
 PIP3_PKGS: list[str] = [
     "build",
@@ -78,14 +78,14 @@ STOW_DIRS: list[str] = [
     "lazygit",
     "lazyvim",
     "oh-my-posh",
-    "opencode",
+    "herdr",
     "tmux",
     "zsh",
 ]
 
 STOW_DIRS_GUI: list[str] = [
     "wallpapers",
-    "onedrive",
+    # "onedrive",
 ]
 
 # ---------------------------------------------------------------------------
@@ -120,6 +120,7 @@ BREW_FORMULAE: list[str] = [
     "ncdu",
     "fastfetch",
     "tldr",
+    "herdr",
     # CLI tools
     "k9s",
     "lazydocker",
@@ -140,7 +141,7 @@ BREW_FORMULAE: list[str] = [
     "mupdf",
     # Dev & build
     "lua",
-    "terraform",
+    # "terraform",
     "ansible",
     "meson",
     "cmake",
@@ -154,12 +155,6 @@ BREW_FORMULAE: list[str] = [
     "zig",
     # Libraries
     "gnupg",
-    # Albert/Qt deps — not needed on macOS
-    # "libqalculate",
-    # "muparser",
-    # "tcl-tk",
-    # "pyqt@5",
-    # "pyqt@6",
     # Font utilities
     "woff2",
 ]
@@ -198,12 +193,7 @@ BREW_FONTS: list[str] = [
     "font-meslo-lg-nerd-font",
     "font-jetbrains-mono-nerd-font",
     "font-fira-code-nerd-font",
-    "font-cascadia-code-nerd-font",
     "font-hack-nerd-font",
-    "font-anonymous-pro-nerd-font",
-    "font-droid-nerd-font",
-    "font-source-code-pro-nerd-font",
-    "font-dejavu-nerd-font",
     "font-noto-emoji",
 ]
 
@@ -434,7 +424,9 @@ def configure_touchid_sudo() -> None:
     if os.path.exists(pam_path):
         with open(pam_path) as f:
             content = f.read()
-            if re.search(r"^\s*auth\s+\S+\s+pam_tid\.so(?:\s|$)", content, re.MULTILINE):
+            if re.search(
+                r"^\s*auth\s+\S+\s+pam_tid\.so(?:\s|$)", content, re.MULTILINE
+            ):
                 print("  Touch ID already configured")
                 return
     tmp = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".pam")
@@ -636,7 +628,11 @@ def stow_dotfiles(script_path: str, extra_dirs: list[str] | None = None) -> None
     )
 
     target = os.path.expanduser("~")
-    subprocess.run(["stow", "--target", target, "--restow", "--simulate", *all_dirs, "zsh"], check=True, cwd=script_path)
+    subprocess.run(
+        ["stow", "--target", target, "--restow", "--simulate", *all_dirs, "zsh"],
+        check=True,
+        cwd=script_path,
+    )
 
     for stow_dir in all_dirs:
         print(f"  Stowing {stow_dir}")
