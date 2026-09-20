@@ -1,0 +1,5 @@
+# Package-local rules replace Stow's defaults; keep documentation excluded.
+^/README.*
+^/LICENSE.*
+^/COPYING
+^/install-plugins\.sh$
