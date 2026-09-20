@@ -1,19 +1,26 @@
 #!/usr/bin/env python3
 """
-macOS setup script using Homebrew.
+macOS 26/27 setup script using Homebrew. Requires Python 3.9 or newer.
 
 Mirrors setup-archlinux.py for macOS environments. Homebrew is the primary
-package manager; casks are used for GUI applications, fonts via homebrew/cask-fonts,
+package manager; casks are used for GUI applications and fonts,
 and background services via brew services / launchctl.
 
 Does NOT require root (Homebrew is user-level by design), though a few
 operations (SSH, shell) prompt for sudo when needed.
+
+Running without flags asks yes/no questions before making changes. Flags answer
+the corresponding question: --brew selects installation, while keyboard skip
+flags leave those settings unchanged. Unanswered options prompt with a default
+of no. Log out and back in after changing keyboard preferences.
 
 Usage:
     python3 setup-macos.py [flags]
 
 Flags:
     --brew             Install the base Homebrew CLI formulae
+    --skip-disable-macos-shortcuts  Leave the current keyboard shortcuts unchanged
+    --skip-fast-key-repeat         Leave the current repeat/delay settings unchanged
     --stow             Stow dotfiles without adopting conflicting local files
     --brew-zsh         Set Homebrew zsh as the login shell
     --xcode            Validate full Xcode for native/iOS development
@@ -29,19 +36,23 @@ Flags:
     --services         Enable Colima; PHP is started only with --php
     --gui              Install GUI applications (browsers, editors, media, office)
     --mas              Install Mac App Store apps via mas (requires prior iCloud sign-in)
-    --skip-brew        Skip Homebrew formula/cask installation
     --manual           Run package installs interactively (no --noconfirm equivalent)
 """
 
+from __future__ import annotations
+
 import argparse
 import getpass
+import json
 import os
 import platform
+import plistlib
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import xml.etree.ElementTree as ET
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -71,26 +82,30 @@ STOW_DIRS: list[str] = [
     "aerospace",
     "ghostty",
     "atuin",
-    "bin",
-    "common",
     "containers",
+    "git",
     "gnupg",
+    "htop",
+    "keepassxc",
+    "k9s",
     "lazygit",
     "lazyvim",
+    "mpv",
     "oh-my-posh",
     "herdr",
     "tmux",
-    "zsh",
-]
-
-STOW_DIRS_GUI: list[str] = [
     "wallpapers",
-    # "onedrive",
+    "zsh",
 ]
 
 # ---------------------------------------------------------------------------
 # Homebrew formula packages (CLI tools)
 # ---------------------------------------------------------------------------
+
+# Added by --brew before updating and installing formulae.
+BREW_TAPS: list[str] = [
+    "hashicorp/tap",
+]
 
 BREW_FORMULAE: list[str] = [
     # Essentials
@@ -123,6 +138,8 @@ BREW_FORMULAE: list[str] = [
     "herdr",
     # CLI tools
     "k9s",
+    "colima",
+    "docker",
     "lazydocker",
     "restic",
     "asciinema",
@@ -134,14 +151,14 @@ BREW_FORMULAE: list[str] = [
     "code-minimap",
     # Media
     "ffmpeg",
-    "unrar",
+    "unar",
     "exiftool",
     "imagemagick",
     "mpv",
     "mupdf",
     # Dev & build
     "lua",
-    # "terraform",
+    "hashicorp/tap/terraform",
     "ansible",
     "meson",
     "cmake",
@@ -164,6 +181,7 @@ BREW_FORMULAE: list[str] = [
 # ---------------------------------------------------------------------------
 
 BREW_CASKS: list[str] = [
+    "ghostty",
     "alacritty",
     "firefox",
     "google-chrome",
@@ -171,6 +189,7 @@ BREW_CASKS: list[str] = [
     "discord",
     "spotify",
     "obs",
+    "vorssaint",
     "keepassxc",
     "postman",
     "anydesk",
@@ -186,7 +205,7 @@ BREW_CASKS: list[str] = [
 ]
 
 # ---------------------------------------------------------------------------
-# Homebrew cask-fonts (Nerd Fonts)
+# Homebrew font casks (Nerd Fonts)
 # ---------------------------------------------------------------------------
 
 BREW_FONTS: list[str] = [
@@ -201,11 +220,14 @@ BREW_FONTS: list[str] = [
 # macOS system preferences (defaults write)
 # ---------------------------------------------------------------------------
 
-MACOS_DEFAULTS: list[tuple[str, str, str, str]] = [
-    # (domain, key, type, value)
+KEYBOARD_DEFAULTS: list[tuple[str, str, str, str]] = [
     ("NSGlobalDomain", "ApplePressAndHoldEnabled", "-bool", "false"),
     ("NSGlobalDomain", "KeyRepeat", "-int", "2"),
     ("NSGlobalDomain", "InitialKeyRepeat", "-int", "15"),
+]
+
+MACOS_DEFAULTS: list[tuple[str, str, str, str]] = [
+    # (domain, key, type, value)
     ("NSGlobalDomain", "AppleShowAllExtensions", "-bool", "true"),
     ("com.apple.finder", "AppleShowAllFiles", "-bool", "true"),
     ("NSGlobalDomain", "NSDocumentSaveNewDocumentsToCloud", "-bool", "false"),
@@ -220,6 +242,28 @@ MACOS_DEFAULTS: list[tuple[str, str, str, str]] = [
     ("com.apple.dock", "mru-spaces", "-bool", "false"),
     ("com.apple.dock", "orientation", "-string", "bottom"),
 ]
+
+# System action IDs, independent of the assigned key combination. Include the
+# clipboard, Touch Bar, recording, and visual-intelligence capture variants.
+# Source: https://gist.github.com/stephancasas/2c8e8f71e23ec7221495d7f4b9efb794
+# Show Apps: https://git.billygeorge.net/billy.george/dotfiles/commit/c37c58cb78ba7c9fc9b29d0649654ced77e65ab7
+MACOS_SHORTCUTS: dict[str, str] = {
+    "28": "Save picture of screen",
+    "29": "Copy picture of screen",
+    "30": "Save picture of selected area",
+    "31": "Copy picture of selected area",
+    "181": "Save picture of Touch Bar",
+    "182": "Copy picture of Touch Bar",
+    "184": "Screenshot and recording options",
+    "185": "Screenshot and recording clipboard variant",
+    "261": "Capture for visual intelligence",
+    "262": "Copy capture for visual intelligence",
+    "263": "Capture top window for visual intelligence",
+    "264": "Copy top window for visual intelligence",
+    "160": "Show Apps",
+    "64": "Show Spotlight search",
+    "190": "Quick Note",
+}
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -286,26 +330,50 @@ def print_step(title: str) -> None:
 
 
 def ensure_homebrew(manual: bool = False) -> None:
-    """Install Homebrew if not already present."""
+    """Install Homebrew if absent and expose its tools to this setup process."""
     try:
-        get_brew_bin()
+        brew_bin = get_brew_bin()
     except RuntimeError:
-        pass
+        print_step("Installing Homebrew")
+        # Keep the official installer's confirmation/password prompts. A failed
+        # download must stop here, before attempting to execute the installer.
+        with tempfile.TemporaryDirectory(prefix="homebrew-install-") as temp_dir:
+            installer = os.path.join(temp_dir, "install.sh")
+            subprocess.run(
+                [
+                    "/usr/bin/curl",
+                    "-fsSL",
+                    "--output",
+                    installer,
+                    "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh",
+                ],
+                check=True,
+            )
+            subprocess.run(["/bin/bash", installer], check=True)
+        brew_bin = get_brew_bin()
     else:
         print("Homebrew already installed.")
-        return
-    print_step("Installing Homebrew")
-    cmd = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-    subprocess.run(cmd, shell=True, check=True)
-    get_brew_bin()
+
+    prefix = subprocess.check_output([brew_bin, "--prefix"], text=True).strip()
+    if not os.path.isabs(prefix):
+        raise RuntimeError(f"Homebrew returned an invalid prefix: {prefix!r}")
+    brew_paths = [os.path.join(prefix, "bin"), os.path.join(prefix, "sbin")]
+    other_paths = [
+        path
+        for path in os.environ.get("PATH", "").split(os.pathsep)
+        if path not in brew_paths
+    ]
+    os.environ["HOMEBREW_PREFIX"] = prefix
+    os.environ["PATH"] = os.pathsep.join(brew_paths + other_paths)
 
 
-def install_brew_packages(skip_brew: bool = False, manual: bool = False) -> None:
+def install_brew_packages(manual: bool = False) -> None:
     """Install Homebrew formula packages."""
-    if skip_brew:
-        return
-
     ensure_homebrew(manual)
+
+    for tap in BREW_TAPS:
+        print_step(f"Adding Homebrew tap: {tap}")
+        run_brew(["tap", tap])
 
     print_step("Updating Homebrew")
     run_brew(["update"])
@@ -331,7 +399,7 @@ def install_brew_casks(manual: bool = False) -> None:
 
 
 def install_brew_fonts(manual: bool = False) -> None:
-    """Install Nerd Fonts via homebrew/cask-fonts."""
+    """Install Nerd Fonts via Homebrew casks."""
     ensure_homebrew(manual)
 
     install_cmd = ["install", "--cask"]
@@ -365,6 +433,151 @@ def ensure_full_xcode() -> None:
             "sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer."
         )
     subprocess.run(["xcodebuild", "-version"], check=True)
+
+
+def read_preferences(domain: str) -> dict:
+    """Read through defaults so cached preferences and fresh accounts work."""
+    result = subprocess.run(
+        ["/usr/bin/defaults", "export", domain, "-"],
+        capture_output=True,
+        env={**os.environ, "LC_ALL": "C"},
+    )
+    if result.returncode:
+        # A fresh account may not have any overrides in this domain yet.
+        if b"does not exist" in result.stderr:
+            return {}
+        raise RuntimeError(
+            f"Cannot read {domain}: {result.stderr.decode(errors='replace').strip()}"
+        )
+    preferences = plistlib.loads(result.stdout)
+    if not isinstance(preferences, dict):
+        raise RuntimeError(f"Expected a preference dictionary for {domain}")
+    return preferences
+
+
+def preference_dictionary(preferences: dict, key: str) -> dict:
+    value = preferences.get(key, {})
+    if not isinstance(value, dict):
+        raise RuntimeError(f"Expected a dictionary for {key}; no changes made")
+    return value
+
+
+def plist_argument(value: object) -> str:
+    """Serialize a defaults value without shell interpolation or a plist wrapper."""
+    return ET.tostring(ET.fromstring(plistlib.dumps(value))[0], encoding="unicode")
+
+
+def logout_menu_titles() -> list[str]:
+    """Resolve Log Out titles using AppKit and the account's display name."""
+    # Loading AppKit/Foundation does not require Accessibility or Automation
+    # access. No UI scripting, keystrokes, or logout actions are performed.
+    script = r"""
+ObjC.import('AppKit');
+var bundle = $.NSBundle.bundleWithIdentifier('com.apple.AppKit');
+var fullName = ObjC.unwrap($.NSFullUserName());
+var titles = [];
+['Log Out', 'Log Out %@', 'Log Out…', 'Log Out...', 'Log Out %@…', 'Log Out %@...'].forEach(function(key) {
+    var localized = ObjC.unwrap(bundle.localizedStringForKeyValueTable(
+        key, key, 'MenuCommands'));
+    [key, localized].forEach(function(title) {
+        title = title.replace('%@', fullName);
+        // Menu resources may add the ellipsis after substituting the name.
+        if (!/[….]$/.test(title)) title += '…';
+        if (titles.indexOf(title) === -1) titles.push(title);
+    });
+});
+JSON.stringify(titles);
+"""
+    titles = json.loads(
+        subprocess.check_output(
+            ["/usr/bin/osascript", "-l", "JavaScript", "-e", script],
+            text=True,
+        )
+    )
+    if (
+        not isinstance(titles, list)
+        or not titles
+        or any(not isinstance(title, str) or not title for title in titles)
+    ):
+        raise RuntimeError("Could not resolve the Log Out menu title")
+    return titles
+
+
+def disable_macos_shortcuts() -> None:
+    """Disable the selected actions, preserving unrelated keys and bindings."""
+    print_step("Disabling macOS shortcuts (opt out: --skip-disable-macos-shortcuts)")
+    domain = "com.apple.symbolichotkeys"
+    preferences = read_preferences(domain)
+    hotkeys = preference_dictionary(preferences, "AppleSymbolicHotKeys")
+    updates = {}
+    for hotkey_id, label in MACOS_SHORTCUTS.items():
+        current = preference_dictionary(hotkeys, hotkey_id)
+        if current.get("enabled") is not False:
+            # Keep custom key combinations and any future fields on the entry.
+            updates[hotkey_id] = {**current, "enabled": False}
+        print(f"  {label}")
+
+    global_preferences = read_preferences("NSGlobalDomain")
+    equivalents = preference_dictionary(global_preferences, "NSUserKeyEquivalents")
+    # A non-keyboard character removes Cmd+Shift+Q while retaining the menu
+    # action. Do not disable ForceLogout or remove Log Out from the Apple menu.
+    logout_updates = {
+        title: "\u200b"
+        for title in logout_menu_titles()
+        if equivalents.get(title) != "\u200b"
+    }
+    if not updates and not logout_updates:
+        print("  Shortcut preferences already configured.")
+        return
+
+    backup_root = os.path.expanduser("~/Library/Application Support/dotfiles/backups")
+    os.makedirs(backup_root, mode=0o700, exist_ok=True)
+    backup_dir = tempfile.mkdtemp(prefix="macos-shortcuts-", dir=backup_root)
+    for name, original in [
+        (domain, preferences),
+        ("NSGlobalDomain", global_preferences),
+    ]:
+        path = os.path.join(backup_dir, f"{name}.plist")
+        with open(path, "xb") as backup:
+            os.chmod(path, 0o600)
+            plistlib.dump(original, backup)
+    print(f"  Preference snapshots: {backup_dir}")
+
+    if updates:
+        command = [
+            "/usr/bin/defaults",
+            "write",
+            domain,
+            "AppleSymbolicHotKeys",
+            "-dict-add",
+        ]
+        for hotkey_id, entry in updates.items():
+            command.extend([hotkey_id, plist_argument(entry)])
+        subprocess.run(command, check=True)
+    if logout_updates:
+        command = [
+            "/usr/bin/defaults",
+            "write",
+            "NSGlobalDomain",
+            "NSUserKeyEquivalents",
+            "-dict-add",
+        ]
+        for title, value in logout_updates.items():
+            # Quote the value as a plist string, not as shell code.
+            command.extend([title, plist_argument(value)])
+        subprocess.run(command, check=True)
+
+    saved = preference_dictionary(read_preferences(domain), "AppleSymbolicHotKeys")
+    saved_equivalents = preference_dictionary(
+        read_preferences("NSGlobalDomain"), "NSUserKeyEquivalents"
+    )
+    if any(saved.get(key) != value for key, value in updates.items()) or any(
+        saved_equivalents.get(key) != value for key, value in logout_updates.items()
+    ):
+        raise RuntimeError(
+            f"Shortcut preferences did not persist; backups: {backup_dir}"
+        )
+    print("  Preferences saved. Log out and back in to activate all shortcut changes.")
 
 
 def configure_macos_defaults() -> None:
@@ -405,6 +618,15 @@ def configure_macos_defaults() -> None:
     # Restart affected apps
     subprocess.run(["killall", "Finder"], check=False)
     subprocess.run(["killall", "Dock"], check=False)
+
+
+def configure_fast_key_repeat() -> None:
+    """Use fast repeat and a short initial delay instead of press-and-hold accents."""
+    print_step("Configuring fast key repeat (KeyRepeat=2, InitialKeyRepeat=15)")
+    for domain, key, typ, value in KEYBOARD_DEFAULTS:
+        subprocess.run(
+            ["/usr/bin/defaults", "write", domain, key, typ, value], check=True
+        )
 
 
 def configure_ssh() -> None:
@@ -543,6 +765,7 @@ def install_python_via_pyenv(pyenv_version: str) -> None:
     pyenv_version = require_version(pyenv_version, r"\d+\.\d+(?:\.\d+)?", "--pyenv")
     print_step(f"Installing Python {pyenv_version} via pyenv")
 
+    ensure_homebrew()
     if not command_exists("pyenv"):
         run_brew(["install", "pyenv"])
 
@@ -620,16 +843,25 @@ def stow_dotfiles(script_path: str, extra_dirs: list[str] | None = None) -> None
     """Create required local dirs and stow all dotfile directories."""
     print_step("Stowing dotfiles")
 
+    if not command_exists("stow"):
+        ensure_homebrew()
+        if not command_exists("stow"):
+            run_brew(["install", "stow"])
+
     os.makedirs(os.path.expanduser("~/.local/bin"), exist_ok=True)
     os.makedirs(os.path.expanduser("~/.local/share/fonts"), exist_ok=True)
+    os.makedirs(os.path.expanduser("~/.gnupg"), mode=0o700, exist_ok=True)
 
     all_dirs = [directory for directory in STOW_DIRS if directory != "zsh"] + (
         extra_dirs or []
     )
 
     target = os.path.expanduser("~")
+    # Keep directories real so new keys, caches, histories, and app state remain
+    # in HOME rather than being created under a directory symlink into the repo.
+    stow = ["stow", "--target", target, "--no-folding", "--restow"]
     subprocess.run(
-        ["stow", "--target", target, "--restow", "--simulate", *all_dirs, "zsh"],
+        [*stow, "--simulate", *all_dirs, "zsh"],
         check=True,
         cwd=script_path,
     )
@@ -637,14 +869,14 @@ def stow_dotfiles(script_path: str, extra_dirs: list[str] | None = None) -> None
     for stow_dir in all_dirs:
         print(f"  Stowing {stow_dir}")
         subprocess.run(
-            ["stow", "--target", target, "--restow", stow_dir],
+            [*stow, stow_dir],
             check=True,
             cwd=script_path,
         )
 
     # Link zsh config last after env is loaded
     subprocess.run(
-        ["stow", "--target", target, "--restow", "zsh"],
+        [*stow, "zsh"],
         check=True,
         cwd=script_path,
     )
@@ -695,10 +927,11 @@ def install_resticprofile() -> None:
 # Mac App Store (mas)
 # ---------------------------------------------------------------------------
 
+# Find IDs with: mas search "App Name" (or mas list for installed apps).
+# Alternatively, copy the number after "id" in the app's App Store URL.
 MAS_APPS: dict[str, int] = {
     "Xcode": 497799835,
-    "Amphetamine": 937984704,
-    "DaVinci Resolve": 571213070,
+    # "DaVinci Resolve": 571213070,
 }
 
 
@@ -725,8 +958,7 @@ def configure_shell() -> None:
     brew_zsh = os.path.join(os.path.dirname(get_brew_bin()), "zsh")
 
     if not os.path.exists(brew_zsh):
-        print("  brew zsh not found, skipping shell change.")
-        return
+        run_brew(["install", "zsh"])
 
     # Check if brew zsh is in /etc/shells
     with open("/etc/shells") as f:
@@ -757,8 +989,31 @@ def configure_shell() -> None:
 def run_setup(args: argparse.Namespace, script_path: str) -> None:
     """Execute all setup steps, gated by flags."""
 
-    # Xcode CLI tools (prerequisite for most things)
-    ensure_xcode_cli_tools()
+    if not args.skip_disable_macos_shortcuts:
+        disable_macos_shortcuts()
+    if not args.skip_fast_key_repeat:
+        configure_fast_key_repeat()
+
+    # Preference-only runs need neither Homebrew nor developer tools.
+    if any(
+        (
+            args.brew,
+            args.gui,
+            args.font,
+            args.brew_zsh,
+            args.xcode,
+            args.nvm,
+            args.go,
+            args.rust,
+            args.pyenv,
+            args.php,
+            args.k9s_theme,
+            args.resticprofile,
+            args.services,
+            args.mas,
+        )
+    ):
+        ensure_xcode_cli_tools()
 
     if args.xcode:
         ensure_full_xcode()
@@ -770,10 +1025,9 @@ def run_setup(args: argparse.Namespace, script_path: str) -> None:
     if args.touchid_sudo:
         configure_touchid_sudo()
 
-    # Base formulae are opt-in. Languages and containers are installed only by
-    # their matching flags below.
-    if args.brew and not args.skip_brew:
-        install_brew_packages(skip_brew=False, manual=args.manual)
+    # Base formulae are selected via --brew or its prompt.
+    if args.brew:
+        install_brew_packages(manual=args.manual)
 
     # GUI applications
     if args.gui:
@@ -785,8 +1039,7 @@ def run_setup(args: argparse.Namespace, script_path: str) -> None:
 
     # Stow dotfiles
     if args.stow:
-        extra_dirs = list(STOW_DIRS_GUI) if args.gui else []
-        stow_dotfiles(script_path, extra_dirs)
+        stow_dotfiles(script_path)
 
     # Shell
     if args.brew_zsh:
@@ -839,6 +1092,8 @@ def run_setup(args: argparse.Namespace, script_path: str) -> None:
     print("  1. Restart your terminal or run: exec zsh")
     print("  2. Reload .zshrc: source $ZDOTDIR/.zshrc")
     print("  3. Sign into iCloud for App Store apps (if --mas was used)")
+    if not args.skip_disable_macos_shortcuts or not args.skip_fast_key_repeat:
+        print("  4. Log out and back in to activate keyboard preference changes.")
 
 
 # ---------------------------------------------------------------------------
@@ -846,136 +1101,157 @@ def run_setup(args: argparse.Namespace, script_path: str) -> None:
 # ---------------------------------------------------------------------------
 
 
-def parse_args() -> argparse.Namespace:
+# Each option supplies both its command-line help and its yes/no question.
+SETUP_OPTIONS: list[tuple[str, str]] = [
+    ("brew", "Install the base Homebrew CLI formulae"),
+    ("gui", "Install GUI applications, including Vorssaint"),
+    ("font", "Install Nerd Fonts"),
+    ("stow", "Stow the repository dotfiles"),
+    ("brew-zsh", "Set Homebrew zsh as the login shell"),
+    ("defaults", "Apply macOS system preferences (Finder, Dock, etc.)"),
+    ("xcode", "Validate that full Xcode is installed and selected"),
+    ("go", "Install Go + gopls and configure GOMODCACHE"),
+    ("rust", "Install rustup and set nightly as the default toolchain"),
+    ("php", "Install Composer and configure PHP extensions"),
+    ("resticprofile", "Install resticprofile"),
+    ("services", "Install and start Colima (also start PHP if selected)"),
+    ("touchid-sudo", "Enable Touch ID authentication for sudo"),
+    ("ssh", "Enable SSH Remote Login"),
+    ("mas", "Install Mac App Store apps (requires an iCloud sign-in)"),
+    ("manual", "Run package installers interactively"),
+]
+
+VERSION_OPTIONS: list[tuple[str, str, str | None, str]] = [
+    (
+        "nvm",
+        "Install Node via NVM",
+        NODE_VERSION,
+        r"(?:lts/[a-z]+|v?\d+(?:\.\d+){0,2})",
+    ),
+    ("pyenv", "Install Python via pyenv", PYENV_VERSION, r"\d+\.\d+(?:\.\d+)?"),
+    ("k9s-theme", "Install the Catppuccin k9s theme", None, r"[0-9a-f]{40}"),
+]
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "macOS setup script using Homebrew. "
-            "Mirrors setup-archlinux.py for macOS environments."
+            "macOS 26/27 setup using Homebrew (Python 3.9+). "
+            "Prompts for unanswered options before making changes. "
+            "Existing flags answer their questions; all yes/no prompts default to no."
         )
     )
-    parser.add_argument(
-        "--brew",
-        action="store_true",
-        help="Install the base Homebrew CLI formulae.",
-    )
-    parser.add_argument(
-        "--defaults",
-        action="store_true",
-        help="Apply macOS system preferences (Finder, Dock, etc.).",
-    )
-    parser.add_argument(
-        "--stow",
-        action="store_true",
-        help="Stow dotfiles without adopting conflicting local files.",
-    )
-    parser.add_argument(
-        "--brew-zsh",
-        action="store_true",
-        help="Set Homebrew zsh as the login shell.",
-    )
-    parser.add_argument(
-        "--xcode",
-        action="store_true",
-        help="Validate that full Xcode is installed and selected.",
-    )
-    parser.add_argument(
-        "--nvm",
-        type=str,
-        nargs="?",
-        const=NODE_VERSION,
-        default=None,
-        help=f"Install NVM if needed and install Node (default: {NODE_VERSION}).",
-    )
-    parser.add_argument(
-        "--go",
-        action="store_true",
-        help="Install Go + gopls and configure GOMODCACHE.",
-    )
-    parser.add_argument(
-        "--rust",
-        action="store_true",
-        help="Install rustup and set nightly as default toolchain.",
-    )
-    parser.add_argument(
-        "--k9s-theme",
-        dest="k9s_theme",
-        metavar="SHA",
-        help="Install Catppuccin k9s theme from an immutable 40-character Git SHA.",
-    )
-    parser.add_argument(
-        "--resticprofile",
-        action="store_true",
-        help="Install resticprofile through Homebrew.",
-    )
-    parser.add_argument(
-        "--pyenv",
-        type=str,
-        nargs="?",
-        const=PYENV_VERSION,
-        default=None,
-        help=f"Install Python via pyenv (default: {PYENV_VERSION}).",
-    )
-    parser.add_argument(
-        "--font",
-        action="store_true",
-        help="Install Nerd Fonts via Homebrew casks.",
-    )
-    parser.add_argument(
-        "--touchid-sudo",
-        action="store_true",
-        dest="touchid_sudo",
-        help="Enable Touch ID authentication for sudo.",
-    )
-    parser.add_argument(
-        "--ssh",
-        action="store_true",
-        help="Enable SSH Remote Login.",
-    )
-    parser.add_argument(
-        "--php",
-        action="store_true",
-        help="Install Composer and configure PHP extensions.",
-    )
-    parser.add_argument(
-        "--services",
-        action="store_true",
-        help="Enable Colima; PHP is started only when --php is also given.",
-    )
-    parser.add_argument(
-        "--gui",
-        action="store_true",
-        help="Install GUI applications (browsers, editors, etc.).",
-    )
-    parser.add_argument(
-        "--mas",
-        action="store_true",
-        help="Install Mac App Store apps via mas.",
-    )
-    parser.add_argument(
-        "--skip-brew",
-        action="store_true",
-        help="Deprecated compatibility flag; base formulae are opt-in via --brew.",
-    )
-    parser.add_argument(
-        "--manual",
-        action="store_true",
-        help="Run all package installs interactively.",
-    )
-    return parser.parse_args()
+    for flag, help_text in SETUP_OPTIONS:
+        parser.add_argument(
+            f"--{flag}",
+            action="store_true",
+            default=None,
+            help=help_text + ". Prompts if omitted (default: no).",
+        )
+    for flag, help_text, default, pattern in VERSION_OPTIONS:
+        value_options = {"nargs": "?", "const": default} if default else {}
+        parser.add_argument(
+            f"--{flag}",
+            metavar="VERSION" if default else "SHA",
+            default=None,
+            help=help_text
+            + (
+                f" (default: {default})."
+                if default
+                else " from a 40-character Git SHA."
+            ),
+            **value_options,
+        )
+    for flag in ("skip-disable-macos-shortcuts", "skip-fast-key-repeat"):
+        parser.add_argument(
+            f"--{flag}",
+            action="store_true",
+            default=None,
+            help="Leave the current settings unchanged without prompting.",
+        )
+    args = parser.parse_args(argv)
+    # Validate explicit values before asking questions or changing the machine.
+    for flag, _, _, pattern in VERSION_OPTIONS:
+        value = getattr(args, flag.replace("-", "_"))
+        if value:
+            try:
+                require_version(value, pattern, f"--{flag}")
+            except ValueError as error:
+                parser.error(str(error))
+    return args
+
+
+def ask_yes_no(question: str) -> bool:
+    while True:
+        answer = input(f"{question}? [y/N]: ").strip().lower()
+        if not answer:
+            return False
+        if answer in ("y", "yes"):
+            return True
+        if answer in ("n", "no"):
+            return False
+        print("Please answer yes or no.")
+
+
+def prompt_unanswered(args: argparse.Namespace) -> None:
+    """Collect all missing answers before any setup step runs."""
+    for flag, question in SETUP_OPTIONS:
+        dest = flag.replace("-", "_")
+        if getattr(args, dest) is None:
+            setattr(args, dest, ask_yes_no(question))
+    for flag, question, default, pattern in VERSION_OPTIONS:
+        dest = flag.replace("-", "_")
+        if getattr(args, dest) is not None:
+            continue
+        if not ask_yes_no(question):
+            setattr(args, dest, False)
+            continue
+        label = f"Version [{default}]" if default else "40-character Git commit SHA"
+        while True:
+            value = input(f"{label}: ").strip() or default or ""
+            try:
+                require_version(value, pattern, f"--{flag}")
+            except ValueError as error:
+                print(error)
+            else:
+                setattr(args, dest, value)
+                break
+    for dest, question in [
+        (
+            "skip_disable_macos_shortcuts",
+            "Disable Quick Note, Screenshots, Show Apps, Spotlight search, and Log Out shortcuts",
+        ),
+        (
+            "skip_fast_key_repeat",
+            "Enable fast key repeat, a short initial delay, and repeating held letters",
+        ),
+    ]:
+        if getattr(args, dest) is None:
+            setattr(args, dest, not ask_yes_no(question))
 
 
 def main() -> None:
-    if platform.system() != "Darwin":
-        print(
-            f"Warning: This script is designed for macOS. Detected: {platform.system()}"
-        )
-
     args = parse_args()
 
-    reply = input("Continue with setup? [y/N]: ")
-    if not reply.lower().startswith("y"):
-        print("Setup canceled.")
-        sys.exit(0)
+    if platform.system() != "Darwin":
+        sys.exit(f"This script requires macOS. Detected: {platform.system()}")
+    if os.geteuid() == 0:
+        sys.exit(
+            "Run as your login user, without sudo; individual steps request sudo if needed."
+        )
+    try:
+        prompt_unanswered(args)
+    except (EOFError, KeyboardInterrupt):
+        sys.exit("\nSetup canceled before making changes.")
+
+    selected = any(
+        value
+        for name, value in vars(args).items()
+        if not name.startswith("skip_") and name != "manual"
+    ) or not (args.skip_disable_macos_shortcuts and args.skip_fast_key_repeat)
+    if not selected:
+        print("No setup steps selected.")
+        return
 
     script_path = os.path.dirname(os.path.abspath(__file__))
     run_setup(args, script_path)
