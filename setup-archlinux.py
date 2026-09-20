@@ -6,11 +6,14 @@ Replaces both setup-arch-sway.sh and sway-install-profile.zsh.
 Must be run as root (sudo). User-level operations are delegated
 via ``su <user> -c "..."`` to preserve correct home/env context.
 
+Existing flags answer their setup questions. Omitted options prompt with a
+default of no; all answers are collected before setup starts.
+
 Usage:
     sudo python3 setup-archlinux.py --user <username> [flags]
 
 Flags:
-    --user             (required) The login username for user-level operations
+    --user             The login username (defaults to $SUDO_USER)
     --sway             Install Sway compositor and Wayland desktop packages
     --kde              Install KDE Plasma desktop packages
     --nvidia           Install Nvidia GPU drivers and utilities
@@ -26,8 +29,8 @@ Flags:
     --pyenv [VERSION]  Install Python via pyenv (default: 3.13)
     --font             Install DankMono Nerd Font from saifulapm/my-fonts
     --services         Enable user-level systemd services
-    --skip-pacman      Skip installing pacman packages (does not affect --kde, --nvidia, etc.)
-    --skip-aur         Skip installing AUR packages via yay
+    --pacman           Install base pacman packages; otherwise prompt (default: no)
+    --aur              Install base AUR packages via yay; otherwise prompt (default: no)
     --skip-shared-pacman  Skip shared GUI pacman packages (used by --sway/--kde)
     --skip-shared-aur  Skip shared GUI AUR packages (used by --sway/--kde)
     --manual           Run package installs interactively (remove --noconfirm, allow user intervention)
@@ -50,7 +53,7 @@ import tempfile
 NODE_VERSION = "lts/krypton"
 PYENV_VERSION = "3.13"
 RESTICPROFILE_VERSION = "0.32.0"
-NVM_VERSION = "v0.40.1"
+NVM_VERSION = "v0.40.7"
 
 PIP3_PKGS: list[str] = [
     "build",
@@ -914,11 +917,17 @@ def stow_dotfiles(
     target = pwd.getpwnam(user).pw_dir
     stow_args = ["stow", "--target", target]
     # Check all packages before linking anything; never overwrite repository files.
-    run_as_user(user, "LC_ALL=C " + shlex.join(stow_args + ["--simulate", *all_dirs, "zsh"]), cwd=script_path)
+    run_as_user(
+        user,
+        "LC_ALL=C " + shlex.join(stow_args + ["--simulate", *all_dirs, "zsh"]),
+        cwd=script_path,
+    )
 
     for stow_dir in all_dirs:
         print(f"Stowing {stow_dir}")
-        run_as_user(user, "LC_ALL=C " + shlex.join(stow_args + [stow_dir]), cwd=script_path)
+        run_as_user(
+            user, "LC_ALL=C " + shlex.join(stow_args + [stow_dir]), cwd=script_path
+        )
 
     print("==========================================")
     print(
@@ -1085,16 +1094,16 @@ def run_root_setup(
 ) -> None:
     """Execute all root-level operations (always run unless gated by a flag)."""
 
-    # 1. Install yay if missing
-    if not args.skip_aur:
+    # 1. Ensure yay is available for either base or selected desktop AUR packages.
+    if args.aur or ((args.sway or args.kde) and not args.skip_shared_aur):
         install_yay(user, temp_dir, manual=args.manual)
 
     # 2. Install pacman packages
-    if not args.skip_pacman:
+    if args.pacman:
         install_pacman_packages(manual=args.manual)
 
     # 3. Install AUR packages (non-interactive)
-    if not args.skip_aur:
+    if args.aur:
         install_aur_packages(user, manual=args.manual)
 
     # 4. Install desktop packages (--sway and/or --kde flags)
@@ -1215,12 +1224,58 @@ def run_user_setup(user: str, script_path: str, args: argparse.Namespace) -> Non
 # ---------------------------------------------------------------------------
 
 
+# Keep command-line help and prompt wording together.
+SETUP_OPTIONS: list[tuple[str, str]] = [
+    ("pacman", "Install base pacman packages"),
+    ("aur", "Install base AUR packages via yay"),
+    ("sway", "Install Sway compositor and Wayland desktop packages"),
+    ("kde", "Install KDE Plasma desktop packages"),
+    ("nvidia", "Install Nvidia GPU drivers and utilities"),
+    (
+        "asus",
+        "Install ASUS ROG laptop tools (asusctl, rog-control-center, supergfxctl)",
+    ),
+    ("pipewire", "Install the Pipewire audio stack"),
+    (
+        "ssh",
+        "Enable SSH configuration (uncomment Port 22 / ListenAddress in sshd_config)",
+    ),
+    ("php", "Install Composer, fix xdebug.ini, and configure PHP extensions"),
+    ("stow", "Stow dotfiles, cache fonts, and configure zsh"),
+    ("go", "Install Go + gopls and configure GOMODCACHE"),
+    ("rust", "Install rustup and set nightly as the default toolchain"),
+    ("k9s-theme", "Download and extract the Catppuccin k9s theme"),
+    ("font", "Install DankMono Nerd Font from saifulapm/my-fonts"),
+    (
+        "services",
+        "Configure system services, groups, the login shell, and user services",
+    ),
+    ("manual", "Run package installers interactively"),
+]
+
+VERSION_OPTIONS: list[tuple[str, str, str, str]] = [
+    ("nvm", "Install Node via NVM", NODE_VERSION, r"[A-Za-z0-9][A-Za-z0-9._/+*-]*"),
+    (
+        "pyenv",
+        "Install Python via pyenv",
+        PYENV_VERSION,
+        r"[A-Za-z0-9][A-Za-z0-9._+-]*",
+    ),
+    (
+        "resticprofile",
+        "Install the resticprofile binary",
+        RESTICPROFILE_VERSION,
+        r"\d+\.\d+\.\d+",
+    ),
+]
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Arch Linux + Sway setup script. "
-            "Must be run as root (sudo). "
-            "Replaces both setup-arch-sway.sh and sway-install-profile.zsh."
+            "Arch Linux setup script with optional Sway/KDE desktops. "
+            "Must be run as root (sudo). Existing flags answer their questions; "
+            "omitted options prompt with a default of no."
         )
     )
     parser.add_argument(
@@ -1228,122 +1283,65 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="The login username for user-level operations. Defaults to $SUDO_USER.",
     )
-    parser.add_argument(
-        "--sway",
-        action="store_true",
-        help="Install Sway compositor and Wayland desktop packages.",
-    )
-    parser.add_argument(
-        "--kde",
-        action="store_true",
-        help="Install KDE Plasma desktop packages.",
-    )
-    parser.add_argument(
-        "--nvidia",
-        action="store_true",
-        help="Install Nvidia GPU drivers and utilities.",
-    )
-    parser.add_argument(
-        "--asus",
-        action="store_true",
-        help="Install ASUS ROG laptop tools (asusctl, rog-control-center, supergfxctl).",
-    )
-    parser.add_argument(
-        "--pipewire",
-        action="store_true",
-        help="Install Pipewire audio stack.",
-    )
-    parser.add_argument(
-        "--ssh",
-        action="store_true",
-        help="Enable SSH configuration (uncomment Port 22 / ListenAddress in sshd_config).",
-    )
-    parser.add_argument(
-        "--php",
-        action="store_true",
-        help="Install Composer, fix xdebug.ini, modify php.ini extensions.",
-    )
-    parser.add_argument(
-        "--stow",
-        action="store_true",
-        help="Stow dotfiles, cache fonts, configure zsh shell.",
-    )
-    parser.add_argument(
-        "--nvm",
-        type=str,
-        nargs="?",
-        const=NODE_VERSION,
-        default=None,
-        help=f"Install/upgrade nvm and install node version (default: {NODE_VERSION}).",
-    )
-    parser.add_argument(
-        "--go",
-        action="store_true",
-        help="Install Go + gopls and configure GOMODCACHE.",
-    )
-    parser.add_argument(
-        "--rust",
-        action="store_true",
-        help="Install rustup and set nightly as default toolchain.",
-    )
-    parser.add_argument(
-        "--k9s-theme",
-        action="store_true",
-        dest="k9s_theme",
-        help="Download and extract catppuccin k9s theme.",
-    )
-    parser.add_argument(
-        "--resticprofile",
-        type=str,
-        nargs="?",
-        const=RESTICPROFILE_VERSION,
-        default=None,
-        help=f"Download and extract resticprofile binary (default: {RESTICPROFILE_VERSION}).",
-    )
-    parser.add_argument(
-        "--pyenv",
-        type=str,
-        nargs="?",
-        const=PYENV_VERSION,
-        default=None,
-        help=f"Install Python via pyenv (default: {PYENV_VERSION}).",
-    )
-    parser.add_argument(
-        "--font",
-        action="store_true",
-        help="Install DankMono Nerd Font from saifulapm/my-fonts.",
-    )
-    parser.add_argument(
-        "--services",
-        action="store_true",
-        help="Enable user-level systemd services.",
-    )
-    parser.add_argument(
-        "--skip-pacman",
-        action="store_true",
-        help="Skip installing pacman packages (does not affect --kde, --nvidia, etc.).",
-    )
-    parser.add_argument(
-        "--skip-aur",
-        action="store_true",
-        help="Skip installing AUR packages via yay.",
-    )
-    parser.add_argument(
-        "--skip-shared-pacman",
-        action="store_true",
-        help="Skip installing shared GUI pacman packages (used by --sway/--kde).",
-    )
-    parser.add_argument(
-        "--skip-shared-aur",
-        action="store_true",
-        help="Skip installing shared GUI AUR packages (used by --sway/--kde).",
-    )
-    parser.add_argument(
-        "--manual",
-        action="store_true",
-        help="Run all package installs interactively (remove --noconfirm, allow user intervention).",
-    )
+    for flag, help_text in SETUP_OPTIONS:
+        parser.add_argument(
+            f"--{flag}",
+            action="store_true",
+            default=None,
+            help=help_text + ". Prompts if omitted (default: no).",
+        )
+    for flag, help_text, default, _ in VERSION_OPTIONS:
+        parser.add_argument(
+            f"--{flag}",
+            nargs="?",
+            const=default,
+            default=None,
+            metavar="VERSION",
+            help=f"{help_text} (default version: {default}). Prompts if omitted (default: no).",
+        )
+    for manager in ("pacman", "aur"):
+        parser.add_argument(
+            f"--skip-shared-{manager}",
+            action="store_true",
+            default=None,
+            help=f"Skip shared GUI {manager} packages without prompting (used by --sway/--kde).",
+        )
     return parser.parse_args()
+
+
+def ask_yes_no(question: str) -> bool:
+    while True:
+        reply = input(f"{question}? [y/N]: ").strip().lower()
+        if reply in ("", "n", "no", "y", "yes"):
+            return reply in ("y", "yes")
+        print("Please answer yes or no.")
+
+
+def prompt_unanswered(args: argparse.Namespace) -> None:
+    """Collect missing selections before any setup command runs."""
+    for flag, question in SETUP_OPTIONS:
+        dest = flag.replace("-", "_")
+        if getattr(args, dest) is None:
+            setattr(args, dest, ask_yes_no(question))
+    for manager in ("pacman", "aur"):
+        dest = f"skip_shared_{manager}"
+        if getattr(args, dest) is None:
+            selected = (args.sway or args.kde) and ask_yes_no(
+                f"Install shared GUI {manager} packages"
+            )
+            setattr(args, dest, not selected)
+    for flag, question, default, pattern in VERSION_OPTIONS:
+        if getattr(args, flag) is not None:
+            continue
+        if not ask_yes_no(question):
+            setattr(args, flag, None)
+            continue
+        while True:
+            version = input(f"Version [{default}]: ").strip() or default
+            if re.fullmatch(pattern, version):
+                setattr(args, flag, version)
+                break
+            print(f"Invalid --{flag} version.")
 
 
 def main() -> None:
@@ -1358,20 +1356,18 @@ def main() -> None:
     pwd.getpwnam(user)  # Reject unknown accounts before making changes.
     if not re.fullmatch(r"[a-z_][a-z0-9_-]*[$]?", user):
         sys.exit("Invalid target username")
-    for flag, pattern in (("nvm", r"[A-Za-z0-9][A-Za-z0-9._/+*-]*"),
-                          ("pyenv", r"[A-Za-z0-9][A-Za-z0-9._+-]*"),
-                          ("resticprofile", r"\d+\.\d+\.\d+")):
+    for flag, _, _, pattern in VERSION_OPTIONS:
         value = getattr(args, flag)
         if value and not re.fullmatch(pattern, value):
             sys.exit(f"Invalid --{flag} version")
 
     script_path = os.path.dirname(os.path.abspath(__file__))
 
-    # Confirmation gate
-    reply = input("y to continue, any key to cancel: ")
-    if not reply.startswith("y"):
-        print("Script canceled!")
-        sys.exit(0)
+    # Collect all unanswered selections before making changes.
+    try:
+        prompt_unanswered(args)
+    except (EOFError, KeyboardInterrupt):
+        sys.exit("\nSetup canceled before making changes.")
 
     # Create a temporary directory, give ownership to the target user
     temp_dir = tempfile.mkdtemp()
