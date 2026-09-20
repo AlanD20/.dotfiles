@@ -23,3 +23,6 @@ zsh/**/includes/**/*.*
 
 onedrive/**/*/*.*
 onedrive/**/*/refresh_token
+
+# Private SSH host configuration.
+/common/.ssh/config.d/*.conf
