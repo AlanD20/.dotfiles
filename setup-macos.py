@@ -786,52 +786,99 @@ def install_python_via_pyenv(pyenv_version: str) -> None:
 
 
 def install_php() -> None:
-    """Install PHP extensions via pecl and configure php.ini."""
-    if not command_exists("php"):
-        ensure_homebrew()
-        run_brew(["install", "php"])
+    """Match Arch's PHP extensions using Homebrew PHP and PECL."""
+    ensure_homebrew()
+    print_step("Installing PHP and extensions")
+    run_brew(["install", "php", "composer"])
 
-    print_step("Configuring PHP")
+    # Do not accidentally build extensions against another PHP on PATH.
+    prefix = run_brew(
+        ["--prefix", "php"], capture_output=True, text=True
+    ).stdout.strip()
+    php_bin = os.path.join(prefix, "bin", "php")
+    pecl_bin = os.path.join(prefix, "bin", "pecl")
+    env = os.environ.copy()
+    env["PATH"] = os.path.join(prefix, "bin") + os.pathsep + env.get("PATH", "")
+    env["PHP_PEAR_PHP_BIN"] = php_bin
+    # Configure this Homebrew installation, independent of shell INI overrides.
+    env.pop("PHPRC", None)
+    env.pop("PHP_INI_SCAN_DIR", None)
 
-    if not command_exists("composer"):
-        run_brew(["install", "composer"])
+    def loaded_extensions() -> set[str]:
+        return set(
+            subprocess.check_output([php_bin, "-m"], text=True, env=env)
+            .lower()
+            .splitlines()
+        )
 
-    subprocess.run(["pecl", "install", "xdebug"], check=True)
+    paths = json.loads(
+        subprocess.check_output(
+            [
+                php_bin,
+                "-r",
+                'echo json_encode([ini_get("extension_dir"), PHP_CONFIG_FILE_SCAN_DIR]);',
+            ],
+            text=True,
+            env=env,
+        )
+    )
+    extension_dir, scan_dir = paths
+    if not os.path.isabs(extension_dir) or not os.path.isabs(scan_dir):
+        raise RuntimeError(f"Unexpected Homebrew PHP extension/config paths: {paths!r}")
+    os.makedirs(scan_dir, exist_ok=True)
 
-    # Enable common PHP extensions in php.ini
-    ini_path = None
-    for candidate in [
-        "/opt/homebrew/etc/php/*/php.ini",
-        "/usr/local/etc/php/*/php.ini",
-    ]:
-        import glob
-
-        files = glob.glob(candidate)
-        if files:
-            ini_path = files[0]
-            break
-
-    if ini_path:
-        extensions = [
-            "bcmath",
-            "gd",
-            "intl",
-            "mbstring",
-            "mysqli",
-            "pdo_mysql",
-            "pdo_sqlite",
-            "sockets",
-            "sodium",
-            "exif",
-            "fileinfo",
-            "openssl",
-            "sqlite3",
-        ]
-        for ext in extensions:
+    # Homebrew compiles the standard extensions into PHP. Only these need PECL.
+    # Arch's Redis package depends on igbinary; load it before Redis here too.
+    for name, directive, options in (
+        ("igbinary", "extension", []),
+        ("redis", "extension", ["--configureoptions=enable-redis-igbinary='yes'"]),
+        ("xdebug", "zend_extension", []),
+    ):
+        if name in loaded_extensions():
+            continue
+        if not os.path.isfile(os.path.join(extension_dir, f"{name}.so")):
             subprocess.run(
-                ["sed", "-i", "", f"s/;extension={ext}/extension={ext}/", ini_path],
+                [pecl_bin, "install", "--force", *options, name],
+                input="\n" * 20,
+                text=True,
                 check=True,
+                env=env,
             )
+        # PECL may enable the module itself. Avoid adding a duplicate directive.
+        if name not in loaded_extensions():
+            with open(
+                os.path.join(scan_dir, f"{name}.ini"), "a", encoding="utf-8"
+            ) as f:
+                f.write(f"\n{directive}={name}.so\n")
+
+    required = {
+        "bcmath",
+        "exif",
+        "fileinfo",
+        "gd",
+        "iconv",
+        "igbinary",
+        "intl",
+        "mbstring",
+        "mysqli",
+        "openssl",
+        "pdo_mysql",
+        "pdo_pgsql",
+        "pdo_sqlite",
+        "pgsql",
+        "redis",
+        "snmp",
+        "sockets",
+        "sodium",
+        "sqlite3",
+        "xdebug",
+        "xsl",
+    }
+    missing = required - loaded_extensions()
+    if missing:
+        raise RuntimeError(
+            f"PHP extensions failed to load: {', '.join(sorted(missing))}"
+        )
 
 
 # ---------------------------------------------------------------------------

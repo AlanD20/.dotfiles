@@ -19,7 +19,7 @@ Flags:
     --nvidia           Install Nvidia GPU drivers and utilities
     --asus             Install ASUS ROG laptop tools (asusctl, rog-control-center, supergfxctl)
     --ssh              Enable SSH configuration (uncomment Port 22 / ListenAddress)
-    --php              Install Composer, fix xdebug.ini, modify php.ini extensions
+    --php              Install PHP, Composer, and enable PHP extensions
     --stow             Stow dotfiles, cache fonts, configure zsh shell
     --nvm [VERSION]    Install/upgrade nvm and install node (default: lts/krypton)
     --go               Install Go + gopls, configure GOMODCACHE
@@ -478,7 +478,8 @@ PHP_PKGS: list[str] = [
     "php-fpm",
     "php-gd",
     "php-embed",
-    "php-intl",
+    # Intl is included in the main php package.
+    "php-igbinary",
     "php-redis",
     "php-snmp",
     "php-sqlite",
@@ -780,13 +781,10 @@ def configure_ssh() -> None:
     )
 
 
-def configure_php(temp_dir: str) -> None:
-    """Fix xdebug.ini and uncomment PHP extensions in php.ini / redis.ini."""
+def configure_php() -> None:
+    """Enable the installed PHP extensions and verify that they load."""
     if not command_exists("php"):
         return
-
-    # Fix debug file — xdebug.ini is expected in the temp working directory
-    run_cmd(["sed", "s/;//", "-i", "xdebug.ini"], cwd=temp_dir)
 
     print("==========================================")
     print("Modify php.ini file")
@@ -800,7 +798,6 @@ def configure_php(temp_dir: str) -> None:
         (";extension=bcmath", "extension=bcmath"),
         (";extension=fileinfo", "extension=fileinfo"),
         (";extension=gd", "extension=gd"),
-        (";extension=imap", "extension=imap"),
         (";extension=mbstring", "extension=mbstring"),
         (";extension=exif", "extension=exif"),
         (";extension=mysqli", "extension=mysqli"),
@@ -808,27 +805,64 @@ def configure_php(temp_dir: str) -> None:
         (";extension=openssl", "extension=openssl"),
         (";extension=pdo_mysql", "extension=pdo_mysql"),
         (";extension=pdo_sqlite", "extension=pdo_sqlite"),
+        (";extension=pdo_pgsql", "extension=pdo_pgsql"),
+        (";extension=pgsql", "extension=pgsql"),
+        (";extension=snmp", "extension=snmp"),
+        (";extension=xsl", "extension=xsl"),
         (";extension=sockets", "extension=sockets"),
         (";extension=intl", "extension=intl"),
         (";extension=sodium", "extension=sodium"),
-        (";extension=igbinary.so", "extension=igbinary.so"),
-        (";igbinary.compact_strings=On", "igbinary.compact_strings=On"),
-        (";extension=redis", "extension=redis"),
         (";extension=iconv", "extension=iconv"),
     ]
 
     for old, new in php_ini_subs:
         run_cmd(["sed", "-i", f"s/{old}/{new}/I", php_ini])
 
-    # redis.ini also gets the redis extension uncommented
-    run_cmd(
-        [
-            "sed",
-            "-i",
-            "s/;extension=redis/extension=redis/I",
-            "/etc/php/conf.d/redis.ini",
-        ]
-    )
+    # Use package-owned INI files so igbinary loads before Redis and Xdebug
+    # uses zend_extension rather than extension. Preserve other settings.
+    for name, directive in (
+        ("igbinary", "extension"),
+        ("redis", "extension"),
+        ("xdebug", "zend_extension"),
+    ):
+        run_cmd(
+            [
+                "sed",
+                "-i",
+                f"s/^[[:space:]]*;[[:space:]]*{directive}[[:space:]]*=/{directive}=/I",
+                f"/etc/php/conf.d/{name}.ini",
+            ]
+        )
+
+    required = {
+        "bcmath",
+        "exif",
+        "fileinfo",
+        "gd",
+        "iconv",
+        "igbinary",
+        "intl",
+        "mbstring",
+        "mysqli",
+        "openssl",
+        "pdo_mysql",
+        "pdo_pgsql",
+        "pdo_sqlite",
+        "pgsql",
+        "redis",
+        "snmp",
+        "sockets",
+        "sodium",
+        "sqlite3",
+        "xdebug",
+        "xsl",
+    }
+    loaded = set(subprocess.check_output(["php", "-m"], text=True).lower().splitlines())
+    missing = required - loaded
+    if missing:
+        raise RuntimeError(
+            f"PHP extensions failed to load: {', '.join(sorted(missing))}"
+        )
 
 
 def configure_system_services(user: str) -> None:
@@ -1155,7 +1189,7 @@ def run_root_setup(
 
     # 13. PHP configuration (--php flag)
     if args.php:
-        configure_php(temp_dir)
+        configure_php()
 
     # 11. System services (gated behind --services flag)
     if args.services:
@@ -1240,7 +1274,7 @@ SETUP_OPTIONS: list[tuple[str, str]] = [
         "ssh",
         "Enable SSH configuration (uncomment Port 22 / ListenAddress in sshd_config)",
     ),
-    ("php", "Install Composer, fix xdebug.ini, and configure PHP extensions"),
+    ("php", "Install PHP, Composer, and enable PHP extensions"),
     ("stow", "Stow dotfiles, cache fonts, and configure zsh"),
     ("go", "Install Go + gopls and configure GOMODCACHE"),
     ("rust", "Install rustup and set nightly as the default toolchain"),
