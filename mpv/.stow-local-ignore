@@ -1,0 +1,5 @@
+# Package-local rules replace Stow's defaults.
+^/install-modernz\.sh$
+^/README.*
+^/LICENSE.*
+^/COPYING

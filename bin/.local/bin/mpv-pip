@@ -1,18 +1,42 @@
 #!/bin/bash
 # PiP player - plays URL in small always-on-top window
-# Usage: pip-play "STREAM_URL"
+# Usage: mpv-pip "STREAM_URL"
 
 if [ -z "$1" ]; then
     echo "Usage: $0 <STREAM_URL>"
     exit 1
 fi
 
-WAYLAND_DISPLAY=wayland-0 mpv --geometry=400x225 \
-    --autofit-larger=400x225 \
-    --autofit-smaller=400x225 \
-    --ontop-level=desktop \
-    --force-window=immediate \
-    --no-border \
-    --gpu-context=wayland \
-    --title="mpv-pip" \
-    "$1"
+mpv_bin=$(command -v mpv)
+if [ -z "$mpv_bin" ]; then
+    for candidate in /opt/homebrew/bin/mpv /usr/local/bin/mpv; do
+        if [ -x "$candidate" ]; then
+            mpv_bin=$candidate
+            break
+        fi
+    done
+fi
+
+if [ -z "$mpv_bin" ]; then
+    echo "mpv not found (checked PATH and Homebrew locations)" >&2
+    exit 1
+fi
+
+options=(
+    --geometry=400x225
+    --autofit-larger=400x225
+    --autofit-smaller=400x225
+    --ontop
+    --force-window=immediate
+    --no-border
+    --title=mpv-pip
+)
+
+if [ "$(uname -s)" != Darwin ]; then
+    options+=(--ontop-level=desktop --gpu-context=wayland)
+    export WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-wayland-0}
+else
+    options+=(--input-conf="$(dirname "$(realpath "$0")")/mpv-pip.input.conf")
+fi
+
+exec "$mpv_bin" "${options[@]}" "$1"
